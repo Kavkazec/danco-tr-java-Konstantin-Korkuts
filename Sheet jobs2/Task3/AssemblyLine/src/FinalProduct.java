@@ -13,8 +13,7 @@ public class FinalProduct {
 		System.out.println("-------------------");
 		ProductAssemlbyLine pa = new ProductAssemlbyLine(bStep, cStep, eStep);
 		System.out.println("-------------------");
-		Auto auto = new Auto();
-		System.out.println("-------------------");
+		Auto auto = new Auto(bStep.buildProductPart(), cStep.buildProductPart(), eStep.buildProductPart());
 		pa.assemblyProduct(auto);
 		
 

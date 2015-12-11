@@ -10,8 +10,10 @@ public class ProductAssemlbyLine implements IAssemblyLine {
 		this.es = es;
 		System.out.println("AssemlbyLine");
 	}
+	
 	@Override
 	public void assemblyProduct(Auto auto) {
+		System.out.println(" ");
 		auto.installFirstPart(bs.buildProductPart());
 		auto.installSecondPart(cs.buildProductPart());
 		auto.installThirdPart(es.buildProductPart());
