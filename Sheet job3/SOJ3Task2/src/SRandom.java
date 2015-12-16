@@ -1,12 +1,8 @@
 
 public class SRandom {
-	int chiclo = new java.util.Random(100).nextInt(999);
-	String s = "" + chiclo;
-	String ss = "";
-	int range = s.length();
-	int[] mass = new int[range+1];
-	int summ = 0;
-	void summ(){
+	void summ(int[] mass, String s){
+		String ss = "";
+		int summ = 0;
 		for(int i = 1; i <= s.length();i++){
 			ss=s.substring(i-1,i);
 			mass[i] = Integer.parseInt(ss);
