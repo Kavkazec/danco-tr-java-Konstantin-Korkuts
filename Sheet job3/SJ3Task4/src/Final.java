@@ -2,32 +2,42 @@
 public class Final {
 
 	public static void main(String[] args) {
-		Reader r1 = new Reader("Vasya");
-		Reader r2 = new Reader("kolya");
-		Book b1 = new Book("To nobody","Kupala");
-		Book b2 = new Book("In winter","Kupala");
-		Book b3 = new Book("Pavlinka","Kupala");
 		Library lb = new Library();
-		lb.addReader(r1);
-		lb.addReader(r2);
-		lb.addBookToLibrary(b1);
-		lb.addBookToLibrary(b2);
-		lb.addBookToLibrary(b3);
+		
+		Reader r1 = new Reader("Vasya");
+		Reader r2 = new Reader("Kolya");
+		lb.addReaders(r1);
+		lb.addReaders(r2);
+		
+		Book b1 = new Book();
+		b1.setName("Var");
+		Book b2 = new Book();
+		b2.setName("Garden");
+		Book b3 = new Book();
+		b3.setName("Darkness");
+		Book b4 = new Book();
+		b4.setName("Konstantin");
+		lb.addBooksToLibrary(b1);
+		lb.addBooksToLibrary(b2);
+		lb.addBooksToLibrary(b3);
+		lb.addBooksToLibrary(b4);
+		
+		r1.addBooksToReader(b1);
+		r1.addBooksToReader(b2);
+		r2.addBooksToReader(b3);
+		r1.unsubscribeBook(b2);
+		
+		r1.showBooks();
+		r2.showBooks();
+		
+		System.out.println("------------------");
+		lb.findReaderAndShow(b3);
+		System.out.println("------------------");
 		lb.showReaders();
-		System.out.println("-----------");
-		lb.recordBook(r1, b1);
-		lb.recordBook(r1, b2);
-		lb.recordBook(r2, b3);
-		lb.show();
-		System.out.println("-----------");
-		lb.show(r1);
-		System.out.println("-----------");
-		lb.show(b3);
-		System.out.println("-----------");
-		lb.unsubscribeBook(r1, b1);
-		System.out.println("-----------");
-		lb.show();
-
+		System.out.println("------------------");
+		lb.findBooks();
+		
+		
 	}
 
 }

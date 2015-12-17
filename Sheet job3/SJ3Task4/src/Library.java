@@ -1,78 +1,76 @@
+import java.util.Arrays;
 
-public class Library {
-	Reader[] readers = new Reader[5];
-	Book[] books = new Book[10];
-	String[] mass = new String[100];
-	int i = -1;
-	int x = -1;
-	int s = -1;
-	String name;
-	//b) A method that adds readers
-	void addReader(Reader reader){
-		i++;
-		if(i < readers.length){
-			readers[i] = reader;
-		}else System.out.println("Filled with an array of readers!");
+public class Library implements ILibrary{
+	private Reader[] readers = new Reader[100];
+	private Book[] books = new Book[100];
+	
+	
+	public Reader[] getReaders() {
+		return readers;
 	}
-	//g) A method that allows you to list all the readers
-	void showReaders(){
-		for(int k = 0; k < readers.length; k++){
-			if(readers[k] != null){
-			name = readers[k].getName();
-			System.out.println(name);
+	//b)Adds a new reader
+	public void addReaders(Reader reader) {
+		for(int i = 0; i < readers.length; i++ ){
+			if(readers[i] == null){
+				readers[i] = reader;
+				return;
 			}
 		}
 	}
-	//a) A method that adds books
-	void addBookToLibrary(Book book){
-		x++;
-		if(x < books.length){
-			books[x] = book;
-		}else System.out.println("Filled with an array of books!");
+	
+	public Book[] getBooks() {
+		return books;
 	}
-	//c)A method that allows you to upload the book to the reader
-	void recordBook(Reader reader, Book book){
-		s++;
-		if(s < mass.length){
-			mass[s] = reader.getName()+":"+ book.getName();
-		}else System.out.println("Filled with an array of books!");
-	}
-	//d) A method that allows you to see what a particular book reader
-	void show(Reader reader){
-		for(int k = 0; k < mass.length; k++){
-			if(mass[k] != null && mass[k].startsWith(reader.getName())){
-			name = mass[k];
-			System.out.println(name);
+	//a)Lets you add a book to the library
+	public void addBooksToLibrary(Book book) {
+		for(int i = 0; i < books.length; i++ ){
+			if(books[i] == null){
+				books[i] = book;
+				return;
 			}
 		}
 	}
-	//c)A method that allows you to sign the book to the reader
-	void unsubscribeBook(Reader reader, Book book){
-		for(int k = 0; k < mass.length; k++){
-			if(mass[k] != null && mass[k].equals(reader.getName()+":"+book.getName())){
-				mass[k] = null;
-				System.out.println("Usubscribe | "+reader.getName()+":"+book.getName());
+	//e)Lets look at some specific book reader
+	public void  findReaderAndShow(Book book){
+		Book[] arr = new Book[0];
+		for(int i = 0; i < readers.length; i++ ){
+			if(readers[i] != null){
+				arr = Arrays.copyOf(readers[i].getBooksArr(), readers[i].getBooksArr().length);
+				for(int j = 0; j < arr.length; j++ ){
+					if(arr[j] != null && arr[j].equals(book)){
+						System.out.println(readers[i].getName());
+					}
+				}
 			}
 		}
+		
 	}
-	//e)A method that allows the reader to look at a particular book
-	void show(Book book){
-		for(int k = 0; k < mass.length; k++){
-			if(mass[k] != null && mass[k].endsWith(book.getName())){
-			name = mass[k];
-			System.out.println(name);
-			}
+	//g)It allows you to display a list of all readers
+	public void showReaders(){
+		for(int i = 0; i < readers.length; i++){
+			if(readers[i] != null)
+			System.out.println(readers[i].getName());
 		}
 	}
-	//f)A method that allows you to see a list of all the books with a note of where they are
-	void show(){
-		for(int k = 0; k < mass.length; k++){
-			if(mass[k] != null){
-			name =mass[k];
-			System.out.println(name);
+	//f)It allows you to display a list of all the books with a note of where they are
+	public void findBooks(){
+		Book[] arr = new Book[0];
+		for(int i = 0; i < books.length; i++){
+			for(int k = 0; k < readers.length; k++){
+			if(books[i] != null &&readers[k] != null ){
+				arr = Arrays.copyOf(readers[k].getBooksArr(), readers[k].getBooksArr().length);
+				for(int j = 0; j < arr.length; j++ ){
+					if(arr[j] != null && arr[j].equals(books[i])){
+						System.out.println("The book " + books[i].getName() + " is at " + readers[k].getName() + "!");
+						break;
+					} else if(arr[j] != null && arr[j].equals(books[i]) == false)
+						System.out.println("The book " + books[i].getName() + " at library!");
+					
+				}
+			  }
 			}
+			
 		}
 	}
 
 }
-
