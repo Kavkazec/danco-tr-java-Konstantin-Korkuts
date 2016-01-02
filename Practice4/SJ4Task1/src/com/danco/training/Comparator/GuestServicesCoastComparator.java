@@ -2,18 +2,18 @@ package com.danco.training.Comparator;
 
 import java.util.Comparator;
 
-import com.danco.training.Model.RoomModel;
+import com.danco.training.Model.ServiceModel;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class RoomCoastComparator.
+ * The Class GuestServicesCoastComparator.
  */
-public class RoomCoastComparator implements Comparator<RoomModel> {
+public class GuestServicesCoastComparator implements Comparator<ServiceModel> {
 	
 	/* (non-Javadoc)
 	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 	 */
-	public int compare(RoomModel a, RoomModel b){
+	public int compare(ServiceModel a, ServiceModel b){
 		return ((Integer)a.getCoast()).compareTo((Integer)b.getCoast());
 	}
 }
