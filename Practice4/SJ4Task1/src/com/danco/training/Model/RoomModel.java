@@ -140,7 +140,7 @@ public class RoomModel{
 	 * @param status the new status
 	 */
 	public void setStatus(boolean status){
-		
+		isFreeRoom = status;
 	}
 	
 	/**

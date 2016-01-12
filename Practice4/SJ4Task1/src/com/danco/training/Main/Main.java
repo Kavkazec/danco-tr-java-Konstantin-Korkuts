@@ -2,6 +2,7 @@ package com.danco.training.Main;
 
 
 
+import java.text.ParseException;
 import java.util.GregorianCalendar;
 
 import com.danco.training.TextFileWorker;
@@ -24,8 +25,9 @@ public class Main {
 	 * The main method.
 	 *
 	 * @param args the arguments
+	 * @throws ParseException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		final String FILE_PATH_ROOMS = "src/files/rooms.txt";
 		final String FILE_PATH_GUESTS = "src/files/guests.txt";
 		final String FILE_PATH_SERVICES = "src/files/services.txt";
@@ -120,15 +122,18 @@ public class Main {
 		
 		System.out.println();
 		textParser1.writeRoomsToFile();
-		textParser1.readRooms();
+		for(int i = 0; i < textParser1.readRooms().size(); i++)
+			System.out.println(textParser1.readRooms().get(i).toString());
 		
 		System.out.println();
 		textParser2.writeGuestsToFile();
-		textParser2.readGuests();
+		for(int i = 0; i < textParser2.readGuests().size(); i++)
+			System.out.println(textParser2.readGuests().get(i).toString());
 		
 		System.out.println();
 		textParser3.writeServicesToFile();
-		textParser3.readServices();
+		for(int i = 0; i < textParser3.readServices().size(); i++)
+			System.out.println(textParser3.readServices().get(i).toString());
 		
 	}
 

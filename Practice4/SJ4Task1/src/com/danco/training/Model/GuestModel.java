@@ -28,7 +28,7 @@ public class GuestModel  {
     private static final char SEMICOLON = ';';
     
     /** The sdf. */
-    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	
 	/** The services. */
 	private List<ServiceModel> services = new ArrayList<ServiceModel>();

@@ -1,7 +1,11 @@
 package com.danco.training.Parser;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 
@@ -16,6 +20,7 @@ import com.danco.training.Storage.Hotel;
  * The Class TextParser.
  */
 public class TextParser {
+	SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	
 	/** The rooms text. */
 	private String roomsText = "number; capasity; numberOfStars; coast; isOnRepair:	";	
@@ -88,27 +93,22 @@ public class TextParser {
 	 *
 	 * @return the list
 	 */
-	public List<String> readRooms() {
+	public List<RoomModel> readRooms() {
 		String[] c = new String[10];
 		c = tfw.readFromFile();
-		List<String> list = new ArrayList<String>();
+		List<RoomModel> list = new ArrayList<RoomModel>();
 		String[] e = new String[5];
 		for (String b1 : c) {
 			if (!b1.equals("null")) {
 				e = b1.split(";");
-				String number = e[0];
-				String capasity = e[1];
-				String numberOfStars = e[2];
-				String coast = e[3];
-				String status = e[4];
-				StringBuilder sb = new StringBuilder();
-				sb.append(roomsText);
-				sb.append(number+SEMICOLON);
-				sb.append(capasity+SEMICOLON);
-				sb.append(numberOfStars+SEMICOLON);
-				sb.append(coast+SEMICOLON);
-				sb.append(status+SEMICOLON);
-				System.out.println(sb.toString());
+				int number = Integer.parseInt(e[0]);
+				int capacity = Integer.parseInt(e[1]);
+				int numberOfStars = Integer.parseInt(e[2]);
+				int coast = Integer.parseInt(e[3]);
+				boolean status = Boolean.parseBoolean(e[4]);
+				RoomModel rm = new RoomModel(number, capacity, numberOfStars, coast);
+				rm.setStatus(status);
+				list.add(rm);
 			}
 		}
 		return list;
@@ -119,25 +119,24 @@ public class TextParser {
 	 *
 	 * @return the list
 	 */
-	public List<String> readGuests() {
+	public List<GuestModel> readGuests() {
 		String[] c = new String[10];
+		String[] massA = new String[3];
+		String[] massE = new String[3];
 		c = tfw.readFromFile();
-		List<String> list = new ArrayList<String>();
+		List<GuestModel> list = new ArrayList<GuestModel>();
 		String[] e = new String[4];
 		for (String b1 : c) {
 			if (!b1.equals("null")) {
 				e = b1.split(";");
-				String id = e[0];
+				int id = Integer.parseInt(e[0]);
 				String name = e[1];
 				String dateOfAdd = e[2];
+				massA = dateOfAdd.split("-");
 				String dateOfEvi = e[3];
-				StringBuilder sb = new StringBuilder();
-				sb.append(guestsText);
-				sb.append(id+SEMICOLON);
-				sb.append(name+SEMICOLON);
-				sb.append(dateOfAdd+SEMICOLON);
-				sb.append(dateOfEvi+SEMICOLON);
-				System.out.println(sb.toString());
+				massE = dateOfEvi.split("-");
+				GuestModel gm = new GuestModel(id, name, new GregorianCalendar(Integer.parseInt(massA[0]),Integer.parseInt(massA[1]), Integer.parseInt(massA[2])), new GregorianCalendar(Integer.parseInt(massE[0]),Integer.parseInt(massE[1]), Integer.parseInt(massE[2])));
+				list.add(gm);
 			}
 		}
 		return list;
@@ -147,24 +146,23 @@ public class TextParser {
 	 * Read services.
 	 *
 	 * @return the list
+	 * @throws ParseException 
 	 */
-	public List<String> readServices() {
-		String[] c = new String[10];
-		c = tfw.readFromFile();
-		List<String> list = new ArrayList<String>();
+	public List<ServiceModel> readServices() throws ParseException {
+		String[] massL = new String[10];
+		String[] mass = new String[3];
+		massL = tfw.readFromFile();
+		List<ServiceModel> list = new ArrayList<ServiceModel>();
 		String[] e = new String[3];
-		for (String b1 : c) {
+		for (String b1 : massL) {
 			if (!b1.equals("null")) {
 				e = b1.split(";");
 				String name = e[0];
-				String coast = e[1];
+				int coast = Integer.parseInt(e[1]);
 				String date = e[2];
-				StringBuilder sb = new StringBuilder();
-				sb.append(servicesText);
-				sb.append(name+SEMICOLON);
-				sb.append(coast+SEMICOLON);
-				sb.append(date+SEMICOLON);
-				System.out.println(sb.toString());
+				mass = date.split("-");
+				ServiceModel sm = new ServiceModel(name, coast,new GregorianCalendar(Integer.parseInt(mass[0]), Integer.parseInt(mass[1]), Integer.parseInt(mass[2])));
+				list.add(sm);
 			}
 		}
 		return list;

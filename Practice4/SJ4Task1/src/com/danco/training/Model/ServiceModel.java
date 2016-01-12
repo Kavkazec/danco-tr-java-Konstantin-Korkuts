@@ -23,7 +23,7 @@ public class ServiceModel{
 	private static final char SEMICOLON = ';';
 	
 	/** The sdf. */
-	SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+	SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	
 	/**
 	 * Instantiates a new service model.
