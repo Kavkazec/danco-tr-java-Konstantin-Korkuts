@@ -20,10 +20,10 @@ public class ServiceModel{
 	private Date date;
 	
 	/** The Constant SEMICOLON. */
-	private static final char SEMICOLON = ';';
+	private static final String SEMICOLON = " ; ";
 	
 	/** The sdf. */
-	SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	
 	/**
 	 * Instantiates a new service model.
@@ -74,14 +74,18 @@ public class ServiceModel{
 		return date;
 	}
 	
+	public void setDate(Date date){
+		this.date = date;
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
-		sb.append(name + SEMICOLON);
-		sb.append(Integer.toString(coast) + SEMICOLON);
-		sb.append(sdf.format(date).toString() + SEMICOLON);
+		sb.append(getName() + SEMICOLON);
+		sb.append(Integer.toString(getCoast()) + SEMICOLON);
+		sb.append(sdf.format(getDate()) + SEMICOLON);
 		return sb.toString();
 	}
 	

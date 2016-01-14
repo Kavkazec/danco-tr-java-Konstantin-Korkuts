@@ -31,7 +31,7 @@ public class RoomService {
 	private Hotel hotel;
 	
 	/** The sdf. */
-	SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	
 	/**
 	 * Instantiates a new room service.
@@ -139,7 +139,7 @@ public class RoomService {
 	 * @return the string
 	 */
 	public String showPricePerRoom(GuestModel guest){
-		String str = guest.getName() + " doljna	";
+		String str = "Guest " + guest.getName() + " with ID " + guest.getId() + " must pay ";
 		for(RoomModel roomMod : hotel.getRoom().getListOfNumbers()){
 			for(GuestModel guestMod : roomMod.getGuests()){
 				if(guestMod.equals(guest)){
@@ -157,6 +157,7 @@ public class RoomService {
 	 * @param room the room
 	 * @return the string
 	 */
+	
 	public String showLastThreeGuests(RoomModel room){
 		String str ="";
 		for(RoomModel roomMod : hotel.getRoom().getListOfNumbers()){

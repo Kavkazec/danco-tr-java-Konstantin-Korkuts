@@ -25,10 +25,10 @@ public class GuestModel  {
     private Date dateOfEvi;
     
     /** The Constant SEMICOLON. */
-    private static final char SEMICOLON = ';';
+    private static final String SEMICOLON = " ; ";
     
     /** The sdf. */
-    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	
 	/** The services. */
 	private List<ServiceModel> services = new ArrayList<ServiceModel>();
@@ -66,6 +66,11 @@ public class GuestModel  {
 		return dateOfAdd;
 	}
 	
+	
+	public void setDateAdd(Date dateOfAdd){
+		this.dateOfAdd = dateOfAdd;
+	}
+	
 	/**
 	 * Gets the date of evi.
 	 *
@@ -73,6 +78,10 @@ public class GuestModel  {
 	 */
 	public Date getDateOfEvi() {
 		return dateOfEvi;
+	}
+	
+	public void setDateEvi(Date dateOfEvi){
+		this.dateOfEvi = dateOfEvi;
 	}
 	
 	/**
@@ -107,10 +116,10 @@ public class GuestModel  {
 	 */
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
-		sb.append(Integer.toString(id)+SEMICOLON);
-		sb.append(name+SEMICOLON);
-		sb.append(sdf.format(dateOfAdd).toString()+SEMICOLON);
-		sb.append(sdf.format(dateOfEvi).toString()+SEMICOLON);	
+		sb.append(Integer.toString(getId())+SEMICOLON);
+		sb.append(getName()+SEMICOLON);
+		sb.append(sdf.format(getDateOfAdd())+SEMICOLON);
+		sb.append(sdf.format(getDateOfEvi())+SEMICOLON);	
 		return sb.toString();
 	}
 }

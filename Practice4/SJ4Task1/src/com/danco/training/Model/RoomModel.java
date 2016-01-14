@@ -28,7 +28,7 @@ public class RoomModel{
 	private boolean isOnRepair = false;
 	
 	/** The Constant SEMICOLON. */
-	private static final char SEMICOLON = ';'; 
+	private static final String SEMICOLON = " ; ";
 	
 	/** The guests. */
 	private List<GuestModel> guests = new ArrayList<GuestModel>();
@@ -38,10 +38,7 @@ public class RoomModel{
 	 *
 	 * @return true, if is on repair
 	 */
-	public boolean isOnRepair() {
-		if(guests.isEmpty()){
-			System.out.println("Status is changed!");
-		}	else System.out.println("Evict!");
+	public boolean getIsOnRepair() {
 		return isOnRepair;
 	}
 	
@@ -84,9 +81,7 @@ public class RoomModel{
 	 * @param guests the new guests
 	 */
 	public void setGuests(GuestModel guests) {
-		if(this.guests.size() < capacity){
-			this.guests.add(guests);
-		} else System.out.println("Room is full of guests");
+		this.guests.add(guests);
 	}
 	
 	/**
@@ -151,7 +146,7 @@ public class RoomModel{
 	public boolean getStatus() {
 		if(guests.size() < capacity){
 			isFreeRoom = false;
-		} else isFreeRoom= true;
+		} else isFreeRoom = true;
 		return isFreeRoom;
 	}
 	

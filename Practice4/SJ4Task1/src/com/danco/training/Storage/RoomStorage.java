@@ -1,6 +1,7 @@
 package com.danco.training.Storage;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import com.danco.training.Model.RoomModel;
 /**
  * The Class RoomStorage.
  */
-public class RoomStorage {
+public class RoomStorage implements Serializable{
 	
 	/** The rooms. */
 	private List<RoomModel> rooms = new ArrayList<RoomModel>();

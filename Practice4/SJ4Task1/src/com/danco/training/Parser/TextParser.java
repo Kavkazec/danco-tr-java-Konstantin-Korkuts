@@ -20,25 +20,11 @@ import com.danco.training.Storage.Hotel;
  * The Class TextParser.
  */
 public class TextParser {
-	SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-	
-	/** The rooms text. */
-	private String roomsText = "number; capasity; numberOfStars; coast; isOnRepair:	";	
-	
-	/** The guests text. */
-	private String guestsText = "id; name; date of settlement; Check-out date:	";
-	
-	/** The services text. */
-	private String servicesText = "name; coast; date:	";
-	
-	/** The Constant SEMICOLON. */
-	private static final String SEMICOLON = " ; "; 
-	
-	/** The hotel. */
-	Hotel hotel = Hotel.getInstance();
+	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+	private static final String SEMICOLON = " ; ";
 	
 	/** The tfw. */
-	TextFileWorker tfw;
+	private TextFileWorker tfw;
 	
 	/**
 	 * Instantiates a new text parser.
@@ -52,41 +38,18 @@ public class TextParser {
 	/**
 	 * Write rooms to file.
 	 */
-	public void writeRoomsToFile(){
-		String[] str = new String[10];
-		int i = 0;
-		for (RoomModel rm : hotel.getRoom().getListOfNumbers()) {
-			str[i] = rm.toString();
-			i++;
+	
+	
+	public void writeToFile(List<?> list){
+		String[] str = new String[list.size()];
+		int j = 0;
+		for(int i = 0; i < list.size(); i++){
+			str[j] = list.get(i).toString();
+			j++;
 		}
 		tfw.writeToFile(str);
 	}
 	
-	/**
-	 * Write guests to file.
-	 */
-	public void writeGuestsToFile(){
-		String[] str = new String[10];
-		int i = 0;
-		for (GuestModel gm : hotel.getGuest().getGuests()) {
-			str[i] = gm.toString();
-			i++;
-		}
-		tfw.writeToFile(str);
-	}
-	
-	/**
-	 * Write services to file.
-	 */
-	public void writeServicesToFile(){
-		String[] str = new String[10];
-		int i = 0;
-		for (ServiceModel sm : hotel.getService().getListOfServices()) {
-			str[i] = sm.toString();
-			i++;
-		}
-		tfw.writeToFile(str);
-	}
 	
 	/**
 	 * Read rooms.
@@ -99,8 +62,8 @@ public class TextParser {
 		List<RoomModel> list = new ArrayList<RoomModel>();
 		String[] e = new String[5];
 		for (String b1 : c) {
-			if (!b1.equals("null")) {
-				e = b1.split(";");
+			if (!("null").equals(b1)) {
+				e = b1.split(SEMICOLON);
 				int number = Integer.parseInt(e[0]);
 				int capacity = Integer.parseInt(e[1]);
 				int numberOfStars = Integer.parseInt(e[2]);
@@ -118,24 +81,23 @@ public class TextParser {
 	 * Read guests.
 	 *
 	 * @return the list
+	 * @throws ParseException 
 	 */
-	public List<GuestModel> readGuests() {
+	public List<GuestModel> readGuests() throws ParseException {
 		String[] c = new String[10];
-		String[] massA = new String[3];
-		String[] massE = new String[3];
 		c = tfw.readFromFile();
 		List<GuestModel> list = new ArrayList<GuestModel>();
 		String[] e = new String[4];
 		for (String b1 : c) {
-			if (!b1.equals("null")) {
-				e = b1.split(";");
+			if (!("null").equals(b1)) {
+				e = b1.split(SEMICOLON);
 				int id = Integer.parseInt(e[0]);
 				String name = e[1];
-				String dateOfAdd = e[2];
-				massA = dateOfAdd.split("-");
-				String dateOfEvi = e[3];
-				massE = dateOfEvi.split("-");
-				GuestModel gm = new GuestModel(id, name, new GregorianCalendar(Integer.parseInt(massA[0]),Integer.parseInt(massA[1]), Integer.parseInt(massA[2])), new GregorianCalendar(Integer.parseInt(massE[0]),Integer.parseInt(massE[1]), Integer.parseInt(massE[2])));
+				Date dateOfAdd = sdf.parse(e[2]);
+				Date dateOfEvi = sdf.parse(e[3]);
+				GuestModel gm = new GuestModel(id, name, new GregorianCalendar(), new GregorianCalendar());
+				gm.setDateAdd(dateOfAdd);
+				gm.setDateEvi(dateOfEvi);
 				list.add(gm);
 			}
 		}
@@ -150,18 +112,17 @@ public class TextParser {
 	 */
 	public List<ServiceModel> readServices() throws ParseException {
 		String[] massL = new String[10];
-		String[] mass = new String[3];
 		massL = tfw.readFromFile();
 		List<ServiceModel> list = new ArrayList<ServiceModel>();
 		String[] e = new String[3];
 		for (String b1 : massL) {
-			if (!b1.equals("null")) {
-				e = b1.split(";");
+			if (!("null").equals(b1)) {
+				e = b1.split(SEMICOLON);
 				String name = e[0];
 				int coast = Integer.parseInt(e[1]);
-				String date = e[2];
-				mass = date.split("-");
-				ServiceModel sm = new ServiceModel(name, coast,new GregorianCalendar(Integer.parseInt(mass[0]), Integer.parseInt(mass[1]), Integer.parseInt(mass[2])));
+				Date date = sdf.parse(e[2]);
+				ServiceModel sm = new ServiceModel(name, coast,new GregorianCalendar());
+				sm.setDate(date);
 				list.add(sm);
 			}
 		}

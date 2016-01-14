@@ -1,5 +1,6 @@
 package com.danco.training.Storage;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import com.danco.training.Model.ServiceModel;
 /**
  * The Class ServiceStorage.
  */
-public class ServiceStorage{
+public class ServiceStorage implements Serializable{
 	
 	/** The services. */
 	private List<ServiceModel> services = new ArrayList<ServiceModel>();

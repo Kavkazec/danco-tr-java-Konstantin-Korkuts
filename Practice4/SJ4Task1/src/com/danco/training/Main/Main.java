@@ -28,17 +28,7 @@ public class Main {
 	 * @throws ParseException 
 	 */
 	public static void main(String[] args) throws ParseException {
-		final String FILE_PATH_ROOMS = "src/files/rooms.txt";
-		final String FILE_PATH_GUESTS = "src/files/guests.txt";
-		final String FILE_PATH_SERVICES = "src/files/services.txt";
-		TextFileWorker tfw1 = new TextFileWorker(FILE_PATH_ROOMS);
-		TextParser textParser1 = new TextParser(tfw1);
-		TextFileWorker tfw2 = new TextFileWorker(FILE_PATH_GUESTS);
-		TextParser textParser2 = new TextParser(tfw2);
-		TextFileWorker tfw3 = new TextFileWorker(FILE_PATH_SERVICES);
-		TextParser textParser3 = new TextParser(tfw3);
 		
-		 
 		Hotel hotel = Hotel.getInstance();
 		
 		RoomModel r1 = new RoomModel(1, 3, 5, 320);
@@ -54,37 +44,40 @@ public class Main {
 		GuestModel g5 = new GuestModel(5, "Pasha",new GregorianCalendar(2015,11,29), new GregorianCalendar(2015,11,30));
 		GuestModel g6 = new GuestModel(6, "Andrei",new GregorianCalendar(2015,11,26), new GregorianCalendar(2015,11,27));
 
-		ServiceModel s1 = new ServiceModel("champagne in the room", 10, new GregorianCalendar(2015,11,25));
+		ServiceModel s1 = new ServiceModel("champagne in the room", 40, new GregorianCalendar(2015,11,25));
 		ServiceModel s2 = new ServiceModel("ded moroz in the room", 30, new GregorianCalendar(2015,11,27));
 		ServiceModel s3 = new ServiceModel("snegurka in the room", 20, new GregorianCalendar(2015,11,26));
 		
-		hotel.getGuest().addGuests(g1);
-		hotel.getGuest().addGuests(g2);
-		hotel.getGuest().addGuests(g3);
-		hotel.getGuest().addGuests(g4);
-		hotel.getGuest().addGuests(g5);
-		hotel.getGuest().addGuests(g6);
+		hotel.addGuest(g1);
+		hotel.addGuest(g2);
+		hotel.addGuest(g3);
+		hotel.addGuest(g4);
+		hotel.addGuest(g5);
+		hotel.addGuest(g6);
 		
 		
-		hotel.getRoom().addNumber(r1);
-		hotel.getRoom().addNumber(r2);
-		hotel.getRoom().addNumber(r3);
-		hotel.getRoom().addNumber(r4);
-		hotel.getRoom().addNumber(r5);
+		hotel.addRoom(r1);
+		hotel.addRoom(r2);
+		hotel.addRoom(r3);
+		hotel.addRoom(r4);
+		hotel.addRoom(r5);
 		
-		hotel.getService().addService(s1);
-		hotel.getService().addService(s2);
-		hotel.getService().addService(s3);
+		hotel.addService(s1);
+		hotel.addService(s2);
+		hotel.addService(s3);
 		
-		r2.setGuests(g2);
-		r3.setGuests(g1);
-		r3.setGuests(g3);
-		r1.setGuests(g4);
-		r1.setGuests(g5);
-		r1.setGuests(g6);
+		hotel.addGuestInRoom(g2,r2);
+		hotel.addGuestInRoom(g1,r3);
+		hotel.addGuestInRoom(g3,r3);
+		hotel.addGuestInRoom(g4,r1);
+		hotel.addGuestInRoom(g5,r1);
+		hotel.addGuestInRoom(g6,r1);
 		
-		g1.setServices(s2);
-		g1.setServices(s3);
+		hotel.addServiceToGuest(s1, g1);
+		hotel.addServiceToGuest(s2, g1);
+		hotel.addServiceToGuest(s3, g1);
+		
+		
 		
 		r2.setCoast(400);
 		
@@ -103,7 +96,7 @@ public class Main {
 		System.out.println();
 		
 		System.out.println(rs.showRoomDetails(r1));
-		System.out.println(rs.showPricePerRoom(g1));
+		System.out.println(rs.showPricePerRoom(g2));
 		System.out.println();
 		
 		for(ServiceModel sm : gs.showListOfServicesSortedByCoast(g1)){
@@ -115,25 +108,18 @@ public class Main {
 		for(ServiceModel sm : gs.showListOfServicesSortedByDate(g1)){
 			System.out.println(sm);
 		}
-		
-		
-		
-		rs.sortByStarsFreeRoom();
-		
 		System.out.println();
-		textParser1.writeRoomsToFile();
-		for(int i = 0; i < textParser1.readRooms().size(); i++)
-			System.out.println(textParser1.readRooms().get(i).toString());
 		
-		System.out.println();
-		textParser2.writeGuestsToFile();
-		for(int i = 0; i < textParser2.readGuests().size(); i++)
-			System.out.println(textParser2.readGuests().get(i).toString());
+		hotel.writeGuests();
+		hotel.writeRooms();
+		hotel.writeServices();
 		
+		System.out.print(hotel.showGuestsFromFile());
 		System.out.println();
-		textParser3.writeServicesToFile();
-		for(int i = 0; i < textParser3.readServices().size(); i++)
-			System.out.println(textParser3.readServices().get(i).toString());
+		System.out.print(hotel.showRoomsFromFile());
+		System.out.println();
+		System.out.print(hotel.showServicesFromFile());
+		
 		
 	}
 
