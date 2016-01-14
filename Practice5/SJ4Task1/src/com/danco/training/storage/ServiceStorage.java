@@ -1,0 +1,51 @@
+package com.danco.training.storage;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.danco.training.model.ServiceModel;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ServiceStorage.
+ */
+public class ServiceStorage implements Serializable{
+	
+	/** The services. */
+	private List<ServiceModel> services = new ArrayList<ServiceModel>();
+	
+	/**
+	 * Adds the service.
+	 *
+	 * @param service the service
+	 */
+	public void addService(ServiceModel service){
+		services.add(service);
+	}
+	
+	/**
+	 * Gets the list of services.
+	 *
+	 * @return the list of services
+	 */
+	public List<ServiceModel> getListOfServices(){
+		return services;
+	}
+	
+	/** The instance. */
+	private static ServiceStorage instance;
+
+	/**
+	 * Gets the single instance of ServiceStorage.
+	 *
+	 * @return single instance of ServiceStorage
+	 */
+	public static ServiceStorage getInstance() {
+		if (instance == null) {
+			instance = new ServiceStorage();
+		}
+		return instance;
+	}
+	
+}
