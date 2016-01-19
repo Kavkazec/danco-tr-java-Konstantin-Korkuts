@@ -36,7 +36,7 @@ public class GuestStorage{
 	 * @param guest the guest
 	 */
 	public void addGuests(GuestModel guest) {
-		guests.add(guest);
+		getGuests().add(guest);
 	}
 	
 	/**
@@ -44,9 +44,11 @@ public class GuestStorage{
 	 *
 	 * @param guest the guest
 	 */
-	public void deleteGuest(GuestModel guest){
-		if(guests.contains(guest)){
-			guests.remove(guest);
+	public void deleteGuest(String name){
+		for(int i = 0; i < getGuests().size(); i++){
+			if(name.equals(getGuests().get(i).getName())){
+				getGuests().remove(i);
+			}
 		}
 	}
 	
@@ -57,12 +59,5 @@ public class GuestStorage{
 	 * @param dateOfAdd the date of add
 	 * @param dateOfEvi the date of evi
 	 */
-	public void updateGuest(GuestModel guest, String dateOfAdd, String dateOfEvi ){
-		try {
-			guest.setDateAdd(sdf.parse(dateOfAdd));
-			guest.setDateEvi(sdf.parse(dateOfEvi));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
+	
 }

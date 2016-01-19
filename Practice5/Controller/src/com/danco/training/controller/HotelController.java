@@ -1,17 +1,13 @@
 package com.danco.training.controller;
 
-import java.util.Date;
-import java.util.List;
-
-import com.danco.training.model.GuestModel;
-import com.danco.training.model.RoomModel;
-import com.danco.training.model.ServiceModel;
-import com.danco.training.service.HotelService;
+import java.text.ParseException;
 
 public class HotelController {
-	private static HotelService hotelServ = HotelService.getInstance();
+	private GuestController guestCon;
+	private RoomController roomCon;
+	private ServiceController serviceCon;
 	
-	private static HotelController instance = null;
+	private static HotelController instance;
 	
 	private HotelController(){
 		
@@ -24,163 +20,155 @@ public class HotelController {
 		return instance;
 	}
 	
-	public HotelService getHotelServ(){
-		return hotelServ;
+	
+	public GuestController getGuestCon() {
+		if(guestCon == null){
+			guestCon = new GuestController();
+		}
+		return guestCon;
+	}
+	public RoomController getRoomCon() {
+		if(roomCon == null){
+			roomCon = new RoomController();
+		}
+		return roomCon;
+	}
+	public ServiceController getServiceCon() {
+		if(serviceCon == null){
+			serviceCon = new ServiceController();
+		}
+		return serviceCon;
 	}
 	
-	
-	
-	public void addGuest(GuestModel guest) {
-		getHotelServ().addGuest(guest);
+	public void addGuest(){
+		getGuestCon().addGuest();
 	}
 	
-	public void deleteGuest(GuestModel guest){
-		getHotelServ().deleteGuest(guest);
+	public void deletGuest(){
+		getGuestCon().deletGuest();
 	}
 	
-	public void updateGuest(GuestModel guest, String dateOfAdd, String dateOfEvi ){
-		getHotelServ().updateGuest(guest, dateOfAdd, dateOfEvi);
+	public void sortByNameGuests(){
+		getGuestCon().sortByNameGuests();
 	}
 	
-	public List<GuestModel> sortByNameGuests(){
-		return getHotelServ().sortByNameGuests();
+	public void sortByDateGuests(){
+		getGuestCon().sortByDateGuests();
 	}
 	
-	public List<GuestModel> sortByDateGuests(){
-		return getHotelServ().sortByDateGuests();
+	public void showNumberOfGuests(){
+		getGuestCon().showNumberOfGuests();
 	}
 	
-	public int showNumberOfGuests(){
-		return getHotelServ().showNumberOfGuests();
+	public void showGuestsServicesSortedByCoast(){
+		getGuestCon().showGuestsServicesSortedByCoast();
 	}
 	
-	public List<ServiceModel> showGuestsServicesSortedByCoast(GuestModel guest){
-		return getHotelServ().showGuestsServicesSortedByCoast(guest);
+	public void showGuestsServicesSortedByDate(){
+		getGuestCon().showGuestsServicesSortedByDate();
 	}
 	
-	public List<ServiceModel> showGuestsServicesSortedByDate(GuestModel guest){
-		return getHotelServ().showGuestsServicesSortedByDate(guest);
+	public void addServiceToGuest(){
+		getGuestCon().addServiceToGuest();
 	}
 	
-	public void addService(ServiceModel service){
-		getHotelServ().addService(service);
+	public void printGuest(){
+		getGuestCon().printGuest();
 	}
 	
-	public void deleteService(ServiceModel service){
-		getHotelServ().deleteService(service);
+	public void addRoom(){
+		getRoomCon().addRoom();
 	}
 	
-	public void changeServicesCoast(String name, int coast){
-		getHotelServ().changeServicesCoast(name, coast);
+	public void deleteRoom(){
+		getRoomCon().deleteRoom();
 	}
 	
-	public void addRoom(RoomModel room){
-		getHotelServ().addRoom(room);
+	public void deleteGuestFromRoom(){
+		getRoomCon().deleteGuestFromRoom();
 	}
 	
-	public void deleteRoom(RoomModel room){
-		getHotelServ().deleteRoom(room);
+	public void deleteAllGuestsFromRoom(){
+		getRoomCon().deleteAllGuestsFromRoom();
 	}
 	
-	public void updateRoom(RoomModel room, int numberOfStars){
-		getHotelServ().updateNumber(room, numberOfStars);
-	}
-	
-	public void deleteGuestFromRoom(RoomModel room, GuestModel guest){
-		getHotelServ().deleteGuestFromRoom(room, guest);
-	}
-	
-	public void deleteAllGuestsFromRoom(RoomModel room){
-		getHotelServ().deleteAllGuestsFromRoom(room);
-	}
-	
-	public void changeRoomsCoast(RoomModel room, int coast){
-		getHotelServ().changeRoomsCoast(room, coast);
+	public void changeRoomsCoast(){
+		getRoomCon().changeRoomsCoast();
 	}
 	
 	public void changeRoomsStatusRepair(){
-		getHotelServ().changeRoomsStatusRepair();
+		getRoomCon().changeRoomsStatusRepair();
 	}
 	
-	public List<RoomModel> sortByCoastFreeRoom(){
-		return getHotelServ().sortByCoastFreeRoom();
+	public void sortByCoastFreeRoom(){
+		getRoomCon().sortByCoastFreeRoom();
 	}
 	
-	public List<RoomModel> sortByCopasityFreeRoom(){
-		return getHotelServ().sortByCopasityFreeRoom();
+	public void sortByCopasityFreeRoom(){
+		getRoomCon().sortByCopasityFreeRoom();
 	}
 	
-	public List<RoomModel> sortByStarsFreeRoom(){
-		return getHotelServ().sortByStarsFreeRoom();
+	public void sortByStarsFreeRoom(){
+		getRoomCon().sortByStarsFreeRoom();
 	}
 	
-	public List<RoomModel> sortByCoastRoom(){
-		return getHotelServ().sortByCoastRoom();
+	public void sortByCoastRoom(){
+		getRoomCon().sortByCoastRoom();
 	}
 	
-	public List<RoomModel> sortByCopasityRoom(){
-		return getHotelServ().sortByCopasityRoom();
+	public void sortByCopasityRoom(){
+		getRoomCon().sortByCopasityRoom();
 	}
 	
-	public List<RoomModel> sortByStarsRoom(){
-		return getHotelServ().sortByStarsRoom();
+	public void sortByStarsRoom(){
+		getRoomCon().sortByStarsRoom();
 	}
 	
-	public int showNumberOfFreeRooms(){
-		return getHotelServ().showNumberOfFreeRooms();
+	public void showNumberOfFreeRooms(){
+		getRoomCon().showNumberOfFreeRooms();
 	}
 	
-	public List<RoomModel> showChekOutDate(Date date){
-		return getHotelServ().showChekOutDate(date);
+	public void showChekOutDate(){
+		try {
+			getRoomCon().showChekOutDate();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public String showPricePerRoom(GuestModel guest){
-		return getHotelServ().showPricePerRoom(guest);
+	public void showRoomDetails(){
+		getRoomCon().showRoomDetails();
 	}
 	
-	public String showLastThreeGuests(RoomModel room){
-		return getHotelServ().showLastThreeGuests(room);
+	public void showPricePerRoom(){
+		getRoomCon().showPricePerRoom();
 	}
 	
-	public void addServiceToGuest( GuestModel guest,ServiceModel service){
-		getHotelServ().addServiceToGuest(guest, service);
+	public void showLastThreeGuests(){
+		getRoomCon().showLastThreeGuests();
 	}
 	
-	public void addGuestInRoom( RoomModel room , GuestModel guest){
-		getHotelServ().addGuestInRoom(room, guest);
+	public void addGuestInRoom(){
+		getRoomCon().addGuestInRoom();
 	}
 	
-	public void writeGuests(){
-		getHotelServ().writeGuests();
+	public void printRoom(){
+		getRoomCon().printRoom();
 	}
 	
-	public void writeRooms(){
-		getHotelServ().writeRooms();
+	public void addService(){
+		getServiceCon().addService();
 	}
 	
-	public void writeServices(){
-		getHotelServ().writeServices();
+	public void deleteService(){
+		getServiceCon().deleteService();
 	}
 	
-	public String showGuestsFromFile(){
-		return getHotelServ().showGuestsFromFile();
+	public void changeServicesCoast(){
+		getServiceCon().changeServicesCoast();
 	}
 	
-	public String showRoomsFromFile(){
-		return getHotelServ().showRoomsFromFile();
+	public void printService(){
+		getServiceCon().printService();
 	}
-	
-	public String showServicesFromFile(){
-		return getHotelServ().showServicesFromFile();
-	}
-	
-	public void show(){
-		hotelServ.hah();
-	}
-
-	public void showW() {
-		System.out.println("sgasdg");	
-	}
-	
-	
 }

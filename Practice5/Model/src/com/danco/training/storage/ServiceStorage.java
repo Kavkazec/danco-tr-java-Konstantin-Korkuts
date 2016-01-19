@@ -20,7 +20,7 @@ public class ServiceStorage{
 	 * @param service the service
 	 */
 	public void addService(ServiceModel service){
-		services.add(service);
+		getListOfServices().add(service);
 	}
 	
 	/**
@@ -28,9 +28,11 @@ public class ServiceStorage{
 	 *
 	 * @param service the service
 	 */
-	public void deleteService(ServiceModel service){
-		if(services.contains(service)){
-			services.remove(service);
+	public void deleteService(String name){
+		for(int i = 0; i < getListOfServices().size(); i++){
+			if(name.equals(getListOfServices().get(i).getName())){
+				getListOfServices().remove(i);
+			}
 		}
 	}
 	

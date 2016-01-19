@@ -64,18 +64,8 @@ public class RoomService {
 	 *
 	 * @param room the room
 	 */
-	public void deleteRoom(RoomModel room){
-		hotel.deleteRoom(room);
-	}
-	
-	/**
-	 * Update number.
-	 *
-	 * @param room the room
-	 * @param numberOfStars the number of stars
-	 */
-	public void updateNumber(RoomModel room, int numberOfStars){
-		hotel.updateRoom(room, numberOfStars);
+	public void deleteRoom(int number){
+		hotel.deleteRoom(number);
 	}
 	
 	/**
@@ -84,8 +74,8 @@ public class RoomService {
 	 * @param room the room
 	 * @param guest the guest
 	 */
-	public void deleteGuestFromRoom(RoomModel room, GuestModel guest){
-		hotel.deleteGuestFromRoom(room, guest);
+	public void deleteGuestFromRoom(String name){
+		hotel.deleteGuestFromRoom(name);
 	}
 	
 	/**
@@ -93,8 +83,8 @@ public class RoomService {
 	 *
 	 * @param room the room
 	 */
-	public void deleteAllGuestsFromRoom(RoomModel room){
-		hotel.deleteAllGuestFromRoom(room);
+	public void deleteAllGuestsFromRoom(int number){
+		hotel.deleteAllGuestFromRoom(number);
 	}
 	
 	/**
@@ -103,15 +93,15 @@ public class RoomService {
 	 * @param room the room
 	 * @param guest the guest
 	 */
-	public void addGuestInRoom( RoomModel room , GuestModel guest){
-		hotel.addGuestInRoom(room, guest);
+	public void addGuestInRoom( int number, String name){
+		hotel.addGuestInRoom(number, name);
 	}
 	
-	public void changeCoast(RoomModel room, int coast)
+	public void changeCoast(int number, int coast)
 	{
 		for(int i = 0; i < hotel.getRoom().getListOfNumbers().size(); i++)
 		{
-			if(hotel.getRoom().getListOfNumbers().get(i) == room){
+			if(number == hotel.getRoom().getListOfNumbers().get(i).getNumber()){
 				hotel.getRoom().getListOfNumbers().get(i).setCoast(coast);
 			}
 		}
@@ -227,11 +217,11 @@ public class RoomService {
 	 * @param room the room
 	 * @return the string
 	 */
-	public String showRoomDetails(RoomModel room){
+	public String showRoomDetails(int number){
 		String str = "";
 		for(RoomModel roomMod: hotel.getRoom().getListOfNumbers()){
-			if(roomMod.equals(room)){
-				str = room.toString();
+			if(number == roomMod.getNumber()){
+				str = roomMod.toString();
 			}
 		}
 		return str;
@@ -243,11 +233,11 @@ public class RoomService {
 	 * @param guest the guest
 	 * @return the string
 	 */
-	public String showPricePerRoom(GuestModel guest){
-		String str = "Guest " + guest.getName()  + " must pay ";
+	public String showPricePerRoom(String name){
+		String str = "Guest " + name  + " must pay ";
 		for(RoomModel roomMod : hotel.getRoom().getListOfNumbers()){
 			for(GuestModel guestMod : roomMod.getGuests()){
-				if(guestMod.equals(guest)){
+				if(name.equals(guestMod.getName())){
 					long diff = guestMod.getDateOfEvi().getTime() - guestMod.getDateOfAdd().getTime();
 					str = str + (diff / (1000L*60L*60L*24L)*roomMod.getCoast()) + "$";
 				}
@@ -263,12 +253,18 @@ public class RoomService {
 	 * @return the string
 	 */
 	
-	public String showLastThreeGuests(RoomModel room){
+	public String showLastThreeGuests(int number){
 		String str ="";
 		for(RoomModel roomMod : hotel.getRoom().getListOfNumbers()){
-			if(roomMod == room){
-				for(int i = roomMod.getGuests().size()-3; i < roomMod.getGuests().size(); i++){
-					str = str + roomMod.getGuests().get(i).getName() +" : "+ sdf.format(roomMod.getGuests().get(i).getDateOfEvi()) + "\n";
+			if(number == roomMod.getNumber()){
+				if(roomMod.getGuests().size() == 3){
+					for(int i = roomMod.getGuests().size()-3; i < roomMod.getGuests().size(); i++){
+						str = str + roomMod.getGuests().get(i).getName() +" : "+ sdf.format(roomMod.getGuests().get(i).getDateOfEvi()) + "\n";
+					}
+				} else if(roomMod.getGuests().size() < 3){
+					for(int i = 0; i < roomMod.getGuests().size(); i++){
+						str = str + roomMod.getGuests().get(i).getName() +" : "+ sdf.format(roomMod.getGuests().get(i).getDateOfEvi()) + "\n";
+					}
 				}
 			}
 		}
@@ -278,19 +274,19 @@ public class RoomService {
 	/**
 	 * Write rooms.
 	 */
-	
+	/*
 	public void writeRooms(){
 		hotel.writeRooms();
 	}
-	
+	*/
 	/**
 	 * Show rooms from file.
 	 *
 	 * @return the string
 	 */
-	
+	/*
 	public String showRoomsFromFile(){
 		return hotel.showRoomsFromFile();
 	}
-	
+	*/
 }

@@ -21,7 +21,7 @@ import com.danco.training.model.ServiceModel;
 public class TextParser {
 	
 	/** The sdf. */
-	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	
 	/** The Constant SEMICOLON. */
 	private static final String SEMICOLON = " ; ";
@@ -99,7 +99,7 @@ public class TextParser {
 				String name = e[0];
 				Date dateOfAdd = sdf.parse(e[1]);
 				Date dateOfEvi = sdf.parse(e[2]);
-				GuestModel gm = new GuestModel(name, new GregorianCalendar(), new GregorianCalendar());
+				GuestModel gm = new GuestModel(name, dateOfAdd, dateOfEvi);
 				gm.setDateAdd(dateOfAdd);
 				gm.setDateEvi(dateOfEvi);
 				list.add(gm);

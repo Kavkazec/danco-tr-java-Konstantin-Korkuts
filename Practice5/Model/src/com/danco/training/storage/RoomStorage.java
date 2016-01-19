@@ -24,7 +24,7 @@ public class RoomStorage{
 	 * @param room the room
 	 */
 	public void addNumber(RoomModel room){
-		rooms.add(room);
+		getListOfNumbers().add(room);
 	}
 	
 	/**
@@ -32,20 +32,12 @@ public class RoomStorage{
 	 *
 	 * @param room the room
 	 */
-	public void deleteNumber(RoomModel room){
-		if(rooms.contains(room)){
-			rooms.remove(room);
+	public void deleteNumber(int number){
+		for(int i = 0 ; i < getListOfNumbers().size(); i++){
+			if(number == getListOfNumbers().get(i).getNumber()){
+				getListOfNumbers().remove(i);
+			}
 		}
-	}
-	
-	/**
-	 * Update number.
-	 *
-	 * @param room the room
-	 * @param numberOfStars the number of stars
-	 */
-	public void updateNumber(RoomModel room, int numberOfStars){
-			room.setNumberOfStars(numberOfStars);
 	}
 	
 	/**
@@ -66,12 +58,13 @@ public class RoomStorage{
 	 * @param room the room
 	 * @param guest the guest
 	 */
-	public void deleteGuestFromRoom(RoomModel room, GuestModel guest){
-			for(int j = 0; j < room.getGuests().size(); j++)
-			{
-				if(room.getGuests().get(j) == guest)
+	public void deleteGuestFromRoom(String name){
+			for(int i = 0; i < getListOfNumbers().size(); i++){
+				for(int j = 0; j < getListOfNumbers().get(i).getGuests().size(); j++)
 				{
-					room.getGuests().remove(j);
+					if(name.equals(getListOfNumbers().get(i).getGuests().get(j).getName())){
+						getListOfNumbers().get(i).getGuests().remove(j);
+					}
 				}
 			}
 	}
@@ -81,9 +74,13 @@ public class RoomStorage{
 	 *
 	 * @param room the room
 	 */
-	public void deleteAllGuestsFromRoom(RoomModel room){
-			room.getGuests().clear();
-	}
+	public void deleteAllGuestsFromRoom(int number){
+		for(int i = 0; i < getListOfNumbers().size(); i++){
+			if(number == getListOfNumbers().get(i).getNumber()){
+				getListOfNumbers().get(i).getGuests().clear();
+			}
+		}
+	}			
 	
 	
 }

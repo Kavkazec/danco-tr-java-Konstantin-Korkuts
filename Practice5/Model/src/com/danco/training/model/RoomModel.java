@@ -168,7 +168,7 @@ public class RoomModel{
 		sb.append(Integer.toString(capacity)+SEMICOLON);
 		sb.append(Integer.toString(numberOfStars)+SEMICOLON);
 		sb.append(Integer.toString(coast)+SEMICOLON);
-		sb.append(Boolean.toString(isFreeRoom)+SEMICOLON);
+		sb.append(Boolean.toString(getStatus())+SEMICOLON);
 		return sb.toString();
 	}
 }

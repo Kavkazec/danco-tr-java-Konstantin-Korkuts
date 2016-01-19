@@ -57,19 +57,8 @@ public class GuestService {
 	 *
 	 * @param guest the guest
 	 */
-	public void deleteGuest(GuestModel guest){
-		hotel.deleteGuest(guest);
-	}
-	
-	/**
-	 * Update guest.
-	 *
-	 * @param guest the guest
-	 * @param dateOfAdd the date of add
-	 * @param dateOfEvi the date of evi
-	 */
-	public void updateGuest(GuestModel guest, String dateOfAdd, String dateOfEvi ){
-		hotel.updateGuest(guest, dateOfAdd, dateOfEvi);
+	public void deleteGuest(String str){
+		hotel.deleteGuest(str);
 	}
 	
 	/**
@@ -78,7 +67,7 @@ public class GuestService {
 	 * @param guest the guest
 	 * @param service the service
 	 */
-	public void addServiceToGuest( GuestModel guest,ServiceModel service){
+	public void addServiceToGuest( String guest, String service){
 		hotel.addServiceToGuest(guest, service);
 	}
 	
@@ -122,10 +111,10 @@ public class GuestService {
 	 * @param guest the guest
 	 * @return the list
 	 */
-	public List<ServiceModel> showListOfServicesSortedByCoast(GuestModel guest){
+	public List<ServiceModel> showListOfServicesSortedByCoast(String name){
 		List<ServiceModel> list = new ArrayList<ServiceModel>();
 		for(GuestModel gm : hotel.getGuest().getGuests()){
-			if(gm.equals(guest)){
+			if(name.equals(gm.getName())){
 				for(ServiceModel sm : gm.getServices()){
 					list.add(sm);
 				}
@@ -141,10 +130,10 @@ public class GuestService {
 	 * @param guest the guest
 	 * @return the list
 	 */
-	public List<ServiceModel> showListOfServicesSortedByDate(GuestModel guest){
+	public List<ServiceModel> showListOfServicesSortedByDate(String name){
 		List<ServiceModel> list = new ArrayList<ServiceModel>();
 		for(GuestModel gm : hotel.getGuest().getGuests()){
-			if(gm.equals(guest)){
+			if(name.equals(gm.getName())){
 				for(ServiceModel sm : gm.getServices()){
 					list.add(sm);
 				}
@@ -157,19 +146,19 @@ public class GuestService {
 	/**
 	 * Write guests.
 	 */
-	
+	/*
 	public void writeGuests(){
 		hotel.writeGuests();
 	}
-	
+	*/
 	/**
 	 * Show guests from file.
 	 *
 	 * @return the string
 	 */
-	
+	/*
 	public String showGuestsFromFile(){
 		return hotel.showGuestsFromFile();
 	}
-	
+	*/
 }

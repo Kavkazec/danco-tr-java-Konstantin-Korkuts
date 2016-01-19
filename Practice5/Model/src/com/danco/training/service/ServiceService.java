@@ -35,8 +35,8 @@ import com.danco.training.storage.Hotel;
 	 *
 	 * @param service the service
 	 */
-	public void deleteService(ServiceModel service){
-		hotel.deleteService(service);
+	public void deleteService(String name){
+		hotel.deleteService(name);
 	}
 	
 	/**
@@ -65,19 +65,19 @@ import com.danco.training.storage.Hotel;
 	/**
 	 * Write services.
 	 */
-	
+	/*
 	public void writeServices(){
 		hotel.writeServices();
 	}
-	
+	*/
 	/**
 	 * Show services from file.
 	 *
 	 * @return the string
 	 */
-	
+	/*
 	public String showServicesFromFile(){
 		return hotel.showServicesFromFile();
 	}
-	
+	*/
 }

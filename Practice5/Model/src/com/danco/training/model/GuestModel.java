@@ -25,7 +25,7 @@ public class GuestModel  {
     private static final String SEMICOLON = " ; ";
     
     /** The sdf. */
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	
 	/** The services. */
 	private List<ServiceModel> services = new ArrayList<ServiceModel>();
@@ -37,10 +37,10 @@ public class GuestModel  {
 	 * @param dateOfAdd the date of add
 	 * @param dateOfEvi the date of evi
 	 */
-	public GuestModel(String name, GregorianCalendar dateOfAdd, GregorianCalendar dateOfEvi){
+	public GuestModel(String name, Date dateOfAdd, Date dateOfEvi){
 		this.name = name;
-		this.dateOfAdd = dateOfAdd.getTime();
-		this.dateOfEvi = dateOfEvi.getTime();
+		this.dateOfAdd = dateOfAdd;
+		this.dateOfEvi = dateOfEvi;
 	}
 	
 	/**

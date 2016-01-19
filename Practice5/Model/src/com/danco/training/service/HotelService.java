@@ -90,21 +90,10 @@ public class HotelService {
 	 *
 	 * @param guest the guest
 	 */
-	public void deleteGuest(GuestModel guest){
-		getGuestServ().deleteGuest(guest);
+	public void deleteGuest(String str){
+		getGuestServ().deleteGuest(str);
 	}
 	
-	/**
-	 * Update guest.
-	 *
-	 * @param guest the guest
-	 * @param dateOfAdd the date of add
-	 * @param dateOfEvi the date of evi
-	 */
-	public void updateGuest(GuestModel guest, String dateOfAdd, String dateOfEvi ){
-		getGuestServ().updateGuest(guest, dateOfAdd, dateOfEvi);
-	}
-
 	/**
 	 * Sort by name guests.
 	 *
@@ -138,8 +127,8 @@ public class HotelService {
 	 * @param guest the guest
 	 * @return the list
 	 */
-	public List<ServiceModel> showGuestsServicesSortedByCoast(GuestModel guest){
-		return getGuestServ().showListOfServicesSortedByCoast(guest);
+	public List<ServiceModel> showGuestsServicesSortedByCoast(String name){
+		return getGuestServ().showListOfServicesSortedByCoast(name);
 	}
 	
 	/**
@@ -148,8 +137,8 @@ public class HotelService {
 	 * @param guest the guest
 	 * @return the list
 	 */
-	public List<ServiceModel> showGuestsServicesSortedByDate(GuestModel guest){
-		return getGuestServ().showListOfServicesSortedByDate(guest);
+	public List<ServiceModel> showGuestsServicesSortedByDate(String name){
+		return getGuestServ().showListOfServicesSortedByDate(name);
 	}
 	
 	/**
@@ -175,8 +164,8 @@ public class HotelService {
 	 *
 	 * @param service the service
 	 */
-	public void deleteService(ServiceModel service){
-		getServiceServ().deleteService(service);
+	public void deleteService(String name){
+		getServiceServ().deleteService(name);
 	}
 	
 	/**
@@ -212,18 +201,8 @@ public class HotelService {
 	 *
 	 * @param room the room
 	 */
-	public void deleteRoom(RoomModel room){
-		getRoomServ().deleteRoom(room);
-	}
-	
-	/**
-	 * Update number.
-	 *
-	 * @param room the room
-	 * @param numberOfStars the number of stars
-	 */
-	public void updateNumber(RoomModel room, int numberOfStars){
-		getRoomServ().updateNumber(room, numberOfStars);
+	public void deleteRoom(int number){
+		getRoomServ().deleteRoom(number);
 	}
 	
 	/**
@@ -232,8 +211,8 @@ public class HotelService {
 	 * @param room the room
 	 * @param guest the guest
 	 */
-	public void deleteGuestFromRoom(RoomModel room, GuestModel guest){
-		getRoomServ().deleteGuestFromRoom(room, guest);
+	public void deleteGuestFromRoom(String name){
+		getRoomServ().deleteGuestFromRoom(name);
 	}
 	
 	/**
@@ -241,12 +220,12 @@ public class HotelService {
 	 *
 	 * @param room the room
 	 */
-	public void deleteAllGuestsFromRoom(RoomModel room){
-		getRoomServ().deleteAllGuestsFromRoom(room);
+	public void deleteAllGuestsFromRoom(int number){
+		getRoomServ().deleteAllGuestsFromRoom(number);
 	}
 	
-	public void changeRoomsCoast(RoomModel room, int coast){
-		getRoomServ().changeCoast(room, coast);
+	public void changeRoomsCoast(int number, int coast){
+		getRoomServ().changeCoast(number, coast);
 	}
 	
 	public void changeRoomsStatusRepair(){
@@ -332,8 +311,8 @@ public class HotelService {
 	 * @param room the room
 	 * @return the string
 	 */
-	public String showRoomDetails(RoomModel room){
-		return getRoomServ().showRoomDetails(room);
+	public String showRoomDetails(int number){
+		return getRoomServ().showRoomDetails(number);
 	}
 	
 	/**
@@ -342,8 +321,8 @@ public class HotelService {
 	 * @param guest the guest
 	 * @return the string
 	 */
-	public String showPricePerRoom(GuestModel guest){
-		return getRoomServ().showPricePerRoom(guest);
+	public String showPricePerRoom(String name){
+		return getRoomServ().showPricePerRoom(name);
 	}
 	
 	/**
@@ -352,8 +331,8 @@ public class HotelService {
 	 * @param room the room
 	 * @return the string
 	 */
-	public String showLastThreeGuests(RoomModel room){
-		return getRoomServ().showLastThreeGuests(room);
+	public String showLastThreeGuests(int number){
+		return getRoomServ().showLastThreeGuests(number);
 	}
 	
 	/**
@@ -362,7 +341,7 @@ public class HotelService {
 	 * @param guest the guest
 	 * @param service the service
 	 */
-	public void addServiceToGuest( GuestModel guest,ServiceModel service){
+	public void addServiceToGuest( String guest, String service){
 		getGuestServ().addServiceToGuest(guest, service);
 	}
 	
@@ -372,65 +351,62 @@ public class HotelService {
 	 * @param room the room
 	 * @param guest the guest
 	 */
-	public void addGuestInRoom( RoomModel room , GuestModel guest){
-		getRoomServ().addGuestInRoom(room, guest);
+	public void addGuestInRoom( int number, String name){
+		getRoomServ().addGuestInRoom(number, name);
 	}
 	
 	/**
 	 * Write guests.
 	 */
-	
+	/*
 	public void writeGuests(){
 		getGuestServ().writeGuests();
 	}
-	
+	*/
 	/**
 	 * Write rooms.
 	 */
-	
+	/*
 	public void writeRooms(){
 		getRoomServ().writeRooms();
 	}
-
+*/
 	/**
 	 * Write services.
 	 */
-	
+	/*
 	public void writeServices(){
 		getRoomServ().writeRooms();
 	}
-	
+	*/
 	/**
 	 * Show guests from file.
 	 *
 	 * @return the string
 	 */
-	
+	/*
 	public String showGuestsFromFile(){
 		return getGuestServ().showGuestsFromFile();
 	}
-	
+	*/
 	/**
 	 * Show rooms from file.
 	 *
 	 * @return the string
 	 */
-	
+	/*
 	public String showRoomsFromFile(){
 		return getGuestServ().showGuestsFromFile();
 	}
-	
+	*/
 	/**
 	 * Show services from file.
 	 *
 	 * @return the string
 	 */
-	
+	/*
 	public String showServicesFromFile(){
 		return getServiceServ().showServicesFromFile();
 	}
-	
-	public void hah(){
-		System.out.println("Nana");
-	}
+	*/
 }
