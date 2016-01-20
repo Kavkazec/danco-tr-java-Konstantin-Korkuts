@@ -274,19 +274,19 @@ public class RoomService {
 	/**
 	 * Write rooms.
 	 */
-	/*
+	
 	public void writeRooms(){
-		hotel.writeRooms();
+		hotel.writeToFileRooms();
 	}
-	*/
+	
 	/**
 	 * Show rooms from file.
 	 *
 	 * @return the string
 	 */
-	/*
+	
 	public String showRoomsFromFile(){
 		return hotel.showRoomsFromFile();
 	}
-	*/
+	
 }

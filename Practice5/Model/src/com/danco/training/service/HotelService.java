@@ -3,6 +3,9 @@ package com.danco.training.service;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
+import com.danco.training.logger.Config;
 import com.danco.training.model.GuestModel;
 import com.danco.training.model.RoomModel;
 import com.danco.training.model.ServiceModel;
@@ -12,41 +15,48 @@ import com.danco.training.model.ServiceModel;
  * The Class HotelService.
  */
 public class HotelService {
-	
+	private static final String LOGFILE = "log4j.properties";
+	private static Config config = new Config(LOGFILE);
+	private static final Logger logger = Logger.getLogger(HotelService.class);
 	/** The guest serv. */
 	private GuestService guestServ = new GuestService();
-	
+
 	/** The room serv. */
 	private RoomService roomServ = new RoomService();
-	
+
 	/** The service serv. */
 	private ServiceService serviceServ = new ServiceService();
-	
+
 	/**
 	 * Instantiates a new hotel service.
 	 */
-	
+
 	private static HotelService instance = null;
-	
-	private HotelService(){
-		
+
+	private HotelService() {
+
 	}
-	
-	
-	public static HotelService getInstance(){
-		if(instance == null){
+
+	public static HotelService getInstance() {
+		if (instance == null) {
 			instance = new HotelService();
 		}
 		return instance;
 	}
-	
+
 	/**
 	 * Gets the guest serv.
 	 *
 	 * @return the guest serv
 	 */
 	public GuestService getGuestServ() {
-		return guestServ;
+		try {
+			config.init();
+			return guestServ;
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
 
 	/**
@@ -55,7 +65,13 @@ public class HotelService {
 	 * @return the room serv
 	 */
 	public RoomService getRoomServ() {
-		return roomServ;
+		try {
+			config.init();
+			return roomServ;
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
 
 	/**
@@ -64,349 +80,619 @@ public class HotelService {
 	 * @return the service serv
 	 */
 	public ServiceService getServiceServ() {
-		return serviceServ;
+		try {
+			config.init();
+			return serviceServ;
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
-	
+
 	/**
 	 * Gets the guests.
 	 *
 	 * @return the guests
 	 */
 	public List<GuestModel> getGuests() {
-		return getGuestServ().getGuests();
+		try {
+			config.init();
+			return getGuestServ().getGuests();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
-	
+
 	/**
 	 * Adds the guest.
 	 *
-	 * @param guest the guest
+	 * @param guest
+	 *            the guest
 	 */
 	public void addGuest(GuestModel guest) {
-		getGuestServ().addGuest(guest);
+		try {
+			config.init();
+			getGuestServ().addGuest(guest);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
-	
+
 	/**
 	 * Delete guest.
 	 *
-	 * @param guest the guest
+	 * @param guest
+	 *            the guest
 	 */
-	public void deleteGuest(String str){
-		getGuestServ().deleteGuest(str);
+	public void deleteGuest(String str) {
+
+		try {
+			config.init();
+			getGuestServ().deleteGuest(str);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
-	
+
 	/**
 	 * Sort by name guests.
 	 *
 	 * @return the list
 	 */
-	public List<GuestModel> sortByNameGuests(){
-		return getGuestServ().sortByName();
+	public List<GuestModel> sortByNameGuests() {
+
+		try {
+			config.init();
+			return getGuestServ().sortByName();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
-	
+
 	/**
 	 * Sort by date guests.
 	 *
 	 * @return the list
 	 */
-	public List<GuestModel> sortByDateGuests(){
-		return getGuestServ().sortByDate();
+	public List<GuestModel> sortByDateGuests() {
+
+		try {
+			config.init();
+			return getGuestServ().sortByDate();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
-	
+
 	/**
 	 * Show number of guests.
 	 *
 	 * @return the int
 	 */
-	public int showNumberOfGuests(){
-		return getGuestServ().showAllGuests();
+	public int showNumberOfGuests() {
+
+		try {
+			config.init();
+			return getGuestServ().showAllGuests();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return 0;
+		}
 	}
-	
+
 	/**
 	 * Show guests services sorted by coast.
 	 *
-	 * @param guest the guest
+	 * @param guest
+	 *            the guest
 	 * @return the list
 	 */
-	public List<ServiceModel> showGuestsServicesSortedByCoast(String name){
-		return getGuestServ().showListOfServicesSortedByCoast(name);
+	public List<ServiceModel> showGuestsServicesSortedByCoast(String name) {
+
+		try {
+			config.init();
+			return getGuestServ().showListOfServicesSortedByCoast(name);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
-	
+
 	/**
 	 * Show guests services sorted by date.
 	 *
-	 * @param guest the guest
+	 * @param guest
+	 *            the guest
 	 * @return the list
 	 */
-	public List<ServiceModel> showGuestsServicesSortedByDate(String name){
-		return getGuestServ().showListOfServicesSortedByDate(name);
+	public List<ServiceModel> showGuestsServicesSortedByDate(String name) {
+
+		try {
+			config.init();
+			return getGuestServ().showListOfServicesSortedByDate(name);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
-	
+
 	/**
 	 * Gets the services.
 	 *
 	 * @return the services
 	 */
-	public List<ServiceModel> getServices(){
-		return getServiceServ().getServices();
+	public List<ServiceModel> getServices() {
+
+		try {
+			config.init();
+			return getServiceServ().getServices();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
-	
+
 	/**
 	 * Adds the service.
 	 *
-	 * @param service the service
+	 * @param service
+	 *            the service
 	 */
-	public void addService(ServiceModel service){
-		getServiceServ().addService(service);
+	public void addService(ServiceModel service) {
+
+		try {
+			config.init();
+			getServiceServ().addService(service);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
-	
+
 	/**
 	 * Delete service.
 	 *
-	 * @param service the service
+	 * @param service
+	 *            the service
 	 */
-	public void deleteService(String name){
-		getServiceServ().deleteService(name);
+	public void deleteService(String name) {
+
+		try {
+			config.init();
+			getServiceServ().deleteService(name);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
-	
+
 	/**
 	 * Change services coast.
 	 *
-	 * @param name the name
-	 * @param coast the coast
+	 * @param name
+	 *            the name
+	 * @param coast
+	 *            the coast
 	 */
-	public void changeServicesCoast(String name, int coast){
-		getServiceServ().changeStatus(name, coast);
+	public void changeServicesCoast(String name, int coast) {
+
+		try {
+			config.init();
+			getServiceServ().changeStatus(name, coast);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
-	
+
 	/**
 	 * Gets the rooms.
 	 *
 	 * @return the rooms
 	 */
-	public List<RoomModel> getRooms(){
-		return getRoomServ().getRooms();
-	}			
-	
+	public List<RoomModel> getRooms() {
+
+		try {
+			config.init();
+			return getRoomServ().getRooms();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
+	}
+
 	/**
 	 * Adds the room.
 	 *
-	 * @param room the room
+	 * @param room
+	 *            the room
 	 */
-	public void addRoom(RoomModel room){
-		getRoomServ().addRoom(room);
+	public void addRoom(RoomModel room) {
+
+		try {
+			config.init();
+			getRoomServ().addRoom(room);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
-	
+
 	/**
 	 * Delete room.
 	 *
-	 * @param room the room
+	 * @param room
+	 *            the room
 	 */
-	public void deleteRoom(int number){
-		getRoomServ().deleteRoom(number);
+	public void deleteRoom(int number) {
+
+		try {
+			config.init();
+			getRoomServ().deleteRoom(number);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
-	
+
 	/**
 	 * Delete guest from room.
 	 *
-	 * @param room the room
-	 * @param guest the guest
+	 * @param room
+	 *            the room
+	 * @param guest
+	 *            the guest
 	 */
-	public void deleteGuestFromRoom(String name){
-		getRoomServ().deleteGuestFromRoom(name);
+	public void deleteGuestFromRoom(String name) {
+
+		try {
+			config.init();
+			getRoomServ().deleteGuestFromRoom(name);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
-	
+
 	/**
 	 * Delete all guests from room.
 	 *
-	 * @param room the room
+	 * @param room
+	 *            the room
 	 */
-	public void deleteAllGuestsFromRoom(int number){
-		getRoomServ().deleteAllGuestsFromRoom(number);
+	public void deleteAllGuestsFromRoom(int number) {
+		try {
+			config.init();
+			getRoomServ().deleteAllGuestsFromRoom(number);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
+
 	}
-	
-	public void changeRoomsCoast(int number, int coast){
-		getRoomServ().changeCoast(number, coast);
+
+	public void changeRoomsCoast(int number, int coast) {
+		try {
+			config.init();
+			getRoomServ().changeCoast(number, coast);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
+
 	}
-	
-	public void changeRoomsStatusRepair(){
-		getRoomServ().changeStatusRepair();
+
+	public void changeRoomsStatusRepair() {
+		try {
+			config.init();
+			getRoomServ().changeStatusRepair();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
+
 	}
-	
+
 	/**
 	 * Sort by coast free room.
 	 *
 	 * @return the list
 	 */
-	public List<RoomModel> sortByCoastFreeRoom(){
-		return getRoomServ().sortByCoastFreeRoom();
+	public List<RoomModel> sortByCoastFreeRoom() {
+		try {
+			config.init();
+			return getRoomServ().sortByCoastFreeRoom();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
+
 	}
-	
+
 	/**
 	 * Sort by copasity free room.
 	 *
 	 * @return the list
 	 */
-	public List<RoomModel> sortByCopasityFreeRoom(){
-		return getRoomServ().sortByCopasityFreeRoom();
+	public List<RoomModel> sortByCopasityFreeRoom() {
+
+		try {
+			config.init();
+			return getRoomServ().sortByCopasityFreeRoom();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
-	
+
 	/**
 	 * Sort by stars free room.
 	 *
 	 * @return the list
 	 */
-	public List<RoomModel> sortByStarsFreeRoom(){
-		return getRoomServ().sortByStarsFreeRoom();
+	public List<RoomModel> sortByStarsFreeRoom() {
+
+		try {
+			config.init();
+			return getRoomServ().sortByStarsFreeRoom();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
-	
+
 	/**
 	 * Sort by coast room.
 	 *
 	 * @return the list
 	 */
-	public List<RoomModel> sortByCoastRoom(){
-		return getRoomServ().sortByCoastRoom();
+	public List<RoomModel> sortByCoastRoom() {
+
+		try {
+			config.init();
+			return getRoomServ().sortByCoastRoom();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
-	
+
 	/**
 	 * Sort by copasity room.
 	 *
 	 * @return the list
 	 */
-	public List<RoomModel> sortByCopasityRoom(){
-		return getRoomServ().sortByCopasityRoom();
+	public List<RoomModel> sortByCopasityRoom() {
+
+		try {
+			config.init();
+			return getRoomServ().sortByCopasityRoom();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
-	
+
 	/**
 	 * Sort by stars room.
 	 *
 	 * @return the list
 	 */
-	public List<RoomModel> sortByStarsRoom(){
-		return getRoomServ().sortByStarsRoom();
+	public List<RoomModel> sortByStarsRoom() {
+
+		try {
+			config.init();
+			return getRoomServ().sortByStarsRoom();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
-	
+
 	/**
 	 * Show number of free rooms.
 	 *
 	 * @return the int
 	 */
-	public int showNumberOfFreeRooms(){
-		return getRoomServ().showFreeRooms();
+	public int showNumberOfFreeRooms() {
+
+		try {
+			config.init();
+			return getRoomServ().showFreeRooms();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return 0;
+		}
 	}
-	
+
 	/**
 	 * Show chek out date.
 	 *
-	 * @param date the date
+	 * @param date
+	 *            the date
 	 * @return the list
 	 */
-	public List<RoomModel> showChekOutDate(Date date){
-		return getRoomServ().showChekOutDate(date);
+	public List<RoomModel> showChekOutDate(Date date) {
+
+		try {
+			config.init();
+			return getRoomServ().showChekOutDate(date);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
-	
+
 	/**
 	 * Show room details.
 	 *
-	 * @param room the room
+	 * @param room
+	 *            the room
 	 * @return the string
 	 */
-	public String showRoomDetails(int number){
-		return getRoomServ().showRoomDetails(number);
+	public String showRoomDetails(int number) {
+
+		try {
+			config.init();
+			return getRoomServ().showRoomDetails(number);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
-	
+
 	/**
 	 * Show price per room.
 	 *
-	 * @param guest the guest
+	 * @param guest
+	 *            the guest
 	 * @return the string
 	 */
-	public String showPricePerRoom(String name){
-		return getRoomServ().showPricePerRoom(name);
+	public String showPricePerRoom(String name) {
+
+		try {
+			config.init();
+			return getRoomServ().showPricePerRoom(name);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
-	
+
 	/**
 	 * Show last three guests.
 	 *
-	 * @param room the room
+	 * @param room
+	 *            the room
 	 * @return the string
 	 */
-	public String showLastThreeGuests(int number){
-		return getRoomServ().showLastThreeGuests(number);
+	public String showLastThreeGuests(int number) {
+
+		try {
+			config.init();
+			return getRoomServ().showLastThreeGuests(number);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
-	
+
 	/**
 	 * Adds the service to guest.
 	 *
-	 * @param guest the guest
-	 * @param service the service
+	 * @param guest
+	 *            the guest
+	 * @param service
+	 *            the service
 	 */
-	public void addServiceToGuest( String guest, String service){
-		getGuestServ().addServiceToGuest(guest, service);
+	public void addServiceToGuest(String guest, String service) {
+
+		try {
+			config.init();
+			getGuestServ().addServiceToGuest(guest, service);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
-	
+
 	/**
 	 * Adds the guest in room.
 	 *
-	 * @param room the room
-	 * @param guest the guest
+	 * @param room
+	 *            the room
+	 * @param guest
+	 *            the guest
 	 */
-	public void addGuestInRoom( int number, String name){
-		getRoomServ().addGuestInRoom(number, name);
+	public void addGuestInRoom(int number, String name) {
+
+		try {
+			config.init();
+			getRoomServ().addGuestInRoom(number, name);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
-	
+
 	/**
 	 * Write guests.
 	 */
-	/*
-	public void writeGuests(){
-		getGuestServ().writeGuests();
+
+	public void writeGuests() {
+		try {
+			config.init();
+			getGuestServ().writeGuests();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
+
 	}
-	*/
+
 	/**
 	 * Write rooms.
 	 */
-	/*
-	public void writeRooms(){
-		getRoomServ().writeRooms();
+
+	public void writeRooms() {
+		try {
+			config.init();
+			getRoomServ().writeRooms();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
-*/
+
 	/**
 	 * Write services.
 	 */
-	/*
-	public void writeServices(){
-		getRoomServ().writeRooms();
+
+	public void writeServices() {
+		try {
+			config.init();
+			getServiceServ().writeServices();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
-	*/
+
 	/**
 	 * Show guests from file.
 	 *
 	 * @return the string
 	 */
-	/*
-	public String showGuestsFromFile(){
-		return getGuestServ().showGuestsFromFile();
+
+	public String showGuestsFromFile() {
+		try {
+			config.init();
+			return getGuestServ().showGuestsFromFile();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
-	*/
+
 	/**
 	 * Show rooms from file.
 	 *
 	 * @return the string
 	 */
-	/*
-	public String showRoomsFromFile(){
-		return getGuestServ().showGuestsFromFile();
+
+	public String showRoomsFromFile() {
+		try {
+			config.init();
+			return getRoomServ().showRoomsFromFile();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
-	*/
+
 	/**
 	 * Show services from file.
 	 *
 	 * @return the string
 	 */
-	/*
-	public String showServicesFromFile(){
-		return getServiceServ().showServicesFromFile();
+
+	public String showServicesFromFile() {
+		try {
+			config.init();
+			return getServiceServ().showServicesFromFile();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
-	*/
+
 }

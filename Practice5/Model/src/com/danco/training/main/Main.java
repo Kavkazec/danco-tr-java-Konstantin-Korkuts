@@ -97,6 +97,10 @@ public class Main {
 		for(int i = 0; i < hotel.getGuest().getGuests().size(); i++){
 			System.out.println(hotel.getGuest().getGuests().get(i));
 		}
+		
+		hotel.writeGuests();
+		hotel.writeServices();
+		hotel.writeToFileRooms();
 
 	}
 

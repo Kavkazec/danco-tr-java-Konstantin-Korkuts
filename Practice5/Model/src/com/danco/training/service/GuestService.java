@@ -146,19 +146,19 @@ public class GuestService {
 	/**
 	 * Write guests.
 	 */
-	/*
+	
 	public void writeGuests(){
 		hotel.writeGuests();
 	}
-	*/
+	
 	/**
 	 * Show guests from file.
 	 *
 	 * @return the string
 	 */
-	/*
+	
 	public String showGuestsFromFile(){
 		return hotel.showGuestsFromFile();
 	}
-	*/
+	
 }

@@ -23,6 +23,7 @@ public class Navigator {
 	
 	public void printMenu(){
 		StringBuilder sb = new StringBuilder();
+		sb.append(currentMenu.getTitle() + "\n");
 		for(MenuItem menuItem : currentMenu.getMenuItems()){
 			sb.append(menuItem.getTitle() + "\n");
 		}

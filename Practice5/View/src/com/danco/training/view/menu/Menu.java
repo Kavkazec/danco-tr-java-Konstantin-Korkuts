@@ -8,11 +8,19 @@ public class Menu {
 	private String title;
 	
 	public Menu(){
-	
+		
 	}
 	
-	public Menu(List<MenuItem> menuItems){
+	public Menu(String title){
+		this.title = title;
+	}
+	
+	public Menu( List<MenuItem> menuItems){
 		this.menuItems = menuItems;
+	}
+
+	public String getTitle() {
+		return title;
 	}
 
 	public List<MenuItem> getMenuItems() {

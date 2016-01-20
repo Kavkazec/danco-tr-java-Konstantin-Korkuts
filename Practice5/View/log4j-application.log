@@ -1,0 +1,35 @@
+2016-01-20 19:49:01 ERROR InReader:22 - 
+java.util.InputMismatchException
+	at java.util.Scanner.throwFor(Scanner.java:864)
+	at java.util.Scanner.next(Scanner.java:1485)
+	at java.util.Scanner.nextInt(Scanner.java:2117)
+	at java.util.Scanner.nextInt(Scanner.java:2076)
+	at com.danco.training.controller.utils.InReader.readInt(InReader.java:20)
+	at com.danco.training.controller.utils.InRoom.inputRoom(InRoom.java:9)
+	at com.danco.training.controller.RoomController.addRoom(RoomController.java:44)
+	at com.danco.training.controller.HotelController.addRoom(HotelController.java:79)
+	at com.danco.training.view.action.room.AddRoomAction.execute(AddRoomAction.java:10)
+	at com.danco.training.view.menu.MenuItem.doAction(MenuItem.java:23)
+	at com.danco.training.view.menu.Navigator.navigate(Navigator.java:17)
+	at com.danco.training.view.menu.MainController.run(MainController.java:14)
+	at com.danco.training.view.menu.Start.main(Start.java:6)
+2016-01-20 19:50:24 ERROR InReader:22 - INPUT_ERROR
+java.util.InputMismatchException
+	at java.util.Scanner.throwFor(Scanner.java:864)
+	at java.util.Scanner.next(Scanner.java:1485)
+	at java.util.Scanner.nextInt(Scanner.java:2117)
+	at java.util.Scanner.nextInt(Scanner.java:2076)
+	at com.danco.training.controller.utils.InReader.readInt(InReader.java:20)
+	at com.danco.training.controller.utils.InRoom.inputRoom(InRoom.java:9)
+	at com.danco.training.controller.RoomController.addRoom(RoomController.java:44)
+	at com.danco.training.controller.HotelController.addRoom(HotelController.java:79)
+	at com.danco.training.view.action.room.AddRoomAction.execute(AddRoomAction.java:10)
+	at com.danco.training.view.menu.MenuItem.doAction(MenuItem.java:23)
+	at com.danco.training.view.menu.Navigator.navigate(Navigator.java:17)
+	at com.danco.training.view.menu.MainController.run(MainController.java:14)
+	at com.danco.training.view.menu.Start.main(Start.java:6)
+2016-01-20 19:51:00 ERROR InReader:22 - INPUT_ERROR
+2016-01-20 19:51:07 ERROR InReader:22 - INPUT_ERROR
+2016-01-20 19:51:09 ERROR InReader:22 - INPUT_ERROR
+2016-01-20 19:51:10 ERROR InReader:22 - INPUT_ERROR
+2016-01-20 20:30:43 ERROR InReader:86 - NULL

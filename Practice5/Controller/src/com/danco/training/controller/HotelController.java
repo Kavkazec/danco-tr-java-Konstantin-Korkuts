@@ -1,8 +1,14 @@
 package com.danco.training.controller;
 
-import java.text.ParseException;
+import org.apache.log4j.Logger;
+
+import com.danco.training.controller.utils.InReader;
+import com.danco.training.logger.Config;
 
 public class HotelController {
+	private static final String LOGFILE = "log4j.properties";
+	private static final Logger LOGGER = Logger.getLogger(InReader.class);
+	private static Config config = new Config(LOGFILE);
 	private GuestController guestCon;
 	private RoomController roomCon;
 	private ServiceController serviceCon;
@@ -73,7 +79,12 @@ public class HotelController {
 	}
 	
 	public void printGuest(){
+		try{
+			config.init();
 		getGuestCon().printGuest();
+		} catch(Exception e){
+			LOGGER.error("INCORRECT_DATE_INPUT");
+		}
 	}
 	
 	public void addRoom(){
@@ -129,11 +140,7 @@ public class HotelController {
 	}
 	
 	public void showChekOutDate(){
-		try {
-			getRoomCon().showChekOutDate();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		getRoomCon().showChekOutDate();
 	}
 	
 	public void showRoomDetails(){
@@ -170,5 +177,29 @@ public class HotelController {
 	
 	public void printService(){
 		getServiceCon().printService();
+	}
+	
+	public void writeRooms(){ 
+		getRoomCon().writeRooms();
+	}
+	
+	public void showRoomsFromFile(){
+		getRoomCon().showRoomsFromFile();
+	}
+	
+	public void writeServices(){ 
+		getServiceCon().writeServices();
+	}
+	
+	public void showServicesFromFile(){
+		getServiceCon().showServicesFromFile();
+	}
+	
+	public void writeGuest(){
+		getGuestCon().writeGuest();
+	}
+	
+	public void showGuestsFromFile(){ 
+		getGuestCon().showGuestsFromFile();
 	}
 }
