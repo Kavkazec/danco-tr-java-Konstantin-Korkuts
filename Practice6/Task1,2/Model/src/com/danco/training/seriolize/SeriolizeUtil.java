@@ -64,7 +64,7 @@ public class SeriolizeUtil {
 		try {
 			FileInputStream fis = new FileInputStream(getPath());
 			ObjectInputStream oin = new ObjectInputStream(fis);
-			Hotel hotel  = (Hotel) oin.readObject();
+			Hotel.getInstance().setHotel((Hotel) oin.readObject());
 			oin.close();
 		} catch (ClassNotFoundException | IOException e) {
 			LOGGER.error("IOEXCEPRION_OR_CLASSNOTFOUND",e);

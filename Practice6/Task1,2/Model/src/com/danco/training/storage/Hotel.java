@@ -28,7 +28,7 @@ public class Hotel implements Serializable{
 	private ServiceStorage service;
 	
 	/** The instance. */
-	private static Hotel instance = null;
+	private static Hotel instance;
 	
 	private Hotel(){
 		
@@ -43,6 +43,10 @@ public class Hotel implements Serializable{
 			instance = new Hotel();
 		}
 		return instance;
+	}
+	
+	public void setHotel(Hotel hotel){
+		instance = hotel;
 	}
 	
 	/**
