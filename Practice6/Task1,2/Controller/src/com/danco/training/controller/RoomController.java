@@ -235,18 +235,6 @@ public class RoomController {
 		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
-	public void writeRooms(){ 
-		getService().writeRooms();
-		getInReader().print(LINE_AFTER_ACTION);
-	}
-	
-	public void showRoomsFromFile(){
-		getInReader().print(DETAILS_ROOM);
-		getInReader().print(getService().showRoomsFromFile());
-		getInReader().print(LINE);
-		getInReader().print(LINE_AFTER_ACTION);
-	}
-	
 	public void cloneRoom(){
 		getInReader().print(DETAILS_ROOM);
 		for(int i = 0; i < getService().getRooms().size(); i++){

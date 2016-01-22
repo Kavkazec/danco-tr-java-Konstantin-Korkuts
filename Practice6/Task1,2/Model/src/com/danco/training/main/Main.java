@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
 import com.danco.training.model.GuestModel;
 import com.danco.training.model.RoomModel;
 import com.danco.training.model.ServiceModel;
+import com.danco.training.seriolize.SeriolizeUtil;
 import com.danco.training.service.GuestService;
 import com.danco.training.service.HotelService;
 import com.danco.training.service.RoomService;
@@ -98,10 +99,10 @@ public class Main {
 			System.out.println(hotel.getGuest().getGuests().get(i));
 		}
 		
-		hotel.writeGuests();
-		hotel.writeServices();
-		hotel.writeToFileRooms();
-
+		SeriolizeUtil util = SeriolizeUtil.getInstatcne();
+		util.setPath();
+		util.writeInFile();
+				
 	}
 
 }

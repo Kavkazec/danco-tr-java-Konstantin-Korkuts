@@ -74,16 +74,4 @@ public class ServiceController {
 		getInReader().print(LINE);
 		getInReader().print(LINE_AFTER_ACTION);
 	}
-	
-	public void writeServices(){ 
-		 getService().writeServices();
-		 getInReader().print(LINE_AFTER_ACTION);
-	}
-	
-	public void showServicesFromFile(){
-		getInReader().print(DETAILS_SERVICE);
-		getInReader().print(getService().showServicesFromFile());
-		getInReader().print(LINE);
-		getInReader().print(LINE_AFTER_ACTION);
-	}
 }

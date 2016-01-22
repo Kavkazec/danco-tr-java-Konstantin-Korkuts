@@ -274,24 +274,6 @@ public class RoomService {
 		return str;
 	}
 	
-	/**
-	 * Write rooms.
-	 */
-	
-	public void writeRooms(){
-		hotel.writeToFileRooms();
-	}
-	
-	/**
-	 * Show rooms from file.
-	 *
-	 * @return the string
-	 */
-	
-	public String showRoomsFromFile(){
-		return hotel.showRoomsFromFile();
-	}
-	
 	public void cloneRoom(int number) throws CloneNotSupportedException{
 		hotel.cloneRoom(number);
 	}

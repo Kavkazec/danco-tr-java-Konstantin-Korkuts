@@ -4,11 +4,13 @@ import org.apache.log4j.Logger;
 
 import com.danco.training.controller.utils.InReader;
 import com.danco.training.logger.Config;
+import com.danco.training.service.HotelService;
 
 public class HotelController {
 	private static final String LOGFILE = "log4j.properties";
 	private static final Logger LOGGER = Logger.getLogger(InReader.class);
 	private static Config config = new Config(LOGFILE);
+	private static HotelService service = HotelService.getInstance();
 	private GuestController guestCon;
 	private RoomController roomCon;
 	private ServiceController serviceCon;
@@ -179,31 +181,15 @@ public class HotelController {
 		getServiceCon().printService();
 	}
 	
-	public void writeRooms(){ 
-		getRoomCon().writeRooms();
-	}
-	
-	public void showRoomsFromFile(){
-		getRoomCon().showRoomsFromFile();
-	}
-	
-	public void writeServices(){ 
-		getServiceCon().writeServices();
-	}
-	
-	public void showServicesFromFile(){
-		getServiceCon().showServicesFromFile();
-	}
-	
-	public void writeGuest(){
-		getGuestCon().writeGuest();
-	}
-	
-	public void showGuestsFromFile(){ 
-		getGuestCon().showGuestsFromFile();
-	}
-	
 	public void cloneRoom(){
 		getRoomCon().cloneRoom();
+	}
+	
+	public void writeInFile(){
+		service.writeInFile();
+	}
+	
+	public void readFromFile(){
+		service.readFromFile();
 	}
 }

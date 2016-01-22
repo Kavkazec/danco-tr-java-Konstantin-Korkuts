@@ -9,6 +9,8 @@ import com.danco.training.logger.Config;
 import com.danco.training.model.GuestModel;
 import com.danco.training.model.RoomModel;
 import com.danco.training.model.ServiceModel;
+import com.danco.training.seriolize.SeriolizeUtil;
+import com.danco.training.storage.Hotel;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -26,6 +28,8 @@ public class HotelService {
 
 	/** The service serv. */
 	private ServiceService serviceServ = new ServiceService();
+	
+	private SeriolizeUtil util = SeriolizeUtil.getInstatcne();
 
 	/**
 	 * Instantiates a new hotel service.
@@ -606,94 +610,6 @@ public class HotelService {
 			logger.error(e.getMessage(), e);
 		}
 	}
-
-	/**
-	 * Write guests.
-	 */
-
-	public void writeGuests() {
-		try {
-			config.init();
-			getGuestServ().writeGuests();
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
-
-	}
-
-	/**
-	 * Write rooms.
-	 */
-
-	public void writeRooms() {
-		try {
-			config.init();
-			getRoomServ().writeRooms();
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
-	}
-
-	/**
-	 * Write services.
-	 */
-
-	public void writeServices() {
-		try {
-			config.init();
-			getServiceServ().writeServices();
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
-	}
-
-	/**
-	 * Show guests from file.
-	 *
-	 * @return the string
-	 */
-
-	public String showGuestsFromFile() {
-		try {
-			config.init();
-			return getGuestServ().showGuestsFromFile();
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			return null;
-		}
-	}
-
-	/**
-	 * Show rooms from file.
-	 *
-	 * @return the string
-	 */
-
-	public String showRoomsFromFile() {
-		try {
-			config.init();
-			return getRoomServ().showRoomsFromFile();
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			return null;
-		}
-	}
-
-	/**
-	 * Show services from file.
-	 *
-	 * @return the string
-	 */
-
-	public String showServicesFromFile() {
-		try {
-			config.init();
-			return getServiceServ().showServicesFromFile();
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			return null;
-		}
-	}
 	
 	public void cloneRoom(int number){
 		try {
@@ -702,6 +618,16 @@ public class HotelService {
 		} catch (CloneNotSupportedException e) {
 			logger.error(e.getMessage(), e);
 		}
+	}
+	
+	public void writeInFile(){
+		util.setPath();
+		util.writeInFile();
+	}
+	
+	public void readFromFile(){
+		util.setPath();
+		util.ReadFromFile();
 	}
 
 }

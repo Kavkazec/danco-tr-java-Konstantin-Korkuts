@@ -1,20 +1,21 @@
 package com.danco.training.storage;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
-import com.danco.training.model.GuestModel;
 import com.danco.training.model.RoomModel;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class RoomStorage.
  */
-public class RoomStorage{
-	private static Logger logger = Logger.getLogger(RoomModel.class);
+public class RoomStorage implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** The rooms. */
 	private List<RoomModel> rooms;
 	

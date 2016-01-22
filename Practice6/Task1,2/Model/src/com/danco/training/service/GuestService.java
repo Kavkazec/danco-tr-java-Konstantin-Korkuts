@@ -142,23 +142,4 @@ public class GuestService {
 		Collections.sort(list, new GuestServicesDateCopmarator());
 		return list;
 	}
-	
-	/**
-	 * Write guests.
-	 */
-	
-	public void writeGuests(){
-		hotel.writeGuests();
-	}
-	
-	/**
-	 * Show guests from file.
-	 *
-	 * @return the string
-	 */
-	
-	public String showGuestsFromFile(){
-		return hotel.showGuestsFromFile();
-	}
-	
 }

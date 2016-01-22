@@ -129,16 +129,4 @@ public class GuestController {
 		getInReader().print(LINE);
 		getInReader().print(LINE_AFTER_ACTION);
 	}
-	
-	public void writeGuest(){
-		getService().writeGuests();
-		getInReader().print(LINE_AFTER_ACTION);
-	}
-	
-	public void showGuestsFromFile(){ 
-		getInReader().print(DETAILS_GUEST);
-		getInReader().print(getService().showGuestsFromFile());
-		getInReader().print(LINE);
-		getInReader().print(LINE_AFTER_ACTION);
-	}
 }

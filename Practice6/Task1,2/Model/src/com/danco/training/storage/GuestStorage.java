@@ -1,7 +1,6 @@
 package com.danco.training.storage;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,11 +10,13 @@ import com.danco.training.model.GuestModel;
 /**
  * The Class GuestStorage.
  */
-public class GuestStorage{
+public class GuestStorage  implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** The sdf. */
-	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-	/** The guests. */
 	private List<GuestModel> guests;
 	
 	/**
