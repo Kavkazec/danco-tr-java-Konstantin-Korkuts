@@ -7,12 +7,26 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 
 public class PropertiesReader {
-	private static Logger logger = Logger.getLogger(PropertiesUtil.class);
+	private static Logger logger = Logger.getLogger(PropertiesReader.class);
 
 	private PropertiesUtil util = new PropertiesUtil();
 	
+	private static PropertiesReader instance;
+	
+	private PropertiesReader(){
+		
+	}
+	
+	public static PropertiesReader getInstance(){
+		if(instance == null){
+			instance = new PropertiesReader();
+		}
+		return instance;
+	}
+	
 	private static final String RECORD_KEY = "RECORD";
 	private static final String SWITCH_KEY = "SWITCH_OFF";
+	private static final String PATH = "Path";
 
 	
 	public void setProperties(){
@@ -22,12 +36,14 @@ public class PropertiesReader {
 			properties.load(reader);
 			Boolean swith = Boolean.parseBoolean(properties.getProperty(SWITCH_KEY));
 			int record = Integer.parseInt(properties.getProperty(RECORD_KEY));
+			String path = properties.getProperty(PATH);
 			util.setSwitchOff(swith);
 			util.setRecordNumber(record);
+			util.setPath(path);
 		} catch (FileNotFoundException e) {
-			logger.error("FILE_NOT_FOUND",e);
+			logger.error("FILE_NOT_FOUND");
 		} catch (IOException e) {
-			logger.error("IOEXCEPTION",e);
+			logger.error("IOEXCEPTION");
 		}
 	}
 	

@@ -10,7 +10,6 @@ public class GuestController {
 	private static final String DETAILS_GUEST = "name ; date of added; date of departure ;";
 	private static final String DETAILS_SERVICE = "name ; coast ;";
 	private static final String LINE = "-------------------------------------------";
-	private static final String LINE_AFTER_ACTION = "#############################################";
 	
 	private InGuest inGuest;
 	private InReader inReader;
@@ -38,7 +37,6 @@ public class GuestController {
 	
 	public void addGuest(){
 			getService().addGuest(getInGuest().inputGuest());
-			getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void deletGuest(){
@@ -50,7 +48,6 @@ public class GuestController {
 		getInReader().print("Guest's name:");
 		String name = getInReader().readStrin();
 		getService().deleteGuest(name);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void sortByNameGuests(){
@@ -59,7 +56,6 @@ public class GuestController {
 			getInReader().print(getService().sortByNameGuests().get(i).toString());
 		}
 		getInReader().print(LINE);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void sortByDateGuests(){
@@ -68,13 +64,11 @@ public class GuestController {
 			getInReader().print(getService().sortByDateGuests().get(i).toString());
 		}
 		getInReader().print(LINE);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void showNumberOfGuests(){
 		String str = getService().showNumberOfGuests() + PUSTOTA;
 		getInReader().print(str);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void showGuestsServicesSortedByCoast(){
@@ -86,7 +80,6 @@ public class GuestController {
 		getInReader().print("Guest's name:");
 		String name = getInReader().readStrin();
 		getService().showGuestsServicesSortedByCoast(name);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void showGuestsServicesSortedByDate(){
@@ -98,7 +91,6 @@ public class GuestController {
 		getInReader().print("Guest's name:");
 		String name = getInReader().readStrin();
 		getService().showGuestsServicesSortedByDate(name);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void addServiceToGuest(){
@@ -117,7 +109,6 @@ public class GuestController {
 		getInReader().print("Service name:");
 		String service = getInReader().readStrin();
 		getService().addServiceToGuest(guest, service);
-		getInReader().print(LINE_AFTER_ACTION);
 		
 	}
 	
@@ -127,6 +118,5 @@ public class GuestController {
 			getInReader().print(getService().getGuests().get(i).toString());
 		}
 		getInReader().print(LINE);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 }

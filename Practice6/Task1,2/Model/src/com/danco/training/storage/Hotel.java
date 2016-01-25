@@ -61,6 +61,15 @@ public class Hotel implements Serializable{
 		return guest;
 	}
 	
+	public void setGuest(GuestStorage guest) {
+		this.guest = guest;
+	}
+	public void setRoom(RoomStorage room) {
+		this.room = room;
+	}
+	public void setService(ServiceStorage service) {
+		this.service = service;
+	}
 	/**
 	 * Sets the guest.
 	 *

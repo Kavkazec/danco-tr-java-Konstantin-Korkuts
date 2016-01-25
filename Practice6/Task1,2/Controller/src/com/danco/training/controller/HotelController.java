@@ -3,13 +3,10 @@ package com.danco.training.controller;
 import org.apache.log4j.Logger;
 
 import com.danco.training.controller.utils.InReader;
-import com.danco.training.logger.Config;
 import com.danco.training.service.HotelService;
 
 public class HotelController {
-	private static final String LOGFILE = "log4j.properties";
 	private static final Logger LOGGER = Logger.getLogger(InReader.class);
-	private static Config config = new Config(LOGFILE);
 	private static HotelService service = HotelService.getInstance();
 	private GuestController guestCon;
 	private RoomController roomCon;
@@ -82,7 +79,6 @@ public class HotelController {
 	
 	public void printGuest(){
 		try{
-			config.init();
 		getGuestCon().printGuest();
 		} catch(Exception e){
 			LOGGER.error("INCORRECT_DATE_INPUT");

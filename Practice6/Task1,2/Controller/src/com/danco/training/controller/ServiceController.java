@@ -10,7 +10,6 @@ public class ServiceController {
 	private InService inService;
 	private static final String DETAILS_SERVICE = "name ; coast ;";
 	private static final String LINE = "-------------------------------------------";
-	private static final String LINE_AFTER_ACTION = "#############################################";
 
 	
 	
@@ -37,7 +36,6 @@ public class ServiceController {
 	
 	public void addService(){
 		getService().addService(getInService().inputService());
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void deleteService(){
@@ -49,7 +47,6 @@ public class ServiceController {
 		getInReader().print("Service name:");
 		String name = getInReader().readStrin();
 		getService().deleteService(name);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void changeServicesCoast(){
@@ -63,7 +60,6 @@ public class ServiceController {
 		getInReader().print("Coast:");
 		int coast = getInReader().readInt();
 		getService().changeServicesCoast(name, coast);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void printService(){
@@ -72,6 +68,5 @@ public class ServiceController {
 			getInReader().print(getService().getServices().get(i).toString());
 		}
 		getInReader().print(LINE);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 }

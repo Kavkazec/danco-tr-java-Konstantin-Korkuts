@@ -46,10 +46,9 @@ public class Builder {
 	private Menu guestMenuOtherSort = new Menu("Guest menu->Other->Sort");
 	private Menu roomMenuOtherSort = new Menu("Room menu->Other->Sort");
 	private Menu roomMenuOtherShow = new Menu("Room menu->Other->Show");
-	private PropertiesReader reader = new PropertiesReader();
 	
 	public void buildMenu() {
-		reader.setProperties();
+		PropertiesReader.getInstance().setProperties();
 		mainMenu.addMenuItem(new MenuItem(null, "0 -> Open operations with guests ", guestMenu));
 		mainMenu.addMenuItem(new MenuItem(null, "1 -> Open operations with rooms ", roomMenu));
 		mainMenu.addMenuItem(new MenuItem(null, "2 -> Open operations with services", serviceMenu));
@@ -80,7 +79,7 @@ public class Builder {
 		
 		roomMenuOther.addMenuItem(new MenuItem(new AddGuestInRoomAction(), "0-> Add guest in room", roomMenuOther));
 		roomMenuOther.addMenuItem(new MenuItem(new ChangeRoomsCoastAction(), "1-> Change room's coast", roomMenuOther));
-		if(!reader.getUtil().isSwitchOff()){
+		if(!PropertiesReader.getInstance().getUtil().isSwitchOff()){
 			roomMenuOther.addMenuItem(new MenuItem(new ChangeRoomsStatusRepairAction(), "2-> Change room's status", roomMenuOther));
 		} else {
 			roomMenuOther.addMenuItem(new MenuItem(null, "2-> Room's status cannot be changed!", roomMenuOther));

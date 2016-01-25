@@ -27,8 +27,6 @@ import com.danco.training.storage.Hotel;
  */
 public class RoomService {
 	
-	private PropertiesReader reader = new PropertiesReader();
-
 	/** The t. */
 	private int t = 0;
 	
@@ -255,8 +253,8 @@ public class RoomService {
 	 */
 	
 	public String showLastThreeGuests(int number){
-		reader.setProperties();
-		int numberOfGuest = reader.getUtil().getRecordNumber();
+		PropertiesReader.getInstance().setProperties();
+		int numberOfGuest = PropertiesReader.getInstance().getUtil().getRecordNumber();
 		String str ="";
 		for(RoomModel roomMod : hotel.getRoom().getListOfNumbers()){
 			if(number == roomMod.getNumber()){

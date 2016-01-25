@@ -2,6 +2,7 @@ package com.danco.training.view.menu;
 
 
 public class Navigator {
+	private static final String FINAL_LINE = "#################################";
 	private Menu currentMenu = new Menu();
 
 	public Menu getCurrentMenu() {
@@ -28,5 +29,6 @@ public class Navigator {
 			sb.append(menuItem.getTitle() + "\n");
 		}
 		System.out.println(sb.toString());
+		System.out.println(FINAL_LINE);
 	}
 }

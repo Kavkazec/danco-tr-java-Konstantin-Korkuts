@@ -9,6 +9,7 @@ import com.danco.training.logger.Config;
 import com.danco.training.model.GuestModel;
 import com.danco.training.model.RoomModel;
 import com.danco.training.model.ServiceModel;
+import com.danco.training.properties.PropertiesReader;
 import com.danco.training.seriolize.SeriolizeUtil;
 import com.danco.training.storage.Hotel;
 
@@ -18,7 +19,6 @@ import com.danco.training.storage.Hotel;
  */
 public class HotelService {
 	private static final String LOGFILE = "log4j.properties";
-	private static Config config = new Config(LOGFILE);
 	private static final Logger logger = Logger.getLogger(HotelService.class);
 	/** The guest serv. */
 	private GuestService guestServ = new GuestService();
@@ -29,8 +29,8 @@ public class HotelService {
 	/** The service serv. */
 	private ServiceService serviceServ = new ServiceService();
 	
-	private SeriolizeUtil util = SeriolizeUtil.getInstatcne();
-
+	private SeriolizeUtil util = new SeriolizeUtil();
+	
 	/**
 	 * Instantiates a new hotel service.
 	 */
@@ -55,7 +55,6 @@ public class HotelService {
 	 */
 	public GuestService getGuestServ() {
 		try {
-			config.init();
 			return guestServ;
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -63,6 +62,13 @@ public class HotelService {
 		}
 	}
 
+	public void setHotel(Hotel hotel){
+		Hotel.getInstance().setHotel(hotel);
+	}
+	
+	public Hotel getHotel(){
+		return Hotel.getInstance();
+	}
 	/**
 	 * Gets the room serv.
 	 *
@@ -70,7 +76,6 @@ public class HotelService {
 	 */
 	public RoomService getRoomServ() {
 		try {
-			config.init();
 			return roomServ;
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -85,7 +90,6 @@ public class HotelService {
 	 */
 	public ServiceService getServiceServ() {
 		try {
-			config.init();
 			return serviceServ;
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -100,7 +104,6 @@ public class HotelService {
 	 */
 	public List<GuestModel> getGuests() {
 		try {
-			config.init();
 			return getGuestServ().getGuests();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -116,7 +119,6 @@ public class HotelService {
 	 */
 	public void addGuest(GuestModel guest) {
 		try {
-			config.init();
 			getGuestServ().addGuest(guest);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -132,7 +134,6 @@ public class HotelService {
 	public void deleteGuest(String str) {
 
 		try {
-			config.init();
 			getGuestServ().deleteGuest(str);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -147,7 +148,6 @@ public class HotelService {
 	public List<GuestModel> sortByNameGuests() {
 
 		try {
-			config.init();
 			return getGuestServ().sortByName();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -163,7 +163,6 @@ public class HotelService {
 	public List<GuestModel> sortByDateGuests() {
 
 		try {
-			config.init();
 			return getGuestServ().sortByDate();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -179,7 +178,6 @@ public class HotelService {
 	public int showNumberOfGuests() {
 
 		try {
-			config.init();
 			return getGuestServ().showAllGuests();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -197,7 +195,6 @@ public class HotelService {
 	public List<ServiceModel> showGuestsServicesSortedByCoast(String name) {
 
 		try {
-			config.init();
 			return getGuestServ().showListOfServicesSortedByCoast(name);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -215,7 +212,6 @@ public class HotelService {
 	public List<ServiceModel> showGuestsServicesSortedByDate(String name) {
 
 		try {
-			config.init();
 			return getGuestServ().showListOfServicesSortedByDate(name);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -231,7 +227,6 @@ public class HotelService {
 	public List<ServiceModel> getServices() {
 
 		try {
-			config.init();
 			return getServiceServ().getServices();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -248,7 +243,6 @@ public class HotelService {
 	public void addService(ServiceModel service) {
 
 		try {
-			config.init();
 			getServiceServ().addService(service);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -264,7 +258,6 @@ public class HotelService {
 	public void deleteService(String name) {
 
 		try {
-			config.init();
 			getServiceServ().deleteService(name);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -282,7 +275,6 @@ public class HotelService {
 	public void changeServicesCoast(String name, int coast) {
 
 		try {
-			config.init();
 			getServiceServ().changeStatus(name, coast);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -297,7 +289,6 @@ public class HotelService {
 	public List<RoomModel> getRooms() {
 
 		try {
-			config.init();
 			return getRoomServ().getRooms();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -314,7 +305,6 @@ public class HotelService {
 	public void addRoom(RoomModel room) {
 
 		try {
-			config.init();
 			getRoomServ().addRoom(room);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -330,7 +320,6 @@ public class HotelService {
 	public void deleteRoom(int number) {
 
 		try {
-			config.init();
 			getRoomServ().deleteRoom(number);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -348,7 +337,6 @@ public class HotelService {
 	public void deleteGuestFromRoom(String name) {
 
 		try {
-			config.init();
 			getRoomServ().deleteGuestFromRoom(name);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -363,7 +351,6 @@ public class HotelService {
 	 */
 	public void deleteAllGuestsFromRoom(int number) {
 		try {
-			config.init();
 			getRoomServ().deleteAllGuestsFromRoom(number);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -373,7 +360,6 @@ public class HotelService {
 
 	public void changeRoomsCoast(int number, int coast) {
 		try {
-			config.init();
 			getRoomServ().changeCoast(number, coast);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -383,7 +369,6 @@ public class HotelService {
 
 	public void changeRoomsStatusRepair() {
 		try {
-			config.init();
 			getRoomServ().changeStatusRepair();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -398,7 +383,6 @@ public class HotelService {
 	 */
 	public List<RoomModel> sortByCoastFreeRoom() {
 		try {
-			config.init();
 			return getRoomServ().sortByCoastFreeRoom();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -415,7 +399,6 @@ public class HotelService {
 	public List<RoomModel> sortByCopasityFreeRoom() {
 
 		try {
-			config.init();
 			return getRoomServ().sortByCopasityFreeRoom();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -431,7 +414,6 @@ public class HotelService {
 	public List<RoomModel> sortByStarsFreeRoom() {
 
 		try {
-			config.init();
 			return getRoomServ().sortByStarsFreeRoom();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -447,7 +429,6 @@ public class HotelService {
 	public List<RoomModel> sortByCoastRoom() {
 
 		try {
-			config.init();
 			return getRoomServ().sortByCoastRoom();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -463,7 +444,6 @@ public class HotelService {
 	public List<RoomModel> sortByCopasityRoom() {
 
 		try {
-			config.init();
 			return getRoomServ().sortByCopasityRoom();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -479,7 +459,6 @@ public class HotelService {
 	public List<RoomModel> sortByStarsRoom() {
 
 		try {
-			config.init();
 			return getRoomServ().sortByStarsRoom();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -495,7 +474,6 @@ public class HotelService {
 	public int showNumberOfFreeRooms() {
 
 		try {
-			config.init();
 			return getRoomServ().showFreeRooms();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -513,7 +491,6 @@ public class HotelService {
 	public List<RoomModel> showChekOutDate(Date date) {
 
 		try {
-			config.init();
 			return getRoomServ().showChekOutDate(date);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -531,7 +508,6 @@ public class HotelService {
 	public String showRoomDetails(int number) {
 
 		try {
-			config.init();
 			return getRoomServ().showRoomDetails(number);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -549,7 +525,6 @@ public class HotelService {
 	public String showPricePerRoom(String name) {
 
 		try {
-			config.init();
 			return getRoomServ().showPricePerRoom(name);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -567,7 +542,6 @@ public class HotelService {
 	public String showLastThreeGuests(int number) {
 
 		try {
-			config.init();
 			return getRoomServ().showLastThreeGuests(number);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -586,7 +560,6 @@ public class HotelService {
 	public void addServiceToGuest(String guest, String service) {
 
 		try {
-			config.init();
 			getGuestServ().addServiceToGuest(guest, service);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -604,7 +577,6 @@ public class HotelService {
 	public void addGuestInRoom(int number, String name) {
 
 		try {
-			config.init();
 			getRoomServ().addGuestInRoom(number, name);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -613,21 +585,22 @@ public class HotelService {
 	
 	public void cloneRoom(int number){
 		try {
-			config.init();
 			roomServ.cloneRoom(number);
 		} catch (CloneNotSupportedException e) {
 			logger.error(e.getMessage(), e);
 		}
 	}
 	
+	
+	
 	public void writeInFile(){
-		util.setPath();
-		util.writeInFile();
+		PropertiesReader.getInstance().setProperties();
+		util.writeInFile(PropertiesReader.getInstance().getUtil().getPath());
 	}
 	
 	public void readFromFile(){
-		util.setPath();
-		util.ReadFromFile();
+		PropertiesReader.getInstance().setProperties();
+		util.readFromFile(PropertiesReader.getInstance().getUtil().getPath());
 	}
 
 }

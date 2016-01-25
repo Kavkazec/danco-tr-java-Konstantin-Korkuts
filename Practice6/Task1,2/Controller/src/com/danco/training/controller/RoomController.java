@@ -13,7 +13,6 @@ public class RoomController {
 	private static final String DETAILS_ROOM = "number ; capacity ; stats ; coast ; free? ;";
 	private static final String DETAILS_GUEST = "name ; date of added; date of departure ;";
 	private static final String LINE = "-------------------------------------------";
-	private static final String LINE_AFTER_ACTION = "#############################################";
 
 	private HotelService service;
 	private InReader inReader;
@@ -42,7 +41,6 @@ public class RoomController {
 	
 	public void addRoom(){
 		getService().addRoom(getInRoom().inputRoom());
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void deleteRoom(){
@@ -54,7 +52,6 @@ public class RoomController {
 		getInReader().print("Room's number:");
 		int number = getInReader().readInt();
 		getService().deleteRoom(number);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void deleteGuestFromRoom(){
@@ -67,7 +64,6 @@ public class RoomController {
 		getInReader().print("Guest's name:");
 		String name = getInReader().readStrin();
 		getService().deleteGuestFromRoom(name);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void deleteAllGuestsFromRoom(){
@@ -79,7 +75,6 @@ public class RoomController {
 		getInReader().print("Room's number:");
 		int number = getInReader().readInt();
 		getService().deleteAllGuestsFromRoom(number);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void changeRoomsCoast(){
@@ -93,12 +88,10 @@ public class RoomController {
 		getInReader().print("Coast:");
 		int coast = getInReader().readInt();
 		getService().changeRoomsCoast(number, coast);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void changeRoomsStatusRepair(){
 		getService().changeRoomsStatusRepair();
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void sortByCoastFreeRoom(){
@@ -107,7 +100,6 @@ public class RoomController {
 			getInReader().print(getService().sortByCoastFreeRoom().get(i).toString());
 		}
 		getInReader().print(LINE);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void sortByCopasityFreeRoom(){
@@ -116,7 +108,6 @@ public class RoomController {
 			getInReader().print(getService().sortByCopasityFreeRoom().get(i).toString());
 		}
 		getInReader().print(LINE);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void sortByStarsFreeRoom(){
@@ -125,7 +116,6 @@ public class RoomController {
 			getInReader().print(getService().sortByStarsFreeRoom().get(i).toString());
 		}
 		getInReader().print(LINE);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void sortByCoastRoom(){
@@ -134,7 +124,6 @@ public class RoomController {
 			getInReader().print(getService().sortByCoastRoom().get(i).toString());
 		}
 		getInReader().print(LINE);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void sortByCopasityRoom(){
@@ -143,7 +132,6 @@ public class RoomController {
 			getInReader().print(getService().sortByCopasityRoom().get(i).toString());
 		}
 		getInReader().print(LINE);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void sortByStarsRoom(){
@@ -152,13 +140,11 @@ public class RoomController {
 			getInReader().print(getService().sortByStarsRoom().get(i).toString());
 		}
 		getInReader().print(LINE);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void showNumberOfFreeRooms(){
 		String str = getService().showNumberOfGuests() + PUSTOTA;
 		getInReader().print(str);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void showChekOutDate(){
@@ -167,7 +153,6 @@ public class RoomController {
 		for(int i = 0; i < getService().showChekOutDate(dateOfArr).size(); i++){
 			getInReader().print(getService().showChekOutDate(dateOfArr).get(i).toString());
 		}
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void showRoomDetails(){
@@ -179,7 +164,6 @@ public class RoomController {
 		getInReader().print("Room's number:");
 		int number = getInReader().readInt();
 		getInReader().print(getService().showRoomDetails(number));
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void showPricePerRoom(){
@@ -192,7 +176,6 @@ public class RoomController {
 		getInReader().print("Guest's name:");
 		String name = getInReader().readStrin();
 		getInReader().print(getService().showPricePerRoom(name));
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void showLastThreeGuests(){
@@ -204,7 +187,6 @@ public class RoomController {
 		getInReader().print("Room's number:");
 		int number = getInReader().readInt();
 		getInReader().print(getService().showLastThreeGuests(number));
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void addGuestInRoom(){
@@ -223,7 +205,6 @@ public class RoomController {
 		getInReader().print("Guest's name:");
 		String name = getInReader().readStrin();
 		getService().addGuestInRoom(number, name);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void printRoom(){
@@ -232,7 +213,6 @@ public class RoomController {
 			getInReader().print(getService().getRooms().get(i).toString());
 		}
 		getInReader().print(LINE);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 	
 	public void cloneRoom(){
@@ -244,6 +224,5 @@ public class RoomController {
 		getInReader().print("Room's number:");
 		int number = getInReader().readInt();
 		getService().cloneRoom(number);
-		getInReader().print(LINE_AFTER_ACTION);
 	}
 }
