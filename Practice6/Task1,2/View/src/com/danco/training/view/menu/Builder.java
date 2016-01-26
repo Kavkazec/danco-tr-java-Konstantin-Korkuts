@@ -4,6 +4,8 @@ import com.danco.training.properties.PropertiesReader;
 import com.danco.training.view.action.guest.AddGuestAction;
 import com.danco.training.view.action.guest.AddServiceToGuestAction;
 import com.danco.training.view.action.guest.DeleteGuestAction;
+import com.danco.training.view.action.guest.ExportGuestAction;
+import com.danco.training.view.action.guest.ImportGuestsAction;
 import com.danco.training.view.action.guest.PrintGuestsAction;
 import com.danco.training.view.action.guest.ShowGuestsServicesSortedByCoastAction;
 import com.danco.training.view.action.guest.ShowGuestsServicesSortedByDateAction;
@@ -18,6 +20,8 @@ import com.danco.training.view.action.room.CloneRoomAction;
 import com.danco.training.view.action.room.DeleteAllGuestsFromRoomAction;
 import com.danco.training.view.action.room.DeleteGuestFromRoomAction;
 import com.danco.training.view.action.room.DeleteRoomAction;
+import com.danco.training.view.action.room.ExportRoomsAction;
+import com.danco.training.view.action.room.ImportRoomsAction;
 import com.danco.training.view.action.room.PrintRoomAction;
 import com.danco.training.view.action.room.ShowChekOutDateAction;
 import com.danco.training.view.action.room.ShowLastThreeGuestsAction;
@@ -33,6 +37,8 @@ import com.danco.training.view.action.room.SortByStarsRoomAction;
 import com.danco.training.view.action.service.AddServiceAction;
 import com.danco.training.view.action.service.ChangeServicesCoastAction;
 import com.danco.training.view.action.service.DeleteServiceAction;
+import com.danco.training.view.action.service.ExportServicesAction;
+import com.danco.training.view.action.service.ImportServicesAction;
 import com.danco.training.view.action.service.PrintServiceAction;
 
 public class Builder {
@@ -58,7 +64,9 @@ public class Builder {
 		guestMenu.addMenuItem(new MenuItem(new DeleteGuestAction(),"1 -> Delete guest",guestMenu));
 		guestMenu.addMenuItem(new MenuItem(new PrintGuestsAction(),"2 -> Print guests",guestMenu));
 		guestMenu.addMenuItem(new MenuItem(null,"3 -> Other",guestMenuOther));
-		guestMenu.addMenuItem(new MenuItem(null,"4 -> Back", mainMenu));
+		guestMenu.addMenuItem(new MenuItem(new ExportGuestAction(),"4 -> Export guests",guestMenu));
+		guestMenu.addMenuItem(new MenuItem(new ImportGuestsAction(),"5 -> Import guests",guestMenu));
+		guestMenu.addMenuItem(new MenuItem(null,"6 -> Back", mainMenu));
 		
 		guestMenuOther.addMenuItem(new MenuItem(new AddServiceToGuestAction(),"0-> Add service to guest", guestMenuOther));
 		guestMenuOther.addMenuItem(new MenuItem(new ShowNumberOfGuestsAction(),"1-> Show number of guests", guestMenuOther));
@@ -73,9 +81,11 @@ public class Builder {
 		
 		roomMenu.addMenuItem(new MenuItem(new AddRoomAction(), "0 -> Add room", roomMenu));
 		roomMenu.addMenuItem(new MenuItem(new DeleteRoomAction(), "1 -> Delete rooms", roomMenu));
-		roomMenu.addMenuItem(new MenuItem(new PrintRoomAction(), "2 -> Print rooms", roomMenu));;
+		roomMenu.addMenuItem(new MenuItem(new PrintRoomAction(), "2 -> Print rooms", roomMenu));
 		roomMenu.addMenuItem(new MenuItem(null, "3 -> Other", roomMenuOther));
-		roomMenu.addMenuItem(new MenuItem(null, "4 -> Back", mainMenu));
+		roomMenu.addMenuItem(new MenuItem(new ExportRoomsAction(), "4 -> Export rooms", roomMenu));
+		roomMenu.addMenuItem(new MenuItem(new ImportRoomsAction(), "5 -> Import rooms", roomMenu));
+		roomMenu.addMenuItem(new MenuItem(null, "6 -> Back", mainMenu));
 		
 		roomMenuOther.addMenuItem(new MenuItem(new AddGuestInRoomAction(), "0-> Add guest in room", roomMenuOther));
 		roomMenuOther.addMenuItem(new MenuItem(new ChangeRoomsCoastAction(), "1-> Change room's coast", roomMenuOther));
@@ -110,7 +120,9 @@ public class Builder {
 		serviceMenu.addMenuItem(new MenuItem(new DeleteServiceAction(), "1 -> Delete service", serviceMenu));
 		serviceMenu.addMenuItem(new MenuItem(new PrintServiceAction(), "2 -> Print services", serviceMenu));
 		serviceMenu.addMenuItem(new MenuItem(null, "3 -> Other", serviceMenuOther));
-		serviceMenu.addMenuItem(new MenuItem(null, "4 -> Back", mainMenu));
+		serviceMenu.addMenuItem(new MenuItem(new ExportServicesAction(), "4 -> Export services", serviceMenu));
+		serviceMenu.addMenuItem(new MenuItem(new ImportServicesAction(), "5 -> Import services", serviceMenu));
+		serviceMenu.addMenuItem(new MenuItem(null, "6 -> Back", mainMenu));
 		
 		serviceMenuOther.addMenuItem(new MenuItem(new ChangeServicesCoastAction(), "0-> Change service's coast", serviceMenuOther));
 		serviceMenuOther.addMenuItem(new MenuItem(null, "1-> Back", serviceMenu));

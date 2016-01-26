@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.danco.training.model.GuestModel;
+import com.danco.training.reader.Export;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -18,7 +19,6 @@ public class GuestStorage  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	/** The sdf. */
 	private List<GuestModel> guests;
-	
 	/**
 	 * Gets the guests.
 	 *

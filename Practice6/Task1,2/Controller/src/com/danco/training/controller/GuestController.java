@@ -119,4 +119,12 @@ public class GuestController {
 		}
 		getInReader().print(LINE);
 	}
+	
+	public void exportGuests(){
+		getService().exportGuests();
+	}
+	
+	public void importGuests(){
+		getService().importGuests();
+	}
 }

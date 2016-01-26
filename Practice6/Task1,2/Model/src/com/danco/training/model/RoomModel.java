@@ -10,6 +10,11 @@ import java.util.List;
  */
 public class RoomModel implements Cloneable,Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The number. */
 	private int number;
 	

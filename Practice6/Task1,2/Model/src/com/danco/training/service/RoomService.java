@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 
 import com.danco.training.comparator.FreeRoomCoastComparator;
 import com.danco.training.comparator.FreeRoomCopasityComparator;
@@ -17,6 +16,7 @@ import com.danco.training.comparator.RoomStarsCmparator;
 import com.danco.training.model.GuestModel;
 import com.danco.training.model.RoomModel;
 import com.danco.training.properties.PropertiesReader;
+import com.danco.training.reader.Export;
 import com.danco.training.storage.Hotel;
 
 
@@ -276,4 +276,15 @@ public class RoomService {
 		hotel.cloneRoom(number);
 	}
 	
+	public void exportRooms(String path){
+		Export.getInstance().writeToFile(path, hotel.getRoom().getListOfNumbers());
+	}
+	
+	public void importRooms(String path){
+		for(Object ob: Export.getInstance().readFromFile(path)){
+			if("RoomModel".equals(ob.getClass().getSimpleName())){
+				hotel.getRoom().addNumber((RoomModel) ob);
+			}
+		}
+	}
 }

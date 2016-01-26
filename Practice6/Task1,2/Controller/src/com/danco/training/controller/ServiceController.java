@@ -69,4 +69,12 @@ public class ServiceController {
 		}
 		getInReader().print(LINE);
 	}
+	
+	public void exportServices(){
+		getService().exportServices();
+	}
+	
+	public void importServices(){
+		getService().importServices();
+	}
 }

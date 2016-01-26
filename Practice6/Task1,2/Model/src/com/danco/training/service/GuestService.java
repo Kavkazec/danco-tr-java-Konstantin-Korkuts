@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 
 import com.danco.training.comparator.GuestDateComparator;
 import com.danco.training.comparator.GuestNameComparator;
@@ -12,6 +11,7 @@ import com.danco.training.comparator.GuestServicesCoastComparator;
 import com.danco.training.comparator.GuestServicesDateCopmarator;
 import com.danco.training.model.GuestModel;
 import com.danco.training.model.ServiceModel;
+import com.danco.training.reader.Export;
 import com.danco.training.storage.Hotel;
 
 
@@ -141,5 +141,17 @@ public class GuestService {
 		}
 		Collections.sort(list, new GuestServicesDateCopmarator());
 		return list;
+	}
+	
+	public void exportGuests(String path){
+		Export.getInstance().writeToFile(path, hotel.getGuest().getGuests());
+	}
+	
+	public void importGuests(String path){
+		for(Object ob: Export.getInstance().readFromFile(path)){
+			if("GuestModel".equals(ob.getClass().getSimpleName())){
+				hotel.getGuest().addGuests((GuestModel) ob);
+			}
+		}
 	}
 }

@@ -208,6 +208,4 @@ public class Hotel implements Serializable{
 	public void cloneRoom(int number) throws CloneNotSupportedException{
 		getRoom().cloneRoom(number);
 	}
-	
-	
 }

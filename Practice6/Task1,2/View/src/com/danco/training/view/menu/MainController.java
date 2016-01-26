@@ -13,6 +13,6 @@ public class MainController {
 			navigator.printMenu();
 			navigator.navigate(sc.nextInt());			
 		}
-		
+		sc.close();
 	}
 }

@@ -17,7 +17,7 @@ public class Config {
 	private static Properties logProperties = new Properties();
 	
 	/** The log file. */
-	private static String logFile;
+	private String logFile;
 	
 	/**
 	 * Instantiates a new config.

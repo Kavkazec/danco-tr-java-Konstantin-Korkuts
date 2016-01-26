@@ -1,7 +1,6 @@
 package com.danco.training.model;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 // TODO: Auto-generated Javadoc

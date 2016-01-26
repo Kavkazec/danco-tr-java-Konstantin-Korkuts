@@ -27,6 +27,7 @@ public class PropertiesReader {
 	private static final String RECORD_KEY = "RECORD";
 	private static final String SWITCH_KEY = "SWITCH_OFF";
 	private static final String PATH = "Path";
+	private static final String CSVPATH = "CSV";
 
 	
 	public void setProperties(){
@@ -37,9 +38,11 @@ public class PropertiesReader {
 			Boolean swith = Boolean.parseBoolean(properties.getProperty(SWITCH_KEY));
 			int record = Integer.parseInt(properties.getProperty(RECORD_KEY));
 			String path = properties.getProperty(PATH);
+			String csvPath = properties.getProperty(CSVPATH);
 			util.setSwitchOff(swith);
 			util.setRecordNumber(record);
 			util.setPath(path);
+			util.setCsvPath(csvPath);
 		} catch (FileNotFoundException e) {
 			logger.error("FILE_NOT_FOUND");
 		} catch (IOException e) {

@@ -225,4 +225,12 @@ public class RoomController {
 		int number = getInReader().readInt();
 		getService().cloneRoom(number);
 	}
+	
+	public void exportRooms(){
+		getService().exportRooms();
+	}
+	
+	public void importRooms(){
+		getService().importRooms();
+	}
 }

@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.logger.Config;
 import com.danco.training.model.GuestModel;
 import com.danco.training.model.RoomModel;
 import com.danco.training.model.ServiceModel;
@@ -18,7 +17,6 @@ import com.danco.training.storage.Hotel;
  * The Class HotelService.
  */
 public class HotelService {
-	private static final String LOGFILE = "log4j.properties";
 	private static final Logger logger = Logger.getLogger(HotelService.class);
 	/** The guest serv. */
 	private GuestService guestServ = new GuestService();
@@ -603,4 +601,33 @@ public class HotelService {
 		util.readFromFile(PropertiesReader.getInstance().getUtil().getPath());
 	}
 
+	public void exportGuests(){
+		PropertiesReader.getInstance().setProperties();
+		getGuestServ().exportGuests(PropertiesReader.getInstance().getUtil().getCsvPath());
+	}
+	
+	public void importGuests(){
+		PropertiesReader.getInstance().setProperties();
+		getGuestServ().importGuests(PropertiesReader.getInstance().getUtil().getCsvPath());
+	}
+	
+	public void exportRooms(){
+		PropertiesReader.getInstance().setProperties();
+		getRoomServ().exportRooms(PropertiesReader.getInstance().getUtil().getCsvPath());
+	}
+	
+	public void importRooms(){
+		PropertiesReader.getInstance().setProperties();
+		getRoomServ().importRooms(PropertiesReader.getInstance().getUtil().getCsvPath());
+	}
+	
+	public void exportServices(){
+		PropertiesReader.getInstance().setProperties();
+		getServiceServ().exportServices(PropertiesReader.getInstance().getUtil().getCsvPath());
+	}
+	
+	public void importServices(){
+		PropertiesReader.getInstance().setProperties();
+		getServiceServ().importServices(PropertiesReader.getInstance().getUtil().getCsvPath());
+	}
 }

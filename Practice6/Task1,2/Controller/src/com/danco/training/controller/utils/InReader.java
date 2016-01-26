@@ -6,16 +6,16 @@ import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.logger.Config;
 
 public class InReader {
-	private static final String LOGFILE = "log4j.properties";
 	private static final Logger LOGGER = Logger.getLogger(InReader.class);
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	public int readInt(){
+		int i;
 		try{
 			Scanner sc = new Scanner(System.in);
-			return sc.nextInt();
+			i = sc.nextInt();
+			return i;
 		} catch (Exception e){
 			LOGGER.error("INPUT_ERROR");
 			return 0;
@@ -23,8 +23,10 @@ public class InReader {
 	}
 	
 	public String readStrin(){
+		String str;
 		Scanner sc = new Scanner(System.in);
-		return sc.nextLine();
+		str = sc.nextLine();
+		return str;
 	}
 	
 	public Date readDate(){

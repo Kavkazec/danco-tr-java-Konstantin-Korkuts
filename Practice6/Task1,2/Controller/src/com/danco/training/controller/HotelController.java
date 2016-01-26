@@ -188,4 +188,28 @@ public class HotelController {
 	public void readFromFile(){
 		service.readFromFile();
 	}
+	
+	public void exportGuests(){
+		getGuestCon().exportGuests();
+	}
+	
+	public void importGuests(){
+		getGuestCon().importGuests();
+	}
+	
+	public void exportRooms(){
+		getRoomCon().exportRooms();
+	}
+	
+	public void importRooms(){
+		getRoomCon().importRooms();
+	}
+	
+	public void exportServices(){
+		getServiceCon().exportServices();
+	}
+	
+	public void importServices(){
+		getServiceCon().importServices();
+	}
 }

@@ -1,2 +1,3 @@
 SWITCH_OFF = true
 RECORD = 2
+Path = seriolize.ser
