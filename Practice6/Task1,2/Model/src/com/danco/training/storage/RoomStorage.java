@@ -6,21 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.danco.training.model.RoomModel;
-import com.danco.training.reader.Export;
+import com.danco.training.reader.ImportAndExport;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class RoomStorage.
  */
 public class RoomStorage implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	/** The rooms. */
 	private List<RoomModel> rooms;
-	
-	
 	
 	/**
 	 * Adds the number.

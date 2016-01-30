@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.danco.training.model.GuestModel;
 import com.danco.training.model.ServiceModel;
-import com.danco.training.reader.Export;
+import com.danco.training.reader.ImportAndExport;
 import com.danco.training.storage.Hotel;
 
 	// TODO: Auto-generated Javadoc
@@ -63,14 +63,10 @@ import com.danco.training.storage.Hotel;
 	}
 	
 	public void exportServices(String path){
-		Export.getInstance().writeToFile(path, hotel.getService().getListOfServices());
+		ImportAndExport.getInstance().writeToFileServices(path);
 	}
 	
 	public void importServices(String path){
-		for(Object ob: Export.getInstance().readFromFile(path)){
-			if("ServiceModel".equals(ob.getClass().getSimpleName())){
-				hotel.getService().addService((ServiceModel) ob);
-			}
-		}
+		ImportAndExport.getInstance().readFromFileServices(path);
 	}
 }

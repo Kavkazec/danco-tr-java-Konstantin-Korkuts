@@ -193,16 +193,8 @@ public class HotelController {
 		getGuestCon().exportGuests();
 	}
 	
-	public void importGuests(){
-		getGuestCon().importGuests();
-	}
-	
 	public void exportRooms(){
 		getRoomCon().exportRooms();
-	}
-	
-	public void importRooms(){
-		getRoomCon().importRooms();
 	}
 	
 	public void exportServices(){
@@ -211,5 +203,13 @@ public class HotelController {
 	
 	public void importServices(){
 		getServiceCon().importServices();
+	}
+	
+	public void importRooms(){
+		getRoomCon().importRooms();
+	}
+	
+	public void importGuests(){
+		getGuestCon().importGuests();
 	}
 }

@@ -2,6 +2,7 @@ package com.danco.training.controller;
 
 import com.danco.training.controller.utils.InReader;
 import com.danco.training.controller.utils.InService;
+import com.danco.training.controller.utils.PrintService;
 import com.danco.training.service.HotelService;
 
 public class ServiceController {
@@ -10,9 +11,14 @@ public class ServiceController {
 	private InService inService;
 	private static final String DETAILS_SERVICE = "name ; coast ;";
 	private static final String LINE = "-------------------------------------------";
-
+	private PrintService printService;
 	
-	
+	public PrintService getPrintService() {
+		if(printService == null){
+			printService = new PrintService();
+		}
+		return printService;
+	}
 	public InReader getInReader() {
 		if(inReader == null){
 			inReader = new InReader();
@@ -40,9 +46,7 @@ public class ServiceController {
 	
 	public void deleteService(){
 		getInReader().print(DETAILS_SERVICE);
-		for(int i = 0; i < getService().getServices().size(); i++){
-			getInReader().print(getService().getServices().get(i).toString());
-		}
+		getPrintService().printServices(getService().getServices());
 		getInReader().print(LINE);
 		getInReader().print("Service name:");
 		String name = getInReader().readStrin();
@@ -51,9 +55,7 @@ public class ServiceController {
 	
 	public void changeServicesCoast(){
 		getInReader().print(DETAILS_SERVICE);
-		for(int i = 0; i < getService().getServices().size(); i++){
-			getInReader().print(getService().getServices().get(i).toString());
-		}
+		getPrintService().printServices(getService().getServices());
 		getInReader().print(LINE);
 		getInReader().print("Service name:");
 		String name = getInReader().readStrin();
@@ -64,16 +66,13 @@ public class ServiceController {
 	
 	public void printService(){
 		getInReader().print(DETAILS_SERVICE);
-		for(int i = 0; i < getService().getServices().size(); i++){
-			getInReader().print(getService().getServices().get(i).toString());
-		}
+		getPrintService().printServices(getService().getServices());
 		getInReader().print(LINE);
 	}
 	
 	public void exportServices(){
 		getService().exportServices();
 	}
-	
 	public void importServices(){
 		getService().importServices();
 	}

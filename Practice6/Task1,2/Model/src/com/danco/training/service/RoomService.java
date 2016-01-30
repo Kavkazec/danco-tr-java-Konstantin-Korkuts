@@ -16,7 +16,7 @@ import com.danco.training.comparator.RoomStarsCmparator;
 import com.danco.training.model.GuestModel;
 import com.danco.training.model.RoomModel;
 import com.danco.training.properties.PropertiesReader;
-import com.danco.training.reader.Export;
+import com.danco.training.reader.ImportAndExport;
 import com.danco.training.storage.Hotel;
 
 
@@ -35,6 +35,8 @@ public class RoomService {
 	
 	/** The sdf. */
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+	
+	private static final String SEPAR = " ; ";
 	
 	/**
 	 * Instantiates a new room service.
@@ -220,7 +222,10 @@ public class RoomService {
 		String str = "";
 		for(RoomModel roomMod: hotel.getRoom().getListOfNumbers()){
 			if(number == roomMod.getNumber()){
-				str = roomMod.toString();
+				str = roomMod.getNumber() + SEPAR + roomMod.getCapacity() + SEPAR +
+						roomMod.getNumberOfStars() + SEPAR+ 
+						roomMod.getCoast() + SEPAR + roomMod.getStatus() +SEPAR
+						+ roomMod.getIsOnRepair() + SEPAR;
 			}
 		}
 		return str;
@@ -252,24 +257,24 @@ public class RoomService {
 	 * @return the string
 	 */
 	
-	public String showLastThreeGuests(int number){
+	public List<GuestModel> showLastThreeGuests(int number){
 		PropertiesReader.getInstance().setProperties();
+		List<GuestModel> list = new ArrayList<GuestModel>();
 		int numberOfGuest = PropertiesReader.getInstance().getUtil().getRecordNumber();
-		String str ="";
 		for(RoomModel roomMod : hotel.getRoom().getListOfNumbers()){
 			if(number == roomMod.getNumber()){
 				if(roomMod.getGuests().size() == numberOfGuest){
 					for(int i = roomMod.getGuests().size()-numberOfGuest; i < roomMod.getGuests().size(); i++){
-						str = str + roomMod.getGuests().get(i).getName() +" : "+ sdf.format(roomMod.getGuests().get(i).getDateOfEvi()) + "\n";
+						list.add(roomMod.getGuests().get(i));
 					}
 				} else if(roomMod.getGuests().size() < 3){
 					for(int i = 0; i < roomMod.getGuests().size(); i++){
-						str = str + roomMod.getGuests().get(i).getName() +" : "+ sdf.format(roomMod.getGuests().get(i).getDateOfEvi()) + "\n";
+						list.add(roomMod.getGuests().get(i));
 					}
 				}
 			}
 		}
-		return str;
+		return list;
 	}
 	
 	public void cloneRoom(int number) throws CloneNotSupportedException{
@@ -277,14 +282,10 @@ public class RoomService {
 	}
 	
 	public void exportRooms(String path){
-		Export.getInstance().writeToFile(path, hotel.getRoom().getListOfNumbers());
+		ImportAndExport.getInstance().writeToFileRooms(path);
 	}
-	
+
 	public void importRooms(String path){
-		for(Object ob: Export.getInstance().readFromFile(path)){
-			if("RoomModel".equals(ob.getClass().getSimpleName())){
-				hotel.getRoom().addNumber((RoomModel) ob);
-			}
-		}
+		ImportAndExport.getInstance().readFromFileRooms(path);
 	}
 }

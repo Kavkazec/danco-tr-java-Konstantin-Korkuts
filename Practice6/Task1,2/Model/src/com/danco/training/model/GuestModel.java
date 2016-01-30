@@ -108,16 +108,4 @@ public class GuestModel implements Serializable {
 	public void setServices(ServiceModel services) {
 		this.services.add(services);
 	}
-	
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	public String toString(){
-		StringBuilder sb = new StringBuilder();
-		sb.append(getName()+SEMICOLON);
-		sb.append(sdf.format(getDateOfAdd())+SEMICOLON);
-		sb.append(sdf.format(getDateOfEvi())+SEMICOLON);	
-		return sb.toString();
-	}
 }

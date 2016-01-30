@@ -45,4 +45,7 @@ public class InReader {
 	public void print(String str){
 		System.out.println(str);
 	}
+	public void print(){
+		System.out.println();
+	}
 }

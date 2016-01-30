@@ -12,10 +12,6 @@ import com.danco.training.model.ServiceModel;
  * The Class Hotel.
  */
 public class Hotel implements Serializable{
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	/** The guest. */

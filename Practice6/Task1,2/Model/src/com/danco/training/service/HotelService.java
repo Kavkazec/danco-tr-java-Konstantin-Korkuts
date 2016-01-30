@@ -223,7 +223,6 @@ public class HotelService {
 	 * @return the services
 	 */
 	public List<ServiceModel> getServices() {
-
 		try {
 			return getServiceServ().getServices();
 		} catch (Exception e) {
@@ -537,7 +536,7 @@ public class HotelService {
 	 *            the room
 	 * @return the string
 	 */
-	public String showLastThreeGuests(int number) {
+	public List<GuestModel> showLastThreeGuests(int number) {
 
 		try {
 			return getRoomServ().showLastThreeGuests(number);
@@ -606,28 +605,26 @@ public class HotelService {
 		getGuestServ().exportGuests(PropertiesReader.getInstance().getUtil().getCsvPath());
 	}
 	
-	public void importGuests(){
-		PropertiesReader.getInstance().setProperties();
-		getGuestServ().importGuests(PropertiesReader.getInstance().getUtil().getCsvPath());
-	}
-	
 	public void exportRooms(){
 		PropertiesReader.getInstance().setProperties();
 		getRoomServ().exportRooms(PropertiesReader.getInstance().getUtil().getCsvPath());
-	}
-	
-	public void importRooms(){
-		PropertiesReader.getInstance().setProperties();
-		getRoomServ().importRooms(PropertiesReader.getInstance().getUtil().getCsvPath());
 	}
 	
 	public void exportServices(){
 		PropertiesReader.getInstance().setProperties();
 		getServiceServ().exportServices(PropertiesReader.getInstance().getUtil().getCsvPath());
 	}
-	
 	public void importServices(){
 		PropertiesReader.getInstance().setProperties();
 		getServiceServ().importServices(PropertiesReader.getInstance().getUtil().getCsvPath());
+	}
+	public void importRooms(){
+		PropertiesReader.getInstance().setProperties();
+		getRoomServ().importRooms(PropertiesReader.getInstance().getUtil().getCsvPath());
+	}
+	
+	public void importGuests(){
+		PropertiesReader.getInstance().setProperties();
+		getGuestServ().importGuests(PropertiesReader.getInstance().getUtil().getCsvPath());
 	}
 }

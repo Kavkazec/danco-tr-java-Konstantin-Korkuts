@@ -11,7 +11,7 @@ import com.danco.training.comparator.GuestServicesCoastComparator;
 import com.danco.training.comparator.GuestServicesDateCopmarator;
 import com.danco.training.model.GuestModel;
 import com.danco.training.model.ServiceModel;
-import com.danco.training.reader.Export;
+import com.danco.training.reader.ImportAndExport;
 import com.danco.training.storage.Hotel;
 
 
@@ -144,14 +144,10 @@ public class GuestService {
 	}
 	
 	public void exportGuests(String path){
-		Export.getInstance().writeToFile(path, hotel.getGuest().getGuests());
+		ImportAndExport.getInstance().writeToFileGuests(path);
 	}
 	
 	public void importGuests(String path){
-		for(Object ob: Export.getInstance().readFromFile(path)){
-			if("GuestModel".equals(ob.getClass().getSimpleName())){
-				hotel.getGuest().addGuests((GuestModel) ob);
-			}
-		}
+		ImportAndExport.getInstance().readFromFileGuests(path);
 	}
 }

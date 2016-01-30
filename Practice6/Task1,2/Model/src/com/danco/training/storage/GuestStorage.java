@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.danco.training.model.GuestModel;
-import com.danco.training.reader.Export;
+import com.danco.training.reader.ImportAndExport;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -52,13 +52,4 @@ public class GuestStorage  implements Serializable{
 			}
 		}
 	}
-	
-	/**
-	 * Update guest.
-	 *
-	 * @param guest the guest
-	 * @param dateOfAdd the date of add
-	 * @param dateOfEvi the date of evi
-	 */
-	
 }

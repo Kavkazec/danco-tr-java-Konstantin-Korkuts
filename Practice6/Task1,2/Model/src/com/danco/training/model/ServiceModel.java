@@ -87,17 +87,4 @@ public class ServiceModel implements Serializable{
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(getName() + SEMICOLON);
-		sb.append(Integer.toString(getCoast()) + SEMICOLON);
-		return sb.toString();
-	}
-
 }

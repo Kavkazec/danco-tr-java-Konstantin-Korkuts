@@ -176,14 +176,4 @@ public class RoomModel implements Cloneable,Serializable{
 	public RoomModel clone() throws CloneNotSupportedException {
 		return (RoomModel)super.clone(); 
 	}
-	
-	public String toString(){
-		StringBuilder sb = new StringBuilder();
-		sb.append(Integer.toString(number)+SEMICOLON);
-		sb.append(Integer.toString(capacity)+SEMICOLON);
-		sb.append(Integer.toString(numberOfStars)+SEMICOLON);
-		sb.append(Integer.toString(coast)+SEMICOLON);
-		sb.append(Boolean.toString(getStatus())+SEMICOLON);
-		return sb.toString();
-	}
 }

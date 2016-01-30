@@ -2,6 +2,8 @@ package com.danco.training.controller;
 
 import com.danco.training.controller.utils.InGuest;
 import com.danco.training.controller.utils.InReader;
+import com.danco.training.controller.utils.PrintGuest;
+import com.danco.training.controller.utils.PrintService;
 import com.danco.training.service.HotelService;
 
 public class GuestController {
@@ -10,15 +12,28 @@ public class GuestController {
 	private static final String DETAILS_GUEST = "name ; date of added; date of departure ;";
 	private static final String DETAILS_SERVICE = "name ; coast ;";
 	private static final String LINE = "-------------------------------------------";
-	
+	private PrintGuest prinGuest;
 	private InGuest inGuest;
 	private InReader inReader;
+	private PrintService printService;
 
+	public PrintService getPrintService() {
+		if(printService == null){
+			printService = new PrintService();
+		}
+		return printService;
+	}
 	public InReader getInReader() {
 		if(inReader == null){
 			inReader = new InReader();
 		}
 		return inReader;
+	}
+	public PrintGuest getPrinGuest() {
+		if(prinGuest == null){
+			prinGuest = new PrintGuest();
+		}
+		return prinGuest;
 	}
 
 	public HotelService getService() {
@@ -41,9 +56,7 @@ public class GuestController {
 	
 	public void deletGuest(){
 		getInReader().print(DETAILS_GUEST);
-		for(int i = 0; i < getService().getGuests().size(); i++){
-			getInReader().print(getService().getGuests().get(i).toString());
-		}
+		getPrinGuest().printGuests(getService().getGuests());
 		getInReader().print(LINE);
 		getInReader().print("Guest's name:");
 		String name = getInReader().readStrin();
@@ -52,17 +65,13 @@ public class GuestController {
 	
 	public void sortByNameGuests(){
 		getInReader().print(DETAILS_GUEST);
-		for(int i = 0; i < getService().sortByNameGuests().size(); i++){
-			getInReader().print(getService().sortByNameGuests().get(i).toString());
-		}
+		getPrinGuest().printGuests(getService().sortByNameGuests());
 		getInReader().print(LINE);
 	}
 	
 	public void sortByDateGuests(){
 		getInReader().print(DETAILS_GUEST);
-		for(int i = 0; i < getService().sortByDateGuests().size(); i++){
-			getInReader().print(getService().sortByDateGuests().get(i).toString());
-		}
+		getPrinGuest().printGuests(getService().sortByDateGuests());
 		getInReader().print(LINE);
 	}
 	
@@ -73,36 +82,36 @@ public class GuestController {
 	
 	public void showGuestsServicesSortedByCoast(){
 		getInReader().print(DETAILS_GUEST);
-		for(int i = 0; i < getService().getGuests().size(); i++){
-			getInReader().print(getService().getGuests().get(i).toString());
-		}
+		getPrinGuest().printGuests(getService().getGuests());
 		getInReader().print(LINE);
 		getInReader().print("Guest's name:");
 		String name = getInReader().readStrin();
-		getService().showGuestsServicesSortedByCoast(name);
+		if(!getService().showGuestsServicesSortedByCoast(name).isEmpty()){
+			getPrintService().printServices(getService().showGuestsServicesSortedByCoast(name));
+		} else {
+			getInReader().print("There are no services!");
+		}
 	}
 	
 	public void showGuestsServicesSortedByDate(){
 		getInReader().print(DETAILS_GUEST);
-		for(int i = 0; i < getService().getGuests().size(); i++){
-			getInReader().print(getService().getGuests().get(i).toString());
-		}
+		getPrinGuest().printGuests(getService().getGuests());
 		getInReader().print(LINE);
 		getInReader().print("Guest's name:");
 		String name = getInReader().readStrin();
-		getService().showGuestsServicesSortedByDate(name);
+		if(!getService().showGuestsServicesSortedByDate(name).isEmpty()){
+			getPrintService().printServices(getService().showGuestsServicesSortedByDate(name));
+		} else {
+			getInReader().print("There are no services!");
+		}
 	}
 	
 	public void addServiceToGuest(){
 		getInReader().print(DETAILS_GUEST);
-		for(int i = 0; i < getService().getGuests().size(); i++){
-			getInReader().print(getService().getGuests().get(i).toString());
-		}
+		getPrinGuest().printGuests(getService().getGuests());
 		getInReader().print(LINE);
 		getInReader().print(DETAILS_SERVICE);
-		for(int i = 0; i < getService().getServices().size(); i++){
-			getInReader().print(getService().getServices().get(i).toString());
-		}
+		getPrintService().printServices(getService().getServices());
 		getInReader().print(LINE);
 		getInReader().print("Guest's name:");
 		String guest = getInReader().readStrin();
@@ -114,9 +123,7 @@ public class GuestController {
 	
 	public void printGuest(){
 		getInReader().print(DETAILS_GUEST);
-		for(int i = 0; i < getService().getGuests().size(); i++){
-			getInReader().print(getService().getGuests().get(i).toString());
-		}
+		getPrinGuest().printGuests(getService().getGuests());
 		getInReader().print(LINE);
 	}
 	
