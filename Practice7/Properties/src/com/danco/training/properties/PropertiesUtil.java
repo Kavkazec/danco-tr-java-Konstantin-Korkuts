@@ -6,13 +6,13 @@ public class PropertiesUtil {
 	private String path = null;
 	private String csvPath = null;
 	private String annotPath = null;
-	private String servName = null;
+	private String[] servName = null;
 
-	public String getServName() {
+	public String[] getServName() {
 		return servName;
 	}
 
-	public void setServName(String servName) {
+	public void setServName(String[] servName) {
 		this.servName = servName;
 	}
 

@@ -1,21 +1,11 @@
 package com.danco.training.reader;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 
-import com.danco.training.model.GuestModel;
-import com.danco.training.model.RoomModel;
-import com.danco.training.model.ServiceModel;
+import com.danco.training.entity.GuestModel;
+import com.danco.training.entity.RoomModel;
+import com.danco.training.entity.ServiceModel;
 
 public class ImportAndExport {
     private ImportAndExportGuests guest;
@@ -71,13 +61,13 @@ public class ImportAndExport {
     	getService().writeToFileServices(path);
     }
     
-    public void readFromFileServices(String path){
-    	getService().readFromFileServices(path);
+    public List<ServiceModel> readFromFileServices(String path){
+    	return getService().readFromFileServices(path);
     }
-    public void readFromFileRooms(String path){
-    	getRoom().readFromFileRooms(path);
+    public List<RoomModel> readFromFileRooms(String path){
+    	return getRoom().readFromFileRooms(path);
     }
-    public void readFromFileGuests(String path){
-    	getGuest().readFromFileGuests(path);
+    public List<GuestModel> readFromFileGuests(String path){
+    	return getGuest().readFromFileGuests(path);
     }
 }

@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 
 import com.danco.training.comparator.FreeRoomCoastComparator;
 import com.danco.training.comparator.FreeRoomCopasityComparator;
@@ -13,8 +14,9 @@ import com.danco.training.comparator.FreeRoomStarsComparator;
 import com.danco.training.comparator.RoomCoastComparator;
 import com.danco.training.comparator.RoomCopasityComparator;
 import com.danco.training.comparator.RoomStarsCmparator;
-import com.danco.training.model.GuestModel;
-import com.danco.training.model.RoomModel;
+import com.danco.training.controller.api.IRoomController;
+import com.danco.training.entity.GuestModel;
+import com.danco.training.entity.RoomModel;
 import com.danco.training.properties.PropertiesReader;
 import com.danco.training.reader.ImportAndExport;
 import com.danco.training.storage.Hotel;
@@ -25,8 +27,8 @@ import com.danco.training.storage.Hotel;
 /**
  * The Class RoomService.
  */
-public class RoomService {
-	
+public class RoomService implements IRoomController{
+	private static final Logger logger = Logger.getLogger(RoomService.class);
 	/** The t. */
 	private int t = 0;
 	
@@ -47,8 +49,13 @@ public class RoomService {
 	 *
 	 * @return the rooms
 	 */
-	public List<RoomModel> getRooms(){
-		return hotel.getRoom().getListOfNumbers();
+	public List<RoomModel> printRoom(){
+		try{
+			return hotel.getRoom().getListOfNumbers();
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
 	
 	/**
@@ -57,7 +64,11 @@ public class RoomService {
 	 * @param room the room
 	 */
 	public void addRoom(RoomModel room){
-		hotel.addRoom(room);
+		try{
+			hotel.addRoom(room);
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
 	
 	/**
@@ -66,7 +77,11 @@ public class RoomService {
 	 * @param room the room
 	 */
 	public void deleteRoom(int number){
-		hotel.deleteRoom(number);
+		try{
+			hotel.deleteRoom(number);
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
 	
 	/**
@@ -76,7 +91,11 @@ public class RoomService {
 	 * @param guest the guest
 	 */
 	public void deleteGuestFromRoom(String name){
-		hotel.deleteGuestFromRoom(name);
+		try{
+			hotel.deleteGuestFromRoom(name);
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
 	
 	/**
@@ -85,7 +104,11 @@ public class RoomService {
 	 * @param room the room
 	 */
 	public void deleteAllGuestsFromRoom(int number){
-		hotel.deleteAllGuestFromRoom(number);
+		try{
+			hotel.deleteAllGuestFromRoom(number);
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
 	
 	/**
@@ -95,26 +118,37 @@ public class RoomService {
 	 * @param guest the guest
 	 */
 	public void addGuestInRoom( int number, String name){
-		hotel.addGuestInRoom(number, name);
+		try{
+			hotel.addGuestInRoom(number, name);
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}	
 	}
 	
-	public void changeCoast(int number, int coast)
-	{
-		for(int i = 0; i < hotel.getRoom().getListOfNumbers().size(); i++)
-		{
-			if(number == hotel.getRoom().getListOfNumbers().get(i).getNumber()){
-				hotel.getRoom().getListOfNumbers().get(i).setCoast(coast);
+	public void changeRoomsCoast(int number, int coast){
+		try{
+			for(int i = 0; i < hotel.getRoom().getListOfNumbers().size(); i++)
+			{
+				if(number == hotel.getRoom().getListOfNumbers().get(i).getNumber()){
+					hotel.getRoom().getListOfNumbers().get(i).setCoast(coast);
+				}
 			}
-		}
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}	
 	}
 	
-	public void changeStatusRepair(){
-		for(int i = 0; i < hotel.getRoom().getListOfNumbers().size(); i++){
-			if(hotel.getRoom().getListOfNumbers().get(i).getStatus() == false){
-				hotel.getRoom().getListOfNumbers().get(i).setOnRepair(true);
-			} else if(hotel.getRoom().getListOfNumbers().get(i).getStatus() == true){
-				hotel.getRoom().getListOfNumbers().get(i).setOnRepair(false);
+	public void changeRoomsStatusRepair(){
+		try{
+			for(int i = 0; i < hotel.getRoom().getListOfNumbers().size(); i++){
+				if(hotel.getRoom().getListOfNumbers().get(i).getStatus() == false){
+					hotel.getRoom().getListOfNumbers().get(i).setOnRepair(true);
+				} else if(hotel.getRoom().getListOfNumbers().get(i).getStatus() == true){
+					hotel.getRoom().getListOfNumbers().get(i).setOnRepair(false);
+				}
 			}
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
 		}
 	}
 	
@@ -124,8 +158,13 @@ public class RoomService {
 	 * @return the list
 	 */
 	public List<RoomModel> sortByCoastFreeRoom(){
-		Collections.sort(hotel.getRoom().getListOfNumbers(), new FreeRoomCoastComparator());
-		return hotel.getRoom().getListOfNumbers();
+		try{
+			Collections.sort(hotel.getRoom().getListOfNumbers(), new FreeRoomCoastComparator());
+			return hotel.getRoom().getListOfNumbers();
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
 	
 	/**
@@ -134,8 +173,13 @@ public class RoomService {
 	 * @return the list
 	 */
 	public List<RoomModel> sortByCopasityFreeRoom(){
-		Collections.sort(hotel.getRoom().getListOfNumbers(), new FreeRoomCopasityComparator());
-		return hotel.getRoom().getListOfNumbers();
+		try{
+			Collections.sort(hotel.getRoom().getListOfNumbers(), new FreeRoomCopasityComparator());
+			return hotel.getRoom().getListOfNumbers();
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
 	
 	/**
@@ -144,8 +188,13 @@ public class RoomService {
 	 * @return the list
 	 */
 	public List<RoomModel> sortByStarsFreeRoom(){
-		Collections.sort(hotel.getRoom().getListOfNumbers(), new FreeRoomStarsComparator());
-		return hotel.getRoom().getListOfNumbers();
+		try{
+			Collections.sort(hotel.getRoom().getListOfNumbers(), new FreeRoomStarsComparator());
+			return hotel.getRoom().getListOfNumbers();
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}	
 	}
 	
 	/**
@@ -154,8 +203,13 @@ public class RoomService {
 	 * @return the list
 	 */
 	public List<RoomModel> sortByCoastRoom(){
-		Collections.sort(hotel.getRoom().getListOfNumbers(), new RoomCoastComparator());
-		return hotel.getRoom().getListOfNumbers();
+		try{
+			Collections.sort(hotel.getRoom().getListOfNumbers(), new RoomCoastComparator());
+			return hotel.getRoom().getListOfNumbers();
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}	
 	}
 	
 	/**
@@ -164,8 +218,13 @@ public class RoomService {
 	 * @return the list
 	 */
 	public List<RoomModel> sortByCopasityRoom(){
-		Collections.sort(hotel.getRoom().getListOfNumbers(), new RoomCopasityComparator());
-		return hotel.getRoom().getListOfNumbers();
+		try{
+			Collections.sort(hotel.getRoom().getListOfNumbers(), new RoomCopasityComparator());
+			return hotel.getRoom().getListOfNumbers();
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}	
 	}
 	
 	/**
@@ -174,8 +233,13 @@ public class RoomService {
 	 * @return the list
 	 */
 	public List<RoomModel> sortByStarsRoom(){
-		Collections.sort(hotel.getRoom().getListOfNumbers(), new RoomStarsCmparator());
-		return hotel.getRoom().getListOfNumbers();
+		try{
+			Collections.sort(hotel.getRoom().getListOfNumbers(), new RoomStarsCmparator());
+			return hotel.getRoom().getListOfNumbers();
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}	
 	}
 	
 	/**
@@ -183,13 +247,18 @@ public class RoomService {
 	 *
 	 * @return the int
 	 */
-	public int showFreeRooms(){
-		for(int i = 0; i < hotel.getRoom().getListOfNumbers().size(); i++)
-			if(hotel.getRoom().getListOfNumbers().get(i).getStatus() == false){
-				t += 1;
-			}
-				
-		return t;
+	public int showNumberOfFreeRooms(){
+		try{
+			for(int i = 0; i < hotel.getRoom().getListOfNumbers().size(); i++)
+				if(hotel.getRoom().getListOfNumbers().get(i).getStatus() == false){
+					t += 1;
+				}
+					
+			return t;
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return 0;
+		}	
 	}
 	
 	/**
@@ -199,17 +268,22 @@ public class RoomService {
 	 * @return the list
 	 */
 	public List<RoomModel> showChekOutDate(Date date){
-		List<RoomModel> list = new ArrayList<RoomModel>();
-		for(int i = 0; i < hotel.getRoom().getListOfNumbers().size(); i++)
-		{
-				for(int j = 0; j < hotel.getRoom().getListOfNumbers().get(i).getGuests().size(); j++)
-				{
-					if(hotel.getRoom().getListOfNumbers().get(i).getStatus() == true && sdf.format(hotel.getRoom().getListOfNumbers().get(i).getGuests().get(j).getDateOfEvi()).equals(sdf.format(date))){
-						list.add(hotel.getRoom().getListOfNumbers().get(i));
+		try{
+			List<RoomModel> list = new ArrayList<RoomModel>();
+			for(int i = 0; i < hotel.getRoom().getListOfNumbers().size(); i++)
+			{
+					for(int j = 0; j < hotel.getRoom().getListOfNumbers().get(i).getGuests().size(); j++)
+					{
+						if(hotel.getRoom().getListOfNumbers().get(i).getStatus() == true && sdf.format(hotel.getRoom().getListOfNumbers().get(i).getGuests().get(j).getDateOfEvi()).equals(sdf.format(date))){
+							list.add(hotel.getRoom().getListOfNumbers().get(i));
+						}
 					}
-				}
+			}
+			return list;
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
 		}
-		return list;
 	}
 	
 	/**
@@ -219,16 +293,21 @@ public class RoomService {
 	 * @return the string
 	 */
 	public String showRoomDetails(int number){
-		String str = "";
-		for(RoomModel roomMod: hotel.getRoom().getListOfNumbers()){
-			if(number == roomMod.getNumber()){
-				str = roomMod.getNumber() + SEPAR + roomMod.getCapacity() + SEPAR +
-						roomMod.getNumberOfStars() + SEPAR+ 
-						roomMod.getCoast() + SEPAR + roomMod.getStatus() +SEPAR
-						+ roomMod.getIsOnRepair() + SEPAR;
+		try{
+			String str = "";
+			for(RoomModel roomMod: hotel.getRoom().getListOfNumbers()){
+				if(number == roomMod.getNumber()){
+					str = roomMod.getNumber() + SEPAR + roomMod.getCapacity() + SEPAR +
+							roomMod.getNumberOfStars() + SEPAR+ 
+							roomMod.getCoast() + SEPAR + roomMod.getStatus() +SEPAR
+							+ roomMod.getIsOnRepair() + SEPAR;
+				}
 			}
+			return str;
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
 		}
-		return str;
 	}
 	
 	/**
@@ -238,16 +317,21 @@ public class RoomService {
 	 * @return the string
 	 */
 	public String showPricePerRoom(String name){
-		String str = "Guest " + name  + " must pay ";
-		for(RoomModel roomMod : hotel.getRoom().getListOfNumbers()){
-			for(GuestModel guestMod : roomMod.getGuests()){
-				if(name.equals(guestMod.getName())){
-					long diff = guestMod.getDateOfEvi().getTime() - guestMod.getDateOfAdd().getTime();
-					str = str + (diff / (1000L*60L*60L*24L)*roomMod.getCoast()) + "$";
+		try{
+			String str = "Guest " + name  + " must pay ";
+			for(RoomModel roomMod : hotel.getRoom().getListOfNumbers()){
+				for(GuestModel guestMod : roomMod.getGuests()){
+					if(name.equals(guestMod.getName())){
+						long diff = guestMod.getDateOfEvi().getTime() - guestMod.getDateOfAdd().getTime();
+						str = str + (diff / (1000L*60L*60L*24L)*roomMod.getCoast()) + "$";
+					}
 				}
 			}
+			return str;
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
 		}
-		return str;
 	}
 	
 	/**
@@ -258,34 +342,53 @@ public class RoomService {
 	 */
 	
 	public List<GuestModel> showLastThreeGuests(int number){
-		PropertiesReader.getInstance().setProperties();
-		List<GuestModel> list = new ArrayList<GuestModel>();
-		int numberOfGuest = PropertiesReader.getInstance().getUtil().getRecordNumber();
-		for(RoomModel roomMod : hotel.getRoom().getListOfNumbers()){
-			if(number == roomMod.getNumber()){
-				if(roomMod.getGuests().size() == numberOfGuest){
-					for(int i = roomMod.getGuests().size()-numberOfGuest; i < roomMod.getGuests().size(); i++){
-						list.add(roomMod.getGuests().get(i));
-					}
-				} else if(roomMod.getGuests().size() < 3){
-					for(int i = 0; i < roomMod.getGuests().size(); i++){
-						list.add(roomMod.getGuests().get(i));
+		try{
+			PropertiesReader.getInstance().setProperties();
+			List<GuestModel> list = new ArrayList<GuestModel>();
+			int numberOfGuest = PropertiesReader.getInstance().getUtil().getRecordNumber();
+			for(RoomModel roomMod : hotel.getRoom().getListOfNumbers()){
+				if(number == roomMod.getNumber()){
+					if(roomMod.getGuests().size() == numberOfGuest){
+						for(int i = roomMod.getGuests().size()-numberOfGuest; i < roomMod.getGuests().size(); i++){
+							list.add(roomMod.getGuests().get(i));
+						}
+					} else if(roomMod.getGuests().size() < 3){
+						for(int i = 0; i < roomMod.getGuests().size(); i++){
+							list.add(roomMod.getGuests().get(i));
+						}
 					}
 				}
 			}
+			return list;
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
 		}
-		return list;
 	}
 	
-	public void cloneRoom(int number) throws CloneNotSupportedException{
-		hotel.cloneRoom(number);
+	public void cloneRoom(int number){
+		try{
+			hotel.cloneRoom(number);
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
 	
-	public void exportRooms(String path){
-		ImportAndExport.getInstance().writeToFileRooms(path);
+	public void exportRooms(){
+		try{
+			PropertiesReader.getInstance().setProperties();
+			ImportAndExport.getInstance().writeToFileRooms(PropertiesReader.getInstance().getUtil().getCsvPath());
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
 
-	public void importRooms(String path){
-		ImportAndExport.getInstance().readFromFileRooms(path);
+	public void importRooms(){
+		try{
+			PropertiesReader.getInstance().setProperties();
+			ImportAndExport.getInstance().readFromFileRooms(PropertiesReader.getInstance().getUtil().getCsvPath());
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
 }

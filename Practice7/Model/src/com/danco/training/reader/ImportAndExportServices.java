@@ -5,26 +5,22 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.model.ServiceModel;
-import com.danco.training.service.HotelService;
+import com.danco.training.entity.ServiceModel;
+import com.danco.training.service.ServiceService;
 
 public class ImportAndExportServices {
 	private static final String SEPAR = " ; ";
 	private static final String NEXT_LINE = "\n";
-	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	private static final Logger LOGGER = Logger.getLogger(ImportAndExportServices.class);
-	private HotelService service;
-	public HotelService getService() {
+	private ServiceService service;
+	public ServiceService getService() {
 		if(service == null){
-			service = HotelService.getInstance();
+			service = new ServiceService();
 		}
 		return service;
 	}
@@ -34,10 +30,10 @@ public class ImportAndExportServices {
 			FileWriter fw = new FileWriter(path);
 			fw.append(ServiceModel.class.getSimpleName());
 			fw.append(NEXT_LINE);
-			for(int i = 0 ; i < getService().getServices().size(); i++){
-				fw.append(getService().getServices().get(i).getName());
+			for(int i = 0 ; i < getService().printService().size(); i++){
+				fw.append(getService().printService().get(i).getName());
 				fw.append(SEPAR);
-				fw.append(getService().getServices().get(i).getCoast() + "");
+				fw.append(getService().printService().get(i).getCoast() + "");
 				fw.append(SEPAR);
 				fw.append(NEXT_LINE);
 			}
@@ -48,8 +44,9 @@ public class ImportAndExportServices {
 		} 
 	}
 	
-	public void readFromFileServices(String path){
+	public List<ServiceModel> readFromFileServices(String path){
 		List<String> list = new ArrayList<String>();
+		List<ServiceModel> services = new ArrayList<ServiceModel>();
 		String line = "";
 		try {
 			BufferedReader bf = new BufferedReader(new FileReader(path));
@@ -61,7 +58,10 @@ public class ImportAndExportServices {
 					String[] arr = list.get(i).split(SEPAR);
 					String name = arr[0];
 					int coast = Integer.parseInt(arr[1]);
-					getService().addService(new ServiceModel(name, coast));
+					ServiceModel sm = new ServiceModel(name, coast);
+					if(!equalID(name, services)){
+						services.add(sm);
+					}
 				}
 			}
 			bf.close();
@@ -70,5 +70,21 @@ public class ImportAndExportServices {
 		} catch (IOException e) {
 			LOGGER.error("IOEXCEPTION",e);
 		}
+		return services;
+	}
+	
+	public boolean equalID(String name, List<ServiceModel> list){
+		ServiceModel sm = null;
+		for(ServiceModel model: list){
+			if(model.getName().equals(name)){
+				sm = model;
+				break;
+			}
+		}
+		if(sm == null){
+			return true;
+		}
+		return false;
+		
 	}
 }

@@ -17,7 +17,7 @@ public class DIConfig {
 		PropertiesReader.getInstance().setProperties();
 	}
 	
-	public String getClassName(){
+	public String[] getClassName(){
 		return PropertiesReader.getInstance().getUtil().getServName();
 	}
 }

@@ -2,7 +2,7 @@ package com.danco.training.controller.utils;
 
 import java.util.List;
 
-import com.danco.training.model.RoomModel;
+import com.danco.training.entity.RoomModel;
 
 public class PrintRoom {
 	private static final String SEPAR = " ; ";

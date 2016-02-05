@@ -1,12 +1,12 @@
 package com.danco.training.view.menu;
 
-import com.danco.training.controller.HotelController;
+import com.danco.training.seriolize.SeriolizeUtil;
 
 public class Start {
 	public static void main(String[] args){
-		HotelController.getInstance().readFromFile();
+		//SeriolizeUtil.getInstance().readFromFile();
 		MainController mainC = new MainController();
 		mainC.run();
-		HotelController.getInstance().writeInFile();
+		//SeriolizeUtil.getInstance().writeInFile();
 	}
 }

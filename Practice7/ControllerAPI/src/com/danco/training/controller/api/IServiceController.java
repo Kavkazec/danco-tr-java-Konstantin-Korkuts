@@ -2,7 +2,7 @@ package com.danco.training.controller.api;
 
 import java.util.List;
 
-import com.danco.training.model.ServiceModel;
+import com.danco.training.entity.ServiceModel;
 
 public interface IServiceController {
 	public void addService(ServiceModel service);

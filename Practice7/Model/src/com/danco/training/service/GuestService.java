@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 
 import com.danco.training.comparator.GuestDateComparator;
 import com.danco.training.comparator.GuestNameComparator;
 import com.danco.training.comparator.GuestServicesCoastComparator;
 import com.danco.training.comparator.GuestServicesDateCopmarator;
-import com.danco.training.model.GuestModel;
-import com.danco.training.model.ServiceModel;
+import com.danco.training.controller.api.IGuestController;
+import com.danco.training.entity.GuestModel;
+import com.danco.training.entity.ServiceModel;
+import com.danco.training.properties.PropertiesReader;
 import com.danco.training.reader.ImportAndExport;
 import com.danco.training.storage.Hotel;
 
@@ -20,9 +23,9 @@ import com.danco.training.storage.Hotel;
  * The Class GuestService.
  */
 
-public class GuestService {
+public class GuestService implements IGuestController{
 	
-	
+	private static final Logger logger = Logger.getLogger(GuestService.class);
 	
 	/** The t. */
 	private int t = 0;
@@ -39,8 +42,13 @@ public class GuestService {
 	 *
 	 * @return the guests
 	 */
-	public List<GuestModel> getGuests() {
-		return hotel.getGuest().getGuests();
+	public List<GuestModel> printGuest(){
+		try{
+			return hotel.getGuest().getGuests();
+		}  catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
 	
 	/**
@@ -49,7 +57,11 @@ public class GuestService {
 	 * @param guest the guest
 	 */
 	public void addGuest(GuestModel guest) {
-		hotel.addGuest(guest);
+		try{
+			hotel.addGuest(guest);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
 	
 	/**
@@ -58,7 +70,11 @@ public class GuestService {
 	 * @param guest the guest
 	 */
 	public void deleteGuest(String str){
-		hotel.deleteGuest(str);
+		try{
+			hotel.deleteGuest(str);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
 	
 	/**
@@ -68,7 +84,11 @@ public class GuestService {
 	 * @param service the service
 	 */
 	public void addServiceToGuest( String guest, String service){
-		hotel.addServiceToGuest(guest, service);
+		try{
+			hotel.addServiceToGuest(guest, service);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
 	
 	
@@ -77,10 +97,14 @@ public class GuestService {
 	 *
 	 * @return the list
 	 */
-	public List<GuestModel> sortByName(){
-	
+	public List<GuestModel> sortByNameGuests(){
+		try{
 			Collections.sort(hotel.getGuest().getGuests(), new GuestNameComparator());
 			return hotel.getGuest().getGuests();
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
 	
 	/**
@@ -88,9 +112,14 @@ public class GuestService {
 	 *
 	 * @return the list
 	 */
-	public List<GuestModel> sortByDate(){
-		Collections.sort(hotel.getGuest().getGuests(), new GuestDateComparator());
-		return hotel.getGuest().getGuests();
+	public List<GuestModel> sortByDateGuests(){
+		try{
+			Collections.sort(hotel.getGuest().getGuests(), new GuestDateComparator());
+			return hotel.getGuest().getGuests();
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
 	
 	/**
@@ -98,11 +127,16 @@ public class GuestService {
 	 *
 	 * @return the int
 	 */
-	public int showAllGuests(){
-		for(int i = 0; i < hotel.getGuest().getGuests().size(); i++){
-			t +=1;
-		}		
-		return t;
+	public int showNumberOfGuests(){
+		try{
+			for(int i = 0; i < hotel.getGuest().getGuests().size(); i++){
+				t +=1;
+			}		
+			return t;
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return 0;
+		}
 	}
 	
 	/**
@@ -111,17 +145,22 @@ public class GuestService {
 	 * @param guest the guest
 	 * @return the list
 	 */
-	public List<ServiceModel> showListOfServicesSortedByCoast(String name){
-		List<ServiceModel> list = new ArrayList<ServiceModel>();
-		for(GuestModel gm : hotel.getGuest().getGuests()){
-			if(name.equals(gm.getName())){
-				for(ServiceModel sm : gm.getServices()){
-					list.add(sm);
+	public List<ServiceModel> showGuestsServicesSortedByCoast(String name){
+		try{
+			List<ServiceModel> list = new ArrayList<ServiceModel>();
+			for(GuestModel gm : hotel.getGuest().getGuests()){
+				if(name.equals(gm.getName())){
+					for(ServiceModel sm : gm.getServices()){
+						list.add(sm);
+					}
 				}
 			}
+			Collections.sort(list, new GuestServicesCoastComparator());
+			return list;
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
 		}
-		Collections.sort(list, new GuestServicesCoastComparator());
-		return list;
 	}
 	
 	/**
@@ -130,36 +169,56 @@ public class GuestService {
 	 * @param guest the guest
 	 * @return the list
 	 */
-	public List<ServiceModel> showListOfServicesSortedByDate(String name){
-		List<ServiceModel> list = new ArrayList<ServiceModel>();
-		for(GuestModel gm : hotel.getGuest().getGuests()){
-			if(name.equals(gm.getName())){
-				for(ServiceModel sm : gm.getServices()){
-					list.add(sm);
+	public List<ServiceModel> showGuestsServicesSortedByDate(String name){
+		try{
+			List<ServiceModel> list = new ArrayList<ServiceModel>();
+			for(GuestModel gm : hotel.getGuest().getGuests()){
+				if(name.equals(gm.getName())){
+					for(ServiceModel sm : gm.getServices()){
+						list.add(sm);
+					}
 				}
 			}
+			Collections.sort(list, new GuestServicesDateCopmarator());
+			return list;
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
 		}
-		Collections.sort(list, new GuestServicesDateCopmarator());
-		return list;
 	}
 	
-	public void exportGuests(String path){
-		ImportAndExport.getInstance().writeToFileGuests(path);
+	public void exportGuests(){
+		try{
+			PropertiesReader.getInstance().setProperties();
+			ImportAndExport.getInstance().writeToFileGuests(PropertiesReader.getInstance().getUtil().getCsvPath());
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}	
 	}
 	
-	public void importGuests(String path){
-		ImportAndExport.getInstance().readFromFileGuests(path);
+	public void importGuests(){
+		try{
+			PropertiesReader.getInstance().setProperties();
+			ImportAndExport.getInstance().readFromFileGuests(PropertiesReader.getInstance().getUtil().getCsvPath());
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
 	
 	public List<ServiceModel> getService(String name){
-		List<ServiceModel> list = new ArrayList<ServiceModel>();
-		for(GuestModel gm : hotel.getGuest().getGuests()){
-			if(name.equals(gm.getName())){
-				for(ServiceModel sm : gm.getServices()){
-					list.add(sm);
+		try{
+			List<ServiceModel> list = new ArrayList<ServiceModel>();
+			for(GuestModel gm : hotel.getGuest().getGuests()){
+				if(name.equals(gm.getName())){
+					for(ServiceModel sm : gm.getServices()){
+						list.add(sm);
+					}
 				}
 			}
+			return list;
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
 		}
-		return list;
 	}
 }

@@ -3,8 +3,11 @@ package com.danco.training.service;
 
 import java.util.List;
 
-import com.danco.training.model.GuestModel;
-import com.danco.training.model.ServiceModel;
+import org.apache.log4j.Logger;
+
+import com.danco.training.controller.api.IServiceController;
+import com.danco.training.entity.ServiceModel;
+import com.danco.training.properties.PropertiesReader;
 import com.danco.training.reader.ImportAndExport;
 import com.danco.training.storage.Hotel;
 
@@ -12,8 +15,8 @@ import com.danco.training.storage.Hotel;
 /**
 	 * The Class ServiceService.
 	 */
-	public class ServiceService {
-		
+	public class ServiceService implements IServiceController{
+	private static final Logger logger = Logger.getLogger(GuestService.class);
 	/** The hotel. */
 	private Hotel hotel = Hotel.getInstance();
 	
@@ -27,7 +30,11 @@ import com.danco.training.storage.Hotel;
 	 * @param service the service
 	 */
 	public void addService(ServiceModel service){
-		hotel.addService(service);
+		try{
+			hotel.addService(service);
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
 	
 	/**
@@ -36,7 +43,11 @@ import com.danco.training.storage.Hotel;
 	 * @param service the service
 	 */
 	public void deleteService(String name){
-		hotel.deleteService(name);
+		try{
+			hotel.deleteService(name);
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
 	
 	/**
@@ -44,8 +55,13 @@ import com.danco.training.storage.Hotel;
 	 *
 	 * @return the services
 	 */
-	public List<ServiceModel> getServices(){
-		return hotel.getService().getListOfServices();
+	public List<ServiceModel> printService(){
+		try{
+			return hotel.getService().getListOfServices();
+		}catch (Exception e) {
+			logger.error("EXPTION", e);
+			return null;
+		}
 	}
 	
 	/**
@@ -54,19 +70,33 @@ import com.danco.training.storage.Hotel;
 	 * @param name the name
 	 * @param coast the coast
 	 */
-	public void changeStatus(String name,int coast){	
-		for(ServiceModel m: hotel.getService().getListOfServices()){
-			if(m.getName() == name){
-				m.setCoast(coast);
-			}
-		}	
+	public void changeServicesCoast(String name,int coast){	
+		try{
+			for(ServiceModel m: hotel.getService().getListOfServices()){
+				if(m.getName() == name){
+					m.setCoast(coast);
+				}
+			}	
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
 	
-	public void exportServices(String path){
-		ImportAndExport.getInstance().writeToFileServices(path);
+	public void exportServices(){
+		try{
+			PropertiesReader.getInstance().setProperties();
+			ImportAndExport.getInstance().writeToFileServices(PropertiesReader.getInstance().getUtil().getCsvPath());
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
 	
-	public void importServices(String path){
-		ImportAndExport.getInstance().readFromFileServices(path);
+	public void importServices(){
+		try{
+			PropertiesReader.getInstance().setProperties();
+			ImportAndExport.getInstance().readFromFileServices(PropertiesReader.getInstance().getUtil().getCsvPath());
+		}catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
 }

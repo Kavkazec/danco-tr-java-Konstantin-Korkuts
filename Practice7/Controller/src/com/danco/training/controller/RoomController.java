@@ -25,7 +25,7 @@ public class RoomController {
 	private IRoomController roomCon;
 	private IGuestController guestCon;
 	
-	public RoomController(IRoomController roomCon,IGuestController guestCon){
+	public RoomController(IRoomController roomCon, IGuestController guestCon){
 		this.roomCon = roomCon;
 		this.guestCon = guestCon;
 	}

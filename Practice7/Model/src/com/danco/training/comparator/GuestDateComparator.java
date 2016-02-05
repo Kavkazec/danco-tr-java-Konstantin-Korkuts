@@ -2,7 +2,8 @@ package com.danco.training.comparator;
 
 import java.util.Comparator;
 
-import com.danco.training.model.GuestModel;
+import com.danco.training.entity.GuestModel;
+
 
 // TODO: Auto-generated Javadoc
 /**

@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.model.GuestModel;
+import com.danco.training.entity.GuestModel;
 
 public class InGuest {
 	private static final Logger LOGGER = Logger.getLogger(InReader.class);

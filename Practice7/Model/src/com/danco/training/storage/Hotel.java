@@ -3,9 +3,9 @@ package com.danco.training.storage;
 import java.io.Serializable;
 import java.util.GregorianCalendar;
 
-import com.danco.training.model.GuestModel;
-import com.danco.training.model.RoomModel;
-import com.danco.training.model.ServiceModel;
+import com.danco.training.entity.GuestModel;
+import com.danco.training.entity.RoomModel;
+import com.danco.training.entity.ServiceModel;
 
 // TODO: Auto-generated Javadoc
 /**

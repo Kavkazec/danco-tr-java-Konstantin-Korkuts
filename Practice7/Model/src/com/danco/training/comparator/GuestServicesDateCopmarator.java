@@ -2,7 +2,9 @@ package com.danco.training.comparator;
 
 import java.util.Comparator;
 
-import com.danco.training.model.ServiceModel;
+import com.danco.training.entity.ServiceModel;
+
+
 
 // TODO: Auto-generated Javadoc
 /**

@@ -12,8 +12,8 @@ public class InReader {
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	public int readInt(){
 		int i;
+		Scanner sc = new Scanner(System.in);
 		try{
-			Scanner sc = new Scanner(System.in);
 			i = sc.nextInt();
 			return i;
 		} catch (Exception e){
@@ -30,9 +30,9 @@ public class InReader {
 	}
 	
 	public Date readDate(){
+		Scanner sc = new Scanner(System.in);
+		Date date = null;
 		try {
-			Scanner sc = new Scanner(System.in);
-			Date date = null;
 			date = sdf.parse(sc.nextLine());
 			return date;
 		} catch (Exception e) {

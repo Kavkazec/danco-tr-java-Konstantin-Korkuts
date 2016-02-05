@@ -3,8 +3,8 @@ package com.danco.training.controller.api;
 import java.util.Date;
 import java.util.List;
 
-import com.danco.training.model.GuestModel;
-import com.danco.training.model.RoomModel;
+import com.danco.training.entity.GuestModel;
+import com.danco.training.entity.RoomModel;
 
 public interface IRoomController {
 	public void addRoom(RoomModel room);

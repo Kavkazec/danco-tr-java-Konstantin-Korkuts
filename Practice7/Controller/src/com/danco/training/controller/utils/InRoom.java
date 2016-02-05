@@ -1,6 +1,6 @@
 package com.danco.training.controller.utils;
 
-import com.danco.training.model.RoomModel;
+import com.danco.training.entity.RoomModel;
 
 public class InRoom {
 	public RoomModel inputRoom(){
@@ -13,6 +13,7 @@ public class InRoom {
 		int numberOfStars = input.readInt();
 		input.print("Coast:");
 		int coast = input.readInt();
-		return new RoomModel(number, capacity, numberOfStars, coast);
+		RoomModel rm = new RoomModel(number, capacity, numberOfStars, coast);
+		return rm;
 	}
 }

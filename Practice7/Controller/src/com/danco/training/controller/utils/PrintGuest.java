@@ -3,7 +3,7 @@ package com.danco.training.controller.utils;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import com.danco.training.model.GuestModel;
+import com.danco.training.entity.GuestModel;
 
 public class PrintGuest {
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");

@@ -1,19 +1,11 @@
 package com.danco.training.controller;
 
-import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
-
-import org.apache.log4j.Logger;
-
 import com.danco.training.controller.api.IGuestController;
 import com.danco.training.controller.api.IRoomController;
 import com.danco.training.controller.api.IServiceController;
-import com.danco.training.controller.utils.InReader;
 import com.danco.training.di.DependencyInjection;
-import com.danco.training.service.HotelService;
 
 public class HotelController {
-	private static final Logger LOGGER = Logger.getLogger(InReader.class);
-	private static HotelService service = HotelService.getInstance();
 	private GuestController guestCon;
 	private RoomController roomCon;
 	private ServiceController serviceCon;
@@ -21,7 +13,6 @@ public class HotelController {
 	private static HotelController instance;
 	
 	private HotelController(){
-		
 	}
 	
 	public static HotelController getInstance(){
@@ -31,24 +22,25 @@ public class HotelController {
 		return instance;
 	}
 	
-	
-	public GuestController getGuestCon() {
-		if(guestCon == null){
-			guestCon = new GuestController((IGuestController) DependencyInjection.getInstance().getClassInstance(), 
-					(IServiceController) DependencyInjection.getInstance().getClassInstance());
-		}
-		return guestCon;
-	}
 	public RoomController getRoomCon() {
 		if(roomCon == null){
-			roomCon = new RoomController((IRoomController) DependencyInjection.getInstance().getClassInstance(),
-					(IGuestController) DependencyInjection.getInstance().getClassInstance());
+			roomCon = new RoomController((IRoomController) DependencyInjection.getInstance().getClassInstance(IRoomController.class),
+					(IGuestController) DependencyInjection.getInstance().getClassInstance(IGuestController.class));
 		}
 		return roomCon;
 	}
+	
+	public GuestController getGuestCon() {
+		if(guestCon == null){
+			guestCon = new GuestController((IGuestController) DependencyInjection.getInstance().getClassInstance(IGuestController.class), 
+					(IServiceController) DependencyInjection.getInstance().getClassInstance(IServiceController.class));
+		}
+		return guestCon;
+	}
+	
 	public ServiceController getServiceCon() {
 		if(serviceCon == null){
-			serviceCon = new ServiceController((IServiceController) DependencyInjection.getInstance().getClassInstance());
+			serviceCon = new ServiceController((IServiceController) DependencyInjection.getInstance().getClassInstance(IServiceController.class));
 		}
 		return serviceCon;
 	}
@@ -86,11 +78,7 @@ public class HotelController {
 	}
 	
 	public void printGuest(){
-		try{
 		getGuestCon().printGuest();
-		} catch(Exception e){
-			LOGGER.error("INCORRECT_DATE_INPUT");
-		}
 	}
 	
 	public void addRoom(){
@@ -187,14 +175,6 @@ public class HotelController {
 	
 	public void cloneRoom(){
 		getRoomCon().cloneRoom();
-	}
-	
-	public void writeInFile(){
-		service.writeInFile();
-	}
-	
-	public void readFromFile(){
-		service.readFromFile();
 	}
 	
 	public void exportGuests(){

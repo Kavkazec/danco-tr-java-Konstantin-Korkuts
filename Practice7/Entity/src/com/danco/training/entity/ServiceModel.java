@@ -1,4 +1,4 @@
-package com.danco.training.model;
+package com.danco.training.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -31,9 +31,6 @@ public class ServiceModel implements Serializable{
 	/** The date. */
 	@ConfigPropery(cPath = "config.annot", param = "ServiceModel.date", type = "Date")
 	private Date date;
-
-	/** The Constant SEMICOLON. */
-	private static final String SEMICOLON = " ; ";
 
 	/**
 	 * Instantiates a new service model.

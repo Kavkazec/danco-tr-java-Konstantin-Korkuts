@@ -10,18 +10,17 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.model.RoomModel;
-import com.danco.training.model.ServiceModel;
-import com.danco.training.service.HotelService;
+import com.danco.training.entity.RoomModel;
+import com.danco.training.service.RoomService;
 
 public class ImportAndExportRooms {
 	private static final String SEPAR = " ; ";
 	private static final String NEXT_LINE = "\n";
 	private static final Logger LOGGER = Logger.getLogger(ImportAndExportRooms.class);
-	private HotelService service;
-	public HotelService getService() {
+	private RoomService service;
+	public RoomService getService() {
 		if(service == null){
-			service = HotelService.getInstance();
+			service = new RoomService();
 		}
 		return service;
 	}
@@ -31,18 +30,18 @@ public class ImportAndExportRooms {
 			FileWriter fw = new FileWriter(path);
 			fw.append(RoomModel.class.getSimpleName());
 			fw.append(NEXT_LINE);
-			for(int i = 0 ; i < getService().getRooms().size(); i++){
-				fw.append(getService().getRooms().get(i).getNumber() + "");
+			for(int i = 0 ; i < getService().printRoom().size(); i++){
+				fw.append(getService().printRoom().get(i).getNumber() + "");
 				fw.append(SEPAR);
-				fw.append(getService().getRooms().get(i).getCapacity() + "");
+				fw.append(getService().printRoom().get(i).getCapacity() + "");
 				fw.append(SEPAR);
-				fw.append(getService().getRooms().get(i).getNumberOfStars() + "");
+				fw.append(getService().printRoom().get(i).getNumberOfStars() + "");
 				fw.append(SEPAR);
-				fw.append(getService().getRooms().get(i).getCoast() + "");
+				fw.append(getService().printRoom().get(i).getCoast() + "");
 				fw.append(SEPAR);
-				fw.append(getService().getRooms().get(i).getStatus() + "");
+				fw.append(getService().printRoom().get(i).getStatus() + "");
 				fw.append(SEPAR);
-				fw.append(getService().getRooms().get(i).getIsOnRepair() + "");
+				fw.append(getService().printRoom().get(i).getIsOnRepair() + "");
 				fw.append(SEPAR);
 				fw.append(NEXT_LINE);
 			}
@@ -53,8 +52,9 @@ public class ImportAndExportRooms {
 		} 
 	}
 	
-	public void readFromFileRooms(String path){
+	public List<RoomModel> readFromFileRooms(String path){
 		List<String> list = new ArrayList<String>();
+		List<RoomModel> rooms = new ArrayList<RoomModel>();
 		String line = "";
 		try {
 			BufferedReader bf = new BufferedReader(new FileReader(path));
@@ -73,7 +73,9 @@ public class ImportAndExportRooms {
 					RoomModel rm = new RoomModel(number, capacity, stars, coast);
 					rm.setStatus(status);
 					rm.setOnRepair(onRepair);
-					getService().addRoom(rm);
+					if(!equalID(number, rooms)){
+						rooms.add(rm);
+					}
 				}
 			}
 			bf.close();
@@ -82,7 +84,23 @@ public class ImportAndExportRooms {
 		} catch (IOException e) {
 			LOGGER.error("IOEXCEPTION",e);
 		}
+		return rooms;
 	
+	}
+	
+	public boolean equalID(int number, List<RoomModel> list){
+		RoomModel rm = null;
+		for(RoomModel model: list){
+			if(model.getNumber() == number){
+				rm = model;
+				break;
+			}
+		}
+		if(rm == null){
+			return true;
+		}
+		return false;
+		
 	}
 	
 }

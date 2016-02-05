@@ -13,19 +13,18 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.model.GuestModel;
-import com.danco.training.model.RoomModel;
-import com.danco.training.service.HotelService;
+import com.danco.training.entity.GuestModel;
+import com.danco.training.service.GuestService;
 
 public class ImportAndExportGuests {
 	private static final String SEPAR = " ; ";
 	private static final String NEXT_LINE = "\n";
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	private static final Logger LOGGER = Logger.getLogger(ImportAndExportGuests.class);
-	private HotelService service;
-	public HotelService getService() {
+	private GuestService service;
+	public GuestService getService() {
 		if(service == null){
-			service = HotelService.getInstance();
+			service = new GuestService();
 		}
 		return service;
 	}
@@ -35,12 +34,12 @@ public class ImportAndExportGuests {
 			FileWriter fw = new FileWriter(path);
 			fw.append(GuestModel.class.getSimpleName());
 			fw.append(NEXT_LINE);
-			for(int i = 0 ; i < getService().getGuests().size(); i++){
-				fw.append(getService().getGuests().get(i).getName());
+			for(int i = 0 ; i < getService().printGuest().size(); i++){
+				fw.append(getService().printGuest().get(i).getName());
 				fw.append(SEPAR);
-				fw.append(sdf.format(getService().getGuests().get(i).getDateOfAdd()));
+				fw.append(sdf.format(getService().printGuest().get(i).getDateOfAdd()));
 				fw.append(SEPAR);
-				fw.append(sdf.format(getService().getGuests().get(i).getDateOfEvi()));
+				fw.append(sdf.format(getService().printGuest().get(i).getDateOfEvi()));
 				fw.append(SEPAR);
 				fw.append(NEXT_LINE);
 			}
@@ -51,8 +50,9 @@ public class ImportAndExportGuests {
 		} 
 	}
 	
-	public void readFromFileGuests(String path){
+	public List<GuestModel> readFromFileGuests(String path){
 		List<String> list = new ArrayList<String>();
+		List<GuestModel> guests = new ArrayList<GuestModel>();
 		String line = "";
 		try {
 			BufferedReader bf = new BufferedReader(new FileReader(path));
@@ -65,7 +65,10 @@ public class ImportAndExportGuests {
 					String name = arr[0];
 					Date add = sdf.parse(arr[1]);
 					Date evi = sdf.parse(arr[2]);
-					getService().addGuest(new GuestModel(name, add, evi));
+					GuestModel gm = new GuestModel(name, add, evi);
+					if(!equalID(name, add, guests)){
+						guests.add(gm);
+					}
 				}
 			}
 			bf.close();
@@ -76,7 +79,23 @@ public class ImportAndExportGuests {
 		} catch (ParseException e) {
 			LOGGER.error("PARSE_EXCEPTION",e);
 		}
+		return guests;
 	
+	}
+	
+	public boolean equalID(String name, Date date, List<GuestModel> list){
+		GuestModel gm = null;
+		for(GuestModel model: list){
+			if(model.getName().equals(name) && model.getDateOfAdd().equals(date)){
+				gm = model;
+				break;
+			}
+		}
+		if(gm == null){
+			return true;
+		}
+		return false;
+		
 	}
 	
 }

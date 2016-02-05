@@ -1,4 +1,4 @@
-package com.danco.training.model;
+package com.danco.training.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -32,9 +32,6 @@ public class RoomModel implements Cloneable,Serializable{
 	
 	/** The is on repair. */
 	private boolean isOnRepair = false;
-	
-	/** The Constant SEMICOLON. */
-	private static final String SEMICOLON = " ; ";
 	
 	/** The guests. */
 	private List<GuestModel> guests = new ArrayList<GuestModel>();

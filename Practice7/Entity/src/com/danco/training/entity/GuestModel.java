@@ -1,7 +1,6 @@
-package com.danco.training.model;
+package com.danco.training.entity;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,7 +16,7 @@ public class GuestModel implements Serializable {
 	private static final long serialVersionUID = -4853470731812061052L;
 
 	/** The name. */
-	//@ConfigPropery(cPath = "config.annot", param = "GuestModel.name", type = "String")
+	@ConfigPropery(cPath = "config.annot", param = "GuestModel.name", type = "String")
 	private String name;
 	
 	public void setName(String name) {
@@ -38,12 +37,6 @@ public class GuestModel implements Serializable {
     /** The date of evi. */
     private Date dateOfEvi;
     
-    /** The Constant SEMICOLON. */
-    private static final String SEMICOLON = " ; ";
-    
-    /** The sdf. */
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-	
 	/** The services. */
 	private List<ServiceModel> services = new ArrayList<ServiceModel>();
 	

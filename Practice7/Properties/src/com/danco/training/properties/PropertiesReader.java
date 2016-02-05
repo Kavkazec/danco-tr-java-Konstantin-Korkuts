@@ -8,8 +8,10 @@ import org.apache.log4j.Logger;
 
 public class PropertiesReader {
 	private static Logger logger = Logger.getLogger(PropertiesReader.class);
-
 	private PropertiesUtil util = new PropertiesUtil();
+	private static final String ZAP = ",";
+	
+	
 	
 	private static PropertiesReader instance;
 	
@@ -48,7 +50,7 @@ public class PropertiesReader {
 			util.setPath(path);
 			util.setCsvPath(csvPath);
 			util.setAnnotPath(annotPath);
-			util.setServName(servName);
+			util.setServName(servName.split(ZAP));
 			reader.close();
 		} catch (FileNotFoundException e) {
 			logger.error("FILE_NOT_FOUND");
@@ -73,7 +75,7 @@ public class PropertiesReader {
 			util.setPath(path);
 			util.setCsvPath(csvPath);
 			util.setAnnotPath(annotPath);
-			util.setServName(servName);
+			util.setServName(servName.split(ZAP));
 			reader.close();
 		} catch (FileNotFoundException e) {
 			logger.error("FILE_NOT_FOUND");
@@ -86,4 +88,6 @@ public class PropertiesReader {
 	public PropertiesUtil getUtil() {
 		return util;
 	}
+	
+	
 }

@@ -2,7 +2,7 @@ package com.danco.training.comparator;
 
 import java.util.Comparator;
 
-import com.danco.training.model.RoomModel;
+import com.danco.training.entity.RoomModel;
 
 // TODO: Auto-generated Javadoc
 /**

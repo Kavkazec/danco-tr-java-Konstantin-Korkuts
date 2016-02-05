@@ -5,8 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.danco.training.model.RoomModel;
-import com.danco.training.reader.ImportAndExport;
+import com.danco.training.entity.RoomModel;
 
 // TODO: Auto-generated Javadoc
 /**
