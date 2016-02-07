@@ -1,7 +1,7 @@
 package com.danco.training.controller;
 
-import com.danco.training.controller.api.IGuestController;
-import com.danco.training.controller.api.IServiceController;
+import com.danco.training.controller.api.IGuestService;
+import com.danco.training.controller.api.IServiceService;
 import com.danco.training.controller.utils.InGuest;
 import com.danco.training.controller.utils.InReader;
 import com.danco.training.controller.utils.PrintGuest;
@@ -9,8 +9,8 @@ import com.danco.training.controller.utils.PrintService;
 
 public class GuestController {
 	private static final String PUSTOTA = "";
-	private IGuestController guestCon;
-	private IServiceController serviceCon;
+	private IGuestService guestCon;
+	private IServiceService serviceCon;
 	private static final String DETAILS_GUEST = "name ; date of added; date of departure ;";
 	private static final String DETAILS_SERVICE = "name ; coast ;";
 	private static final String LINE = "-------------------------------------------";
@@ -19,7 +19,7 @@ public class GuestController {
 	private InReader inReader;
 	private PrintService printService;
 	
-	public GuestController(IGuestController guestCon, IServiceController serviceCon){
+	public GuestController(IGuestService guestCon, IServiceService serviceCon){
 		this.guestCon = guestCon;
 		this.serviceCon = serviceCon;
 	}

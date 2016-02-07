@@ -5,7 +5,7 @@ import java.util.List;
 import com.danco.training.entity.GuestModel;
 import com.danco.training.entity.ServiceModel;
 
-public interface IGuestController {
+public interface IGuestService {
 	public void addGuest(GuestModel guest);
 	public void deleteGuest(String name);
 	public List<GuestModel> sortByNameGuests();

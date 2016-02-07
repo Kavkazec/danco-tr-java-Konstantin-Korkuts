@@ -14,7 +14,7 @@ import com.danco.training.comparator.FreeRoomStarsComparator;
 import com.danco.training.comparator.RoomCoastComparator;
 import com.danco.training.comparator.RoomCopasityComparator;
 import com.danco.training.comparator.RoomStarsCmparator;
-import com.danco.training.controller.api.IRoomController;
+import com.danco.training.controller.api.IRoomService;
 import com.danco.training.entity.GuestModel;
 import com.danco.training.entity.RoomModel;
 import com.danco.training.properties.PropertiesReader;
@@ -27,7 +27,7 @@ import com.danco.training.storage.Hotel;
 /**
  * The Class RoomService.
  */
-public class RoomService implements IRoomController{
+public class RoomService implements IRoomService{
 	private static final Logger logger = Logger.getLogger(RoomService.class);
 	/** The t. */
 	private int t = 0;

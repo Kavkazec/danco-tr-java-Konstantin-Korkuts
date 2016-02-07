@@ -1,19 +1,17 @@
 package com.danco.training.controller;
 
-import com.danco.training.controller.api.IGuestController;
-import com.danco.training.controller.api.IRoomController;
-import com.danco.training.controller.api.IServiceController;
+import com.danco.training.controller.api.IGuestService;
+import com.danco.training.controller.api.IHotelController;
+import com.danco.training.controller.api.IRoomService;
+import com.danco.training.controller.api.IServiceService;
 import com.danco.training.di.DependencyInjection;
 
-public class HotelController {
-	private GuestController guestCon;
+public class HotelController implements IHotelController {
 	private RoomController roomCon;
+	private GuestController guestCon;
 	private ServiceController serviceCon;
 	
 	private static HotelController instance;
-	
-	private HotelController(){
-	}
 	
 	public static HotelController getInstance(){
 		if(instance == null){
@@ -24,23 +22,23 @@ public class HotelController {
 	
 	public RoomController getRoomCon() {
 		if(roomCon == null){
-			roomCon = new RoomController((IRoomController) DependencyInjection.getInstance().getClassInstance(IRoomController.class),
-					(IGuestController) DependencyInjection.getInstance().getClassInstance(IGuestController.class));
+			roomCon = new RoomController((IRoomService) DependencyInjection.getInstance().getClassInstance(IRoomService.class),
+					(IGuestService) DependencyInjection.getInstance().getClassInstance(IGuestService.class));
 		}
 		return roomCon;
 	}
 	
 	public GuestController getGuestCon() {
 		if(guestCon == null){
-			guestCon = new GuestController((IGuestController) DependencyInjection.getInstance().getClassInstance(IGuestController.class), 
-					(IServiceController) DependencyInjection.getInstance().getClassInstance(IServiceController.class));
+			guestCon = new GuestController((IGuestService) DependencyInjection.getInstance().getClassInstance(IGuestService.class), 
+					(IServiceService) DependencyInjection.getInstance().getClassInstance(IServiceService.class));
 		}
 		return guestCon;
 	}
 	
 	public ServiceController getServiceCon() {
 		if(serviceCon == null){
-			serviceCon = new ServiceController((IServiceController) DependencyInjection.getInstance().getClassInstance(IServiceController.class));
+			serviceCon = new ServiceController((IServiceService) DependencyInjection.getInstance().getClassInstance(IServiceService.class));
 		}
 		return serviceCon;
 	}

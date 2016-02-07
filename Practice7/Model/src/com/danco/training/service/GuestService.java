@@ -10,7 +10,7 @@ import com.danco.training.comparator.GuestDateComparator;
 import com.danco.training.comparator.GuestNameComparator;
 import com.danco.training.comparator.GuestServicesCoastComparator;
 import com.danco.training.comparator.GuestServicesDateCopmarator;
-import com.danco.training.controller.api.IGuestController;
+import com.danco.training.controller.api.IGuestService;
 import com.danco.training.entity.GuestModel;
 import com.danco.training.entity.ServiceModel;
 import com.danco.training.properties.PropertiesReader;
@@ -23,7 +23,7 @@ import com.danco.training.storage.Hotel;
  * The Class GuestService.
  */
 
-public class GuestService implements IGuestController{
+public class GuestService implements IGuestService{
 	
 	private static final Logger logger = Logger.getLogger(GuestService.class);
 	

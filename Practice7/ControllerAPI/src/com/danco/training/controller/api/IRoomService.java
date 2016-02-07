@@ -6,7 +6,7 @@ import java.util.List;
 import com.danco.training.entity.GuestModel;
 import com.danco.training.entity.RoomModel;
 
-public interface IRoomController {
+public interface IRoomService {
 	public void addRoom(RoomModel room);
 	public void deleteRoom(int number);
 	public void deleteGuestFromRoom(String name);

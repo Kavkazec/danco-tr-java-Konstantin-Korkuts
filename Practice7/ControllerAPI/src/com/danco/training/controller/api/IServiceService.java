@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.danco.training.entity.ServiceModel;
 
-public interface IServiceController {
+public interface IServiceService {
 	public void addService(ServiceModel service);
 	public void deleteService(String name);
 	public void changeServicesCoast(String name, int coast);

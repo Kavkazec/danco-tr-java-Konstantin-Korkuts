@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.controller.api.IServiceController;
+import com.danco.training.controller.api.IServiceService;
 import com.danco.training.entity.ServiceModel;
 import com.danco.training.properties.PropertiesReader;
 import com.danco.training.reader.ImportAndExport;
@@ -15,7 +15,7 @@ import com.danco.training.storage.Hotel;
 /**
 	 * The Class ServiceService.
 	 */
-	public class ServiceService implements IServiceController{
+	public class ServiceService implements IServiceService{
 	private static final Logger logger = Logger.getLogger(GuestService.class);
 	/** The hotel. */
 	private Hotel hotel = Hotel.getInstance();

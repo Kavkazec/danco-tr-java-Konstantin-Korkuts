@@ -3,8 +3,8 @@ package com.danco.training.controller;
 
 import java.util.Date;
 
-import com.danco.training.controller.api.IGuestController;
-import com.danco.training.controller.api.IRoomController;
+import com.danco.training.controller.api.IGuestService;
+import com.danco.training.controller.api.IRoomService;
 import com.danco.training.controller.utils.InReader;
 import com.danco.training.controller.utils.InRoom;
 import com.danco.training.controller.utils.PrintGuest;
@@ -22,10 +22,10 @@ public class RoomController {
 	private PrintRoom printRoom;
 	private PrintGuest prinGuest;
 	
-	private IRoomController roomCon;
-	private IGuestController guestCon;
+	private IRoomService roomCon;
+	private IGuestService guestCon;
 	
-	public RoomController(IRoomController roomCon, IGuestController guestCon){
+	public RoomController(IRoomService roomCon, IGuestService guestCon){
 		this.roomCon = roomCon;
 		this.guestCon = guestCon;
 	}

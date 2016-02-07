@@ -1,6 +1,6 @@
 package com.danco.training.controller;
 
-import com.danco.training.controller.api.IServiceController;
+import com.danco.training.controller.api.IServiceService;
 import com.danco.training.controller.utils.InReader;
 import com.danco.training.controller.utils.InService;
 import com.danco.training.controller.utils.PrintService;
@@ -11,10 +11,10 @@ public class ServiceController {
 	private static final String DETAILS_SERVICE = "name ; coast ;";
 	private static final String LINE = "-------------------------------------------";
 	private PrintService printService;
-	private IServiceController serviceCon;
+	private IServiceService serviceCon;
 	
 	
-	public ServiceController(IServiceController serviceCon){
+	public ServiceController(IServiceService serviceCon){
 		this.serviceCon = serviceCon;
 	}
 	public PrintService getPrintService() {
