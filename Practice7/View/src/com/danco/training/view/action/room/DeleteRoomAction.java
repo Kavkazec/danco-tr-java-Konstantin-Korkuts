@@ -1,13 +1,16 @@
 package com.danco.training.view.action.room;
 
-import com.danco.training.controller.HotelController;
+import com.danco.training.controller.api.IHotelController;
+import com.danco.training.di.DependencyInjection;
 import com.danco.training.view.action.IAction;
 
 public class DeleteRoomAction implements IAction{
 
+	private IHotelController hotel  = (IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class);
+
 	@Override
 	public void execute() {
-		HotelController.getInstance().deleteRoom();
+		hotel.deleteRoom();
 	}
 
 }

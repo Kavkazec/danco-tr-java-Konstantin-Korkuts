@@ -1,9 +1,5 @@
 package com.danco.training.main;
 
-import com.danco.training.controller.HotelController;
-import com.danco.training.controller.api.IHotelController;
-import com.danco.training.di.DependencyInjection;
-import com.danco.training.properties.PropertiesReader;
 
 // TODO: Auto-generated Javadoc
 /**

@@ -6,7 +6,5 @@
 	<classpathentry kind="lib" path="C:/Users/Kavkazec/git/Practice7/Model/properties.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/ControllerAPI"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Entity"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/DI"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Controller"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
