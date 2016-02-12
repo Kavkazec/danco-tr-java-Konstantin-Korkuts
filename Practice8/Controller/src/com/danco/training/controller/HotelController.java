@@ -198,4 +198,14 @@ public class HotelController implements IHotelController {
 	public void importGuests(){
 		getGuestCon().importGuests();
 	}
+	
+	public void buildServicesFromAnnot(){
+		getServiceCon().buildServicesFromAnnot();
+	}
+	public void buildGuestsFromAnnot(){
+		getGuestCon().buildGuestsFromAnnot();
+	}
+	public void buildRoomsFromAnnot(){
+		getRoomCon().buildRoomsFromAnnot();
+	}
 }

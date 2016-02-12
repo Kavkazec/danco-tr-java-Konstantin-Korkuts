@@ -17,7 +17,7 @@ public class InReader {
 			i = sc.nextInt();
 			return i;
 		} catch (Exception e){
-			LOGGER.error("INPUT_ERROR");
+			LOGGER.error(e.getMessage(),e);
 			return 0;
 		}
 	}
@@ -25,8 +25,14 @@ public class InReader {
 	public String readStrin(){
 		String str;
 		Scanner sc = new Scanner(System.in);
-		str = sc.nextLine();
-		return str;
+		try{
+			str = sc.nextLine();
+			return str;
+		}
+		 catch (Exception e){
+			LOGGER.error(e.getMessage(),e);
+			return null;
+		}
 	}
 	
 	public Date readDate(){
@@ -36,10 +42,9 @@ public class InReader {
 			date = sdf.parse(sc.nextLine());
 			return date;
 		} catch (Exception e) {
-			LOGGER.error("INPUT_ERROR");
+			LOGGER.error(e.getMessage(),e);
 			return null;
 		}
-		
 	}
 	
 	public void print(String str){

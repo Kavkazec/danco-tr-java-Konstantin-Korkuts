@@ -35,8 +35,9 @@ public class PropertiesReader {
 
 	
 	public void setProperties(){
+		FileInputStream reader = null;
 		try {
-			FileInputStream reader = new FileInputStream("config.properties");
+			reader = new FileInputStream("config.properties");
 			Properties properties = new Properties();
 			properties.load(reader);
 			Boolean swith = Boolean.parseBoolean(properties.getProperty(SWITCH_KEY));
@@ -51,17 +52,23 @@ public class PropertiesReader {
 			util.setCsvPath(csvPath);
 			util.setAnnotPath(annotPath);
 			util.setServName(servName.split(ZAP));
-			reader.close();
 		} catch (FileNotFoundException e) {
-			logger.error("FILE_NOT_FOUND");
+			logger.error(e.getMessage(),e);
 		} catch (IOException e) {
-			logger.error("IOEXCEPTION");
+			logger.error(e.getMessage(),e);
+		} finally{
+			try {
+				reader.close();
+			} catch (IOException e) {
+				logger.error(e.getMessage(),e);
+			}
 		}
 	}
 	
 	public PropertiesUtil setPropery(){
+		FileInputStream reader = null;
 		try {
-			FileInputStream reader = new FileInputStream("config.properties");
+			reader = new FileInputStream("config.properties");
 			Properties properties = new Properties();
 			properties.load(reader);
 			Boolean swith = Boolean.parseBoolean(properties.getProperty(SWITCH_KEY));
@@ -76,11 +83,16 @@ public class PropertiesReader {
 			util.setCsvPath(csvPath);
 			util.setAnnotPath(annotPath);
 			util.setServName(servName.split(ZAP));
-			reader.close();
 		} catch (FileNotFoundException e) {
-			logger.error("FILE_NOT_FOUND");
+			logger.error(e.getMessage(),e);
 		} catch (IOException e) {
-			logger.error("IOEXCEPTION");
+			logger.error(e.getMessage(),e);
+		}finally{
+			try {
+				reader.close();
+			} catch (IOException e) {
+				logger.error(e.getMessage(),e);
+			}
 		}
 		return util;
 	}

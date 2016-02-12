@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.danco.training.annotation.ProcessAnnotation;
 import com.danco.training.comparator.FreeRoomCoastComparator;
 import com.danco.training.comparator.FreeRoomCopasityComparator;
 import com.danco.training.comparator.FreeRoomStarsComparator;
@@ -18,6 +19,7 @@ import com.danco.training.controller.api.IRoomService;
 import com.danco.training.entity.GuestModel;
 import com.danco.training.entity.RoomModel;
 import com.danco.training.properties.PropertiesReader;
+import com.danco.training.properties.init.annotation.InitRoomAnnotation;
 import com.danco.training.reader.ImportAndExport;
 import com.danco.training.storage.Hotel;
 
@@ -386,9 +388,16 @@ public class RoomService implements IRoomService{
 	public void importRooms(){
 		try{
 			PropertiesReader.getInstance().setProperties();
-			ImportAndExport.getInstance().readFromFileRooms(PropertiesReader.getInstance().getUtil().getCsvPath());
+			hotel.getRoom().setRooms(ImportAndExport.getInstance().readFromFileRooms(PropertiesReader.getInstance().getUtil().getCsvPath()));
 		}catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
+	}
+	public void buildRoomsFromAnnot(){
+		PropertiesReader.getInstance().setProperties();
+		ProcessAnnotation p = new ProcessAnnotation();
+		InitRoomAnnotation r = new InitRoomAnnotation();
+		p.procAnnotation(r);
+		hotel.getRoom().setRooms(r.soomList());;
 	}
 }

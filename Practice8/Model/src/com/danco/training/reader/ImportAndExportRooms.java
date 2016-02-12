@@ -56,8 +56,9 @@ public class ImportAndExportRooms {
 		List<String> list = new ArrayList<String>();
 		List<RoomModel> rooms = new ArrayList<RoomModel>();
 		String line = "";
+		BufferedReader bf = null;
 		try {
-			BufferedReader bf = new BufferedReader(new FileReader(path));
+			bf = new BufferedReader(new FileReader(path));
 			while((line = bf.readLine()) != null){
 				list.add(line);
 			}
@@ -78,11 +79,16 @@ public class ImportAndExportRooms {
 					}
 				}
 			}
-			bf.close();
 		}catch (FileNotFoundException e) {
 			LOGGER.error("FILE_NOT_FOUND_EXCPTION",e);
 		} catch (IOException e) {
 			LOGGER.error("IOEXCEPTION",e);
+		} finally{
+			try {
+				bf.close();
+			} catch (IOException e) {
+				LOGGER.error("IOEXCEPTION",e);
+			}
 		}
 		return rooms;
 	

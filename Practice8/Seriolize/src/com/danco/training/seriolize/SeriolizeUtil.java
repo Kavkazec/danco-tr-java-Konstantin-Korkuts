@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
 import com.danco.training.properties.PropertiesReader;
@@ -24,33 +25,50 @@ public class SeriolizeUtil {
 	
 	public void writeInFile(){
 		PropertiesReader.getInstance().setProperties();
-		FileOutputStream fos;
+		BasicConfigurator.configure();
+		FileOutputStream fos = null;
+		ObjectOutputStream oos = null;
 		try {
 			fos = new FileOutputStream(PropertiesReader.getInstance().getUtil().getPath());
-			ObjectOutputStream oos;
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(Hotel.getInstance());
 			oos.flush();
-			fos.close();
-			oos.close();
 		}  catch (IOException e) {
-			LOGGER.error("IOEXCEPRION",e);
+			LOGGER.error(e.getMessage(),e);
+		}finally{
+			try {
+				fos.close();
+				oos.close();
+			} catch (IOException e) {
+				LOGGER.error(e.getMessage(),e);
+			}
+			
 		}
 	}
 	
 	public void readFromFile() {
 		PropertiesReader.getInstance().setProperties();
+		BasicConfigurator.configure();
+		FileInputStream fis = null;
+		ObjectInputStream oin = null;
 		try {
-			FileInputStream fis = new FileInputStream(PropertiesReader.getInstance().getUtil().getPath());
-			ObjectInputStream oin = new ObjectInputStream(fis);
+			fis = new FileInputStream(PropertiesReader.getInstance().getUtil().getPath());
+			oin = new ObjectInputStream(fis);
 			Hotel hotel = (Hotel) oin.readObject();
 			Hotel.getInstance().setGuest(hotel.getGuest());
 			Hotel.getInstance().setRoom(hotel.getRoom());
 			Hotel.getInstance().setService(hotel.getService());
-			fis.close();
-			oin.close();
+			
 		} catch (ClassNotFoundException | IOException e) {
-			LOGGER.error("IOEXCEPRION_OR_CLASSNOTFOUND",e);
+			LOGGER.error(e.getMessage(),e);
+		}finally{
+			try {
+				fis.close();
+				oin.close();
+			} catch (IOException e) {
+				LOGGER.error(e.getMessage(),e);
+			}
+			
 		}
 
 	}

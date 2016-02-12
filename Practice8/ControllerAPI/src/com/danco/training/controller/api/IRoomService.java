@@ -29,4 +29,5 @@ public interface IRoomService {
 	public void cloneRoom(int number);
 	public void exportRooms();
 	public void importRooms();
+	public void buildRoomsFromAnnot();
 }

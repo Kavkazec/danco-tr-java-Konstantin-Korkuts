@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.danco.training.annotation.ProcessAnnotation;
 import com.danco.training.comparator.GuestDateComparator;
 import com.danco.training.comparator.GuestNameComparator;
 import com.danco.training.comparator.GuestServicesCoastComparator;
@@ -14,6 +15,7 @@ import com.danco.training.controller.api.IGuestService;
 import com.danco.training.entity.GuestModel;
 import com.danco.training.entity.ServiceModel;
 import com.danco.training.properties.PropertiesReader;
+import com.danco.training.properties.init.annotation.InitGuestAnnotation;
 import com.danco.training.reader.ImportAndExport;
 import com.danco.training.storage.Hotel;
 
@@ -199,7 +201,7 @@ public class GuestService implements IGuestService{
 	public void importGuests(){
 		try{
 			PropertiesReader.getInstance().setProperties();
-			ImportAndExport.getInstance().readFromFileGuests(PropertiesReader.getInstance().getUtil().getCsvPath());
+			hotel.getGuest().setGuests(ImportAndExport.getInstance().readFromFileGuests(PropertiesReader.getInstance().getUtil().getCsvPath()));
 		}catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
@@ -220,5 +222,12 @@ public class GuestService implements IGuestService{
 			logger.error(e.getMessage(), e);
 			return null;
 		}
+	}
+	public void buildGuestsFromAnnot(){
+		PropertiesReader.getInstance().setProperties();
+		ProcessAnnotation p = new ProcessAnnotation();
+		InitGuestAnnotation g = new InitGuestAnnotation();
+		p.procAnnotation(g);
+		hotel.getGuest().setGuests(g.guestList());
 	}
 }

@@ -54,8 +54,9 @@ public class ImportAndExportGuests {
 		List<String> list = new ArrayList<String>();
 		List<GuestModel> guests = new ArrayList<GuestModel>();
 		String line = "";
+		BufferedReader bf = null;
 		try {
-			BufferedReader bf = new BufferedReader(new FileReader(path));
+			bf = new BufferedReader(new FileReader(path));
 			while((line = bf.readLine()) != null){
 				list.add(line);
 			}
@@ -78,6 +79,13 @@ public class ImportAndExportGuests {
 			LOGGER.error("IOEXCEPTION",e);
 		} catch (ParseException e) {
 			LOGGER.error("PARSE_EXCEPTION",e);
+		}
+		finally{
+			try {
+				bf.close();
+			} catch (IOException e) {
+				LOGGER.error("IOEXCEPTION",e);
+			}
 		}
 		return guests;
 	

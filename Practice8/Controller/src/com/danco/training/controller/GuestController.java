@@ -1,5 +1,7 @@
 package com.danco.training.controller;
 
+import java.util.Collections;
+
 import com.danco.training.controller.api.IGuestService;
 import com.danco.training.controller.api.IServiceService;
 import com.danco.training.controller.utils.InGuest;
@@ -50,12 +52,14 @@ public class GuestController {
 	}
 	
 	public void addGuest(){
-		this.guestCon.addGuest(getInGuest().inputGuest());
+		synchronized (guestCon) {
+			this.guestCon.addGuest(getInGuest().inputGuest());
+		}
 	}
 	
 	public void deletGuest(){
 		getInReader().print(DETAILS_GUEST);
-		getPrinGuest().printGuests(this.guestCon.printGuest());
+		getPrinGuest().printGuests(Collections.synchronizedList(this.guestCon.printGuest()));
 		getInReader().print(LINE);
 		getInReader().print("Guest's name:");
 		String name = getInReader().readStrin();
@@ -64,13 +68,13 @@ public class GuestController {
 	
 	public void sortByNameGuests(){
 		getInReader().print(DETAILS_GUEST);
-		getPrinGuest().printGuests(this.guestCon.sortByNameGuests());
+		getPrinGuest().printGuests(Collections.synchronizedList(this.guestCon.sortByNameGuests()));
 		getInReader().print(LINE);
 	}
 	
 	public void sortByDateGuests(){
 		getInReader().print(DETAILS_GUEST);
-		getPrinGuest().printGuests(this.guestCon.sortByDateGuests());
+		getPrinGuest().printGuests(Collections.synchronizedList(this.guestCon.sortByDateGuests()));
 		getInReader().print(LINE);
 	}
 	
@@ -80,49 +84,55 @@ public class GuestController {
 	}
 	
 	public void showGuestsServicesSortedByCoast(){
-		getInReader().print(DETAILS_GUEST);
-		getPrinGuest().printGuests(this.guestCon.printGuest());
-		getInReader().print(LINE);
-		getInReader().print("Guest's name:");
-		String name = getInReader().readStrin();
-		if(!this.guestCon.showGuestsServicesSortedByCoast(name).isEmpty()){
-			getPrintService().printServices(this.guestCon.showGuestsServicesSortedByCoast(name));
-		} else {
-			getInReader().print("There are no services!");
+		synchronized (guestCon) {
+			getInReader().print(DETAILS_GUEST);
+			getPrinGuest().printGuests(this.guestCon.printGuest());
+			getInReader().print(LINE);
+			getInReader().print("Guest's name:");
+			String name = getInReader().readStrin();
+			if(!this.guestCon.showGuestsServicesSortedByCoast(name).isEmpty()){
+				getPrintService().printServices(this.guestCon.showGuestsServicesSortedByCoast(name));
+			} else {
+				getInReader().print("There are no services!");
+			}
 		}
+		
 	}
 	
 	public void showGuestsServicesSortedByDate(){
-		getInReader().print(DETAILS_GUEST);
-		getPrinGuest().printGuests(this.guestCon.printGuest());
-		getInReader().print(LINE);
-		getInReader().print("Guest's name:");
-		String name = getInReader().readStrin();
-		if(!this.guestCon.showGuestsServicesSortedByDate(name).isEmpty()){
-			getPrintService().printServices(this.guestCon.showGuestsServicesSortedByDate(name));
-		} else {
-			getInReader().print("There are no services!");
+		synchronized (guestCon) {
+			getInReader().print(DETAILS_GUEST);
+			getPrinGuest().printGuests(this.guestCon.printGuest());
+			getInReader().print(LINE);
+			getInReader().print("Guest's name:");
+			String name = getInReader().readStrin();
+			if(!this.guestCon.showGuestsServicesSortedByDate(name).isEmpty()){
+				getPrintService().printServices(this.guestCon.showGuestsServicesSortedByDate(name));
+			} else {
+				getInReader().print("There are no services!");
+			}
 		}
 	}
 	
 	public void addServiceToGuest(){
-		getInReader().print(DETAILS_GUEST);
-		getPrinGuest().printGuests(this.guestCon.printGuest());
-		getInReader().print(LINE);
-		getInReader().print(DETAILS_SERVICE);
-		getPrintService().printServices(this.serviceCon.printService());
-		getInReader().print(LINE);
-		getInReader().print("Guest's name:");
-		String guest = getInReader().readStrin();
-		getInReader().print("Service name:");
-		String service = getInReader().readStrin();
-		this.guestCon.addServiceToGuest(guest, service);
-		
+		synchronized (guestCon) {
+			getInReader().print(DETAILS_GUEST);
+			getPrinGuest().printGuests(this.guestCon.printGuest());
+			getInReader().print(LINE);
+			getInReader().print(DETAILS_SERVICE);
+			getPrintService().printServices(this.serviceCon.printService());
+			getInReader().print(LINE);
+			getInReader().print("Guest's name:");
+			String guest = getInReader().readStrin();
+			getInReader().print("Service name:");
+			String service = getInReader().readStrin();
+			this.guestCon.addServiceToGuest(guest, service);
+		}
 	}
 	
 	public void printGuest(){
 		getInReader().print(DETAILS_GUEST);
-		getPrinGuest().printGuests(this.guestCon.printGuest());
+		getPrinGuest().printGuests(Collections.synchronizedList(this.guestCon.printGuest()));
 		getInReader().print(LINE);
 	}
 	
@@ -132,5 +142,8 @@ public class GuestController {
 	
 	public void importGuests(){
 		this.guestCon.importGuests();
+	}
+	public void buildGuestsFromAnnot(){
+		this.guestCon.buildGuestsFromAnnot();
 	}
 }

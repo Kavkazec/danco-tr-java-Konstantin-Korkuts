@@ -11,4 +11,5 @@ public interface IServiceService {
 	public List<ServiceModel> printService();
 	public void exportServices();
 	public void importServices();
+	public void buildServicesFromAnnot();
 }

@@ -1,6 +1,7 @@
 package com.danco.training.controller;
 
 
+import java.util.Collections;
 import java.util.Date;
 
 import com.danco.training.controller.api.IGuestService;
@@ -58,12 +59,14 @@ public class RoomController {
 	}
 	
 	public void addRoom(){
-		this.roomCon.addRoom(getInRoom().inputRoom());
+		synchronized (roomCon) {
+			this.roomCon.addRoom(getInRoom().inputRoom());
+		}
 	}
 	
 	public void deleteRoom(){
 		getInReader().print(DETAILS_ROOM);
-		getPrintRoom().printRooms(this.roomCon.printRoom());
+		getPrintRoom().printRooms(Collections.synchronizedList(this.roomCon.printRoom()));
 		getInReader().print(LINE);
 		getInReader().print("Room's number:");
 		int number = getInReader().readInt();
@@ -71,19 +74,21 @@ public class RoomController {
 	}
 	
 	public void deleteGuestFromRoom(){
-		getInReader().print(DETAILS_GUEST);
-		for(int i = 0; i < this.roomCon.printRoom().size(); i++){
-			getPrinGuest().printGuests(this.roomCon.printRoom().get(i).getGuests());
+		synchronized (roomCon) {
+			getInReader().print(DETAILS_GUEST);
+			for(int i = 0; i < this.roomCon.printRoom().size(); i++){
+				getPrinGuest().printGuests(this.roomCon.printRoom().get(i).getGuests());
+			}
+			getInReader().print(LINE);
+			getInReader().print("Guest's name:");
+			String name = getInReader().readStrin();
+			this.roomCon.deleteGuestFromRoom(name);
 		}
-		getInReader().print(LINE);
-		getInReader().print("Guest's name:");
-		String name = getInReader().readStrin();
-		this.roomCon.deleteGuestFromRoom(name);
 	}
 	
 	public void deleteAllGuestsFromRoom(){
 		getInReader().print(DETAILS_ROOM);
-		getPrintRoom().printRooms(this.roomCon.printRoom());
+		getPrintRoom().printRooms(Collections.synchronizedList(this.roomCon.printRoom()));
 		getInReader().print(LINE);
 		getInReader().print("Room's number:");
 		int number = getInReader().readInt();
@@ -91,14 +96,16 @@ public class RoomController {
 	}
 	
 	public void changeRoomsCoast(){
-		getInReader().print(DETAILS_ROOM);
-		getPrintRoom().printRooms(this.roomCon.printRoom());
-		getInReader().print(LINE);
-		getInReader().print("Room's number:");
-		int number = getInReader().readInt();
-		getInReader().print("Coast:");
-		int coast = getInReader().readInt();
-		this.roomCon.changeRoomsCoast(number, coast);
+		synchronized (roomCon) {
+			getInReader().print(DETAILS_ROOM);
+			getPrintRoom().printRooms(this.roomCon.printRoom());
+			getInReader().print(LINE);
+			getInReader().print("Room's number:");
+			int number = getInReader().readInt();
+			getInReader().print("Coast:");
+			int coast = getInReader().readInt();
+			this.roomCon.changeRoomsCoast(number, coast);
+		}
 	}
 	
 	public void changeRoomsStatusRepair(){
@@ -107,37 +114,37 @@ public class RoomController {
 	
 	public void sortByCoastFreeRoom(){
 		getInReader().print(DETAILS_ROOM);
-		getPrintRoom().printRooms(this.roomCon.sortByCoastFreeRoom());
+		getPrintRoom().printRooms(Collections.synchronizedList(this.roomCon.sortByCoastFreeRoom()));
 		getInReader().print(LINE);
 	}
 	
 	public void sortByCopasityFreeRoom(){
 		getInReader().print(DETAILS_ROOM);
-		getPrintRoom().printRooms(this.roomCon.sortByCopasityFreeRoom());
+		getPrintRoom().printRooms(Collections.synchronizedList(this.roomCon.sortByCopasityFreeRoom()));
 		getInReader().print(LINE);
 	}
 	
 	public void sortByStarsFreeRoom(){
 		getInReader().print(DETAILS_ROOM);
-		getPrintRoom().printRooms(this.roomCon.sortByStarsFreeRoom());
+		getPrintRoom().printRooms(Collections.synchronizedList(this.roomCon.sortByStarsFreeRoom()));
 		getInReader().print(LINE);
 	}
 	
 	public void sortByCoastRoom(){
 		getInReader().print(DETAILS_ROOM);
-		getPrintRoom().printRooms(this.roomCon.sortByCoastRoom());
+		getPrintRoom().printRooms(Collections.synchronizedList(this.roomCon.sortByCoastRoom()));
 		getInReader().print(LINE);
 	}
 	
 	public void sortByCopasityRoom(){
 		getInReader().print(DETAILS_ROOM);
-		getPrintRoom().printRooms(this.roomCon.sortByCopasityRoom());
+		getPrintRoom().printRooms(Collections.synchronizedList(this.roomCon.sortByCopasityRoom()));
 		getInReader().print(LINE);
 	}
 	
 	public void sortByStarsRoom(){
 		getInReader().print(DETAILS_ROOM);
-		getPrintRoom().printRooms(this.roomCon.sortByStarsRoom());
+		getPrintRoom().printRooms(Collections.synchronizedList(this.roomCon.sortByStarsRoom()));
 		getInReader().print(LINE);
 	}
 	
@@ -149,12 +156,12 @@ public class RoomController {
 	public void showChekOutDate(){
 		getInReader().print("Input date:");
 		Date dateOfArr = getInReader().readDate();
-		getPrintRoom().printRooms(this.roomCon.showChekOutDate(dateOfArr));
+		getPrintRoom().printRooms(Collections.synchronizedList(this.roomCon.showChekOutDate(dateOfArr)));
 	}
 	
 	public void showRoomDetails(){
 		getInReader().print(DETAILS_ROOM);
-		getPrintRoom().printRooms(this.roomCon.printRoom());
+		getPrintRoom().printRooms(Collections.synchronizedList(this.roomCon.printRoom()));
 		getInReader().print(LINE);
 		getInReader().print("Room's number:");
 		int number = getInReader().readInt();
@@ -162,48 +169,52 @@ public class RoomController {
 	}
 	
 	public void showPricePerRoom(){
-		getInReader().print(DETAILS_GUEST);
-		for(int i = 0; i < this.roomCon.printRoom().size(); i++){
-			getPrinGuest().printGuests(this.roomCon.printRoom().get(i).getGuests());
+		synchronized (roomCon) {
+			getInReader().print(DETAILS_GUEST);
+			for(int i = 0; i < this.roomCon.printRoom().size(); i++){
+				getPrinGuest().printGuests(this.roomCon.printRoom().get(i).getGuests());
+			}
+			getInReader().print(LINE);
+			getInReader().print("Guest's name:");
+			String name = getInReader().readStrin();
+			getInReader().print(this.roomCon.showPricePerRoom(name));
 		}
-		getInReader().print(LINE);
-		getInReader().print("Guest's name:");
-		String name = getInReader().readStrin();
-		getInReader().print(this.roomCon.showPricePerRoom(name));
 	}
 	
 	public void showLastThreeGuests(){
 		getInReader().print(DETAILS_ROOM);
-		getPrintRoom().printRooms(this.roomCon.printRoom());
+		getPrintRoom().printRooms(Collections.synchronizedList(this.roomCon.printRoom()));
 		getInReader().print(LINE);
 		getInReader().print("Room's number:");
 		int number = getInReader().readInt();
-		getPrinGuest().printGuests(this.roomCon.showLastThreeGuests(number));
+		getPrinGuest().printGuests(Collections.synchronizedList(this.roomCon.showLastThreeGuests(number)));
 	}
 	
 	public void addGuestInRoom(){
-		getInReader().print(DETAILS_ROOM);
-		getPrintRoom().printRooms(this.roomCon.printRoom());
-		getInReader().print(LINE);
-		getInReader().print(DETAILS_GUEST);
-		getPrinGuest().printGuests(this.guestCon.printGuest());
-		getInReader().print(LINE);
-		getInReader().print("Room's number:");
-		int number = getInReader().readInt();
-		getInReader().print("Guest's name:");
-		String name = getInReader().readStrin();
-		this.roomCon.addGuestInRoom(number, name);
+		synchronized (roomCon) {
+			getInReader().print(DETAILS_ROOM);
+			getPrintRoom().printRooms(this.roomCon.printRoom());
+			getInReader().print(LINE);
+			getInReader().print(DETAILS_GUEST);
+			getPrinGuest().printGuests(this.guestCon.printGuest());
+			getInReader().print(LINE);
+			getInReader().print("Room's number:");
+			int number = getInReader().readInt();
+			getInReader().print("Guest's name:");
+			String name = getInReader().readStrin();
+			this.roomCon.addGuestInRoom(number, name);
+		}
 	}
 	
 	public void printRoom(){
 		getInReader().print(DETAILS_ROOM);
-		getPrintRoom().printRooms(this.roomCon.printRoom());
+		getPrintRoom().printRooms(Collections.synchronizedList(this.roomCon.printRoom()));
 		getInReader().print(LINE);
 	}
 	
 	public void cloneRoom(){
 		getInReader().print(DETAILS_ROOM);
-		getPrintRoom().printRooms(this.roomCon.printRoom());
+		getPrintRoom().printRooms(Collections.synchronizedList(this.roomCon.printRoom()));
 		getInReader().print(LINE);
 		getInReader().print("Room's number:");
 		int number = getInReader().readInt();
@@ -216,5 +227,8 @@ public class RoomController {
 	
 	public void importRooms(){
 		this.roomCon.importRooms();
+	}
+	public void buildRoomsFromAnnot(){
+		this.roomCon.buildRoomsFromAnnot();
 	}
 }

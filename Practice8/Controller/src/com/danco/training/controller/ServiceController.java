@@ -1,5 +1,7 @@
 package com.danco.training.controller;
 
+import java.util.Collections;
+
 import com.danco.training.controller.api.IServiceService;
 import com.danco.training.controller.utils.InReader;
 import com.danco.training.controller.utils.InService;
@@ -37,12 +39,14 @@ public class ServiceController {
 	}
 	
 	public void addService(){
-		this.serviceCon.addService(getInService().inputService());
+		synchronized (serviceCon) {
+			this.serviceCon.addService(getInService().inputService());
+		}
 	}
 	
 	public void deleteService(){
 		getInReader().print(DETAILS_SERVICE);
-		getPrintService().printServices(this.serviceCon.printService());
+		getPrintService().printServices(Collections.synchronizedList(this.serviceCon.printService()));
 		getInReader().print(LINE);
 		getInReader().print("Service name:");
 		String name = getInReader().readStrin();
@@ -50,19 +54,21 @@ public class ServiceController {
 	}
 	
 	public void changeServicesCoast(){
-		getInReader().print(DETAILS_SERVICE);
-		getPrintService().printServices(this.serviceCon.printService());
-		getInReader().print(LINE);
-		getInReader().print("Service name:");
-		String name = getInReader().readStrin();
-		getInReader().print("Coast:");
-		int coast = getInReader().readInt();
-		this.serviceCon.changeServicesCoast(name, coast);
+		synchronized (serviceCon) {
+			getInReader().print(DETAILS_SERVICE);
+			getPrintService().printServices(this.serviceCon.printService());
+			getInReader().print(LINE);
+			getInReader().print("Service name:");
+			String name = getInReader().readStrin();
+			getInReader().print("Coast:");
+			int coast = getInReader().readInt();
+			this.serviceCon.changeServicesCoast(name, coast);
+		}
 	}
 	
 	public void printService(){
 		getInReader().print(DETAILS_SERVICE);
-		getPrintService().printServices(this.serviceCon.printService());
+		getPrintService().printServices(Collections.synchronizedList(this.serviceCon.printService()));
 		getInReader().print(LINE);
 	}
 	
@@ -71,5 +77,9 @@ public class ServiceController {
 	}
 	public void importServices(){
 		this.serviceCon.importServices();
+	}
+	
+	public void buildServicesFromAnnot(){
+		this.serviceCon.buildServicesFromAnnot();
 	}
 }

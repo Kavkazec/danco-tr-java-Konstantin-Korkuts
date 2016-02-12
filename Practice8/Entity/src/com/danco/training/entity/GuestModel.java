@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.danco.training.annotation.ConfigPropery;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -16,7 +15,6 @@ public class GuestModel implements Serializable {
 	private static final long serialVersionUID = -4853470731812061052L;
 
 	/** The name. */
-	@ConfigPropery(cPath = "config.annot", param = "GuestModel.name", type = "String")
 	private String name;
 	
 	public void setName(String name) {

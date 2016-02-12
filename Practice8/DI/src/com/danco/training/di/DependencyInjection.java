@@ -3,7 +3,6 @@ package com.danco.training.di;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
 public class DependencyInjection {
@@ -24,7 +23,6 @@ public class DependencyInjection {
 	private Map<String, Object> map = new HashMap<String, Object>();
 
 	public Object getClassInstance(Class<?> clazz) {
-		BasicConfigurator.configure();
 		String[] className = DIConfig.getInstance().getClassName();
 		Object ob = null;
 		for (int i = 0; i < className.length; i++) {

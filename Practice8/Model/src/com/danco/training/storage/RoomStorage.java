@@ -16,6 +16,16 @@ public class RoomStorage implements Serializable{
 	/** The rooms. */
 	private List<RoomModel> rooms;
 	
+	public void setRooms(List<RoomModel> rooms) {
+		for(int i = 0; i < rooms.size(); i++){
+			for(int j = 0; j < getListOfNumbers().size(); j++){
+				if(rooms.get(i).getNumber() != getListOfNumbers().get(j).getNumber()){
+					getListOfNumbers().add(rooms.get(i));
+				}
+			}
+		}
+	}
+
 	/**
 	 * Adds the number.
 	 *

@@ -1,6 +1,7 @@
 package com.danco.training.client;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -22,15 +23,26 @@ public class Client {
 	public void start(){
 		BasicConfigurator.configure();
 		ObjectOutputStream oos = null;
+		ObjectInputStream ois = null;
+		Socket socket = null;
 		try {
-			MainController m = new MainController();
-			m.run();
-			Socket socket = new Socket(servIP, servPort);
+			socket = new Socket(servIP, servPort);
 			oos =  new ObjectOutputStream(socket.getOutputStream());
+			ois = new ObjectInputStream(socket.getInputStream());
+			MainController con = new MainController();
 		} catch (UnknownHostException e) {
-			LOGGER.error("UnknownHostException",e);
+			LOGGER.error(e.getMessage(),e);
 		} catch (IOException e) {
-			LOGGER.error("IOExeption",e);
+			LOGGER.error(e.getMessage(),e);
+		}finally {
+			try {
+				oos.close();
+				ois.close();
+				socket.close();
+			} catch (IOException e) {
+				LOGGER.error(e.getMessage(),e);
+			}
+			
 		}
 	}
 }

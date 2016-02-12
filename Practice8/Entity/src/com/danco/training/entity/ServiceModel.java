@@ -3,7 +3,6 @@ package com.danco.training.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.danco.training.annotation.ConfigPropery;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -17,7 +16,6 @@ public class ServiceModel implements Serializable{
 	private static final long serialVersionUID = 3722992019180708232L;
 
 	/** The name. */
-	@ConfigPropery(cPath = "config.annot", param = "ServiceModel.name", type = "String")
 	private String name;
 
 	public void setName(String name) {
@@ -25,11 +23,9 @@ public class ServiceModel implements Serializable{
 	}
 
 	/** The coast. */
-	@ConfigPropery(cPath = "config.annot", param = "ServiceModel.coast", type = "int")
 	private int coast;
 
 	/** The date. */
-	@ConfigPropery(cPath = "config.annot", param = "ServiceModel.date", type = "Date")
 	private Date date;
 
 	/**

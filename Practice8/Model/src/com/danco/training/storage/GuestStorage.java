@@ -39,6 +39,16 @@ public class GuestStorage  implements Serializable{
 		getGuests().add(guest);
 	}
 	
+	public void setGuests(List<GuestModel> guests) {
+		for(int i = 0; i < guests.size(); i++){
+			for(int j = 0; j < getGuests().size(); j++){
+				if(!guests.get(i).getName().equals(getGuests().get(j).getName())){
+					getGuests().add(guests.get(i));
+				}
+			}
+		}
+	}
+
 	/**
 	 * Delete guest.
 	 *

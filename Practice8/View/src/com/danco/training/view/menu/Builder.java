@@ -3,6 +3,7 @@ package com.danco.training.view.menu;
 import com.danco.training.properties.PropertiesReader;
 import com.danco.training.view.action.guest.AddGuestAction;
 import com.danco.training.view.action.guest.AddServiceToGuestAction;
+import com.danco.training.view.action.guest.BuildGuestsFromAnnotAction;
 import com.danco.training.view.action.guest.DeleteGuestAction;
 import com.danco.training.view.action.guest.ExportGuestAction;
 import com.danco.training.view.action.guest.ImportGuestsAction;
@@ -14,6 +15,7 @@ import com.danco.training.view.action.guest.SortByDateGuestsAction;
 import com.danco.training.view.action.guest.SortByNameGuestsAction;
 import com.danco.training.view.action.room.AddGuestInRoomAction;
 import com.danco.training.view.action.room.AddRoomAction;
+import com.danco.training.view.action.room.BuildRoomsFromAnnotAction;
 import com.danco.training.view.action.room.ChangeRoomsCoastAction;
 import com.danco.training.view.action.room.ChangeRoomsStatusRepairAction;
 import com.danco.training.view.action.room.CloneRoomAction;
@@ -35,6 +37,7 @@ import com.danco.training.view.action.room.SortByCapacityRoomAction;
 import com.danco.training.view.action.room.SortByStarsFreeRoomAction;
 import com.danco.training.view.action.room.SortByStarsRoomAction;
 import com.danco.training.view.action.service.AddServiceAction;
+import com.danco.training.view.action.service.BuildServicesFromAnnotAction;
 import com.danco.training.view.action.service.ChangeServicesCoastAction;
 import com.danco.training.view.action.service.DeleteServiceAction;
 import com.danco.training.view.action.service.ExportServicesAction;
@@ -70,8 +73,9 @@ public class Builder {
 		
 		guestMenuOther.addMenuItem(new MenuItem(new AddServiceToGuestAction(),"0-> Add service to guest", guestMenuOther));
 		guestMenuOther.addMenuItem(new MenuItem(new ShowNumberOfGuestsAction(),"1-> Show number of guests", guestMenuOther));
-		guestMenuOther.addMenuItem(new MenuItem(null,"2-> Sorting", guestMenuOtherSort));
-		guestMenuOther.addMenuItem(new MenuItem(null,"3-> Back", guestMenu));
+		guestMenuOther.addMenuItem(new MenuItem(new BuildGuestsFromAnnotAction(),"2-> Add guests from annotation", guestMenuOther));
+		guestMenuOther.addMenuItem(new MenuItem(null,"3-> Sorting", guestMenuOtherSort));
+		guestMenuOther.addMenuItem(new MenuItem(null,"4-> Back", guestMenu));
 		
 		guestMenuOtherSort.addMenuItem(new MenuItem(new SortByNameGuestsAction(),"0-> Sorting guests by name", guestMenuOtherSort));
 		guestMenuOtherSort.addMenuItem(new MenuItem(new SortByDateGuestsAction(),"1-> Sorting guests by date of arrival", guestMenuOtherSort));
@@ -96,10 +100,11 @@ public class Builder {
 		}
 		roomMenuOther.addMenuItem(new MenuItem(new DeleteGuestFromRoomAction(), "3-> Delete guest from room", roomMenuOther));
 		roomMenuOther.addMenuItem(new MenuItem(new DeleteAllGuestsFromRoomAction(), "4-> Delete all guest from room", roomMenuOther));
-		roomMenuOther.addMenuItem(new MenuItem(null, "5-> Show ...", roomMenuOtherShow));
-		roomMenuOther.addMenuItem(new MenuItem(null, "6-> Sorting ...", roomMenuOtherSort));
-		roomMenuOther.addMenuItem(new MenuItem(new CloneRoomAction(), "7-> Cloning", roomMenuOther));
-		roomMenuOther.addMenuItem(new MenuItem(null, "8-> Back", roomMenu));
+		roomMenuOther.addMenuItem(new MenuItem(new BuildRoomsFromAnnotAction(), "5-> Add rooms from annotation", roomMenuOther));
+		roomMenuOther.addMenuItem(new MenuItem(null, "6-> Show ...", roomMenuOtherShow));
+		roomMenuOther.addMenuItem(new MenuItem(null, "7-> Sorting ...", roomMenuOtherSort));
+		roomMenuOther.addMenuItem(new MenuItem(new CloneRoomAction(), "8-> Cloning", roomMenuOther));
+		roomMenuOther.addMenuItem(new MenuItem(null, "9-> Back", roomMenu));
 		
 		roomMenuOtherShow.addMenuItem(new MenuItem(new ShowChekOutDateAction(), "0-> Chek out date", roomMenuOtherShow));
 		roomMenuOtherShow.addMenuItem(new MenuItem(new ShowLastThreeGuestsAction(), "1-> Last three guests", roomMenuOtherShow));
@@ -125,7 +130,8 @@ public class Builder {
 		serviceMenu.addMenuItem(new MenuItem(null, "6 -> Back", mainMenu));
 		
 		serviceMenuOther.addMenuItem(new MenuItem(new ChangeServicesCoastAction(), "0-> Change service's coast", serviceMenuOther));
-		serviceMenuOther.addMenuItem(new MenuItem(null, "1-> Back", serviceMenu));
+		serviceMenuOther.addMenuItem(new MenuItem(new BuildServicesFromAnnotAction(), "1-> Add services from annotation", serviceMenuOther));
+		serviceMenuOther.addMenuItem(new MenuItem(null, "2-> Back", serviceMenu));
 	}
 	
 	public Menu getFirstMenu(){

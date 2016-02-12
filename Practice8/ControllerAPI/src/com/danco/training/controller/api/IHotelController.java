@@ -40,4 +40,7 @@ public interface IHotelController {
 	public void importServices();
 	public void importRooms();
 	public void importGuests();
+	public void buildServicesFromAnnot();
+	public void buildGuestsFromAnnot();
+	public void buildRoomsFromAnnot();
 }

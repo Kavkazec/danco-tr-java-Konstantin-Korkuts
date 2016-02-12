@@ -48,8 +48,9 @@ public class ImportAndExportServices {
 		List<String> list = new ArrayList<String>();
 		List<ServiceModel> services = new ArrayList<ServiceModel>();
 		String line = "";
+		BufferedReader bf = null;
 		try {
-			BufferedReader bf = new BufferedReader(new FileReader(path));
+			bf = new BufferedReader(new FileReader(path));
 			while((line = bf.readLine()) != null){
 				list.add(line);
 			}
@@ -64,27 +65,29 @@ public class ImportAndExportServices {
 					}
 				}
 			}
-			bf.close();
+			
 		}  catch (FileNotFoundException e) {
 			LOGGER.error("FILE_NOT_FOUND_EXCPTION",e);
 		} catch (IOException e) {
 			LOGGER.error("IOEXCEPTION",e);
+		} finally{
+			try {
+				bf.close();
+			} catch (IOException e) {
+				LOGGER.error("IOEXCEPTION",e);
+			}
 		}
 		return services;
 	}
 	
 	public boolean equalID(String name, List<ServiceModel> list){
-		ServiceModel sm = null;
+		boolean b = false;
 		for(ServiceModel model: list){
 			if(model.getName().equals(name)){
-				sm = model;
+				b = true;
 				break;
 			}
 		}
-		if(sm == null){
-			return true;
-		}
-		return false;
-		
+		return b;
 	}
 }
