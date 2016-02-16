@@ -1,16 +1,39 @@
 package com.danco.training.view.action.guest;
 
-import com.danco.training.controller.api.IHotelController;
-import com.danco.training.di.DependencyInjection;
+import java.util.InputMismatchException;
+
+import org.apache.log4j.Logger;
+
+import com.danco.training.server.Transmission;
 import com.danco.training.view.action.IAction;
+import com.danco.training.view.util.InGuest;
+import com.danco.training.view.util.InService;
 
 public class AddServiceToGuestAction implements IAction{
+	private InGuest guest;
+	private InService service;
+	@Override
+	public Transmission sendCommand() {
+		Transmission trans = null;
+		try {
+			guest = new InGuest();
+			service = new InService();
+			
+			Object[] args = {guest.inputGuest()};
+			String methodName = "addGuest";
+			trans = new Transmission(methodName, args);
 
-	private IHotelController hotel  = (IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class);
+		} catch (InputMismatchException e) {
+			Logger logger = Logger.getLogger(AddGuestAction.class);
+			logger.error("Input mismatch!");
+		}
+		return trans;
+	}
 
 	@Override
-	public void execute() {
-		hotel.addServiceToGuest();
+	public void answer(Object answerFromServer) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

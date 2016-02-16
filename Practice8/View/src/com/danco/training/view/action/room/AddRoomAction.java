@@ -1,16 +1,31 @@
 package com.danco.training.view.action.room;
 
-import com.danco.training.controller.api.IHotelController;
-import com.danco.training.di.DependencyInjection;
+import java.util.InputMismatchException;
+
+import org.apache.log4j.Logger;
+
+import com.danco.training.server.Transmission;
 import com.danco.training.view.action.IAction;
+import com.danco.training.view.util.InRoom;
 
 public class AddRoomAction implements IAction{
+	private final Logger logger = Logger.getLogger(AddRoomAction.class);
+	@Override
+	public Transmission sendCommand() {
+		Transmission trans = null;
+		try {
+			Object[] args = {InRoom.inputRoom()};
+			String methodName = "addRoom";
+			trans = new Transmission(methodName, args);
 
-	private IHotelController hotel  = (IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class);
+		} catch (InputMismatchException e) {
+			logger.error(e.getMessage(),e);
+		}
+		return trans;
+	}
 
 	@Override
-	public void execute() {
-		hotel.addRoom();
+	public void answer(Object answerFromServer) {
 	}
 
 }

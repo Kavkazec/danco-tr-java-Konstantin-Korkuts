@@ -4,45 +4,33 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
 import com.danco.training.view.menu.MainController;
 
 public class Client {
-	private String servIP;
-	private int servPort;
-	private static final Logger LOGGER = Logger.getLogger(Client.class);
-	public Client(String servIP, int servPort){
-		this.servIP = servIP;
-		this.servPort = servPort;
+
+	private String serverIP;
+	private int serverPort;
+	private MainController menuController;
+	private Logger logger = Logger.getLogger(Client.class);
+
+	public Client(String serverIP, int serverPort) {
+		this.serverIP = serverIP;
+		this.serverPort = serverPort;
 	}
-	
-	public void start(){
-		BasicConfigurator.configure();
-		ObjectOutputStream oos = null;
-		ObjectInputStream ois = null;
-		Socket socket = null;
-		try {
-			socket = new Socket(servIP, servPort);
-			oos =  new ObjectOutputStream(socket.getOutputStream());
-			ois = new ObjectInputStream(socket.getInputStream());
-			MainController con = new MainController();
-		} catch (UnknownHostException e) {
-			LOGGER.error(e.getMessage(),e);
+
+	public void start() {
+		try (Socket fromServer = new Socket(serverIP, serverPort);
+				ObjectOutputStream out = new ObjectOutputStream(fromServer.getOutputStream());
+				ObjectInputStream in = new ObjectInputStream(fromServer.getInputStream())){
+					menuController = new MainController();
+					while(menuController.getExitFlag() != true) {
+						menuController.run(out, in);
+					}
 		} catch (IOException e) {
-			LOGGER.error(e.getMessage(),e);
-		}finally {
-			try {
-				oos.close();
-				ois.close();
-				socket.close();
-			} catch (IOException e) {
-				LOGGER.error(e.getMessage(),e);
-			}
-			
+			logger.error(e.getMessage(), e);
 		}
 	}
 }

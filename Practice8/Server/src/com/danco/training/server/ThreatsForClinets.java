@@ -9,18 +9,18 @@ import org.apache.log4j.Logger;
 
 import com.danco.training.controller.api.IHotelController;
 
-public class ReadAndWriteThread extends Thread{
-	private static final Logger LOGGER = Logger.getLogger(ReadAndWriteThread.class);
+public class ThreatsForClinets extends Thread{
+	private Logger logger = Logger.getLogger(ThreatsForClinets.class);
 	private Socket fromClient;
 	private IHotelController hotelController;
-
+	private DataProcessing processor;
 	private ObjectOutputStream oos;
 	private ObjectInputStream ois;
 
-	public ReadAndWriteThread(Socket fromClient, IHotelController hotelController) {
+	public ThreatsForClinets(Socket fromClient, IHotelController hotelController) {
 		this.fromClient = fromClient;
-		this.setHotelController(hotelController);
-
+		this.hotelController = hotelController;
+		this.processor = new DataProcessing(hotelController);
 	}
 
 	@Override
@@ -31,26 +31,33 @@ public class ReadAndWriteThread extends Thread{
 			Object input;
 			Object output;
 			while ((input = ois.readObject()) != null) {
-
+				output = processor.executeCommand(input);
+				if (output == "Exit") {
+					break;
+				}
+				if (output == "EMPTY") {
+					oos.reset();
+					oos.writeObject(null);
+					oos.flush();
+				}
+				if (output != null) {
+					oos.reset();
+					oos.writeObject(output);
+					oos.flush();
+				}
 			}
-
 		} catch (IOException e) {
-			LOGGER.error(e.getMessage(),e);
-		} catch (ClassNotFoundException e) {	
-			LOGGER.error(e.getMessage(),e);
+			logger.error(e.getMessage(), e);
+		} catch (ClassNotFoundException e) {
+			logger.error(e.getMessage(), e);
 		} finally {
 			try {
 				oos.close();
 				ois.close();
 				fromClient.close();
 			} catch (IOException e) {
-				LOGGER.error(e.getMessage(),e);
+				logger.error(e.getMessage(), e);
 			}
 		}
 	}
-
-	public void setHotelController(IHotelController hotelController) {
-		this.hotelController = hotelController;
-	}
-
 }

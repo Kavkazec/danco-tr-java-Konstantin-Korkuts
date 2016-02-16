@@ -1,85 +1,43 @@
 package com.danco.training.controller;
 
 import java.util.Collections;
+import java.util.List;
 
 import com.danco.training.controller.api.IServiceService;
-import com.danco.training.controller.utils.InReader;
-import com.danco.training.controller.utils.InService;
-import com.danco.training.controller.utils.PrintService;
+import com.danco.training.entity.ServiceModel;
 
 public class ServiceController {
-	private InReader inReader;
-	private InService inService;
-	private static final String DETAILS_SERVICE = "name ; coast ;";
-	private static final String LINE = "-------------------------------------------";
-	private PrintService printService;
 	private IServiceService serviceCon;
 	
 	
 	public ServiceController(IServiceService serviceCon){
 		this.serviceCon = serviceCon;
 	}
-	public PrintService getPrintService() {
-		if(printService == null){
-			printService = new PrintService();
-		}
-		return printService;
-	}
-	public InReader getInReader() {
-		if(inReader == null){
-			inReader = new InReader();
-		}
-		return inReader;
-	}
-	public InService getInService() {
-		if(inService == null){
-			inService = new InService();
-		}
-		return inService;
+	
+	public void addService(ServiceModel service){
+		this.serviceCon.addService(service);
 	}
 	
-	public void addService(){
-		synchronized (serviceCon) {
-			this.serviceCon.addService(getInService().inputService());
-		}
-	}
-	
-	public void deleteService(){
-		getInReader().print(DETAILS_SERVICE);
-		getPrintService().printServices(Collections.synchronizedList(this.serviceCon.printService()));
-		getInReader().print(LINE);
-		getInReader().print("Service name:");
-		String name = getInReader().readStrin();
+	public void deleteService(String name){
 		this.serviceCon.deleteService(name);
 	}
 	
-	public void changeServicesCoast(){
-		synchronized (serviceCon) {
-			getInReader().print(DETAILS_SERVICE);
-			getPrintService().printServices(this.serviceCon.printService());
-			getInReader().print(LINE);
-			getInReader().print("Service name:");
-			String name = getInReader().readStrin();
-			getInReader().print("Coast:");
-			int coast = getInReader().readInt();
-			this.serviceCon.changeServicesCoast(name, coast);
-		}
+	public void changeServicesCoast(String name, int coast){
+		this.serviceCon.changeServicesCoast(name, coast);
 	}
 	
-	public void printService(){
-		getInReader().print(DETAILS_SERVICE);
-		getPrintService().printServices(Collections.synchronizedList(this.serviceCon.printService()));
-		getInReader().print(LINE);
+	public List<ServiceModel> printService(){
+		return Collections.synchronizedList(this.serviceCon.printService());
 	}
 	
-	public void exportServices(){
+	public synchronized void exportServices(){
 		this.serviceCon.exportServices();
 	}
-	public void importServices(){
+	public synchronized void importServices(){
 		this.serviceCon.importServices();
 	}
 	
-	public void buildServicesFromAnnot(){
+	public synchronized void buildServicesFromAnnot(){
 		this.serviceCon.buildServicesFromAnnot();
 	}
 }

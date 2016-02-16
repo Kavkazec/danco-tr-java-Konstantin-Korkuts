@@ -1,18 +1,28 @@
 package com.danco.training.view.menu;
 
-import java.util.Scanner;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+import com.danco.training.view.util.InReader;
 
 public class MainController {
-	public void run(){
-		Scanner sc = new Scanner(System.in);
-		Navigator navigator = new Navigator();
-		Builder builder = new Builder();
+	private Navigator navigator;
+	private Builder builder;
+	private boolean exitFlag = false;
+	
+	public MainController() {
+		navigator = new Navigator();
+		builder = new Builder();
 		builder.buildMenu();
 		navigator.setCurrentMenu(builder.getFirstMenu());
-		while(navigator.getCurrentMenu() != null){
-			navigator.printMenu();
-			navigator.navigate(sc.nextInt());			
+	}
+	public void run(ObjectOutputStream out, ObjectInputStream in){	
+		if(navigator.getCurrentMenu() != null){
+			navigator.print();		
 		}
-		sc.close();
+		this.exitFlag = !navigator.navigate(InReader.readInt(), in, out);
+	}
+	public boolean getExitFlag() {
+			return exitFlag;
 	}
 }

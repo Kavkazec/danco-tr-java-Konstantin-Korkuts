@@ -31,11 +31,11 @@ public class DependencyInjection {
 					Class<?> cl = Class.forName(className[i]);
 					map.put(className[i], cl.newInstance());
 				} catch (ClassNotFoundException e) {
-					LOGGER.error(e);
+					LOGGER.error(e.getMessage(),e);
 				} catch (InstantiationException e) {
-					LOGGER.error(e);
+					LOGGER.error(e.getMessage(),e);
 				} catch (IllegalAccessException e) {
-					LOGGER.error(e);
+					LOGGER.error(e.getMessage(),e);
 				}
 			} 	
 			

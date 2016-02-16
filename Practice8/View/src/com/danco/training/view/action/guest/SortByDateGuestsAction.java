@@ -1,16 +1,20 @@
 package com.danco.training.view.action.guest;
 
-import com.danco.training.controller.api.IHotelController;
-import com.danco.training.di.DependencyInjection;
+import com.danco.training.server.Transmission;
 import com.danco.training.view.action.IAction;
 
 public class SortByDateGuestsAction implements IAction{
 
-	private IHotelController hotel  = (IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class);
+	@Override
+	public Transmission sendCommand() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
-	public void execute() {
-		hotel.sortByDateGuests();
+	public void answer(Object answerFromServer) {
+		// TODO Auto-generated method stub
+		
 	}
-	
+
 }

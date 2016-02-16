@@ -85,7 +85,7 @@ public class GuestService implements IGuestService{
 	 * @param guest the guest
 	 * @param service the service
 	 */
-	public void addServiceToGuest( String guest, String service){
+	public void addServiceToGuest(String guest, String service){
 		try{
 			hotel.addServiceToGuest(guest, service);
 		} catch (Exception e) {

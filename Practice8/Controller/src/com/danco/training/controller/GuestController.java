@@ -1,149 +1,64 @@
 package com.danco.training.controller;
 
 import java.util.Collections;
+import java.util.List;
 
 import com.danco.training.controller.api.IGuestService;
-import com.danco.training.controller.api.IServiceService;
-import com.danco.training.controller.utils.InGuest;
-import com.danco.training.controller.utils.InReader;
-import com.danco.training.controller.utils.PrintGuest;
-import com.danco.training.controller.utils.PrintService;
+import com.danco.training.entity.GuestModel;
+import com.danco.training.entity.ServiceModel;
+
 
 public class GuestController {
-	private static final String PUSTOTA = "";
 	private IGuestService guestCon;
-	private IServiceService serviceCon;
-	private static final String DETAILS_GUEST = "name ; date of added; date of departure ;";
-	private static final String DETAILS_SERVICE = "name ; coast ;";
-	private static final String LINE = "-------------------------------------------";
-	private PrintGuest prinGuest;
-	private InGuest inGuest;
-	private InReader inReader;
-	private PrintService printService;
 	
-	public GuestController(IGuestService guestCon, IServiceService serviceCon){
+	public GuestController(IGuestService guestCon){
 		this.guestCon = guestCon;
-		this.serviceCon = serviceCon;
-	}
-	public PrintService getPrintService() {
-		if(printService == null){
-			printService = new PrintService();
-		}
-		return printService;
-	}
-	public InReader getInReader() {
-		if(inReader == null){
-			inReader = new InReader();
-		}
-		return inReader;
-	}
-	public PrintGuest getPrinGuest() {
-		if(prinGuest == null){
-			prinGuest = new PrintGuest();
-		}
-		return prinGuest;
 	}
 	
-	public InGuest getInGuest(){
-		if(inGuest == null){
-			inGuest = new InGuest();
-		}
-		return inGuest;
+	public void addGuest(GuestModel guest){
+			this.guestCon.addGuest(guest);
 	}
 	
-	public void addGuest(){
-		synchronized (guestCon) {
-			this.guestCon.addGuest(getInGuest().inputGuest());
-		}
-	}
-	
-	public void deletGuest(){
-		getInReader().print(DETAILS_GUEST);
-		getPrinGuest().printGuests(Collections.synchronizedList(this.guestCon.printGuest()));
-		getInReader().print(LINE);
-		getInReader().print("Guest's name:");
-		String name = getInReader().readStrin();
+	public void deletGuest(String name){
 		this.guestCon.deleteGuest(name);
 	}
 	
-	public void sortByNameGuests(){
-		getInReader().print(DETAILS_GUEST);
-		getPrinGuest().printGuests(Collections.synchronizedList(this.guestCon.sortByNameGuests()));
-		getInReader().print(LINE);
+	public List<GuestModel> sortByNameGuests(){
+		return Collections.synchronizedList(this.guestCon.sortByNameGuests());
 	}
 	
-	public void sortByDateGuests(){
-		getInReader().print(DETAILS_GUEST);
-		getPrinGuest().printGuests(Collections.synchronizedList(this.guestCon.sortByDateGuests()));
-		getInReader().print(LINE);
+	public List<GuestModel> sortByDateGuests(){
+		return Collections.synchronizedList(this.guestCon.sortByDateGuests());
 	}
 	
-	public void showNumberOfGuests(){
-		String str = this.guestCon.showNumberOfGuests() + PUSTOTA;
-		getInReader().print(str);
+	public int showNumberOfGuests(){
+		return this.guestCon.showNumberOfGuests();
 	}
 	
-	public void showGuestsServicesSortedByCoast(){
-		synchronized (guestCon) {
-			getInReader().print(DETAILS_GUEST);
-			getPrinGuest().printGuests(this.guestCon.printGuest());
-			getInReader().print(LINE);
-			getInReader().print("Guest's name:");
-			String name = getInReader().readStrin();
-			if(!this.guestCon.showGuestsServicesSortedByCoast(name).isEmpty()){
-				getPrintService().printServices(this.guestCon.showGuestsServicesSortedByCoast(name));
-			} else {
-				getInReader().print("There are no services!");
-			}
-		}
-		
+	public List<ServiceModel> showGuestsServicesSortedByCoast(String name){
+		return Collections.synchronizedList(this.guestCon.showGuestsServicesSortedByCoast(name));
 	}
 	
-	public void showGuestsServicesSortedByDate(){
-		synchronized (guestCon) {
-			getInReader().print(DETAILS_GUEST);
-			getPrinGuest().printGuests(this.guestCon.printGuest());
-			getInReader().print(LINE);
-			getInReader().print("Guest's name:");
-			String name = getInReader().readStrin();
-			if(!this.guestCon.showGuestsServicesSortedByDate(name).isEmpty()){
-				getPrintService().printServices(this.guestCon.showGuestsServicesSortedByDate(name));
-			} else {
-				getInReader().print("There are no services!");
-			}
-		}
+	public List<ServiceModel> showGuestsServicesSortedByDate(String name){
+		return Collections.synchronizedList(this.guestCon.showGuestsServicesSortedByDate(name));
 	}
 	
-	public void addServiceToGuest(){
-		synchronized (guestCon) {
-			getInReader().print(DETAILS_GUEST);
-			getPrinGuest().printGuests(this.guestCon.printGuest());
-			getInReader().print(LINE);
-			getInReader().print(DETAILS_SERVICE);
-			getPrintService().printServices(this.serviceCon.printService());
-			getInReader().print(LINE);
-			getInReader().print("Guest's name:");
-			String guest = getInReader().readStrin();
-			getInReader().print("Service name:");
-			String service = getInReader().readStrin();
-			this.guestCon.addServiceToGuest(guest, service);
-		}
+	public synchronized void addServiceToGuest(String nameGuest, String nameService){
+		this.guestCon.addServiceToGuest(nameGuest, nameService);
 	}
 	
-	public void printGuest(){
-		getInReader().print(DETAILS_GUEST);
-		getPrinGuest().printGuests(Collections.synchronizedList(this.guestCon.printGuest()));
-		getInReader().print(LINE);
+	public List<GuestModel> printGuest(){
+		return Collections.synchronizedList(this.guestCon.printGuest());
 	}
 	
-	public void exportGuests(){
+	public synchronized void exportGuests(){
 		this.guestCon.exportGuests();
 	}
 	
-	public void importGuests(){
+	public synchronized void importGuests(){
 		this.guestCon.importGuests();
 	}
-	public void buildGuestsFromAnnot(){
+	public synchronized void buildGuestsFromAnnot(){
 		this.guestCon.buildGuestsFromAnnot();
 	}
 }

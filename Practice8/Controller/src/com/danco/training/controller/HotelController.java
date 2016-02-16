@@ -1,10 +1,16 @@
 package com.danco.training.controller;
 
+import java.util.Date;
+import java.util.List;
+
 import com.danco.training.controller.api.IGuestService;
 import com.danco.training.controller.api.IHotelController;
 import com.danco.training.controller.api.IRoomService;
 import com.danco.training.controller.api.IServiceService;
 import com.danco.training.di.DependencyInjection;
+import com.danco.training.entity.GuestModel;
+import com.danco.training.entity.RoomModel;
+import com.danco.training.entity.ServiceModel;
 
 public class HotelController implements IHotelController {
 	private RoomController roomCon;
@@ -22,16 +28,14 @@ public class HotelController implements IHotelController {
 	
 	public RoomController getRoomCon() {
 		if(roomCon == null){
-			roomCon = new RoomController((IRoomService) DependencyInjection.getInstance().getClassInstance(IRoomService.class),
-					(IGuestService) DependencyInjection.getInstance().getClassInstance(IGuestService.class));
+			roomCon = new RoomController((IRoomService) DependencyInjection.getInstance().getClassInstance(IRoomService.class));
 		}
 		return roomCon;
 	}
 	
 	public GuestController getGuestCon() {
 		if(guestCon == null){
-			guestCon = new GuestController((IGuestService) DependencyInjection.getInstance().getClassInstance(IGuestService.class), 
-					(IServiceService) DependencyInjection.getInstance().getClassInstance(IServiceService.class));
+			guestCon = new GuestController((IGuestService) DependencyInjection.getInstance().getClassInstance(IGuestService.class));
 		}
 		return guestCon;
 	}
@@ -43,136 +47,136 @@ public class HotelController implements IHotelController {
 		return serviceCon;
 	}
 	
-	public void addGuest(){
-		getGuestCon().addGuest();
+	public void addGuest(GuestModel guest){
+		getGuestCon().addGuest(guest);
 	}
 	
-	public void deletGuest(){
-		getGuestCon().deletGuest();
+	public void deleteGuest(String name){
+		getGuestCon().deletGuest(name);
 	}
 	
-	public void sortByNameGuests(){
-		getGuestCon().sortByNameGuests();
+	public List<GuestModel> sortByNameGuests(){
+		return getGuestCon().sortByNameGuests();
 	}
 	
-	public void sortByDateGuests(){
-		getGuestCon().sortByDateGuests();
+	public List<GuestModel> sortByDateGuests(){
+		return getGuestCon().sortByDateGuests();
 	}
 	
-	public void showNumberOfGuests(){
-		getGuestCon().showNumberOfGuests();
+	public int showNumberOfGuests(){
+		return getGuestCon().showNumberOfGuests();
 	}
 	
-	public void showGuestsServicesSortedByCoast(){
-		getGuestCon().showGuestsServicesSortedByCoast();
+	public List<ServiceModel> showGuestsServicesSortedByCoast(String name){
+		return getGuestCon().showGuestsServicesSortedByCoast(name);
 	}
 	
-	public void showGuestsServicesSortedByDate(){
-		getGuestCon().showGuestsServicesSortedByDate();
+	public List<ServiceModel> showGuestsServicesSortedByDate(String name){
+		return getGuestCon().showGuestsServicesSortedByDate(name);
 	}
 	
-	public void addServiceToGuest(){
-		getGuestCon().addServiceToGuest();
+	public void addServiceToGuest(String nameGuest, String nameService){
+		getGuestCon().addServiceToGuest(nameGuest, nameService);
 	}
 	
-	public void printGuest(){
-		getGuestCon().printGuest();
+	public List<GuestModel> printGuest(){
+		return getGuestCon().printGuest();
 	}
 	
-	public void addRoom(){
-		getRoomCon().addRoom();
+	public void addRoom(RoomModel room){
+		getRoomCon().addRoom(room);
 	}
 	
-	public void deleteRoom(){
-		getRoomCon().deleteRoom();
+	public void deleteRoom(int number){
+		getRoomCon().deleteRoom(number);
 	}
 	
-	public void deleteGuestFromRoom(){
-		getRoomCon().deleteGuestFromRoom();
+	public void deleteGuestFromRoom(String name){
+		getRoomCon().deleteGuestFromRoom(name);
 	}
 	
-	public void deleteAllGuestsFromRoom(){
-		getRoomCon().deleteAllGuestsFromRoom();
+	public void deleteAllGuestsFromRoom(int number){
+		getRoomCon().deleteAllGuestsFromRoom(number);
 	}
 	
-	public void changeRoomsCoast(){
-		getRoomCon().changeRoomsCoast();
+	public void changeRoomsCoast(int number, int coast){
+		getRoomCon().changeRoomsCoast(number, coast);
 	}
 	
 	public void changeRoomsStatusRepair(){
 		getRoomCon().changeRoomsStatusRepair();
 	}
 	
-	public void sortByCoastFreeRoom(){
-		getRoomCon().sortByCoastFreeRoom();
+	public List<RoomModel> sortByCoastFreeRoom(){
+		return getRoomCon().sortByCoastFreeRoom();
 	}
 	
-	public void sortByCopasityFreeRoom(){
-		getRoomCon().sortByCopasityFreeRoom();
+	public List<RoomModel> sortByCopasityFreeRoom(){
+		return getRoomCon().sortByCopasityFreeRoom();
 	}
 	
-	public void sortByStarsFreeRoom(){
-		getRoomCon().sortByStarsFreeRoom();
+	public List<RoomModel> sortByStarsFreeRoom(){
+		return getRoomCon().sortByStarsFreeRoom();
 	}
 	
-	public void sortByCoastRoom(){
-		getRoomCon().sortByCoastRoom();
+	public List<RoomModel> sortByCoastRoom(){
+		return getRoomCon().sortByCoastRoom();
 	}
 	
-	public void sortByCopasityRoom(){
-		getRoomCon().sortByCopasityRoom();
+	public List<RoomModel> sortByCopasityRoom(){
+		return getRoomCon().sortByCopasityRoom();
 	}
 	
-	public void sortByStarsRoom(){
-		getRoomCon().sortByStarsRoom();
+	public List<RoomModel> sortByStarsRoom(){
+		return getRoomCon().sortByStarsRoom();
 	}
 	
-	public void showNumberOfFreeRooms(){
-		getRoomCon().showNumberOfFreeRooms();
+	public int showNumberOfFreeRooms(){
+		return getRoomCon().showNumberOfFreeRooms();
 	}
 	
-	public void showChekOutDate(){
-		getRoomCon().showChekOutDate();
+	public List<RoomModel> showChekOutDate(Date date){
+		return getRoomCon().showChekOutDate(date);
 	}
 	
-	public void showRoomDetails(){
-		getRoomCon().showRoomDetails();
+	public String showRoomDetails(int number){
+		return getRoomCon().showRoomDetails(number);
 	}
 	
-	public void showPricePerRoom(){
-		getRoomCon().showPricePerRoom();
+	public String showPricePerRoom(String name){
+		return getRoomCon().showPricePerRoom(name);
 	}
 	
-	public void showLastThreeGuests(){
-		getRoomCon().showLastThreeGuests();
+	public List<GuestModel> showLastThreeGuests(int number){
+		return getRoomCon().showLastThreeGuests(number);
 	}
 	
-	public void addGuestInRoom(){
-		getRoomCon().addGuestInRoom();
+	public void addGuestInRoom(int number, String name){
+		getRoomCon().addGuestInRoom(number, name);
 	}
 	
-	public void printRoom(){
-		getRoomCon().printRoom();
+	public List<RoomModel> printRoom(){
+		return getRoomCon().printRoom();
 	}
 	
-	public void addService(){
-		getServiceCon().addService();
+	public void addService(ServiceModel service){
+		getServiceCon().addService(service);
 	}
 	
-	public void deleteService(){
-		getServiceCon().deleteService();
+	public void deleteService(String name){
+		getServiceCon().deleteService(name);
 	}
 	
-	public void changeServicesCoast(){
-		getServiceCon().changeServicesCoast();
+	public void changeServicesCoast(String name, int coast){
+		getServiceCon().changeServicesCoast(name, coast);
 	}
 	
-	public void printService(){
-		getServiceCon().printService();
+	public List<ServiceModel> printService(){
+		return getServiceCon().printService();
 	}
 	
-	public void cloneRoom(){
-		getRoomCon().cloneRoom();
+	public void cloneRoom(int number){
+		getRoomCon().cloneRoom(number);
 	}
 	
 	public void exportGuests(){
@@ -208,4 +212,5 @@ public class HotelController implements IHotelController {
 	public void buildRoomsFromAnnot(){
 		getRoomCon().buildRoomsFromAnnot();
 	}
+
 }

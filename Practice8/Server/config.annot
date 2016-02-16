@@ -1,0 +1,10 @@
+ServiceModel.name.String=agag
+ServiceModel.coast.int=100
+RoomModel.number.int=1
+RoomModel.capacity.int=2
+RoomModel.numberOfStars.int=4
+RoomModel.coast.int=200
+GuestModel.name.String=Kolya
+GuestModel.dateOfAdd.Date=10-02-2016
+GuestModel.dateOfEvi.Date=10-02-2016
+ServiceModel.serviceList.List=Fight;100,StreetFight;200

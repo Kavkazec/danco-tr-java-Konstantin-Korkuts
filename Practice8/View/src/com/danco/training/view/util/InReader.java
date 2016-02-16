@@ -1,4 +1,4 @@
-package com.danco.training.controller.utils;
+package com.danco.training.view.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 public class InReader {
 	private static final Logger LOGGER = Logger.getLogger(InReader.class);
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-	public int readInt(){
+	public static int readInt(){
 		int i;
 		Scanner sc = new Scanner(System.in);
 		try{
@@ -22,7 +22,7 @@ public class InReader {
 		}
 	}
 	
-	public String readStrin(){
+	public static String readStrin(){
 		String str;
 		Scanner sc = new Scanner(System.in);
 		try{
@@ -35,7 +35,7 @@ public class InReader {
 		}
 	}
 	
-	public Date readDate(){
+	public static Date readDate(){
 		Scanner sc = new Scanner(System.in);
 		Date date = null;
 		try {
@@ -47,10 +47,10 @@ public class InReader {
 		}
 	}
 	
-	public void print(String str){
+	public static void print(String str){
 		System.out.println(str);
 	}
-	public void print(){
+	public static void print(){
 		System.out.println();
 	}
 }

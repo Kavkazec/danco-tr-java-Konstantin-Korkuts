@@ -1,16 +1,21 @@
 package com.danco.training.view.action.room;
 
-import com.danco.training.controller.api.IHotelController;
-import com.danco.training.di.DependencyInjection;
+import com.danco.training.server.Transmission;
 import com.danco.training.view.action.IAction;
 
 public class ExportRoomsAction implements IAction  {
 
-	private IHotelController hotel  = (IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class);
+	@Override
+	public Transmission sendCommand() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
-	public void execute() {
-		hotel.exportRooms();
+	public void answer(Object answerFromServer) {
+		// TODO Auto-generated method stub
+		
 	}
+
 
 }
