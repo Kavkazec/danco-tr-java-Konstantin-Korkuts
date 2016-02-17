@@ -4,15 +4,12 @@ import java.util.InputMismatchException;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.server.Transmission;
+import com.danco.training.transmission.Transmission;
 import com.danco.training.view.action.IAction;
-import com.danco.training.view.action.room.AddRoomAction;
-import com.danco.training.view.util.InRoom;
 import com.danco.training.view.util.InService;
 
 public class AddServiceAction implements IAction{
 	private final Logger logger = Logger.getLogger(AddServiceAction.class);
-
 	@Override
 	public Transmission sendCommand() {
 		Transmission trans = null;

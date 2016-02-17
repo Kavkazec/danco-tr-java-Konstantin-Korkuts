@@ -26,8 +26,9 @@ public class ImportAndExportRooms {
 	}
 	
 	public void writeToFileRooms(String path){
+		FileWriter fw = null;
 		try {
-			FileWriter fw = new FileWriter(path);
+			fw = new FileWriter(path);
 			fw.append(RoomModel.class.getSimpleName());
 			fw.append(NEXT_LINE);
 			for(int i = 0 ; i < getService().printRoom().size(); i++){
@@ -46,10 +47,15 @@ public class ImportAndExportRooms {
 				fw.append(NEXT_LINE);
 			}
 			fw.flush();
-			fw.close();
 		}catch (IOException e) {
-			LOGGER.error("IOEXCEPTION",e);
-		} 
+			LOGGER.error(e.getMessage(),e);
+		} finally{
+			try {
+				fw.close();
+			} catch (IOException e) {
+				LOGGER.error(e.getMessage(),e);
+			}
+		}
 	}
 	
 	public List<RoomModel> readFromFileRooms(String path){
@@ -80,14 +86,14 @@ public class ImportAndExportRooms {
 				}
 			}
 		}catch (FileNotFoundException e) {
-			LOGGER.error("FILE_NOT_FOUND_EXCPTION",e);
+			LOGGER.error(e.getMessage(),e);
 		} catch (IOException e) {
-			LOGGER.error("IOEXCEPTION",e);
+			LOGGER.error(e.getMessage(),e);
 		} finally{
 			try {
 				bf.close();
 			} catch (IOException e) {
-				LOGGER.error("IOEXCEPTION",e);
+				LOGGER.error(e.getMessage(),e);
 			}
 		}
 		return rooms;

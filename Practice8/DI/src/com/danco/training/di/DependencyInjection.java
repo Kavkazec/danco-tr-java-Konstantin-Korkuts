@@ -17,7 +17,6 @@ public class DependencyInjection {
 	}
 
 	private DependencyInjection() {
-
 	}
 
 	private Map<String, Object> map = new HashMap<String, Object>();

@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.danco.training.entity.RoomModel;
-import com.danco.training.server.Transmission;
+import com.danco.training.transmission.Transmission;
 import com.danco.training.view.action.IAction;
 import com.danco.training.view.util.PrintRoom;
 

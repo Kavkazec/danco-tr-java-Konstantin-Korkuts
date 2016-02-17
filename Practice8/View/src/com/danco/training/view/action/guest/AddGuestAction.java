@@ -4,11 +4,13 @@ import java.util.InputMismatchException;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.server.Transmission;
+import com.danco.training.transmission.Transmission;
 import com.danco.training.view.action.IAction;
 import com.danco.training.view.util.InGuest;
 
 public class AddGuestAction implements IAction {
+	private final Logger logger = Logger.getLogger(AddGuestAction.class);
+
 	@Override
 	public Transmission sendCommand() {
 		Transmission trans = null;
@@ -18,7 +20,6 @@ public class AddGuestAction implements IAction {
 			trans = new Transmission(methodName, args);
 
 		} catch (InputMismatchException e) {
-			Logger logger = Logger.getLogger(AddGuestAction.class);
 			logger.error(e.getMessage(),e);
 		}
 		return trans;

@@ -5,16 +5,15 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.entity.RoomModel;
 import com.danco.training.entity.ServiceModel;
-import com.danco.training.server.Transmission;
+import com.danco.training.transmission.Transmission;
 import com.danco.training.view.action.IAction;
-import com.danco.training.view.util.PrintRoom;
+import com.danco.training.view.util.InReader;
 import com.danco.training.view.util.PrintService;
 
 public class PrintServiceAction implements IAction{
 	private final Logger logger = Logger.getLogger(PrintServiceAction.class);
-
+	private static final String DETAILS_SERVICE = "name ; coast ;";
 	@Override
 	public Transmission sendCommand() {
 		Transmission trans = null;
@@ -30,7 +29,8 @@ public class PrintServiceAction implements IAction{
 
 	@Override
 	public void answer(Object answerFromServer) {
-		if (answerFromServer instanceof List) {
+		InReader.print(DETAILS_SERVICE);
+		if (answerFromServer instanceof List && answerFromServer != null) {
 			PrintService.printServices((List<ServiceModel>) answerFromServer);
 		}
 	}

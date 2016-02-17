@@ -1,6 +1,6 @@
 package com.danco.training.view.menu;
 
-import com.danco.training.server.Transmission;
+import com.danco.training.transmission.Transmission;
 import com.danco.training.view.action.IAction;
 
 public class MenuItem {
@@ -20,15 +20,11 @@ public class MenuItem {
 	}
 
 	public Transmission sendCommand() {
-
 		return action.sendCommand();
-
 	}
 
 	public void receiveAnswer(Object obj) {
-
 		action.answer(obj);
-
 	}
 
 	public String getTitle() {

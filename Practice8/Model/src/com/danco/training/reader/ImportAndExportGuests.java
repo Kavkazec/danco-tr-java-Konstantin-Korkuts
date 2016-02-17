@@ -30,8 +30,9 @@ public class ImportAndExportGuests {
 	}
 	
 	public void writeToFileGuests(String path){
+		FileWriter fw = null;
 		try {
-			FileWriter fw = new FileWriter(path);
+			fw = new FileWriter(path);
 			fw.append(GuestModel.class.getSimpleName());
 			fw.append(NEXT_LINE);
 			for(int i = 0 ; i < getService().printGuest().size(); i++){
@@ -44,10 +45,15 @@ public class ImportAndExportGuests {
 				fw.append(NEXT_LINE);
 			}
 			fw.flush();
-			fw.close();
 		} catch (IOException e) {
-			LOGGER.error("IOEXCEPTION",e);
-		} 
+			LOGGER.error(e.getMessage(),e);
+		} finally {
+			try {
+				fw.close();
+			} catch (IOException e) {
+				LOGGER.error(e.getMessage(),e);
+			}
+		}
 	}
 	
 	public List<GuestModel> readFromFileGuests(String path){
@@ -72,19 +78,17 @@ public class ImportAndExportGuests {
 					}
 				}
 			}
-			bf.close();
 		}catch (FileNotFoundException e) {
-			LOGGER.error("FILE_NOT_FOUND_EXCPTION",e);
+			LOGGER.error(e.getMessage(),e);
 		} catch (IOException e) {
-			LOGGER.error("IOEXCEPTION",e);
+			LOGGER.error(e.getMessage(),e);
 		} catch (ParseException e) {
-			LOGGER.error("PARSE_EXCEPTION",e);
-		}
-		finally{
+			LOGGER.error(e.getMessage(),e);
+		} finally {
 			try {
 				bf.close();
 			} catch (IOException e) {
-				LOGGER.error("IOEXCEPTION",e);
+				LOGGER.error(e.getMessage(),e);
 			}
 		}
 		return guests;

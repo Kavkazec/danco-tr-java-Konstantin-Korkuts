@@ -10,7 +10,7 @@ public class MainController {
 	private Builder builder;
 	private boolean exitFlag = false;
 	
-	public MainController() {
+	public MainController(){
 		navigator = new Navigator();
 		builder = new Builder();
 		builder.buildMenu();

@@ -6,12 +6,12 @@ import java.io.ObjectOutputStream;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.server.Transmission;
+import com.danco.training.transmission.Transmission;
 import com.danco.training.view.util.InReader;
 
 public class Navigator {
 	private static final String FINAL_LINE = "#################################";
-	private Logger logger = Logger.getLogger(Logger.class);
+	private Logger logger = Logger.getLogger(Navigator.class);
 	private Menu currentMenu = new Menu();
 
 	public Menu getCurrentMenu() {
@@ -26,15 +26,14 @@ public class Navigator {
 		if (this.currentMenu != null) {
 			if ((index < currentMenu.getMenuItems().size()) && (index >= 0)) {
 				try {
-					if (this.currentMenu.getMenuItem(index).getAction() != null) {
+					if (this.currentMenu.getMenuItem(index).getAction() != null){
 						out.writeObject((this.currentMenu.getMenuItem(index).sendCommand()));
 						out.flush();
 						if (in.readObject() != null) {
 							this.currentMenu.getMenuItem(index).receiveAnswer(in.readObject());
 						}
-
 					}
-					if ((this.currentMenu.getMenuItem(index).getAction() != null)
+					if ((this.currentMenu.getMenuItem(index).getAction() != null) 
 							&& (this.currentMenu.getMenuItem(index).getMenu() == null)) {
 						out.writeObject(new Transmission("Exit", null));
 					}
@@ -54,7 +53,7 @@ public class Navigator {
 				out.writeObject(new Transmission("Exit", null));
 				this.currentMenu.getMenuItem(index).receiveAnswer(in.readObject());
 			} catch (IOException | ClassNotFoundException e) {
-				
+
 				logger.error(e.getMessage(), e);
 			}
 			return false;

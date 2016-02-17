@@ -12,20 +12,27 @@ import com.danco.training.properties.PropertiesReader;
 
 public class Server {
 	private int port;
-	private IHotelController hotelController = (IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class);
+	private IHotelController hotelController;
 	private Logger logger = Logger.getLogger(Server.class);
 	public Server(int port) {
-		PropertiesReader.getInstance().setProperties();
 		this.port = port;
+		PropertiesReader.getInstance().setProperties();
+	}
+	
+	public IHotelController getHotelController(){
+		if(hotelController == null){
+			hotelController = (IHotelController)DependencyInjection.getInstance().getClassInstance(IHotelController.class);
+		}
+		return hotelController;
 	}
 
-	public void start() {
+	public void start(){
 		ServerSocket serverSocket = null;
 		try {
 			serverSocket = new ServerSocket(port);
-			while (true) {
+			while(true) {
 				Socket clientSocket = serverSocket.accept();
-				new ThreatsForClinets(clientSocket, hotelController).start();
+				new ThreatsForClinets(clientSocket, getHotelController()).start();
 			}
 		} catch (IOException e) {
 			System.out.println("Can't accept");

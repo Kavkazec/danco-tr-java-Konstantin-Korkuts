@@ -1,6 +1,6 @@
 package com.danco.training.view.action;
 
-import com.danco.training.server.Transmission;
+import com.danco.training.transmission.Transmission;
 
 public interface IAction {
 	public Transmission sendCommand();

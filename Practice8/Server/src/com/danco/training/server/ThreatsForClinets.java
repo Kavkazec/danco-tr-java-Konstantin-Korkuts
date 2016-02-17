@@ -19,8 +19,8 @@ public class ThreatsForClinets extends Thread{
 
 	public ThreatsForClinets(Socket fromClient, IHotelController hotelController) {
 		this.fromClient = fromClient;
-		this.hotelController = hotelController;
-		this.processor = new DataProcessing(hotelController);
+		this.setThreats(hotelController);
+		processor = new DataProcessing(hotelController);
 	}
 
 	@Override
@@ -59,5 +59,9 @@ public class ThreatsForClinets extends Thread{
 				logger.error(e.getMessage(), e);
 			}
 		}
+	}
+	
+	public void setThreats(IHotelController hotelController){
+		this.hotelController = hotelController;
 	}
 }

@@ -26,8 +26,9 @@ public class ImportAndExportServices {
 	}
 	
 	public void writeToFileServices(String path){
+		FileWriter fw = null;
 		try {
-			FileWriter fw = new FileWriter(path);
+			fw = new FileWriter(path);
 			fw.append(ServiceModel.class.getSimpleName());
 			fw.append(NEXT_LINE);
 			for(int i = 0 ; i < getService().printService().size(); i++){
@@ -38,10 +39,15 @@ public class ImportAndExportServices {
 				fw.append(NEXT_LINE);
 			}
 			fw.flush();
-			fw.close();
 		}catch (IOException e) {
-			LOGGER.error("IOEXCEPTION",e);
-		} 
+			LOGGER.error(e.getMessage(),e);
+		} finally{
+			try {
+				fw.close();
+			} catch (IOException e) {
+				LOGGER.error(e.getMessage(),e);;
+			}
+		}
 	}
 	
 	public List<ServiceModel> readFromFileServices(String path){
@@ -66,15 +72,15 @@ public class ImportAndExportServices {
 				}
 			}
 			
-		}  catch (FileNotFoundException e) {
-			LOGGER.error("FILE_NOT_FOUND_EXCPTION",e);
+		} catch (FileNotFoundException e) {
+			LOGGER.error(e.getMessage(),e);
 		} catch (IOException e) {
-			LOGGER.error("IOEXCEPTION",e);
+			LOGGER.error(e.getMessage(),e);
 		} finally{
 			try {
 				bf.close();
 			} catch (IOException e) {
-				LOGGER.error("IOEXCEPTION",e);
+				LOGGER.error(e.getMessage(),e);
 			}
 		}
 		return services;

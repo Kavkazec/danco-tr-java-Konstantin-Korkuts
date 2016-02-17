@@ -23,8 +23,8 @@ public class Client {
 
 	public void start() {
 		try (Socket fromServer = new Socket(serverIP, serverPort);
-				ObjectOutputStream out = new ObjectOutputStream(fromServer.getOutputStream());
-				ObjectInputStream in = new ObjectInputStream(fromServer.getInputStream())){
+			ObjectOutputStream out = new ObjectOutputStream(fromServer.getOutputStream());
+			ObjectInputStream in = new ObjectInputStream(fromServer.getInputStream())){
 					menuController = new MainController();
 					while(menuController.getExitFlag() != true) {
 						menuController.run(out, in);

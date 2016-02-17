@@ -1,4 +1,4 @@
-package com.danco.training.server;
+package com.danco.training.transmission;
 
 import java.io.Serializable;
 

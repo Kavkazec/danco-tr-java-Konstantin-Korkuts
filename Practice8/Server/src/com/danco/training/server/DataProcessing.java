@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import org.apache.log4j.Logger;
 
 import com.danco.training.controller.api.IHotelController;
+import com.danco.training.transmission.Transmission;
 
 public class DataProcessing {
 	private final Logger logger = Logger.getLogger(DataProcessing.class);
@@ -19,7 +20,7 @@ public class DataProcessing {
 		Class<?> bsClass = hotelController.getClass();
 		for (Method method : bsClass.getMethods()) {
 			if (command instanceof Transmission) {
-				if (method.getName().equals(((Transmission) command).getNameOfMethod())) {
+				if (method.getName().equals(((Transmission) command).getNameOfMethod())){
 					try {
 						if (((Transmission) command).getNameOfMethod() != "Exit") {
 							if (((Transmission) command).getArgs().length != 0) {
