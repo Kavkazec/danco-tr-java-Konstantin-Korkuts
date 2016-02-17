@@ -12,7 +12,7 @@ import com.danco.training.view.util.InReader;
 import com.danco.training.view.util.PrintRoom;
 
 public class SortByCapacityFreeRoomAction implements IAction{
-	private final Logger logger = Logger.getLogger(SortByCapacityFreeRoomAction.class);
+	private final Logger LOGGER = Logger.getLogger(SortByCapacityFreeRoomAction.class);
 	private static final String DETAILS_ROOM = "number ; capacity ; stats ; coast ; free? ; on repair?";
 
 	@Override
@@ -23,7 +23,7 @@ public class SortByCapacityFreeRoomAction implements IAction{
 			String methodName = "sortByCopasityFreeRoom";
 			trans = new Transmission(methodName, args);
 		} catch (InputMismatchException e) {
-			logger.error(e.getMessage(),e);
+			LOGGER.error(e.getMessage(),e);
 		}
 		return trans;
 	}

@@ -12,7 +12,7 @@ import com.danco.training.view.util.InReader;
 import com.danco.training.view.util.PrintService;
 
 public class PrintServiceAction implements IAction{
-	private final Logger logger = Logger.getLogger(PrintServiceAction.class);
+	private final Logger LOGGER = Logger.getLogger(PrintServiceAction.class);
 	private static final String DETAILS_SERVICE = "name ; coast ;";
 	@Override
 	public Transmission sendCommand() {
@@ -22,7 +22,7 @@ public class PrintServiceAction implements IAction{
 			String methodName = "printService";
 			trans = new Transmission(methodName, args);
 		} catch (InputMismatchException e) {
-			logger.error(e.getMessage(),e);
+			LOGGER.error(e.getMessage(),e);
 		}
 		return trans;
 	}

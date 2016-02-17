@@ -11,7 +11,7 @@ import com.danco.training.view.action.IAction;
 import com.danco.training.view.util.PrintRoom;
 
 public class PrintRoomAction implements IAction{
-	private final Logger logger = Logger.getLogger(PrintRoomAction.class);
+	private final Logger LOGGER = Logger.getLogger(PrintRoomAction.class);
 	@Override
 	public Transmission sendCommand() {
 		Transmission trans = null;
@@ -21,7 +21,7 @@ public class PrintRoomAction implements IAction{
 			trans = new Transmission(methodName, args);
 
 		} catch (InputMismatchException e) {
-			logger.error(e.getMessage(),e);
+			LOGGER.error(e.getMessage(),e);
 		}
 		return trans;
 	}

@@ -12,7 +12,7 @@ import com.danco.training.view.util.InReader;
 import com.danco.training.view.util.PrintGuest;
 
 public class SortByDateGuestsAction implements IAction{
-	private final Logger logger = Logger.getLogger(SortByDateGuestsAction.class);
+	private final Logger LOGGER = Logger.getLogger(SortByDateGuestsAction.class);
 	private static final String DETAILS_GUEST = "name ; date of added; date of departure ;";
 	@Override
 	public Transmission sendCommand() {
@@ -22,7 +22,7 @@ public class SortByDateGuestsAction implements IAction{
 			String methodName = "sortByDateGuests";
 			trans = new Transmission(methodName, args);
 		} catch (InputMismatchException e) {
-			logger.error(e.getMessage(),e);
+			LOGGER.error(e.getMessage(),e);
 		}
 		return trans;
 	}

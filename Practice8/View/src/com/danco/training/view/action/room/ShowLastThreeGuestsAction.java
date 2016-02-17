@@ -9,7 +9,7 @@ import com.danco.training.view.action.IAction;
 import com.danco.training.view.util.InReader;
 
 public class ShowLastThreeGuestsAction implements IAction{
-	private final Logger logger = Logger.getLogger(ShowLastThreeGuestsAction.class);
+	private final Logger LOGGER = Logger.getLogger(ShowLastThreeGuestsAction.class);
 	@Override
 	public Transmission sendCommand() {
 		Transmission trans = null;
@@ -20,7 +20,7 @@ public class ShowLastThreeGuestsAction implements IAction{
 			trans = new Transmission(methodName, args);
 
 		} catch (InputMismatchException e) {
-			logger.error(e.getMessage(),e);
+			LOGGER.error(e.getMessage(),e);
 		}
 		return trans;
 	}

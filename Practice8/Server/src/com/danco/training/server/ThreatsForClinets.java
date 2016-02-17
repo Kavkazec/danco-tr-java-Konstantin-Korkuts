@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 import com.danco.training.controller.api.IHotelController;
 
 public class ThreatsForClinets extends Thread{
-	private Logger logger = Logger.getLogger(ThreatsForClinets.class);
+	private final Logger LOGGER = Logger.getLogger(ThreatsForClinets.class);
 	private Socket fromClient;
 	private IHotelController hotelController;
 	private DataProcessing processor;
@@ -47,16 +47,16 @@ public class ThreatsForClinets extends Thread{
 				}
 			}
 		} catch (IOException e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		} catch (ClassNotFoundException e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		} finally {
 			try {
 				oos.close();
 				ois.close();
 				fromClient.close();
 			} catch (IOException e) {
-				logger.error(e.getMessage(), e);
+				LOGGER.error(e.getMessage(), e);
 			}
 		}
 	}

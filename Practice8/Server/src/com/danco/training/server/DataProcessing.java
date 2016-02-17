@@ -8,7 +8,7 @@ import com.danco.training.controller.api.IHotelController;
 import com.danco.training.transmission.Transmission;
 
 public class DataProcessing {
-	private final Logger logger = Logger.getLogger(DataProcessing.class);
+	private final Logger LOGGER = Logger.getLogger(DataProcessing.class);
 	private IHotelController hotelController;
 
 	public DataProcessing(IHotelController hotelController) {
@@ -40,7 +40,7 @@ public class DataProcessing {
 							answer = "Exit";
 						}
 					} catch (Exception e) {
-						logger.error(e.getMessage(), e);
+						LOGGER.error(e.getMessage(), e);
 					}
 				}
 			}

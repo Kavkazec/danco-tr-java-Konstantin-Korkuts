@@ -11,7 +11,7 @@ import com.danco.training.view.util.InReader;
 
 public class Navigator {
 	private static final String FINAL_LINE = "#################################";
-	private Logger logger = Logger.getLogger(Navigator.class);
+	private final  Logger LOGGER = Logger.getLogger(Navigator.class);
 	private Menu currentMenu = new Menu();
 
 	public Menu getCurrentMenu() {
@@ -39,22 +39,19 @@ public class Navigator {
 					}
 
 				} catch (IOException | ClassNotFoundException e) {
-					logger.error(e.getMessage(), e);
+					LOGGER.error(e.getMessage(), e);
 				}
 				setCurrentMenu(this.currentMenu.getMenuItem(index).getMenu());
 			} else {
 				setCurrentMenu(null);
 			}
 			return true;
-		}
-
-		else {
+		} else {
 			try {
 				out.writeObject(new Transmission("Exit", null));
 				this.currentMenu.getMenuItem(index).receiveAnswer(in.readObject());
 			} catch (IOException | ClassNotFoundException e) {
-
-				logger.error(e.getMessage(), e);
+				LOGGER.error(e.getMessage(), e);
 			}
 			return false;
 		}

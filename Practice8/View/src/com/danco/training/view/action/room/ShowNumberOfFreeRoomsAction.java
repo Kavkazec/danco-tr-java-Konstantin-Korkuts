@@ -9,7 +9,7 @@ import com.danco.training.view.action.IAction;
 import com.danco.training.view.util.InReader;
 
 public class ShowNumberOfFreeRoomsAction implements IAction {
-	private final Logger logger = Logger.getLogger(ShowNumberOfFreeRoomsAction.class);
+	private final Logger LOGGER = Logger.getLogger(ShowNumberOfFreeRoomsAction.class);
 	@Override
 	public Transmission sendCommand() {
 		Transmission trans = null;
@@ -19,7 +19,7 @@ public class ShowNumberOfFreeRoomsAction implements IAction {
 			trans = new Transmission(methodName, args);
 
 		} catch (InputMismatchException e) {
-			logger.error(e.getMessage(),e);
+			LOGGER.error(e.getMessage(),e);
 		}
 		return trans;
 	}

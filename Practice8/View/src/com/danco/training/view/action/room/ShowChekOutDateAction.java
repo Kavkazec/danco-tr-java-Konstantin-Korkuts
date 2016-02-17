@@ -12,7 +12,7 @@ import com.danco.training.view.util.InReader;
 import com.danco.training.view.util.PrintRoom;
 
 public class ShowChekOutDateAction implements IAction{
-	private final Logger logger = Logger.getLogger(ShowChekOutDateAction.class);
+	private final Logger LOGGER = Logger.getLogger(ShowChekOutDateAction.class);
 	@Override
 	public Transmission sendCommand() {
 		Transmission trans = null;
@@ -23,7 +23,7 @@ public class ShowChekOutDateAction implements IAction{
 			trans = new Transmission(methodName, args);
 
 		} catch (InputMismatchException e) {
-			logger.error(e.getMessage(),e);
+			LOGGER.error(e.getMessage(),e);
 		}
 		return trans;
 	}

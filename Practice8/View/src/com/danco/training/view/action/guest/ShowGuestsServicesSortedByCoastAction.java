@@ -12,7 +12,7 @@ import com.danco.training.view.util.InReader;
 import com.danco.training.view.util.PrintService;
 
 public class ShowGuestsServicesSortedByCoastAction implements IAction{
-	private final Logger logger = Logger.getLogger(ShowGuestsServicesSortedByCoastAction.class);
+	private final Logger LOGGER = Logger.getLogger(ShowGuestsServicesSortedByCoastAction.class);
 	private static final String DETAILS_S = "name ; coast";
 	@Override
 	public Transmission sendCommand() {
@@ -23,7 +23,7 @@ public class ShowGuestsServicesSortedByCoastAction implements IAction{
 			String methodName = "showGuestsServicesSortedByCoast";
 			trans = new Transmission(methodName, args);
 		} catch (InputMismatchException e) {
-			logger.error(e.getMessage(),e);
+			LOGGER.error(e.getMessage(),e);
 		}
 		return trans;
 	}

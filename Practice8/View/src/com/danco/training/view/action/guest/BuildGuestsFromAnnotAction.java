@@ -8,7 +8,7 @@ import com.danco.training.transmission.Transmission;
 import com.danco.training.view.action.IAction;
 
 public class BuildGuestsFromAnnotAction implements IAction {
-	private final Logger logger = Logger.getLogger(BuildGuestsFromAnnotAction.class);
+	private final Logger LOGGER = Logger.getLogger(BuildGuestsFromAnnotAction.class);
 
 	@Override
 	public Transmission sendCommand() {
@@ -19,7 +19,7 @@ public class BuildGuestsFromAnnotAction implements IAction {
 			trans = new Transmission(methodName, args);
 
 		} catch (InputMismatchException e) {
-			logger.error(e.getMessage(),e);
+			LOGGER.error(e.getMessage(),e);
 		}
 		return trans;
 	}

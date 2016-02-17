@@ -13,7 +13,7 @@ import com.danco.training.properties.PropertiesReader;
 public class Server {
 	private int port;
 	private IHotelController hotelController;
-	private Logger logger = Logger.getLogger(Server.class);
+	private final Logger LOGGER = Logger.getLogger(Server.class);
 	public Server(int port) {
 		this.port = port;
 		PropertiesReader.getInstance().setProperties();
@@ -41,7 +41,7 @@ public class Server {
 			try {
 				serverSocket.close();
 			} catch (IOException e) {
-				logger.error(e.getMessage(), e);
+				LOGGER.error(e.getMessage(), e);
 			}
 		}
 

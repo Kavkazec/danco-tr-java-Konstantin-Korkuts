@@ -30,7 +30,7 @@ import com.danco.training.storage.Hotel;
  * The Class RoomService.
  */
 public class RoomService implements IRoomService{
-	private static final Logger logger = Logger.getLogger(RoomService.class);
+	private static final Logger LOGGER = Logger.getLogger(RoomService.class);
 	/** The t. */
 	private int t = 0;
 	
@@ -38,7 +38,7 @@ public class RoomService implements IRoomService{
 	private Hotel hotel = Hotel.getInstance();
 	
 	/** The sdf. */
-	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+	private final static SimpleDateFormat SDF = new SimpleDateFormat("dd-MM-yyyy");
 	
 	private static final String SEPAR = " ; ";
 	
@@ -55,7 +55,7 @@ public class RoomService implements IRoomService{
 		try{
 			return hotel.getRoom().getListOfNumbers();
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 			return null;
 		}
 	}
@@ -69,7 +69,7 @@ public class RoomService implements IRoomService{
 		try{
 			hotel.addRoom(room);
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		}
 	}
 	
@@ -82,7 +82,7 @@ public class RoomService implements IRoomService{
 		try{
 			hotel.deleteRoom(number);
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		}
 	}
 	
@@ -96,7 +96,7 @@ public class RoomService implements IRoomService{
 		try{
 			hotel.deleteGuestFromRoom(name);
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		}
 	}
 	
@@ -109,7 +109,7 @@ public class RoomService implements IRoomService{
 		try{
 			hotel.deleteAllGuestFromRoom(number);
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		}
 	}
 	
@@ -123,7 +123,7 @@ public class RoomService implements IRoomService{
 		try{
 			hotel.addGuestInRoom(number, name);
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		}	
 	}
 	
@@ -136,7 +136,7 @@ public class RoomService implements IRoomService{
 				}
 			}
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		}	
 	}
 	
@@ -150,7 +150,7 @@ public class RoomService implements IRoomService{
 				}
 			}
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		}
 	}
 	
@@ -164,7 +164,7 @@ public class RoomService implements IRoomService{
 			Collections.sort(hotel.getRoom().getListOfNumbers(), new FreeRoomCoastComparator());
 			return hotel.getRoom().getListOfNumbers();
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 			return null;
 		}
 	}
@@ -179,7 +179,7 @@ public class RoomService implements IRoomService{
 			Collections.sort(hotel.getRoom().getListOfNumbers(), new FreeRoomCopasityComparator());
 			return hotel.getRoom().getListOfNumbers();
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 			return null;
 		}
 	}
@@ -194,7 +194,7 @@ public class RoomService implements IRoomService{
 			Collections.sort(hotel.getRoom().getListOfNumbers(), new FreeRoomStarsComparator());
 			return hotel.getRoom().getListOfNumbers();
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 			return null;
 		}	
 	}
@@ -209,7 +209,7 @@ public class RoomService implements IRoomService{
 			Collections.sort(hotel.getRoom().getListOfNumbers(), new RoomCoastComparator());
 			return hotel.getRoom().getListOfNumbers();
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 			return null;
 		}	
 	}
@@ -224,7 +224,7 @@ public class RoomService implements IRoomService{
 			Collections.sort(hotel.getRoom().getListOfNumbers(), new RoomCopasityComparator());
 			return hotel.getRoom().getListOfNumbers();
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 			return null;
 		}	
 	}
@@ -239,7 +239,7 @@ public class RoomService implements IRoomService{
 			Collections.sort(hotel.getRoom().getListOfNumbers(), new RoomStarsCmparator());
 			return hotel.getRoom().getListOfNumbers();
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 			return null;
 		}	
 	}
@@ -258,7 +258,7 @@ public class RoomService implements IRoomService{
 					
 			return t;
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 			return 0;
 		}	
 	}
@@ -276,14 +276,15 @@ public class RoomService implements IRoomService{
 			{
 					for(int j = 0; j < hotel.getRoom().getListOfNumbers().get(i).getGuests().size(); j++)
 					{
-						if(hotel.getRoom().getListOfNumbers().get(i).getStatus() == true && sdf.format(hotel.getRoom().getListOfNumbers().get(i).getGuests().get(j).getDateOfEvi()).equals(sdf.format(date))){
+						if(hotel.getRoom().getListOfNumbers().get(i).getStatus() == true 
+								&& SDF.format(hotel.getRoom().getListOfNumbers().get(i).getGuests().get(j).getDateOfEvi()).equals(SDF.format(date))){
 							list.add(hotel.getRoom().getListOfNumbers().get(i));
 						}
 					}
 			}
 			return list;
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 			return null;
 		}
 	}
@@ -307,7 +308,7 @@ public class RoomService implements IRoomService{
 			}
 			return str;
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 			return null;
 		}
 	}
@@ -331,7 +332,7 @@ public class RoomService implements IRoomService{
 			}
 			return str;
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 			return null;
 		}
 	}
@@ -363,7 +364,7 @@ public class RoomService implements IRoomService{
 			}
 			return list;
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 			return null;
 		}
 	}
@@ -372,7 +373,7 @@ public class RoomService implements IRoomService{
 		try{
 			hotel.cloneRoom(number);
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		}
 	}
 	
@@ -381,7 +382,7 @@ public class RoomService implements IRoomService{
 			PropertiesReader.getInstance().setProperties();
 			ImportAndExport.getInstance().writeToFileRooms(PropertiesReader.getInstance().getUtil().getCsvPath());
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		}
 	}
 
@@ -390,14 +391,18 @@ public class RoomService implements IRoomService{
 			PropertiesReader.getInstance().setProperties();
 			hotel.getRoom().setRooms(ImportAndExport.getInstance().readFromFileRooms(PropertiesReader.getInstance().getUtil().getCsvPath()));
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		}
 	}
 	public void buildRoomsFromAnnot(){
-		PropertiesReader.getInstance().setProperties();
-		ProcessAnnotation p = new ProcessAnnotation();
-		InitRoomAnnotation r = new InitRoomAnnotation();
-		p.procAnnotation(r);
-		hotel.getRoom().setRooms(r.soomList());;
+		try{
+			PropertiesReader.getInstance().setProperties();
+			ProcessAnnotation p = new ProcessAnnotation();
+			InitRoomAnnotation r = new InitRoomAnnotation();
+			p.procAnnotation(r);
+			hotel.getRoom().setRooms(r.soomList());
+		}catch (Exception e) {
+			LOGGER.error(e.getMessage(), e);
+		}
 	}
 }

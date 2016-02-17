@@ -9,7 +9,7 @@ import com.danco.training.view.action.IAction;
 import com.danco.training.view.util.InReader;
 
 public class DeleteRoomAction implements IAction{
-	private final Logger logger = Logger.getLogger(DeleteRoomAction.class);
+	private final Logger LOGGER = Logger.getLogger(DeleteRoomAction.class);
 
 	@Override
 	public Transmission sendCommand() {
@@ -21,7 +21,7 @@ public class DeleteRoomAction implements IAction{
 			trans = new Transmission(methodName, args);
 
 		} catch (InputMismatchException e) {
-			logger.error(e.getMessage(),e);
+			LOGGER.error(e.getMessage(),e);
 		}
 		return trans;
 	}

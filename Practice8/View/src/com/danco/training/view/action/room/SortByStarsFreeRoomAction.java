@@ -13,7 +13,7 @@ import com.danco.training.view.util.PrintRoom;
 
 
 public class SortByStarsFreeRoomAction implements IAction{
-	private final Logger logger = Logger.getLogger(SortByStarsFreeRoomAction.class);
+	private final Logger LOGGER = Logger.getLogger(SortByStarsFreeRoomAction.class);
 	private static final String DETAILS_ROOM = "number ; capacity ; stats ; coast ; free? ; on repair?";
 
 	@Override
@@ -24,7 +24,7 @@ public class SortByStarsFreeRoomAction implements IAction{
 			String methodName = "sortByStarsFreeRoom";
 			trans = new Transmission(methodName, args);
 		} catch (InputMismatchException e) {
-			logger.error(e.getMessage(),e);
+			LOGGER.error(e.getMessage(),e);
 		}
 		return trans;
 	}

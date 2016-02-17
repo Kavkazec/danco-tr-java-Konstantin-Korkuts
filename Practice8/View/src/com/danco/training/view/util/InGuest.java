@@ -20,7 +20,7 @@ public class InGuest {
 			Date dateDep = InReader.readDate();
 			gm = new GuestModel(name, dateArr, dateDep);
 		} catch (Exception e) {
-			LOGGER.error("Date_ERROR");
+			LOGGER.error(e.getMessage(), e);
 		}
 		return gm;
 	}

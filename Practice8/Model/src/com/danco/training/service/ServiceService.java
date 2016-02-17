@@ -18,7 +18,7 @@ import com.danco.training.storage.Hotel;
 	 * The Class ServiceService.
 	 */
 	public class ServiceService implements IServiceService{
-	private static final Logger logger = Logger.getLogger(GuestService.class);
+	private static final Logger LOGGER = Logger.getLogger(GuestService.class);
 	/** The hotel. */
 	private Hotel hotel = Hotel.getInstance();
 	
@@ -35,7 +35,7 @@ import com.danco.training.storage.Hotel;
 		try{
 			hotel.addService(service);
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		}
 	}
 	
@@ -48,7 +48,7 @@ import com.danco.training.storage.Hotel;
 		try{
 			hotel.deleteService(name);
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		}
 	}
 	
@@ -61,7 +61,7 @@ import com.danco.training.storage.Hotel;
 		try{
 			return hotel.getService().getListOfServices();
 		}catch (Exception e) {
-			logger.error("EXPTION", e);
+			LOGGER.error("EXPTION", e);
 			return null;
 		}
 	}
@@ -80,7 +80,7 @@ import com.danco.training.storage.Hotel;
 				}
 			}	
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		}
 	}
 	
@@ -89,7 +89,7 @@ import com.danco.training.storage.Hotel;
 			PropertiesReader.getInstance().setProperties();
 			ImportAndExport.getInstance().writeToFileServices(PropertiesReader.getInstance().getUtil().getCsvPath());
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		}
 	}
 	
@@ -98,15 +98,19 @@ import com.danco.training.storage.Hotel;
 			PropertiesReader.getInstance().setProperties();
 			hotel.getService().setServices(ImportAndExport.getInstance().readFromFileServices(PropertiesReader.getInstance().getUtil().getCsvPath()));
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		}
 	}
 	
 	public void buildServicesFromAnnot(){
-		PropertiesReader.getInstance().setProperties();
-		ProcessAnnotation p = new ProcessAnnotation();
-		InitServerAnnotation s = new InitServerAnnotation();
-		p.procAnnotation(s);
-		hotel.getService().setServices(s.buildServices());
+		try{
+			PropertiesReader.getInstance().setProperties();
+			ProcessAnnotation p = new ProcessAnnotation();
+			InitServerAnnotation s = new InitServerAnnotation();
+			p.procAnnotation(s);
+			hotel.getService().setServices(s.buildServices());
+		}catch (Exception e) {
+			LOGGER.error(e.getMessage(), e);
+		}
 	}
 }

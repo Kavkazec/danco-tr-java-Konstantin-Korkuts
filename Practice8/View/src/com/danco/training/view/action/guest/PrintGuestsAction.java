@@ -15,7 +15,7 @@ import com.danco.training.view.util.PrintGuest;
 import com.danco.training.view.util.PrintService;
 
 public class PrintGuestsAction implements IAction{
-	private final Logger logger = Logger.getLogger(PrintGuestsAction.class);
+	private final Logger LOGGER = Logger.getLogger(PrintGuestsAction.class);
 	private static final String DETAILS_GUEST = "name ; date of added; date of departure ;";
 	@Override
 	public Transmission sendCommand() {
@@ -25,7 +25,7 @@ public class PrintGuestsAction implements IAction{
 			String methodName = "printGuest";
 			trans = new Transmission(methodName, args);
 		} catch (InputMismatchException e) {
-			logger.error(e.getMessage(),e);
+			LOGGER.error(e.getMessage(),e);
 		}
 		return trans;
 	}

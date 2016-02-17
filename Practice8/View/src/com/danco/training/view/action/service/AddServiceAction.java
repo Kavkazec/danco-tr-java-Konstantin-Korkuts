@@ -9,7 +9,7 @@ import com.danco.training.view.action.IAction;
 import com.danco.training.view.util.InService;
 
 public class AddServiceAction implements IAction{
-	private final Logger logger = Logger.getLogger(AddServiceAction.class);
+	private final Logger LOGGER = Logger.getLogger(AddServiceAction.class);
 	@Override
 	public Transmission sendCommand() {
 		Transmission trans = null;
@@ -19,7 +19,7 @@ public class AddServiceAction implements IAction{
 			trans = new Transmission(methodName, args);
 
 		} catch (InputMismatchException e) {
-			logger.error(e.getMessage(),e);
+			LOGGER.error(e.getMessage(),e);
 		}
 		return trans;
 	}

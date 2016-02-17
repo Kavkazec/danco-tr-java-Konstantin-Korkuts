@@ -27,7 +27,7 @@ import com.danco.training.storage.Hotel;
 
 public class GuestService implements IGuestService{
 	
-	private static final Logger logger = Logger.getLogger(GuestService.class);
+	private static final Logger LOGGER = Logger.getLogger(GuestService.class);
 	
 	/** The t. */
 	private int t = 0;
@@ -48,7 +48,7 @@ public class GuestService implements IGuestService{
 		try{
 			return hotel.getGuest().getGuests();
 		}  catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 			return null;
 		}
 	}
@@ -62,7 +62,7 @@ public class GuestService implements IGuestService{
 		try{
 			hotel.addGuest(guest);
 		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		}
 	}
 	
@@ -75,7 +75,7 @@ public class GuestService implements IGuestService{
 		try{
 			hotel.deleteGuest(str);
 		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		}
 	}
 	
@@ -89,7 +89,7 @@ public class GuestService implements IGuestService{
 		try{
 			hotel.addServiceToGuest(guest, service);
 		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		}
 	}
 	
@@ -104,7 +104,7 @@ public class GuestService implements IGuestService{
 			Collections.sort(hotel.getGuest().getGuests(), new GuestNameComparator());
 			return hotel.getGuest().getGuests();
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 			return null;
 		}
 	}
@@ -119,7 +119,7 @@ public class GuestService implements IGuestService{
 			Collections.sort(hotel.getGuest().getGuests(), new GuestDateComparator());
 			return hotel.getGuest().getGuests();
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 			return null;
 		}
 	}
@@ -136,7 +136,7 @@ public class GuestService implements IGuestService{
 			}		
 			return t;
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 			return 0;
 		}
 	}
@@ -160,7 +160,7 @@ public class GuestService implements IGuestService{
 			Collections.sort(list, new GuestServicesCoastComparator());
 			return list;
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 			return null;
 		}
 	}
@@ -184,7 +184,7 @@ public class GuestService implements IGuestService{
 			Collections.sort(list, new GuestServicesDateCopmarator());
 			return list;
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 			return null;
 		}
 	}
@@ -194,7 +194,7 @@ public class GuestService implements IGuestService{
 			PropertiesReader.getInstance().setProperties();
 			ImportAndExport.getInstance().writeToFileGuests(PropertiesReader.getInstance().getUtil().getCsvPath());
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		}	
 	}
 	
@@ -203,7 +203,7 @@ public class GuestService implements IGuestService{
 			PropertiesReader.getInstance().setProperties();
 			hotel.getGuest().setGuests(ImportAndExport.getInstance().readFromFileGuests(PropertiesReader.getInstance().getUtil().getCsvPath()));
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		}
 	}
 	
@@ -219,15 +219,19 @@ public class GuestService implements IGuestService{
 			}
 			return list;
 		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 			return null;
 		}
 	}
 	public void buildGuestsFromAnnot(){
-		PropertiesReader.getInstance().setProperties();
-		ProcessAnnotation p = new ProcessAnnotation();
-		InitGuestAnnotation g = new InitGuestAnnotation();
-		p.procAnnotation(g);
-		hotel.getGuest().setGuests(g.guestList());
+		try{
+			PropertiesReader.getInstance().setProperties();
+			ProcessAnnotation p = new ProcessAnnotation();
+			InitGuestAnnotation g = new InitGuestAnnotation();
+			p.procAnnotation(g);
+			hotel.getGuest().setGuests(g.guestList());
+		}catch (Exception e) {
+			LOGGER.error(e.getMessage(), e);
+		}
 	}
 }
