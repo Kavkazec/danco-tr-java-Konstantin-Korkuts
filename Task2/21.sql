@@ -1,1 +1,4 @@
-SELECT maker, c FROM (SELECT MAX(price) c, model FROM pc GROUP BY model) p INNER JOIN product ON p.model=product.model;
+SELECT maker, MAX(price)
+FROM product
+INNER JOIN pc ON product.model=pc.model
+GROUP BY maker;

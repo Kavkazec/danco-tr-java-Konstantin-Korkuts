@@ -4,26 +4,41 @@ USE danco_hotel_korkuts;
 
 
 CREATE TABLE IF NOT EXISTS guest_model(
-   id INT NOT NULL PRIMARY KEY,
-   guest_name VARCHAR(30) NOT NULL,
-   dateOfAdd DATE NOT NULL,
-   dateOfEvi DATE NOT NULL,
-   service_name VARCHAR(30) NULL,
-   FOREIGN KEY (service_name) REFERENCES service_model(service_name)
+   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+   guest_name VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS room_model(
-    room_number INT NOT NULL PRIMARY KEY,
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    room_number INT NOT NULL,
 	capasity INT NOT NULL,
 	numberOfStars INT NOT NULL,
 	coast INT NOT NULL,
 	isFreeRoom BOOLEAN NOT NULL,
-	isOnRepair BOOLEAN NOT NULL,
-	guest_id INT NULL,
-	FOREIGN KEY (guest_id) REFERENCES guest_model(id)
+	isOnRepair BOOLEAN NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS service_model(
-    service_name VARCHAR(30) NOT NULL PRIMARY KEY,
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    service_name VARCHAR(30) NOT NULL,
 	coast INT NOT NULL 
+);
+
+CREATE TABLE IF NOT EXISTS room_guests(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	guest_ID INT NOT NULL,
+	room_ID INT NOT NULL,
+	date_arrive DATE NOT NULL,
+	date_departure DATE NOT NULL,
+	FOREIGN KEY (guest_ID) REFERENCES guest_model(id),
+	FOREIGN KEY (room_ID) REFERENCES room_model(id)
+);
+
+
+CREATE TABLE IF NOT EXISTS guest_services(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	guest_ID INT NOT NULL,
+	service_ID INT NOT NULL,
+	FOREIGN KEY (guest_ID) REFERENCES guest_model(id),
+	FOREIGN KEY (service_ID) REFERENCES service_model(id)
 );
