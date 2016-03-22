@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ControllerAPI"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Entity"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Controller"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DI"/>
+	<classpathentry kind="lib" path="C:/Users/Kavkazec/practice/Model/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Kavkazec/practice/Model/lib/properties.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Kavkazec/practice/Model/lib/ConfigPropery.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Kavkazec/practice/Model/lib/mysql-connector-java-5.1.38-bin.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
