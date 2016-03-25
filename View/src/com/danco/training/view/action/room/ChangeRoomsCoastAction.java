@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 
 import org.apache.log4j.Logger;
 
+import com.danco.training.controller.HotelController;
 import com.danco.training.transmission.Transmission;
 import com.danco.training.view.action.IAction;
 import com.danco.training.view.util.InReader;
@@ -14,10 +15,9 @@ public class ChangeRoomsCoastAction implements IAction{
 	public Transmission sendCommand() {
 		Transmission trans = null;
 		try {
-			InReader.print("Enter number:");
-			InReader.print("Enter coast:");
-			Object[] args = {InReader.readInt(), InReader.readInt()};
-			String methodName = "changeRoomsCoast";
+			InReader.print("Enter room identifier:");
+			Object[] args = {HotelController.getInstance().getByIdRoom(InReader.readInt())};
+			String methodName = "changeRoomCoast";
 			trans = new Transmission(methodName, args);
 
 		} catch (InputMismatchException e) {

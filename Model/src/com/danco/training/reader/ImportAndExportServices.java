@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.entity.ServiceModel;
+import com.danco.training.entity.Service;
 import com.danco.training.service.ServiceService;
 
 public class ImportAndExportServices {
@@ -27,14 +27,15 @@ public class ImportAndExportServices {
 	
 	public void writeToFileServices(String path){
 		FileWriter fw = null;
+		List<Service> list = getService().getServices();
 		try {
 			fw = new FileWriter(path);
-			fw.append(ServiceModel.class.getSimpleName());
+			fw.append(Service.class.getSimpleName());
 			fw.append(NEXT_LINE);
-			for(int i = 0 ; i < getService().printService().size(); i++){
-				fw.append(getService().printService().get(i).getName());
+			for(int i = 0 ; i < list.size(); i++){
+				fw.append(list.get(i).getName());
 				fw.append(SEPAR);
-				fw.append(getService().printService().get(i).getCoast() + "");
+				fw.append(list.get(i).getCoast() + "");
 				fw.append(SEPAR);
 				fw.append(NEXT_LINE);
 			}
@@ -50,9 +51,9 @@ public class ImportAndExportServices {
 		}
 	}
 	
-	public List<ServiceModel> readFromFileServices(String path){
+	public List<Service> readFromFileServices(String path){
 		List<String> list = new ArrayList<String>();
-		List<ServiceModel> services = new ArrayList<ServiceModel>();
+		List<Service> services = new ArrayList<Service>();
 		String line = "";
 		BufferedReader bf = null;
 		try {
@@ -61,11 +62,11 @@ public class ImportAndExportServices {
 				list.add(line);
 			}
 			for(int i = 1; i < list.size(); i++){
-				if(ServiceModel.class.getSimpleName().equals(list.get(0))){
+				if(Service.class.getSimpleName().equals(list.get(0))){
 					String[] arr = list.get(i).split(SEPAR);
 					String name = arr[0];
 					int coast = Integer.parseInt(arr[1]);
-					ServiceModel sm = new ServiceModel(name, coast);
+					Service sm = new Service(name, coast);
 					if(!equalID(name, services)){
 						services.add(sm);
 					}
@@ -86,9 +87,9 @@ public class ImportAndExportServices {
 		return services;
 	}
 	
-	public boolean equalID(String name, List<ServiceModel> list){
+	public boolean equalID(String name, List<Service> list){
 		boolean b = false;
-		for(ServiceModel model: list){
+		for(Service model: list){
 			if(model.getName().equals(name)){
 				b = true;
 				break;

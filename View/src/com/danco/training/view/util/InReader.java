@@ -47,6 +47,18 @@ public class InReader {
 		}
 	}
 	
+	public static boolean readBoolean(){
+		Scanner sc = new Scanner(System.in);
+		Boolean bool = null;
+		try {
+			bool = sc.nextBoolean();
+			return bool;
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage(),e);
+			return false;
+		}
+	}
+	
 	public static void print(String str){
 		System.out.println(str);
 	}

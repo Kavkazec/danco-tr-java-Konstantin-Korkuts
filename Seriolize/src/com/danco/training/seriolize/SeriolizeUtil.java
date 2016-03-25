@@ -9,8 +9,8 @@ import java.io.ObjectOutputStream;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
+import com.danco.training.dao.factory.DaoFactory;
 import com.danco.training.properties.PropertiesReader;
-import com.danco.training.storage.Hotel;
 
 public class SeriolizeUtil {
 	private static final Logger LOGGER = Logger.getLogger(SeriolizeUtil.class);
@@ -24,6 +24,7 @@ public class SeriolizeUtil {
 	}
 	
 	public void writeInFile(){
+		DaoFactory dao = new DaoFactory();
 		PropertiesReader.getInstance().setProperties();
 		BasicConfigurator.configure();
 		FileOutputStream fos = null;
@@ -31,7 +32,7 @@ public class SeriolizeUtil {
 		try {
 			fos = new FileOutputStream(PropertiesReader.getInstance().getUtil().getPath());
 			oos = new ObjectOutputStream(fos);
-			oos.writeObject(Hotel.getInstance());
+			oos.writeObject(dao);
 			oos.flush();
 		}  catch (IOException e) {
 			LOGGER.error(e.getMessage(),e);
@@ -54,11 +55,7 @@ public class SeriolizeUtil {
 		try {
 			fis = new FileInputStream(PropertiesReader.getInstance().getUtil().getPath());
 			oin = new ObjectInputStream(fis);
-			Hotel hotel = (Hotel) oin.readObject();
-			Hotel.getInstance().setGuest(hotel.getGuest());
-			Hotel.getInstance().setRoom(hotel.getRoom());
-			Hotel.getInstance().setService(hotel.getService());
-			
+			DaoFactory.setDaoFactory((DaoFactory) oin.readObject());
 		} catch (ClassNotFoundException | IOException e) {
 			LOGGER.error(e.getMessage(),e);
 		}finally{

@@ -7,7 +7,7 @@ import java.net.Socket;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.controller.api.IHotelController;
+import com.danco.training.services.api.IHotelController;
 
 public class ThreatsForClinets extends Thread{
 	private final Logger LOGGER = Logger.getLogger(ThreatsForClinets.class);

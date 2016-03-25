@@ -1,116 +1,132 @@
 package com.danco.training.service;
 
-
+import java.sql.Connection;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.annotation.ProcessAnnotation;
-import com.danco.training.controller.api.IServiceService;
-import com.danco.training.entity.ServiceModel;
+import com.danco.training.dao.ServiceDao;
+import com.danco.training.dao.factory.DaoFactory;
+import com.danco.training.dbconnection.ConnectionProvider;
+import com.danco.training.entity.Service;
+import com.danco.training.persistexception.PersistenceException;
 import com.danco.training.properties.PropertiesReader;
-import com.danco.training.properties.init.annotation.InitServerAnnotation;
 import com.danco.training.reader.ImportAndExport;
-import com.danco.training.storage.Hotel;
+import com.danco.training.services.api.IServiceService;
+
 
 	// TODO: Auto-generated Javadoc
 /**
 	 * The Class ServiceService.
 	 */
-	public class ServiceService implements IServiceService{
-	private static final Logger LOGGER = Logger.getLogger(GuestService.class);
-	/** The hotel. */
-	private Hotel hotel = Hotel.getInstance();
+public class ServiceService implements IServiceService{
+	private static final Logger LOGGER = Logger.getLogger(ServiceService.class);
+	private ServiceDao dao = DaoFactory.getServiceDao();
+	private ImportAndExport ie = ImportAndExport.getInstance();
 	
-	/**
-	 * Instantiates a new service service.
-	 */
-	
-	/**
-	 * Adds the service.
-	 *
-	 * @param service the service
-	 */
-	public void addService(ServiceModel service){
+	public String getPath(){
 		try{
-			hotel.addService(service);
-		}catch (Exception e) {
-			LOGGER.error(e.getMessage(), e);
-		}
-	}
-	
-	/**
-	 * Delete service.
-	 *
-	 * @param service the service
-	 */
-	public void deleteService(String name){
-		try{
-			hotel.deleteService(name);
-		}catch (Exception e) {
-			LOGGER.error(e.getMessage(), e);
-		}
-	}
-	
-	/**
-	 * Gets the services.
-	 *
-	 * @return the services
-	 */
-	public List<ServiceModel> printService(){
-		try{
-			return hotel.getService().getListOfServices();
-		}catch (Exception e) {
-			LOGGER.error("EXPTION", e);
+			PropertiesReader prop = PropertiesReader.getInstance();
+			prop.setProperties();
+			return prop.getUtil().getCsvPath();
+		}catch(Exception e){
+			LOGGER.error(e);
 			return null;
 		}
 	}
 	
-	/**
-	 * Change status.
-	 *
-	 * @param name the name
-	 * @param coast the coast
-	 */
-	public void changeServicesCoast(String name,int coast){	
-		try{
-			for(ServiceModel m: hotel.getService().getListOfServices()){
-				if(m.getName() == name){
-					m.setCoast(coast);
-				}
-			}	
-		}catch (Exception e) {
-			LOGGER.error(e.getMessage(), e);
+	public Connection getConnection(){
+		try {
+			return ConnectionProvider.getInstance().getConnection();
+		} catch (PersistenceException e) {
+			LOGGER.error(e);
+			return null;
+			
 		}
 	}
 	
-	public void exportServices(){
+	@Override
+	public void addService(Service service) {
 		try{
-			PropertiesReader.getInstance().setProperties();
-			ImportAndExport.getInstance().writeToFileServices(PropertiesReader.getInstance().getUtil().getCsvPath());
-		}catch (Exception e) {
-			LOGGER.error(e.getMessage(), e);
+			dao.add(getConnection(), service);
+		} catch(Exception e){
+			LOGGER.error(e);
+		}
+	}
+
+	@Override
+	public void deleteService(Service service) {
+		try{
+			dao.delete(getConnection(), service);
+		} catch(Exception e){
+			LOGGER.error(e);
+		}
+	}
+
+	@Override
+	public List<Service> getServices() {
+		try{
+			return dao.getAll(getConnection());
+		} catch(Exception e){
+			LOGGER.error(e);
+			return null;
+		}
+		
+	}
+
+	@Override
+	public void exportServices() {
+		try{
+			ie.writeToFileServices(getPath());
+		} catch(Exception e){
+			LOGGER.error(e);
+		}
+	}
+
+	@Override
+	public void importServices() {
+		try{
+			ie.readFromFileServices(getPath());
+		} catch(Exception e){
+			LOGGER.error(e);
+		}
+	}
+
+	@Override
+	public void buildServicesFromAnnot() {
+		try{
+			
+		} catch(Exception e){
+			LOGGER.error(e);
+		}
+	}
+
+	@Override
+	public void updateService(Service service) {
+		try{
+			dao.update(getConnection(), service);
+		} catch(Exception e){
+			LOGGER.error(e);
+		}
+	}
+
+	@Override
+	public void changeServiceCoast(Service service) {
+		try{
+			dao.update(getConnection(), service);
+		} catch(Exception e){
+			LOGGER.error(e);
+		}
+	}
+
+	@Override
+	public Service getByIdService(int id) {
+		try{
+			return dao.getById(getConnection(), id);
+		} catch(Exception e){
+			LOGGER.error(e);
+			return null;
 		}
 	}
 	
-	public void importServices(){
-		try{
-			PropertiesReader.getInstance().setProperties();
-			hotel.getService().setServices(ImportAndExport.getInstance().readFromFileServices(PropertiesReader.getInstance().getUtil().getCsvPath()));
-		}catch (Exception e) {
-			LOGGER.error(e.getMessage(), e);
-		}
-	}
-	
-	public void buildServicesFromAnnot(){
-		try{
-			PropertiesReader.getInstance().setProperties();
-			ProcessAnnotation p = new ProcessAnnotation();
-			InitServerAnnotation s = new InitServerAnnotation();
-			p.procAnnotation(s);
-			hotel.getService().setServices(s.buildServices());
-		}catch (Exception e) {
-			LOGGER.error(e.getMessage(), e);
-		}
-	}
 }

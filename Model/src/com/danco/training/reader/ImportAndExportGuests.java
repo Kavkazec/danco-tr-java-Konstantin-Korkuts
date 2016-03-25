@@ -5,21 +5,18 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.entity.GuestModel;
+import com.danco.training.entity.Guest;
 import com.danco.training.service.GuestService;
 
 public class ImportAndExportGuests {
+	
 	private static final String SEPAR = " ; ";
 	private static final String NEXT_LINE = "\n";
-	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	private static final Logger LOGGER = Logger.getLogger(ImportAndExportGuests.class);
 	private GuestService service;
 	public GuestService getService() {
@@ -31,16 +28,17 @@ public class ImportAndExportGuests {
 	
 	public void writeToFileGuests(String path){
 		FileWriter fw = null;
+		List<Guest> list = getService().getGuests();
 		try {
 			fw = new FileWriter(path);
-			fw.append(GuestModel.class.getSimpleName());
+			fw.append(Guest.class.getSimpleName());
 			fw.append(NEXT_LINE);
-			for(int i = 0 ; i < getService().printGuest().size(); i++){
-				fw.append(getService().printGuest().get(i).getName());
+			for(int i = 0 ; i < list.size(); i++){
+				fw.append(list.get(i).getName());
 				fw.append(SEPAR);
-				fw.append(sdf.format(getService().printGuest().get(i).getDateOfAdd()));
+				fw.append(list.get(i).getPassportSeries());
 				fw.append(SEPAR);
-				fw.append(sdf.format(getService().printGuest().get(i).getDateOfEvi()));
+				fw.append(list.get(i).getPassportNumber()+"");
 				fw.append(SEPAR);
 				fw.append(NEXT_LINE);
 			}
@@ -56,9 +54,9 @@ public class ImportAndExportGuests {
 		}
 	}
 	
-	public List<GuestModel> readFromFileGuests(String path){
+	public List<Guest> readFromFileGuests(String path){
 		List<String> list = new ArrayList<String>();
-		List<GuestModel> guests = new ArrayList<GuestModel>();
+		List<Guest> guests = new ArrayList<Guest>();
 		String line = "";
 		BufferedReader bf = null;
 		try {
@@ -67,13 +65,13 @@ public class ImportAndExportGuests {
 				list.add(line);
 			}
 			for(int i = 1; i < list.size(); i++){
-				if(GuestModel.class.getSimpleName().equals(list.get(0))){
+				if(Guest.class.getSimpleName().equals(list.get(0))){
 					String[] arr = list.get(i).split(SEPAR);
 					String name = arr[0];
-					Date add = sdf.parse(arr[1]);
-					Date evi = sdf.parse(arr[2]);
-					GuestModel gm = new GuestModel(name, add, evi);
-					if(!equalID(name, add, guests)){
+					String passSer = arr[1];
+					int passNum = Integer.parseInt(arr[2]);
+					Guest gm = new Guest(name, passSer, passNum);
+					if(!equalID(name, passNum, guests)){
 						guests.add(gm);
 					}
 				}
@@ -81,8 +79,6 @@ public class ImportAndExportGuests {
 		}catch (FileNotFoundException e) {
 			LOGGER.error(e.getMessage(),e);
 		} catch (IOException e) {
-			LOGGER.error(e.getMessage(),e);
-		} catch (ParseException e) {
 			LOGGER.error(e.getMessage(),e);
 		} finally {
 			try {
@@ -95,10 +91,10 @@ public class ImportAndExportGuests {
 	
 	}
 	
-	public boolean equalID(String name, Date date, List<GuestModel> list){
-		GuestModel gm = null;
-		for(GuestModel model: list){
-			if(model.getName().equals(name) && model.getDateOfAdd().equals(date)){
+	public boolean equalID(String name, int number, List<Guest> list){
+		Guest gm = null;
+		for(Guest model: list){
+			if(model.getName().equals(name) && model.getPassportNumber()==number){
 				gm = model;
 				break;
 			}

@@ -1,3 +1,6 @@
-ServiceModel
-ag ; 100 ; 
-ag ; 100 ; 
+Room
+122 ; 2 ; 3 ; 200 ; true ; false ; 
+220 ; 3 ; 5 ; 300 ; true ; false ; 
+210 ; 2 ; 3 ; 200 ; true ; false ; 
+211 ; 4 ; 4 ; 400 ; true ; false ; 
+228 ; 2 ; 5 ; 600 ; true ; true ; 

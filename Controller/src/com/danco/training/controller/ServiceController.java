@@ -1,10 +1,9 @@
 package com.danco.training.controller;
 
-import java.util.Collections;
 import java.util.List;
 
-import com.danco.training.controller.api.IServiceService;
-import com.danco.training.entity.ServiceModel;
+import com.danco.training.entity.Service;
+import com.danco.training.services.api.IServiceService;
 
 public class ServiceController {
 	private IServiceService serviceCon;
@@ -14,30 +13,33 @@ public class ServiceController {
 		this.serviceCon = serviceCon;
 	}
 	
-	public void addService(ServiceModel service){
+	public Service getByIdService(int id) {
+		return this.serviceCon.getByIdService(id);
+		
+	}
+	
+	public void addService(Service service){
 		this.serviceCon.addService(service);
 	}
-	
-	public void deleteService(String name){
-		this.serviceCon.deleteService(name);
+	public void deleteService(Service service){
+		this.serviceCon.deleteService(service);
 	}
-	
-	public void changeServicesCoast(String name, int coast){
-		this.serviceCon.changeServicesCoast(name, coast);
+	public void updateService(Service service){
+		this.serviceCon.updateService(service);
 	}
-	
-	public List<ServiceModel> printService(){
-		return Collections.synchronizedList(this.serviceCon.printService());
+	public List<Service> getServices(){
+		return this.serviceCon.getServices();
 	}
-	
-	public synchronized void exportServices(){
+	public void changeServiceCoast(Service service){
+		this.serviceCon.changeServiceCoast(service);
+	}
+	public void exportServices(){
 		this.serviceCon.exportServices();
 	}
-	public synchronized void importServices(){
+	public void importServices(){
 		this.serviceCon.importServices();
 	}
-	
-	public synchronized void buildServicesFromAnnot(){
+	public void buildServicesFromAnnot(){
 		this.serviceCon.buildServicesFromAnnot();
 	}
 }

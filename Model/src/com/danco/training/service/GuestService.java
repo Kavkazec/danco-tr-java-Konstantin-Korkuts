@@ -1,237 +1,133 @@
 package com.danco.training.service;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.sql.Connection;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.annotation.ProcessAnnotation;
-import com.danco.training.comparator.GuestDateComparator;
-import com.danco.training.comparator.GuestNameComparator;
-import com.danco.training.comparator.GuestServicesCoastComparator;
-import com.danco.training.comparator.GuestServicesDateCopmarator;
-import com.danco.training.controller.api.IGuestService;
-import com.danco.training.entity.GuestModel;
-import com.danco.training.entity.ServiceModel;
+import com.danco.training.dao.GuestDao;
+import com.danco.training.dao.factory.DaoFactory;
+import com.danco.training.dbconnection.ConnectionProvider;
+import com.danco.training.entity.Guest;
+import com.danco.training.persistexception.PersistenceException;
 import com.danco.training.properties.PropertiesReader;
-import com.danco.training.properties.init.annotation.InitGuestAnnotation;
 import com.danco.training.reader.ImportAndExport;
-import com.danco.training.storage.Hotel;
-
+import com.danco.training.services.api.IGuestService;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class GuestService.
  */
 
-public class GuestService implements IGuestService{
-	
+public class GuestService implements IGuestService {
 	private static final Logger LOGGER = Logger.getLogger(GuestService.class);
-	
-	/** The t. */
-	private int t = 0;
-	
-	/** The hotel. */
-	private Hotel hotel =  Hotel.getInstance();
+	private GuestDao dao = DaoFactory.getGuestDao();
+	private ImportAndExport ie = ImportAndExport.getInstance();
 
-	/**
-	 * Instantiates a new guest service.
-	 */
-	
-	/**
-	 * Sort by name.
-	 *
-	 * @return the guests
-	 */
-	public List<GuestModel> printGuest(){
-		try{
-			return hotel.getGuest().getGuests();
-		}  catch (Exception e) {
-			LOGGER.error(e.getMessage(), e);
+	public String getPath() {
+		try {
+			PropertiesReader prop = PropertiesReader.getInstance();
+			prop.setProperties();
+			return prop.getUtil().getCsvPath();
+		} catch (Exception e) {
+			LOGGER.error(e);
 			return null;
 		}
 	}
-	
-	/**
-	 * Adds the guest.
-	 *
-	 * @param guest the guest
-	 */
-	public void addGuest(GuestModel guest) {
-		try{
-			hotel.addGuest(guest);
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage(), e);
+
+	public Connection getConnection() {
+		try {
+			return ConnectionProvider.getInstance().getConnection();
+		} catch (PersistenceException e) {
+			LOGGER.error(e);
+			return null;
+
 		}
 	}
-	
-	/**
-	 * Delete guest.
-	 *
-	 * @param guest the guest
-	 */
-	public void deleteGuest(String str){
-		try{
-			hotel.deleteGuest(str);
+
+	@Override
+	public void addGuest(Guest guest) {
+		try {
+			dao.add(getConnection(), guest);
 		} catch (Exception e) {
-			LOGGER.error(e.getMessage(), e);
+			LOGGER.error(e);
 		}
 	}
-	
-	/**
-	 * Adds the service to guest.
-	 *
-	 * @param guest the guest
-	 * @param service the service
-	 */
-	public void addServiceToGuest(String guest, String service){
-		try{
-			hotel.addServiceToGuest(guest, service);
+
+	@Override
+	public void deleteGuest(Guest guest) {
+		try {
+			dao.delete(getConnection(), guest);
 		} catch (Exception e) {
-			LOGGER.error(e.getMessage(), e);
+			LOGGER.error(e);
 		}
 	}
-	
-	
-	/**
-	 * Sort by name.
-	 *
-	 * @return the list
-	 */
-	public List<GuestModel> sortByNameGuests(){
-		try{
-			Collections.sort(hotel.getGuest().getGuests(), new GuestNameComparator());
-			return hotel.getGuest().getGuests();
-		}catch (Exception e) {
-			LOGGER.error(e.getMessage(), e);
+
+	@Override
+	public void updateGuest(Guest guest) {
+		try {
+			dao.update(getConnection(), guest);
+		} catch (Exception e) {
+			LOGGER.error(e);
+		}
+	}
+
+	@Override
+	public List<Guest> getGuests() {
+		try {
+			return dao.getAll(getConnection());
+		} catch (Exception e) {
+			LOGGER.error(e);
 			return null;
 		}
+
 	}
-	
-	/**
-	 * Sort by date.
-	 *
-	 * @return the list
-	 */
-	public List<GuestModel> sortByDateGuests(){
-		try{
-			Collections.sort(hotel.getGuest().getGuests(), new GuestDateComparator());
-			return hotel.getGuest().getGuests();
-		}catch (Exception e) {
-			LOGGER.error(e.getMessage(), e);
-			return null;
+
+	@Override
+	public void exportGuests() {
+		try {
+			ie.writeToFileGuests(getPath());
+		} catch (Exception e) {
+			LOGGER.error(e);
 		}
 	}
-	
-	/**
-	 * Show all guests.
-	 *
-	 * @return the int
-	 */
-	public int showNumberOfGuests(){
+
+	@Override
+	public void importGuests() {
+		try {
+			ie.readFromFileGuests(getPath());
+		} catch (Exception e) {
+			LOGGER.error(e);
+		}
+	}
+
+	@Override
+	public void buildGuestsFromAnnot() {
+		try {
+
+		} catch (Exception e) {
+			LOGGER.error(e);
+		}
+	}
+
+	@Override
+	public int numberOfGuests() {
 		try{
-			for(int i = 0; i < hotel.getGuest().getGuests().size(); i++){
-				t +=1;
-			}		
-			return t;
-		}catch (Exception e) {
-			LOGGER.error(e.getMessage(), e);
+			return dao.getAll(getConnection()).size();
+		} catch(Exception e){
+			LOGGER.error(e);
 			return 0;
 		}
 	}
-	
-	/**
-	 * Show list of services sorted by coast.
-	 *
-	 * @param guest the guest
-	 * @return the list
-	 */
-	public List<ServiceModel> showGuestsServicesSortedByCoast(String name){
+
+	@Override
+	public Guest getByIdGuest(int id) {
 		try{
-			List<ServiceModel> list = new ArrayList<ServiceModel>();
-			for(GuestModel gm : hotel.getGuest().getGuests()){
-				if(name.equals(gm.getName())){
-					for(ServiceModel sm : gm.getServices()){
-						list.add(sm);
-					}
-				}
-			}
-			Collections.sort(list, new GuestServicesCoastComparator());
-			return list;
-		}catch (Exception e) {
-			LOGGER.error(e.getMessage(), e);
+			return dao.getById(getConnection(), id);
+		} catch(Exception e){
+			LOGGER.error(e);
 			return null;
 		}
 	}
-	
-	/**
-	 * Show list of services sorted by date.
-	 *
-	 * @param guest the guest
-	 * @return the list
-	 */
-	public List<ServiceModel> showGuestsServicesSortedByDate(String name){
-		try{
-			List<ServiceModel> list = new ArrayList<ServiceModel>();
-			for(GuestModel gm : hotel.getGuest().getGuests()){
-				if(name.equals(gm.getName())){
-					for(ServiceModel sm : gm.getServices()){
-						list.add(sm);
-					}
-				}
-			}
-			Collections.sort(list, new GuestServicesDateCopmarator());
-			return list;
-		}catch (Exception e) {
-			LOGGER.error(e.getMessage(), e);
-			return null;
-		}
-	}
-	
-	public void exportGuests(){
-		try{
-			PropertiesReader.getInstance().setProperties();
-			ImportAndExport.getInstance().writeToFileGuests(PropertiesReader.getInstance().getUtil().getCsvPath());
-		}catch (Exception e) {
-			LOGGER.error(e.getMessage(), e);
-		}	
-	}
-	
-	public void importGuests(){
-		try{
-			PropertiesReader.getInstance().setProperties();
-			hotel.getGuest().setGuests(ImportAndExport.getInstance().readFromFileGuests(PropertiesReader.getInstance().getUtil().getCsvPath()));
-		}catch (Exception e) {
-			LOGGER.error(e.getMessage(), e);
-		}
-	}
-	
-	public List<ServiceModel> getService(String name){
-		try{
-			List<ServiceModel> list = new ArrayList<ServiceModel>();
-			for(GuestModel gm : hotel.getGuest().getGuests()){
-				if(name.equals(gm.getName())){
-					for(ServiceModel sm : gm.getServices()){
-						list.add(sm);
-					}
-				}
-			}
-			return list;
-		}catch (Exception e) {
-			LOGGER.error(e.getMessage(), e);
-			return null;
-		}
-	}
-	public void buildGuestsFromAnnot(){
-		try{
-			PropertiesReader.getInstance().setProperties();
-			ProcessAnnotation p = new ProcessAnnotation();
-			InitGuestAnnotation g = new InitGuestAnnotation();
-			p.procAnnotation(g);
-			hotel.getGuest().setGuests(g.guestList());
-		}catch (Exception e) {
-			LOGGER.error(e.getMessage(), e);
-		}
-	}
+
 }

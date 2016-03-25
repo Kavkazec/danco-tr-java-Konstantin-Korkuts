@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.entity.RoomModel;
+import com.danco.training.entity.Room;
 import com.danco.training.transmission.Transmission;
 import com.danco.training.view.action.IAction;
 import com.danco.training.view.util.InReader;
@@ -27,11 +27,12 @@ public class SortByCoastRoomAction implements IAction{
 		}
 		return trans;
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public void answer(Object answerFromServer) {
 		InReader.print(DETAILS_ROOM);
 		if (answerFromServer instanceof List<?>) {
-			PrintRoom.printRooms((List<RoomModel>) answerFromServer);
+			PrintRoom.printRooms((List<Room>) answerFromServer);
 		}
 	}
 }

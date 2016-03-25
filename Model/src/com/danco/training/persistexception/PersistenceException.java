@@ -5,7 +5,7 @@ public class PersistenceException extends Exception{
 	 * 
 	 */
 	private static final long serialVersionUID = 8851856144272002809L;
-
+	
 	public PersistenceException() {
 		super();
 	}

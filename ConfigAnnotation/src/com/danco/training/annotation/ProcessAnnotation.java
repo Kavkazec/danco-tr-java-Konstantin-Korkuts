@@ -45,6 +45,9 @@ public class ProcessAnnotation {
 					if(type.equals("String")){
 						fields[i].set(ob, properties.getProperty(param+"."+type));
 					}
+					if(type.equals("Boolean")){
+						fields[i].set(ob, properties.getProperty(param+"."+type));
+					}
 					
 					if(type.equals("Date")){
 						if(properties.getProperty(param+"."+type) != null){

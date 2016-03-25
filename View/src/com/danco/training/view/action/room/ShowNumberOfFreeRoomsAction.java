@@ -15,7 +15,7 @@ public class ShowNumberOfFreeRoomsAction implements IAction {
 		Transmission trans = null;
 		try {
 			Object[] args = {};
-			String methodName = "showNumberOfFreeRooms";
+			String methodName = "numberOfFreeRooms";
 			trans = new Transmission(methodName, args);
 
 		} catch (InputMismatchException e) {

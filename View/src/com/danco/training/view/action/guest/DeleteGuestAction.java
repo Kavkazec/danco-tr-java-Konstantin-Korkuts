@@ -19,7 +19,6 @@ public class DeleteGuestAction implements IAction{
 			Object[] args = {InReader.readStrin()};
 			String methodName = "deleteGuest";
 			trans = new Transmission(methodName, args);
-
 		} catch (InputMismatchException e) {
 			LOGGER.error(e.getMessage(),e);
 		}

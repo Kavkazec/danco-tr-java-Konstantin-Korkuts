@@ -15,7 +15,7 @@ public class ShowNumberOfGuestsAction implements IAction{
 		Transmission trans = null;
 		try {
 			Object[] args = {};
-			String methodName = "showNumberOfGuests";
+			String methodName = "numberOfGuests";
 			trans = new Transmission(methodName, args);
 		} catch (InputMismatchException e) {
 			LOGGER.error(e.getMessage(),e);

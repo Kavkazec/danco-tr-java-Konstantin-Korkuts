@@ -6,9 +6,9 @@ import java.net.Socket;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.controller.api.IHotelController;
 import com.danco.training.di.DependencyInjection;
 import com.danco.training.properties.PropertiesReader;
+import com.danco.training.services.api.IHotelController;
 
 public class Server {
 	private int port;

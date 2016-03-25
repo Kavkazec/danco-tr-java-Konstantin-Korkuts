@@ -2,10 +2,9 @@ package com.danco.training.reader;
 
 import java.util.List;
 
-
-import com.danco.training.entity.GuestModel;
-import com.danco.training.entity.RoomModel;
-import com.danco.training.entity.ServiceModel;
+import com.danco.training.entity.Guest;
+import com.danco.training.entity.Room;
+import com.danco.training.entity.Service;
 
 public class ImportAndExport {
     private ImportAndExportGuests guest;
@@ -61,13 +60,13 @@ public class ImportAndExport {
     	getService().writeToFileServices(path);
     }
     
-    public List<ServiceModel> readFromFileServices(String path){
+    public List<Service> readFromFileServices(String path){
     	return getService().readFromFileServices(path);
     }
-    public List<RoomModel> readFromFileRooms(String path){
+    public List<Room> readFromFileRooms(String path){
     	return getRoom().readFromFileRooms(path);
     }
-    public List<GuestModel> readFromFileGuests(String path){
+    public List<Guest> readFromFileGuests(String path){
     	return getGuest().readFromFileGuests(path);
     }
 }

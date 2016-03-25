@@ -17,12 +17,12 @@ public class ConnectionProvider {
 	private ConnectionProvider() throws PersistenceException{
 		try {
 			Class.forName(JDBC_DRIVER);
-		} catch (Exception classNotFoundException) {
-			throw new PersistenceException(classNotFoundException);
+		} catch (Exception ex) {
+			throw new PersistenceException(ex);
 		}
 	}
 
-	public static ConnectionProvider getInstance() throws PersistenceException {
+	public static ConnectionProvider getInstance() throws PersistenceException{
 		if (instance == null) {
 			instance = new ConnectionProvider();
 		}

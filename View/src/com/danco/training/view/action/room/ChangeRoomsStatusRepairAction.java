@@ -4,8 +4,10 @@ import java.util.InputMismatchException;
 
 import org.apache.log4j.Logger;
 
+import com.danco.training.controller.HotelController;
 import com.danco.training.transmission.Transmission;
 import com.danco.training.view.action.IAction;
+import com.danco.training.view.util.InReader;
 
 public class ChangeRoomsStatusRepairAction implements IAction{
 	private final Logger LOGGER = Logger.getLogger(ChangeRoomsStatusRepairAction.class);
@@ -13,8 +15,9 @@ public class ChangeRoomsStatusRepairAction implements IAction{
 	public Transmission sendCommand() {
 		Transmission trans = null;
 		try {
-			Object[] args = {};
-			String methodName = "changeRoomsStatusRepair";
+			InReader.print("Enter room identifier:");
+			Object[] args = {HotelController.getInstance().getByIdRoom(InReader.readInt())};
+			String methodName = "changeRoomStatus";
 			trans = new Transmission(methodName, args);
 
 		} catch (InputMismatchException e) {
