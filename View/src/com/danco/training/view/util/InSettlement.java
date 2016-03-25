@@ -1,0 +1,56 @@
+package com.danco.training.view.util;
+
+import java.util.Date;
+
+import com.danco.training.controller.HotelController;
+import com.danco.training.entity.Guest;
+import com.danco.training.entity.Room;
+import com.danco.training.entity.Service;
+import com.danco.training.entity.Settlement;
+
+public class InSettlement {
+	private static final String DATE_OF_DEPARTURE = "Date of departure:";
+	private static final String DATE_OF_ARRIVE = "Date of arrive:";
+	private static final String SERVICE_ID = "Service ID:";
+	private static final String GUEST_ID = "Guest ID:";
+	private static final String ROOM_ID = "Room ID:";
+	private static final String ID2 = "ID:";
+
+	public static Settlement inputService(){
+		InReader.print(ROOM_ID);
+		int roomID = InReader.readInt();
+		InReader.print(GUEST_ID);
+		int guestID = InReader.readInt();
+		InReader.print(SERVICE_ID);
+		int serviceID = InReader.readInt();
+		InReader.print(DATE_OF_ARRIVE);
+		Date dateOfArrival = InReader.readDate();
+		InReader.print(DATE_OF_DEPARTURE);
+		Date dateOfDeparture = InReader.readDate();
+		Room room = HotelController.getInstance().getByIdRoom(roomID);
+		Guest guest = HotelController.getInstance().getByIdGuest(guestID);
+		Service service = HotelController.getInstance().getByIdService(serviceID);
+		Settlement sm = new Settlement(room, guest, service, dateOfArrival, dateOfDeparture);
+		return sm;
+	}
+	
+	public static Settlement inputServiceWithID(){
+		InReader.print(ID2);
+		int id = InReader.readInt();
+		InReader.print(ROOM_ID);
+		int roomID = InReader.readInt();
+		InReader.print(GUEST_ID);
+		int guestID = InReader.readInt();
+		InReader.print(SERVICE_ID);
+		int serviceID = InReader.readInt();
+		InReader.print(DATE_OF_ARRIVE);
+		Date dateOfArrival = InReader.readDate();
+		InReader.print(DATE_OF_DEPARTURE);
+		Date dateOfDeparture = InReader.readDate();
+		Room room = HotelController.getInstance().getByIdRoom(roomID);
+		Guest guest = HotelController.getInstance().getByIdGuest(guestID);
+		Service service = HotelController.getInstance().getByIdService(serviceID);
+		Settlement sm = new Settlement(room, guest, service, dateOfArrival, dateOfDeparture);
+		return sm;
+	}
+}
