@@ -1,0 +1,5 @@
+com.danco.training.api.ISettlementService=com.danco.training.service.SettlementService
+com.danco.training.api.IServiceService=com.danco.training.service.ServiceService
+com.danco.training.api.IRoomService=com.danco.training.service.RoomService
+com.danco.training.api.IGuestService=com.danco.training.service.GuestService
+com.danco.training.api.IHotelController=com.danco.training.controller.HotelController
