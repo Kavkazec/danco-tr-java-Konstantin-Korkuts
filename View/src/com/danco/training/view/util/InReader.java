@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 
 public class InReader {
 	private static final Logger LOGGER = Logger.getLogger(InReader.class);
-	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	public static int readInt(){
 		int i;
 		Scanner sc = new Scanner(System.in);

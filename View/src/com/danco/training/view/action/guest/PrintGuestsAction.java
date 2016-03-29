@@ -13,7 +13,7 @@ import com.danco.training.view.util.PrintGuest;
 
 public class PrintGuestsAction implements IAction{
 	private final Logger LOGGER = Logger.getLogger(PrintGuestsAction.class);
-	private static final String DETAILS_GUEST = "name ; date of added; date of departure ;";
+	private static final String DETAILS_GUEST = "id ; name ; date of added; date of departure ;";
 	@Override
 	public Transmission sendCommand() {
 		Transmission trans = null;

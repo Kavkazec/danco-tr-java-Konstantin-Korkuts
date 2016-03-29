@@ -34,9 +34,18 @@ import com.danco.training.view.action.service.DeleteServiceAction;
 import com.danco.training.view.action.service.ExportServicesAction;
 import com.danco.training.view.action.service.ImportServicesAction;
 import com.danco.training.view.action.service.PrintServiceAction;
+import com.danco.training.view.action.service.UpdateServiceAction;
 import com.danco.training.view.action.settlement.AddSettlementAction;
 import com.danco.training.view.action.settlement.DeleteSettlementAction;
+import com.danco.training.view.action.settlement.ExportSettlementsAction;
+import com.danco.training.view.action.settlement.ImportSettlementsAction;
+import com.danco.training.view.action.settlement.ListGuestsAndRoomSortedByAlphAction;
+import com.danco.training.view.action.settlement.ListGuestsAndRoomSortedByDateAction;
 import com.danco.training.view.action.settlement.PrintSettelmentAction;
+import com.danco.training.view.action.settlement.ReleasedInTheFutureActrion;
+import com.danco.training.view.action.settlement.ServicesAndRoomsPriceSortedByCoast;
+import com.danco.training.view.action.settlement.ServicesAndRoomsPriceSortedByType;
+import com.danco.training.view.action.settlement.ShowLastThreeGuestAction;
 import com.danco.training.view.action.settlement.UpdateSettlementAction;
 
 public class Builder {
@@ -51,6 +60,7 @@ public class Builder {
 	private Menu settlementMenuOther = new Menu("Settlement menu->Other");
 	private Menu roomMenuOtherSort = new Menu("Room menu->Other->Sort");
 	private Menu roomMenuOtherShow = new Menu("Room menu->Other->Show");
+	private Menu settlementMenuOtherShow = new Menu("Settlement menu->Other->Show");
 	
 	public void buildMenu() {
 		PropertiesReader.getInstance().setProperties();
@@ -108,11 +118,12 @@ public class Builder {
 		
 		serviceMenu.addMenuItem(new MenuItem(new AddServiceAction(), "0 -> Add service", serviceMenu));
 		serviceMenu.addMenuItem(new MenuItem(new DeleteServiceAction(), "1 -> Delete service", serviceMenu));
-		serviceMenu.addMenuItem(new MenuItem(new PrintServiceAction(), "2 -> Print services", serviceMenu));
-		serviceMenu.addMenuItem(new MenuItem(null, "3 -> Other", serviceMenuOther));
-		serviceMenu.addMenuItem(new MenuItem(new ExportServicesAction(), "4 -> Export services", serviceMenu));
-		serviceMenu.addMenuItem(new MenuItem(new ImportServicesAction(), "5 -> Import services", serviceMenu));
-		serviceMenu.addMenuItem(new MenuItem(null, "6 -> Back", mainMenu));
+		serviceMenu.addMenuItem(new MenuItem(new UpdateServiceAction(), "2 -> Update services", serviceMenu));
+		serviceMenu.addMenuItem(new MenuItem(new PrintServiceAction(), "3 -> Print services", serviceMenu));
+		serviceMenu.addMenuItem(new MenuItem(null, "4 -> Other", serviceMenuOther));
+		serviceMenu.addMenuItem(new MenuItem(new ExportServicesAction(), "5 -> Export services", serviceMenu));
+		serviceMenu.addMenuItem(new MenuItem(new ImportServicesAction(), "6 -> Import services", serviceMenu));
+		serviceMenu.addMenuItem(new MenuItem(null, "7 -> Back", mainMenu));
 		
 		serviceMenuOther.addMenuItem(new MenuItem(new ChangeServicesCoastAction(), "0-> Change service's coast", serviceMenuOther));
 		serviceMenuOther.addMenuItem(new MenuItem(new BuildServicesFromAnnotAction(), "1-> Add services from annotation", serviceMenuOther));
@@ -123,7 +134,31 @@ public class Builder {
 		settlementMenu.addMenuItem(new MenuItem(new UpdateSettlementAction(),"2 -> Update settlement",settlementMenu));
 		settlementMenu.addMenuItem(new MenuItem(new PrintSettelmentAction(),"3 -> Print settlement",settlementMenu));
 		settlementMenu.addMenuItem(new MenuItem(null,"4 -> Other",settlementMenuOther));
-		settlementMenu.addMenuItem(new MenuItem(null,"5 -> Back", mainMenu));
+		settlementMenu.addMenuItem(new MenuItem(new ExportSettlementsAction(),"5 -> Export settlements",settlementMenu));
+		settlementMenu.addMenuItem(new MenuItem(new ImportSettlementsAction(),"6 -> Import settlements",settlementMenu));
+		settlementMenu.addMenuItem(new MenuItem(null,"7 -> Back", mainMenu));
+		
+		
+		settlementMenuOther.addMenuItem(new MenuItem(null,"0 -> List of ...",settlementMenuOtherShow));
+		settlementMenuOther.addMenuItem(new MenuItem(new ShowLastThreeGuestAction(),"0 -> Show last 3 guests",settlementMenuOtherShow));
+		settlementMenuOther.addMenuItem(new MenuItem(null,"2 -> Back",settlementMenu));
+		
+		settlementMenuOtherShow.addMenuItem(new MenuItem(new ServicesAndRoomsPriceSortedByCoast(),"0 -> Prices of rooms and services, "
+																					+ "sorted by price",settlementMenuOtherShow));
+		settlementMenuOtherShow.addMenuItem(new MenuItem(new ServicesAndRoomsPriceSortedByType(),"1 -> Prices of rooms and services, "
+																					+ "sorted by type",settlementMenuOtherShow));
+		settlementMenuOtherShow.addMenuItem(new MenuItem(new ListGuestsAndRoomSortedByAlphAction(),"2 -> Huests and rooms, "
+				+ "sorted by name",settlementMenuOtherShow));
+		settlementMenuOtherShow.addMenuItem(new MenuItem(new ListGuestsAndRoomSortedByDateAction(),"3 -> Huests and rooms, "
+				+ "sorted by date",settlementMenuOtherShow));
+		settlementMenuOtherShow.addMenuItem(new MenuItem(new ServicesAndRoomsPriceSortedByType(),"4 -> Huest's services, "
+				+ "sorted by name",settlementMenuOtherShow));
+		settlementMenuOtherShow.addMenuItem(new MenuItem(new ServicesAndRoomsPriceSortedByType(),"5 -> Guest's services, "
+				+ "sorted by date",settlementMenuOtherShow));
+		settlementMenuOtherShow.addMenuItem(new MenuItem(new ReleasedInTheFutureActrion(),"6 -> Released"
+				+ " in the future",settlementMenuOtherShow));
+		settlementMenuOtherShow.addMenuItem(new MenuItem(null,"7 -> Back",settlementMenuOther));
+		
 	}
 	
 	public Menu getFirstMenu(){

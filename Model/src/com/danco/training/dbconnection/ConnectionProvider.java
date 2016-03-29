@@ -14,7 +14,7 @@ public class ConnectionProvider {
 	private static final String USER = "root";
 	private static final String PASSWORD = "d3dwq7zs";
 
-	private ConnectionProvider() throws PersistenceException{
+	private ConnectionProvider() throws PersistenceException {
 		try {
 			Class.forName(JDBC_DRIVER);
 		} catch (Exception ex) {
@@ -22,7 +22,7 @@ public class ConnectionProvider {
 		}
 	}
 
-	public static ConnectionProvider getInstance() throws PersistenceException{
+	public static ConnectionProvider getInstance() throws PersistenceException {
 		if (instance == null) {
 			instance = new ConnectionProvider();
 		}
@@ -32,7 +32,6 @@ public class ConnectionProvider {
 	public Connection getConnection() throws PersistenceException {
 		try {
 			connection = DriverManager.getConnection(URL, USER, PASSWORD);
-			connection.setAutoCommit(false);
 		} catch (Exception ex) {
 			throw new PersistenceException(ex);
 		}
@@ -60,4 +59,3 @@ public class ConnectionProvider {
 	}
 
 }
-

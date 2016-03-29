@@ -2,8 +2,8 @@ package com.danco.training.controller;
 
 import java.util.List;
 
+import com.danco.training.api.IRoomService;
 import com.danco.training.entity.Room;
-import com.danco.training.services.api.IRoomService;
 
 public class RoomController {
 	private IRoomService roomCon;

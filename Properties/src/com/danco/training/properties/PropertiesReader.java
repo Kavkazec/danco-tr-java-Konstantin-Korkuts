@@ -51,7 +51,7 @@ public class PropertiesReader {
 			util.setPath(path);
 			util.setCsvPath(csvPath);
 			util.setAnnotPath(annotPath);
-			util.setServName(servName.split(ZAP));
+			util.setServName(servName);
 		} catch (FileNotFoundException e) {
 			logger.error(e.getMessage(),e);
 		} catch (IOException e) {

@@ -4,7 +4,8 @@ import java.util.InputMismatchException;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.controller.HotelController;
+import com.danco.training.api.IHotelController;
+import com.danco.training.di.DependencyInjection;
 import com.danco.training.transmission.Transmission;
 import com.danco.training.view.action.IAction;
 import com.danco.training.view.action.service.DeleteServiceAction;
@@ -19,7 +20,7 @@ public class DeleteSettlementAction implements IAction{
 		Transmission trans = null;
 		try {
 			InReader.print(INPUT);
-			Object[] args = {HotelController.getInstance().getByIdSettlement(InReader.readInt())};
+			Object[] args = {((IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class)).getByIdSettlement(InReader.readInt())};
 			String methodName = "delete";
 			trans = new Transmission(methodName, args);
 

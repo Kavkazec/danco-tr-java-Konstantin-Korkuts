@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.services.api.IHotelController;
+import com.danco.training.api.IHotelController;
 import com.danco.training.transmission.Transmission;
 
 public class DataProcessing {

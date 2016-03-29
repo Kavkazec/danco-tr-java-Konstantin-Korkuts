@@ -2,11 +2,12 @@ package com.danco.training.controller;
 
 import java.util.Date;
 import java.util.List;
+
+import com.danco.training.api.ISettlementService;
 import com.danco.training.entity.Guest;
 import com.danco.training.entity.Room;
 import com.danco.training.entity.Service;
 import com.danco.training.entity.Settlement;
-import com.danco.training.services.api.ISettlementService;
 
 public class SettlementController {
 	private ISettlementService setCon;
@@ -40,10 +41,10 @@ public class SettlementController {
 	public int paiForRoom(Guest guest){
 		return this.setCon.paiForRoom(guest);
 	}
-	public int servicesAndRoomsPriceSortedByCoast(){
+	public List<String> servicesAndRoomsPriceSortedByCoast(){
 		return this.setCon.servicesAndRoomsPriceSortedByCoast();
 	}
-	public int servicesAndRoomsPriceSortedByType(){
+	public List<String> servicesAndRoomsPriceSortedByType(){
 		return this.setCon.servicesAndRoomsPriceSortedByType();
 	}
 	public List<String> listGuestsAndRoomsSortedByName(){
@@ -52,10 +53,16 @@ public class SettlementController {
 	public List<String> listGuestsAndRoomsSortedByDate(){
 		return this.setCon.listGuestsAndRoomsSortedByDate();
 	}
-	public List<Service> listGuestServicesSortedByCoast(Guest guest){
+	public List<String> listGuestServicesSortedByCoast(Guest guest){
 		return this.setCon.listGuestServicesSortedByCoast(guest);
 	}
-	public List<Service> listGuestServicesSortedByDate(Guest guest){
+	public List<String> listGuestServicesSortedByDate(Guest guest){
 		return this.setCon.listGuestServicesSortedByDate(guest);
+	}
+	public void exportSettlements(){
+		this.setCon.exportSettlements();
+	}
+	public void importSettlements(){
+		this.setCon.importSettlements();
 	}
 }

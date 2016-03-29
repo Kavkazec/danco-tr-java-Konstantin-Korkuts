@@ -2,8 +2,8 @@ package com.danco.training.controller;
 
 import java.util.List;
 
+import com.danco.training.api.IServiceService;
 import com.danco.training.entity.Service;
-import com.danco.training.services.api.IServiceService;
 
 public class ServiceController {
 	private IServiceService serviceCon;

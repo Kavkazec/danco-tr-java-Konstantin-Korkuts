@@ -5,25 +5,26 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.dao.GuestDao;
-import com.danco.training.dao.factory.DaoFactory;
+import com.danco.training.api.IGuestDao;
+import com.danco.training.api.IGuestService;
+import com.danco.training.api.ISettlementService;
 import com.danco.training.dbconnection.ConnectionProvider;
+import com.danco.training.di.DependencyInjection;
 import com.danco.training.entity.Guest;
 import com.danco.training.persistexception.PersistenceException;
 import com.danco.training.properties.PropertiesReader;
 import com.danco.training.reader.ImportAndExport;
-import com.danco.training.services.api.IGuestService;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class GuestService.
  */
 
-public class GuestService implements IGuestService {
+public class GuestService implements IGuestService{
 	private static final Logger LOGGER = Logger.getLogger(GuestService.class);
-	private GuestDao dao = DaoFactory.getGuestDao();
 	private ImportAndExport ie = ImportAndExport.getInstance();
-
+	private IGuestDao dao = (IGuestDao) DependencyInjection.getInstance().getClassInstance(IGuestDao.class);
+	
 	public String getPath() {
 		try {
 			PropertiesReader prop = PropertiesReader.getInstance();
@@ -41,11 +42,9 @@ public class GuestService implements IGuestService {
 		} catch (PersistenceException e) {
 			LOGGER.error(e);
 			return null;
-
 		}
 	}
 
-	@Override
 	public void addGuest(Guest guest) {
 		try {
 			dao.add(getConnection(), guest);
@@ -54,7 +53,6 @@ public class GuestService implements IGuestService {
 		}
 	}
 
-	@Override
 	public void deleteGuest(Guest guest) {
 		try {
 			dao.delete(getConnection(), guest);
@@ -63,7 +61,6 @@ public class GuestService implements IGuestService {
 		}
 	}
 
-	@Override
 	public void updateGuest(Guest guest) {
 		try {
 			dao.update(getConnection(), guest);
@@ -72,7 +69,6 @@ public class GuestService implements IGuestService {
 		}
 	}
 
-	@Override
 	public List<Guest> getGuests() {
 		try {
 			return dao.getAll(getConnection());
@@ -83,7 +79,6 @@ public class GuestService implements IGuestService {
 
 	}
 
-	@Override
 	public void exportGuests() {
 		try {
 			ie.writeToFileGuests(getPath());
@@ -92,7 +87,6 @@ public class GuestService implements IGuestService {
 		}
 	}
 
-	@Override
 	public void importGuests() {
 		try {
 			ie.readFromFileGuests(getPath());
@@ -101,7 +95,6 @@ public class GuestService implements IGuestService {
 		}
 	}
 
-	@Override
 	public void buildGuestsFromAnnot() {
 		try {
 
@@ -110,21 +103,19 @@ public class GuestService implements IGuestService {
 		}
 	}
 
-	@Override
 	public int numberOfGuests() {
-		try{
+		try {
 			return dao.getAll(getConnection()).size();
-		} catch(Exception e){
+		} catch (Exception e) {
 			LOGGER.error(e);
 			return 0;
 		}
 	}
 
-	@Override
 	public Guest getByIdGuest(int id) {
-		try{
+		try {
 			return dao.getById(getConnection(), id);
-		} catch(Exception e){
+		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
 		}

@@ -2,7 +2,8 @@ package com.danco.training.view.util;
 
 import java.util.Date;
 
-import com.danco.training.controller.HotelController;
+import com.danco.training.api.IHotelController;
+import com.danco.training.di.DependencyInjection;
 import com.danco.training.entity.Guest;
 import com.danco.training.entity.Room;
 import com.danco.training.entity.Service;
@@ -27,9 +28,9 @@ public class InSettlement {
 		Date dateOfArrival = InReader.readDate();
 		InReader.print(DATE_OF_DEPARTURE);
 		Date dateOfDeparture = InReader.readDate();
-		Room room = HotelController.getInstance().getByIdRoom(roomID);
-		Guest guest = HotelController.getInstance().getByIdGuest(guestID);
-		Service service = HotelController.getInstance().getByIdService(serviceID);
+		Room room = ((IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class)).getByIdRoom(roomID);
+		Guest guest = ((IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class)).getByIdGuest(guestID);
+		Service service = ((IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class)).getByIdService(serviceID);
 		Settlement sm = new Settlement(room, guest, service, dateOfArrival, dateOfDeparture);
 		return sm;
 	}
@@ -47,9 +48,9 @@ public class InSettlement {
 		Date dateOfArrival = InReader.readDate();
 		InReader.print(DATE_OF_DEPARTURE);
 		Date dateOfDeparture = InReader.readDate();
-		Room room = HotelController.getInstance().getByIdRoom(roomID);
-		Guest guest = HotelController.getInstance().getByIdGuest(guestID);
-		Service service = HotelController.getInstance().getByIdService(serviceID);
+		Room room = ((IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class)).getByIdRoom(roomID);
+		Guest guest = ((IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class)).getByIdGuest(guestID);
+		Service service = ((IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class)).getByIdService(serviceID);
 		Settlement sm = new Settlement(room, guest, service, dateOfArrival, dateOfDeparture);
 		return sm;
 	}

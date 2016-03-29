@@ -3,16 +3,16 @@ package com.danco.training.controller;
 import java.util.Date;
 import java.util.List;
 
+import com.danco.training.api.IGuestService;
+import com.danco.training.api.IHotelController;
+import com.danco.training.api.IRoomService;
+import com.danco.training.api.IServiceService;
+import com.danco.training.api.ISettlementService;
 import com.danco.training.di.DependencyInjection;
 import com.danco.training.entity.Guest;
 import com.danco.training.entity.Room;
 import com.danco.training.entity.Service;
 import com.danco.training.entity.Settlement;
-import com.danco.training.services.api.IGuestService;
-import com.danco.training.services.api.IHotelController;
-import com.danco.training.services.api.IRoomService;
-import com.danco.training.services.api.IServiceService;
-import com.danco.training.services.api.ISettlementService;
 
 public class HotelController implements IHotelController {
 	private RoomController roomCon;
@@ -263,12 +263,12 @@ public class HotelController implements IHotelController {
 	}
 
 	@Override
-	public int servicesAndRoomsPriceSortedByCoast() {
+	public List<String> servicesAndRoomsPriceSortedByCoast() {
 		return getSettlementCon().servicesAndRoomsPriceSortedByCoast();
 	}
 
 	@Override
-	public int servicesAndRoomsPriceSortedByType() {
+	public List<String> servicesAndRoomsPriceSortedByType() {
 		return getSettlementCon().servicesAndRoomsPriceSortedByType();
 	}
 
@@ -283,12 +283,12 @@ public class HotelController implements IHotelController {
 	}
 
 	@Override
-	public List<Service> listGuestServicesSortedByCoast(Guest guest) {
+	public List<String> listGuestServicesSortedByCoast(Guest guest) {
 		return getSettlementCon().listGuestServicesSortedByCoast(guest);
 	}
 
 	@Override
-	public List<Service> listGuestServicesSortedByDate(Guest guest) {
+	public List<String> listGuestServicesSortedByDate(Guest guest) {
 		return getSettlementCon().listGuestServicesSortedByDate(guest);
 	}
 
@@ -310,5 +310,15 @@ public class HotelController implements IHotelController {
 	@Override
 	public Settlement getByIdSettlement(int id) {
 		return getSettlementCon().getByIdSettlement(id);
+	}
+
+	@Override
+	public void exportSettlements() {
+		getSettlementCon().exportSettlements();
+	}
+
+	@Override
+	public void importSettlements() {
+		getSettlementCon().importSettlements();
 	}
 }

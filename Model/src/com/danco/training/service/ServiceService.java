@@ -5,128 +5,120 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.dao.ServiceDao;
-import com.danco.training.dao.factory.DaoFactory;
+import com.danco.training.api.IGuestDao;
+import com.danco.training.api.IServiceDao;
+import com.danco.training.api.IServiceService;
+import com.danco.training.api.ISettlementService;
 import com.danco.training.dbconnection.ConnectionProvider;
+import com.danco.training.di.DependencyInjection;
 import com.danco.training.entity.Service;
 import com.danco.training.persistexception.PersistenceException;
 import com.danco.training.properties.PropertiesReader;
 import com.danco.training.reader.ImportAndExport;
-import com.danco.training.services.api.IServiceService;
 
-
-	// TODO: Auto-generated Javadoc
+// TODO: Auto-generated Javadoc
 /**
-	 * The Class ServiceService.
-	 */
+ * The Class ServiceService.
+ */
 public class ServiceService implements IServiceService{
 	private static final Logger LOGGER = Logger.getLogger(ServiceService.class);
-	private ServiceDao dao = DaoFactory.getServiceDao();
 	private ImportAndExport ie = ImportAndExport.getInstance();
-	
-	public String getPath(){
-		try{
+	private IServiceDao dao = (IServiceDao) DependencyInjection.getInstance().getClassInstance(IServiceDao.class);
+
+	public String getPath() {
+		try {
 			PropertiesReader prop = PropertiesReader.getInstance();
 			prop.setProperties();
 			return prop.getUtil().getCsvPath();
-		}catch(Exception e){
+		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
 		}
 	}
-	
-	public Connection getConnection(){
+
+	public Connection getConnection() {
 		try {
 			return ConnectionProvider.getInstance().getConnection();
 		} catch (PersistenceException e) {
 			LOGGER.error(e);
 			return null;
-			
+
 		}
 	}
-	
-	@Override
+
 	public void addService(Service service) {
-		try{
+		try {
 			dao.add(getConnection(), service);
-		} catch(Exception e){
+		} catch (Exception e) {
 			LOGGER.error(e);
 		}
 	}
 
-	@Override
 	public void deleteService(Service service) {
-		try{
+		try {
 			dao.delete(getConnection(), service);
-		} catch(Exception e){
+		} catch (Exception e) {
 			LOGGER.error(e);
 		}
 	}
 
-	@Override
 	public List<Service> getServices() {
-		try{
+		try {
 			return dao.getAll(getConnection());
-		} catch(Exception e){
+		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
 		}
-		
+
 	}
 
-	@Override
 	public void exportServices() {
-		try{
+		try {
 			ie.writeToFileServices(getPath());
-		} catch(Exception e){
+		} catch (Exception e) {
 			LOGGER.error(e);
 		}
 	}
 
-	@Override
 	public void importServices() {
-		try{
+		try {
 			ie.readFromFileServices(getPath());
-		} catch(Exception e){
+		} catch (Exception e) {
 			LOGGER.error(e);
 		}
 	}
 
-	@Override
 	public void buildServicesFromAnnot() {
-		try{
-			
-		} catch(Exception e){
+		try {
+
+		} catch (Exception e) {
 			LOGGER.error(e);
 		}
 	}
 
-	@Override
 	public void updateService(Service service) {
-		try{
+		try {
 			dao.update(getConnection(), service);
-		} catch(Exception e){
+		} catch (Exception e) {
 			LOGGER.error(e);
 		}
 	}
 
-	@Override
 	public void changeServiceCoast(Service service) {
-		try{
+		try {
 			dao.update(getConnection(), service);
-		} catch(Exception e){
+		} catch (Exception e) {
 			LOGGER.error(e);
 		}
 	}
 
-	@Override
 	public Service getByIdService(int id) {
-		try{
+		try {
 			return dao.getById(getConnection(), id);
-		} catch(Exception e){
+		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
 		}
 	}
-	
+
 }

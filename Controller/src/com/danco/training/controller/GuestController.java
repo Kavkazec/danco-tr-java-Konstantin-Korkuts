@@ -2,8 +2,8 @@ package com.danco.training.controller;
 
 import java.util.List;
 
+import com.danco.training.api.IGuestService;
 import com.danco.training.entity.Guest;
-import com.danco.training.services.api.IGuestService;
 
 
 public class GuestController {
