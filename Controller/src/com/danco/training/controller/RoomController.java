@@ -26,24 +26,13 @@ public class RoomController {
 	public void updateRoom(Room room){
 		this.roomCon.updateRoom(room);
 	}
-	public List<Room> sortByCoastFreeRoom(){
-		return this.roomCon.sortByCoastFreeRoom();
+	public List<Room> sortRoomsBy(String string){
+		return this.roomCon.sortRoomsBy(string);
 	}
-	public List<Room> sortByCapacityFreeRoom(){
-		return this.roomCon.sortByCapacityFreeRoom();
+	public List<Room> sortFreeRoomsBy(String string){
+		return this.roomCon.sortFreeRoomsBy(string);
 	}
-	public List<Room> sortByStarsFreeRoom(){
-		return this.roomCon.sortByStarsFreeRoom();
-	}
-	public List<Room> sortByCoastRoom(){
-		return this.roomCon.sortByCoastRoom();
-	}
-	public List<Room> sortByCapacityRoom(){
-		return this.roomCon.sortByCapacityRoom();
-	}
-	public List<Room> sortByStarsRoom(){
-		return this.roomCon.sortByStarsRoom();
-	}
+	
 	public List<Room> getRooms(){
 		return this.roomCon.getRooms();
 	}

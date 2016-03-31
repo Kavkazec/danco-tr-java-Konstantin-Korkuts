@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.danco.training.api.IGuestDao;
 import com.danco.training.entity.Guest;
+import com.danco.training.entity.Settlement;
 import com.danco.training.persistexception.PersistenceException;
 
 public class GuestDatabaseDao implements IGuestDao{
@@ -103,7 +104,7 @@ public class GuestDatabaseDao implements IGuestDao{
 				String passport_series = result.getString("passport_series");
 				int passport_number = result.getInt("passport_number");
 				guest = new Guest(id, name, passport_series, passport_number);
-			
+				
 		} catch(Exception ex) {
 			 throw new PersistenceException(PARSE_EXCEPTION);
 		}

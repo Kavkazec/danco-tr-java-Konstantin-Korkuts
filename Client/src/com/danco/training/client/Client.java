@@ -23,12 +23,12 @@ public class Client {
 
 	public void start() {
 		try (Socket fromServer = new Socket(serverIP, serverPort);
-			ObjectOutputStream out = new ObjectOutputStream(fromServer.getOutputStream());
-			ObjectInputStream in = new ObjectInputStream(fromServer.getInputStream())){
-					menuController = new MainController();
-					while(menuController.getExitFlag() != true) {
-						menuController.run(out, in);
-					}
+				ObjectOutputStream out = new ObjectOutputStream(fromServer.getOutputStream());
+				ObjectInputStream in = new ObjectInputStream(fromServer.getInputStream())) {
+			menuController = new MainController();
+			while (menuController.getExitFlag() != true) {
+				menuController.run(out, in);
+			}
 		} catch (IOException e) {
 			logger.error(e.getMessage(), e);
 		}

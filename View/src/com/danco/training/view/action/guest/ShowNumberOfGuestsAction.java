@@ -26,7 +26,7 @@ public class ShowNumberOfGuestsAction implements IAction{
 	@Override
 	public void answer(Object answerFromServer) {
 		if (answerFromServer instanceof Integer) {
-			InReader.print((Integer) answerFromServer + "");
+			InReader.print(answerFromServer + "");
 		}
 	}
 }

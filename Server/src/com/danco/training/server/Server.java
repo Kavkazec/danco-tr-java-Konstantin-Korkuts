@@ -21,7 +21,7 @@ public class Server {
 	
 	public IHotelController getHotelController(){
 		if(hotelController == null){
-			hotelController = (IHotelController)DependencyInjection.getInstance().getClassInstance(IHotelController.class);
+			hotelController = (IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class);
 		}
 		return hotelController;
 	}

@@ -13,12 +13,16 @@ import com.danco.training.persistexception.PersistenceException;
 
 public interface ISettlementDao extends ItemDao<Settlement>{
 	public List<Room> releasedInTheFuture(Connection con, Date date) throws PersistenceException;
+	
 	public int paiForRoom(Connection con, Guest guest) throws PersistenceException;
-	public List<String> servicesAndRoomsPriceSortedByCoast(Connection con) throws PersistenceException;
-	public List<String> servicesAndRoomsPriceSortedByType(Connection con) throws PersistenceException;
-	public List<String> listGuestsAndRoomsSortedByName(Connection con) throws PersistenceException;
-	public List<String> listGuestsAndRoomsSortedByDate(Connection con) throws PersistenceException;
-	public List<String> listGuestServicesSortedByCoast(Connection con, Guest guest) throws PersistenceException;
-	public List<String> listGuestServicesSortedByDate(Connection con, Guest guest) throws PersistenceException;
+	
+	public List<String> servicesAndRoomsPriceSortedBy(Connection con, String string) throws PersistenceException;
+	
+	public List<String> listGuestsAndRoomsSortedBy(Connection con, String string) throws PersistenceException;
+	
+	public List<String> listGuestServicesSortedBy(Connection con, Guest guest , String string) throws PersistenceException;
+	
 	public Settlement parserRS(Connection con, ResultSet result) throws PersistenceException;
+	
+	public void addServiceToGuest(Connection connection, Guest guest, Service service, Date date) throws PersistenceException;
 }

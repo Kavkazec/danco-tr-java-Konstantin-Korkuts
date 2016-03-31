@@ -9,9 +9,17 @@ public class PrintSettlement {
 	
 	public static void printSettlement(List<Settlement> list){
 		for (Settlement settlement : list) {
-			InReader.print(settlement.getId() + SEPAR + settlement.getRoom().getNumber() + SEPAR + settlement.getGuest().getName()
-					 + SEPAR + settlement.getService().getName() + SEPAR  
-					 + settlement.getDateOfArrival() + SEPAR + settlement.getDateOfDeparture());
+			if(settlement.getService() == null){
+				InReader.print(settlement.getId() + SEPAR + settlement.getRoom().getNumber() + SEPAR + settlement.getGuest().getName()
+						 + SEPAR  + settlement.getDateOfArrival() 
+						 + SEPAR + settlement.getDateOfDeparture()
+						 + SEPAR + settlement.isPaid() );
+			} else {
+				InReader.print(settlement.getId() + SEPAR + settlement.getRoom().getNumber() + SEPAR + settlement.getGuest().getName()
+						 + SEPAR + settlement.getService().getName() + SEPAR  + settlement.getDateOfArrival() 
+						 + SEPAR + settlement.getDateOfDeparture() + SEPAR + settlement.getServiceDateOfAdd()  
+						 + SEPAR + settlement.isPaid() );
+			}
 		}
 	}
 }

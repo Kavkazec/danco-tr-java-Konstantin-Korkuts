@@ -10,6 +10,7 @@ import com.danco.training.entity.Service;
 import com.danco.training.entity.Settlement;
 
 public class InSettlement {
+	private static final String DATE_OF_THE_ADDED_SERVICE = "Date of the added service";
 	private static final String DATE_OF_DEPARTURE = "Date of departure:";
 	private static final String DATE_OF_ARRIVE = "Date of arrive:";
 	private static final String SERVICE_ID = "Service ID:";
@@ -22,16 +23,13 @@ public class InSettlement {
 		int roomID = InReader.readInt();
 		InReader.print(GUEST_ID);
 		int guestID = InReader.readInt();
-		InReader.print(SERVICE_ID);
-		int serviceID = InReader.readInt();
 		InReader.print(DATE_OF_ARRIVE);
 		Date dateOfArrival = InReader.readDate();
 		InReader.print(DATE_OF_DEPARTURE);
 		Date dateOfDeparture = InReader.readDate();
 		Room room = ((IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class)).getByIdRoom(roomID);
 		Guest guest = ((IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class)).getByIdGuest(guestID);
-		Service service = ((IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class)).getByIdService(serviceID);
-		Settlement sm = new Settlement(room, guest, service, dateOfArrival, dateOfDeparture);
+		Settlement sm = new Settlement(room, guest, null, dateOfArrival, dateOfDeparture, null, false);
 		return sm;
 	}
 	
@@ -40,18 +38,35 @@ public class InSettlement {
 		int id = InReader.readInt();
 		InReader.print(ROOM_ID);
 		int roomID = InReader.readInt();
-		InReader.print(GUEST_ID);
-		int guestID = InReader.readInt();
 		InReader.print(SERVICE_ID);
-		int serviceID = InReader.readInt();
+		int guestID = InReader.readInt();
 		InReader.print(DATE_OF_ARRIVE);
 		Date dateOfArrival = InReader.readDate();
 		InReader.print(DATE_OF_DEPARTURE);
 		Date dateOfDeparture = InReader.readDate();
 		Room room = ((IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class)).getByIdRoom(roomID);
 		Guest guest = ((IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class)).getByIdGuest(guestID);
-		Service service = ((IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class)).getByIdService(serviceID);
-		Settlement sm = new Settlement(room, guest, service, dateOfArrival, dateOfDeparture);
+		Settlement sm = new Settlement(room, guest, null, dateOfArrival, dateOfDeparture, null, false);
+		return sm;
+	}
+	
+	public static Settlement inputValuesForAdding(){
+		InReader.print(ROOM_ID);
+		int roomID = InReader.readInt();
+		InReader.print(GUEST_ID);
+		int guestID = InReader.readInt();
+		InReader.print(GUEST_ID);
+		int serviceID = InReader.readInt();
+		InReader.print(DATE_OF_ARRIVE);
+		Date dateOfArrival = InReader.readDate();
+		InReader.print(DATE_OF_DEPARTURE);
+		Date dateOfDeparture = InReader.readDate();
+		InReader.print(DATE_OF_THE_ADDED_SERVICE);
+		Date serviceDate = InReader.readDate();
+		Room room = ((IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class)).getByIdRoom(roomID);
+		Guest guest = ((IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class)).getByIdGuest(guestID);
+		Service service =  ((IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class)).getByIdService(serviceID);
+		Settlement sm = new Settlement(room, guest, service, dateOfArrival, dateOfDeparture, serviceDate, false);
 		return sm;
 	}
 }

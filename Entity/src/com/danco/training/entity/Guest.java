@@ -1,5 +1,6 @@
 package com.danco.training.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Guest extends BaseEntity{
@@ -17,6 +18,7 @@ public class Guest extends BaseEntity{
 		this.name = name;
 		this.passportSeries = passportSeries;
 		this.passportNumber = passportNumber;
+		this.settlementList = new ArrayList<Settlement>();
 	}
 	
 	public Guest(int id, String name, String passportSeries, int passportNumber){
@@ -24,8 +26,8 @@ public class Guest extends BaseEntity{
 		this.name = name;
 		this.passportSeries = passportSeries;
 		this.passportNumber = passportNumber;
+		this.settlementList = new ArrayList<Settlement>();
 	}
-	
 	
 	public List<Settlement> getSettlementList() {
 		return settlementList;

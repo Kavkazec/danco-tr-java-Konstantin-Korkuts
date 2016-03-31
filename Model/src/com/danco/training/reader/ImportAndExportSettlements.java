@@ -18,7 +18,6 @@ import com.danco.training.api.IGuestDao;
 import com.danco.training.api.IRoomDao;
 import com.danco.training.api.IServiceDao;
 import com.danco.training.di.DependencyInjection;
-import com.danco.training.entity.Service;
 import com.danco.training.entity.Settlement;
 import com.danco.training.persistexception.PersistenceException;
 import com.danco.training.service.SettlementService;
@@ -48,17 +47,35 @@ public class ImportAndExportSettlements {
 			fw.append(Settlement.class.getSimpleName());
 			fw.append(NEXT_LINE);
 			for (int i = 0; i < list.size(); i++) {
-				fw.append(list.get(i).getRoom().getId() + "");
-				fw.append(SEPAR);
-				fw.append(list.get(i).getGuest().getId() + "");
-				fw.append(SEPAR);
-				fw.append(list.get(i).getService().getId() +"");
-				fw.append(SEPAR);
-				fw.append(list.get(i).getDateOfArrival()+"");
-				fw.append(SEPAR);
-				fw.append(list.get(i).getDateOfDeparture()+"");
-				fw.append(SEPAR);
-				fw.append(NEXT_LINE);
+				if(list.get(i).getService() == null){
+					fw.append(list.get(i).getRoom().getId() + "");
+					fw.append(SEPAR);
+					fw.append(list.get(i).getGuest().getId() + "");
+					fw.append(SEPAR);
+					fw.append(list.get(i).getDateOfArrival()+"");
+					fw.append(SEPAR);
+					fw.append(list.get(i).getDateOfDeparture()+"");
+					fw.append(SEPAR);
+					fw.append(list.get(i).isPaid()+"");
+					fw.append(SEPAR);
+					fw.append(NEXT_LINE);
+				} else {
+					fw.append(list.get(i).getRoom().getId() + "");
+					fw.append(SEPAR);
+					fw.append(list.get(i).getGuest().getId() + "");
+					fw.append(SEPAR);
+					fw.append(list.get(i).getService().getId() +"");
+					fw.append(SEPAR);
+					fw.append(list.get(i).getDateOfArrival()+"");
+					fw.append(SEPAR);
+					fw.append(list.get(i).getDateOfDeparture()+"");
+					fw.append(SEPAR);
+					fw.append(list.get(i).getServiceDateOfAdd()+"");
+					fw.append(SEPAR);
+					fw.append(list.get(i).isPaid()+"");
+					fw.append(SEPAR);
+					fw.append(NEXT_LINE);
+				}
 			}
 			fw.flush();
 		} catch (IOException e) {
@@ -91,8 +108,10 @@ public class ImportAndExportSettlements {
 					int service_ID = Integer.parseInt(arr[2]);
 					Date dateArr = SDF.parse(arr[3]);
 					Date dateDep = SDF.parse(arr[4]);
+					Date servDate = SDF.parse(arr[4]);
+					boolean isPaid = Boolean.parseBoolean(arr[5]);
 					Settlement sm = new Settlement(rdd.getById(con, room_ID), gdd.getById(con, guest_ID),
-							sdd.getById(con, service_ID), dateArr, dateDep);
+							sdd.getById(con, service_ID), dateArr, dateDep, servDate,  isPaid);
 					if (!equalID(sm.getRoom().getNumber(), sm.getGuest().getName(), services)) {
 						services.add(sm);
 					}

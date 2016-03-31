@@ -13,6 +13,7 @@ import com.danco.training.dbconnection.ConnectionProvider;
 import com.danco.training.di.DependencyInjection;
 import com.danco.training.entity.Guest;
 import com.danco.training.entity.Room;
+import com.danco.training.entity.Service;
 import com.danco.training.entity.Settlement;
 import com.danco.training.persistexception.PersistenceException;
 import com.danco.training.properties.PropertiesReader;
@@ -44,6 +45,7 @@ public class SettlementService implements ISettlementService {
 		}
 	}
 
+	@Override
 	public List<Settlement> getAll() {
 		try {
 			return dao.getAll(getConnection());
@@ -54,6 +56,7 @@ public class SettlementService implements ISettlementService {
 
 	}
 
+	@Override
 	public void add(Settlement model) {
 		try {
 			dao.add(getConnection(), model);
@@ -62,6 +65,7 @@ public class SettlementService implements ISettlementService {
 		}
 	}
 
+	@Override
 	public void delete(Settlement model) {
 		try {
 			dao.delete(getConnection(), model);
@@ -70,6 +74,7 @@ public class SettlementService implements ISettlementService {
 		}
 	}
 
+	@Override
 	public void update(Settlement model) {
 		try {
 			dao.update(getConnection(), model);
@@ -78,6 +83,7 @@ public class SettlementService implements ISettlementService {
 		}
 	}
 
+	@Override
 	public List<Room> releasedInTheFuture(Date date) {
 		List<Room> rooms = null;
 		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
@@ -96,6 +102,7 @@ public class SettlementService implements ISettlementService {
 		return rooms;
 	}
 
+	@Override
 	public List<Guest> showLastThreeGuest(Room room) {
 		List<Guest> list = null;
 		try {
@@ -112,75 +119,18 @@ public class SettlementService implements ISettlementService {
 		return list;
 	}
 
+	@Override
 	public int paiForRoom(Guest guest) {
 		try {
-
+			int reuslt = dao.paiForRoom(getConnection(), guest);
+			return reuslt;
 		} catch (Exception e) {
 			LOGGER.error(e);
+			return 0;
 		}
-		return 0;
 	}
 
-	public List<String> servicesAndRoomsPriceSortedByCoast() {
-		try {
-			return dao.servicesAndRoomsPriceSortedByCoast(getConnection());
-		} catch (Exception e) {
-			LOGGER.error(e);
-			return null;
-		}
-
-	}
-
-	public List<String> servicesAndRoomsPriceSortedByType() {
-		try {
-			return dao.servicesAndRoomsPriceSortedByType(getConnection());
-		} catch (Exception e) {
-			LOGGER.error(e);
-			return null;
-		}
-
-	}
-
-	public List<String> listGuestsAndRoomsSortedByName() {
-		try {
-			return dao.listGuestsAndRoomsSortedByName(getConnection());
-		} catch (Exception e) {
-			LOGGER.error(e);
-			return null;
-		}
-
-	}
-
-	public List<String> listGuestsAndRoomsSortedByDate() {
-		try {
-			return dao.listGuestsAndRoomsSortedByDate(getConnection());
-		} catch (Exception e) {
-			LOGGER.error(e);
-			return null;
-		}
-
-	}
-
-	public List<String> listGuestServicesSortedByCoast(Guest guest) {
-		try {
-			return dao.listGuestServicesSortedByCoast(getConnection(), guest);
-		} catch (Exception e) {
-			LOGGER.error(e);
-			return null;
-		}
-		
-	}
-
-	public List<String> listGuestServicesSortedByDate(Guest guest) {
-		try {
-			return dao.listGuestServicesSortedByDate(getConnection(), guest);
-		} catch (Exception e) {
-			LOGGER.error(e);
-			return null;
-		}
-
-	}
-
+	@Override
 	public Settlement getByIdSettlement(int id) {
 		try {
 			return dao.getById(getConnection(), id);
@@ -203,6 +153,45 @@ public class SettlementService implements ISettlementService {
 	public void importSettlements() {
 		try {
 			ie.readFromFileSettlements(getPath(), getConnection());
+		} catch (Exception e) {
+			LOGGER.error(e);
+		}
+	}
+
+	@Override
+	public List<String> servicesAndRoomsPriceSortedBy(String string) {
+		try {
+			return dao.servicesAndRoomsPriceSortedBy(getConnection(), string);
+		} catch (Exception e) {
+			LOGGER.error(e);
+			return null;
+		}
+	}
+
+	@Override
+	public List<String> listGuestsAndRoomsSortedBy(String string) {
+		try {
+			return dao.listGuestsAndRoomsSortedBy(getConnection(), string);
+		} catch (Exception e) {
+			LOGGER.error(e);
+			return null;
+		}
+	}
+
+	@Override
+	public List<String> listGuestServicesSortedBy(Guest guest, String string) {
+		try {
+			return dao.listGuestServicesSortedBy(getConnection(), guest, string);
+		} catch (Exception e) {
+			LOGGER.error(e);
+			return null;
+		}
+	}
+
+	@Override
+	public void addServiceToGuest(Guest guest, Service service, Date date) {
+		try {
+			dao.addServiceToGuest(getConnection(), guest, service, date);
 		} catch (Exception e) {
 			LOGGER.error(e);
 		}

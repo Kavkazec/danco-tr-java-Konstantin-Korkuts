@@ -6,10 +6,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.api.IGuestDao;
 import com.danco.training.api.IRoomDao;
 import com.danco.training.api.IRoomService;
-import com.danco.training.api.ISettlementService;
 import com.danco.training.dbconnection.ConnectionProvider;
 import com.danco.training.di.DependencyInjection;
 import com.danco.training.entity.Room;
@@ -47,6 +45,7 @@ public class RoomService implements IRoomService{
 		}
 	}
 
+	@Override
 	public void addRoom(Room room) {
 		try {
 			dao.add(getConnection(), room);
@@ -55,6 +54,7 @@ public class RoomService implements IRoomService{
 		}
 	}
 
+	@Override
 	public void deleteRoom(Room room) {
 		try {
 			dao.delete(getConnection(), room);
@@ -64,60 +64,7 @@ public class RoomService implements IRoomService{
 		}
 	}
 
-	public List<Room> sortByCoastFreeRoom() {
-		try {
-			return dao.sortFreeRoomsByCoast(getConnection());
-		} catch (Exception e) {
-			LOGGER.error(e);
-			return null;
-		}
-	}
-
-	public List<Room> sortByCapacityFreeRoom() {
-		try {
-			return dao.sortFreeRoomsByCapacity(getConnection());
-		} catch (Exception e) {
-			LOGGER.error(e);
-			return null;
-		}
-	}
-
-	public List<Room> sortByStarsFreeRoom() {
-		try {
-			return dao.sortFreeRoomsByStars(getConnection());
-		} catch (Exception e) {
-			LOGGER.error(e);
-			return null;
-		}
-	}
-
-	public List<Room> sortByCoastRoom() {
-		try {
-			return dao.sortRoomsByCoast(getConnection());
-		} catch (Exception e) {
-			LOGGER.error(e);
-			return null;
-		}
-	}
-
-	public List<Room> sortByCapacityRoom() {
-		try {
-			return dao.sortRoomsByCapacity(getConnection());
-		} catch (Exception e) {
-			LOGGER.error(e);
-			return null;
-		}
-	}
-
-	public List<Room> sortByStarsRoom() {
-		try {
-			return dao.sortRoomsByStars(getConnection());
-		} catch (Exception e) {
-			LOGGER.error(e);
-			return null;
-		}
-	}
-
+	@Override
 	public List<Room> getRooms() {
 		try {
 			return dao.getAll(getConnection());
@@ -128,6 +75,7 @@ public class RoomService implements IRoomService{
 
 	}
 
+	@Override
 	public void cloneRoom(Room model) {
 		Connection conn = getConnection();
 		Room room = null;
@@ -146,6 +94,7 @@ public class RoomService implements IRoomService{
 		}
 	}
 
+	@Override
 	public void exportRooms() {
 		try {
 			ie.writeToFileRooms(getPath());
@@ -154,6 +103,7 @@ public class RoomService implements IRoomService{
 		}
 	}
 
+	@Override
 	public void importRooms() {
 		try {
 			ie.writeToFileRooms(getPath());
@@ -162,6 +112,7 @@ public class RoomService implements IRoomService{
 		}
 	}
 
+	@Override
 	public void buildRoomsFromAnnot() {
 		try {
 
@@ -170,6 +121,7 @@ public class RoomService implements IRoomService{
 		}
 	}
 
+	@Override
 	public void updateRoom(Room room) {
 		try {
 			dao.update(getConnection(), room);
@@ -179,6 +131,7 @@ public class RoomService implements IRoomService{
 
 	}
 
+	@Override
 	public void changeRoomStatus(Room room) {
 		try {
 			dao.update(getConnection(), room);
@@ -187,6 +140,7 @@ public class RoomService implements IRoomService{
 		}
 	}
 
+	@Override
 	public void changeRoomCoast(Room room) {
 		try {
 			dao.update(getConnection(), room);
@@ -195,6 +149,7 @@ public class RoomService implements IRoomService{
 		}
 	}
 
+	@Override
 	public int numberOfFreeRooms() {
 		int count = 0;
 		try {
@@ -210,6 +165,7 @@ public class RoomService implements IRoomService{
 		}
 	}
 
+	@Override
 	public String showRoomDetails(Room room) {
 		String str = "";
 		try {
@@ -222,9 +178,30 @@ public class RoomService implements IRoomService{
 		return str;
 	}
 
+	@Override
 	public Room getByIdRoom(int id) {
 		try {
 			return dao.getById(getConnection(), id);
+		} catch (Exception e) {
+			LOGGER.error(e);
+			return null;
+		}
+	}
+
+	@Override
+	public List<Room> sortRoomsBy(String string) {
+		try {
+			return dao.sortRoomsBy(getConnection(), string);
+		} catch (Exception e) {
+			LOGGER.error(e);
+			return null;
+		}
+	}
+
+	@Override
+	public List<Room> sortFreeRoomsBy(String string) {
+		try {
+			return dao.sortFreeRoomsBy(getConnection(), string);
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;

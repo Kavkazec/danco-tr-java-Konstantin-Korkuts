@@ -10,8 +10,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.api.IGuestDao;
-import com.danco.training.di.DependencyInjection;
 import com.danco.training.entity.Guest;
 import com.danco.training.service.GuestService;
 

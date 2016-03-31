@@ -24,12 +24,8 @@ public interface IHotelController {
 	public void addRoom(Room room);
 	public void deleteRoom(Room room);
 	public void updateRoom(Room room);
-	public List<Room> sortByCoastFreeRoom();
-	public List<Room> sortByCapacityFreeRoom();
-	public List<Room> sortByStarsFreeRoom();
-	public List<Room> sortByCoastRoom();
-	public List<Room> sortByCapacityRoom();
-	public List<Room> sortByStarsRoom();
+	public List<Room> sortRoomsBy(String string);
+	public List<Room> sortFreeRoomsBy(String string);
 	public List<Room> getRooms();
 	public int numberOfFreeRooms();
 	public void changeRoomStatus(Room room);
@@ -49,17 +45,15 @@ public interface IHotelController {
 	public void buildServicesFromAnnot();
 	public List<Settlement> getAll();
 	public void add(Settlement model);
+	public void addServiceToGuest(Guest guest, Service service, Date date);
 	public void delete(Settlement model);
 	public void update(Settlement model);
 	public List<Room> releasedInTheFuture(Date date);
 	public List<Guest> showLastThreeGuest(Room room);
 	public int paiForRoom(Guest guest);
-	public List<String> servicesAndRoomsPriceSortedByCoast();
-	public List<String> servicesAndRoomsPriceSortedByType();
-	public List<String> listGuestsAndRoomsSortedByName();
-	public List<String> listGuestsAndRoomsSortedByDate();
-	public List<String> listGuestServicesSortedByCoast(Guest guest);
-	public List<String> listGuestServicesSortedByDate(Guest guest);
+	public List<String> servicesAndRoomsPriceSortedBy(String string);
+	public List<String> listGuestsAndRoomsSortedBy(String string);
+	public List<String> listGuestServicesSortedBy(Guest guest , String string);
 	public void exportSettlements();
 	public void importSettlements();
 }

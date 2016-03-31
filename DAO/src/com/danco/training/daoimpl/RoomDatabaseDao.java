@@ -121,96 +121,6 @@ public class RoomDatabaseDao implements IRoomDao{
 	}
 
 	@Override
-	public List<Room> sortRoomsByCapacity(Connection connection)  throws PersistenceException{
-		ResultSet result = null;
-		List<Room> roomsList = new ArrayList<Room>();
-		try(Statement statament = connection.createStatement()){
-			result = statament.executeQuery("SELECT * FROM room_model ORDER BY capasity;");
-			while(result.next()){
-				roomsList.add(parserRS(result));
-			}
-		} catch(Exception ex) {
-			 throw new PersistenceException(ex);
-		}
-		return roomsList;
-	}
-
-	@Override
-	public List<Room> sortRoomsByCoast(Connection connection)  throws PersistenceException{
-		ResultSet result = null;
-		List<Room> roomsList = new ArrayList<Room>();
-		try(Statement statament = connection.createStatement()){
-			result = statament.executeQuery("SELECT * FROM room_model ORDER BY coast;");
-			while(result.next()){
-				roomsList.add(parserRS(result));
-			}
-		} catch(Exception ex) {
-			 throw new PersistenceException(ex);
-		}
-		return roomsList;
-	}
-
-	@Override
-	public List<Room> sortRoomsByStars(Connection connection)  throws PersistenceException{
-		ResultSet result = null;
-		List<Room> roomsList = new ArrayList<Room>();
-		try(Statement statament = connection.createStatement()){
-			result = statament.executeQuery("SELECT * FROM room_model ORDER BY numberOfStars;");
-			while(result.next()){
-				roomsList.add(parserRS(result));
-			}
-		} catch(Exception ex) {
-			 throw new PersistenceException(ex);
-		}
-		return roomsList;
-	}
-
-	@Override
-	public List<Room> sortFreeRoomsByCapacity(Connection connection)  throws PersistenceException{
-		ResultSet result = null;
-		List<Room> roomsList = new ArrayList<Room>();
-		try(Statement statament = connection.createStatement()){
-			result = statament.executeQuery("SELECT * FROM room_model WHERE isFreeRoom=true ORDER BY capasity;");
-			while(result.next()){
-				roomsList.add(parserRS(result));
-			}
-		} catch(Exception ex) {
-			 throw new PersistenceException(ex);
-		}
-		return roomsList;
-	}
-
-	@Override
-	public List<Room> sortFreeRoomsByCoast(Connection connection) throws PersistenceException{
-		ResultSet result = null;
-		List<Room> roomsList = new ArrayList<Room>();
-		try(Statement statament = connection.createStatement()){
-			result = statament.executeQuery("SELECT * FROM room_model WHERE isFreeRoom=true ORDER BY coast;");
-			while(result.next()){
-				roomsList.add(parserRS(result));
-			}
-		} catch(Exception ex) {
-			 throw new PersistenceException(ex);
-		}
-		return roomsList;
-	}
-
-	@Override
-	public List<Room> sortFreeRoomsByStars(Connection connection) throws PersistenceException{
-		ResultSet result = null;
-		List<Room> roomsList = new ArrayList<Room>();
-		try(Statement statament = connection.createStatement()){
-			result = statament.executeQuery("SELECT * FROM room_model WHERE isFreeRoom=true ORDER BY numberOfStars;");
-			while(result.next()){
-				roomsList.add(parserRS(result));
-			}
-		} catch(Exception ex) {
-			 throw new PersistenceException(ex);
-		}
-		return roomsList;
-	}
-
-	@Override
 	public int findLastId(Connection connection) throws PersistenceException {
 		ResultSet result = null;
 		try(Statement statament = connection.createStatement()){
@@ -221,6 +131,78 @@ public class RoomDatabaseDao implements IRoomDao{
 			 throw new PersistenceException("EXCEPTION WHEN SEARCHING LAST ID");
 		}
 		
+	}
+	@Override
+	public List<Room> sortRoomsBy(Connection connection, String string) throws PersistenceException {
+		ResultSet result = null;
+		List<Room> roomsList = new ArrayList<Room>();
+		try(Statement statament = connection.createStatement()){
+			switch(string) {
+		    case "capacity": 
+		    	result = statament.executeQuery("SELECT * FROM room_model ORDER BY capasity;");
+		    	while(result.next()){
+					roomsList.add(parserRS(result));
+				}
+				break;
+			case "number of stars": 
+				result = statament.executeQuery("SELECT * FROM room_model ORDER BY numberOfStars;");
+		    	while(result.next()){
+					roomsList.add(parserRS(result));
+				}
+				break;
+			case "coast": 
+				result = statament.executeQuery("SELECT * FROM room_model ORDER BY coast;");
+		    	while(result.next()){
+					roomsList.add(parserRS(result));
+				}
+				break;
+			default:
+				result = statament.executeQuery("SELECT * FROM room_model;");
+		    	while(result.next()){
+					roomsList.add(parserRS(result));
+				}
+				break;
+			}
+		} catch(Exception ex) {
+			 throw new PersistenceException(ex);
+		}
+		return roomsList;
+	}
+	@Override
+	public List<Room> sortFreeRoomsBy(Connection connection, String string) throws PersistenceException {
+		ResultSet result = null;
+		List<Room> roomsList = new ArrayList<Room>();
+		try(Statement statament = connection.createStatement()){
+			switch(string) {
+		    case "capacity": 
+		    	result = statament.executeQuery("SELECT * FROM room_model WHERE isFreeRoom=true ORDER BY capasity;");
+		    	while(result.next()){
+					roomsList.add(parserRS(result));
+				}
+				break;
+			case "number of stars": 
+				result = statament.executeQuery("SELECT * FROM room_model WHERE isFreeRoom=true ORDER BY numberOfStars;");
+		    	while(result.next()){
+					roomsList.add(parserRS(result));
+				}
+				break;
+			case "coast": 
+				result = statament.executeQuery("SELECT * FROM room_model WHERE isFreeRoom=true ORDER BY coast;");
+		    	while(result.next()){
+					roomsList.add(parserRS(result));
+				}
+				break;
+			default:
+				result = statament.executeQuery("SELECT * FROM room_model;");
+		    	while(result.next()){
+					roomsList.add(parserRS(result));
+				}
+				break;
+			}
+		} catch(Exception ex) {
+			 throw new PersistenceException(ex);
+		}
+		return roomsList;
 	}
 
 }

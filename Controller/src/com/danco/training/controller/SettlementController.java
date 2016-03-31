@@ -26,6 +26,9 @@ public class SettlementController {
 	public void add(Settlement model){
 		this.setCon.add(model);
 	}
+	public void addServiceToGuest(Guest guest, Service service, Date date){
+		this.setCon.addServiceToGuest(guest, service, date);
+	}
 	public void delete(Settlement model){
 		this.setCon.delete(model);
 	}
@@ -41,23 +44,14 @@ public class SettlementController {
 	public int paiForRoom(Guest guest){
 		return this.setCon.paiForRoom(guest);
 	}
-	public List<String> servicesAndRoomsPriceSortedByCoast(){
-		return this.setCon.servicesAndRoomsPriceSortedByCoast();
+	public List<String> servicesAndRoomsPriceSortedBy(String string){
+		return this.setCon.servicesAndRoomsPriceSortedBy(string);
 	}
-	public List<String> servicesAndRoomsPriceSortedByType(){
-		return this.setCon.servicesAndRoomsPriceSortedByType();
+	public List<String> listGuestsAndRoomsSortedBy(String string){
+		return this.setCon.listGuestsAndRoomsSortedBy(string);
 	}
-	public List<String> listGuestsAndRoomsSortedByName(){
-		return this.setCon.listGuestsAndRoomsSortedByName();
-	}
-	public List<String> listGuestsAndRoomsSortedByDate(){
-		return this.setCon.listGuestsAndRoomsSortedByDate();
-	}
-	public List<String> listGuestServicesSortedByCoast(Guest guest){
-		return this.setCon.listGuestServicesSortedByCoast(guest);
-	}
-	public List<String> listGuestServicesSortedByDate(Guest guest){
-		return this.setCon.listGuestServicesSortedByDate(guest);
+	public List<String> listGuestServicesSortedBy(Guest guest, String string){
+		return this.setCon.listGuestServicesSortedBy(guest, string);
 	}
 	public void exportSettlements(){
 		this.setCon.exportSettlements();

@@ -19,7 +19,6 @@ public class HotelController implements IHotelController {
 	private GuestController guestCon;
 	private ServiceController serviceCon;
 	private SettlementController setCon;
-	
 	private static HotelController instance;
 	
 	public static HotelController getInstance(){
@@ -28,6 +27,7 @@ public class HotelController implements IHotelController {
 		}
 		return instance;
 	}
+	
 	
 	public RoomController getRoomCon() {
 		if(roomCon == null){
@@ -110,36 +110,6 @@ public class HotelController implements IHotelController {
 	@Override
 	public void updateRoom(Room room) {
 		getRoomCon().updateRoom(room);
-	}
-
-	@Override
-	public List<Room> sortByCoastFreeRoom() {
-		return getRoomCon().sortByCoastFreeRoom();
-	}
-
-	@Override
-	public List<Room> sortByCapacityFreeRoom() {
-		return getRoomCon().sortByCapacityFreeRoom();
-	}
-
-	@Override
-	public List<Room> sortByStarsFreeRoom() {
-		return getRoomCon().sortByStarsFreeRoom();
-	}
-
-	@Override
-	public List<Room> sortByCoastRoom() {
-		return getRoomCon().sortByCoastRoom();
-	}
-
-	@Override
-	public List<Room> sortByCapacityRoom() {
-		return getRoomCon().sortByCapacityRoom();
-	}
-
-	@Override
-	public List<Room> sortByStarsRoom() {
-		return getRoomCon().sortByStarsRoom();
 	}
 
 	@Override
@@ -263,36 +233,6 @@ public class HotelController implements IHotelController {
 	}
 
 	@Override
-	public List<String> servicesAndRoomsPriceSortedByCoast() {
-		return getSettlementCon().servicesAndRoomsPriceSortedByCoast();
-	}
-
-	@Override
-	public List<String> servicesAndRoomsPriceSortedByType() {
-		return getSettlementCon().servicesAndRoomsPriceSortedByType();
-	}
-
-	@Override
-	public List<String> listGuestsAndRoomsSortedByName() {
-		return getSettlementCon().listGuestsAndRoomsSortedByName();
-	}
-
-	@Override
-	public List<String> listGuestsAndRoomsSortedByDate() {
-		return getSettlementCon().listGuestsAndRoomsSortedByDate();
-	}
-
-	@Override
-	public List<String> listGuestServicesSortedByCoast(Guest guest) {
-		return getSettlementCon().listGuestServicesSortedByCoast(guest);
-	}
-
-	@Override
-	public List<String> listGuestServicesSortedByDate(Guest guest) {
-		return getSettlementCon().listGuestServicesSortedByDate(guest);
-	}
-
-	@Override
 	public Guest getByIdGuest(int id) {
 		return getGuestCon().getByIdGuest(id);
 	}
@@ -320,5 +260,35 @@ public class HotelController implements IHotelController {
 	@Override
 	public void importSettlements() {
 		getSettlementCon().importSettlements();
+	}
+
+	@Override
+	public List<Room> sortRoomsBy(String string) {
+		return getRoomCon().sortRoomsBy(string);
+	}
+
+	@Override
+	public List<Room> sortFreeRoomsBy(String string) {
+		return getRoomCon().sortFreeRoomsBy(string);
+	}
+
+	@Override
+	public List<String> servicesAndRoomsPriceSortedBy(String string) {
+		return getSettlementCon().servicesAndRoomsPriceSortedBy(string);
+	}
+
+	@Override
+	public List<String> listGuestsAndRoomsSortedBy(String string) {
+		return getSettlementCon().listGuestsAndRoomsSortedBy(string);
+	}
+
+	@Override
+	public List<String> listGuestServicesSortedBy(Guest guest, String string) {
+		return getSettlementCon().listGuestServicesSortedBy(guest, string);
+	}
+
+	@Override
+	public void addServiceToGuest(Guest guest, Service service, Date date) {
+		getSettlementCon().addServiceToGuest(guest, service, date);
 	}
 }

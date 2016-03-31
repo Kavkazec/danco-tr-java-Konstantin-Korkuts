@@ -26,8 +26,8 @@ public class ShowNumberOfFreeRoomsAction implements IAction {
 
 	@Override
 	public void answer(Object answerFromServer) {
-		if (answerFromServer instanceof Integer) {
-			InReader.print((Integer) answerFromServer + "");
+		if (answerFromServer instanceof Integer && answerFromServer != null) {
+			InReader.print(answerFromServer + "");
 		}
 	}
 

@@ -5,10 +5,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.api.IGuestDao;
 import com.danco.training.api.IServiceDao;
 import com.danco.training.api.IServiceService;
-import com.danco.training.api.ISettlementService;
 import com.danco.training.dbconnection.ConnectionProvider;
 import com.danco.training.di.DependencyInjection;
 import com.danco.training.entity.Service;
@@ -46,6 +44,7 @@ public class ServiceService implements IServiceService{
 		}
 	}
 
+	@Override
 	public void addService(Service service) {
 		try {
 			dao.add(getConnection(), service);
@@ -54,6 +53,7 @@ public class ServiceService implements IServiceService{
 		}
 	}
 
+	@Override
 	public void deleteService(Service service) {
 		try {
 			dao.delete(getConnection(), service);
@@ -62,6 +62,7 @@ public class ServiceService implements IServiceService{
 		}
 	}
 
+	@Override
 	public List<Service> getServices() {
 		try {
 			return dao.getAll(getConnection());
@@ -72,6 +73,7 @@ public class ServiceService implements IServiceService{
 
 	}
 
+	@Override
 	public void exportServices() {
 		try {
 			ie.writeToFileServices(getPath());
@@ -80,6 +82,7 @@ public class ServiceService implements IServiceService{
 		}
 	}
 
+	@Override
 	public void importServices() {
 		try {
 			ie.readFromFileServices(getPath());
@@ -88,6 +91,7 @@ public class ServiceService implements IServiceService{
 		}
 	}
 
+	@Override
 	public void buildServicesFromAnnot() {
 		try {
 
@@ -96,6 +100,7 @@ public class ServiceService implements IServiceService{
 		}
 	}
 
+	@Override
 	public void updateService(Service service) {
 		try {
 			dao.update(getConnection(), service);
@@ -104,6 +109,7 @@ public class ServiceService implements IServiceService{
 		}
 	}
 
+	@Override
 	public void changeServiceCoast(Service service) {
 		try {
 			dao.update(getConnection(), service);
@@ -112,6 +118,7 @@ public class ServiceService implements IServiceService{
 		}
 	}
 
+	@Override
 	public Service getByIdService(int id) {
 		try {
 			return dao.getById(getConnection(), id);

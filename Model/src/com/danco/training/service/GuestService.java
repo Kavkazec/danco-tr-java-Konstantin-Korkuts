@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 
 import com.danco.training.api.IGuestDao;
 import com.danco.training.api.IGuestService;
-import com.danco.training.api.ISettlementService;
 import com.danco.training.dbconnection.ConnectionProvider;
 import com.danco.training.di.DependencyInjection;
 import com.danco.training.entity.Guest;
@@ -45,6 +44,7 @@ public class GuestService implements IGuestService{
 		}
 	}
 
+	@Override
 	public void addGuest(Guest guest) {
 		try {
 			dao.add(getConnection(), guest);
@@ -53,6 +53,7 @@ public class GuestService implements IGuestService{
 		}
 	}
 
+	@Override
 	public void deleteGuest(Guest guest) {
 		try {
 			dao.delete(getConnection(), guest);
@@ -61,6 +62,7 @@ public class GuestService implements IGuestService{
 		}
 	}
 
+	@Override
 	public void updateGuest(Guest guest) {
 		try {
 			dao.update(getConnection(), guest);
@@ -69,6 +71,7 @@ public class GuestService implements IGuestService{
 		}
 	}
 
+	@Override
 	public List<Guest> getGuests() {
 		try {
 			return dao.getAll(getConnection());
@@ -79,6 +82,7 @@ public class GuestService implements IGuestService{
 
 	}
 
+	@Override
 	public void exportGuests() {
 		try {
 			ie.writeToFileGuests(getPath());
@@ -87,6 +91,7 @@ public class GuestService implements IGuestService{
 		}
 	}
 
+	@Override
 	public void importGuests() {
 		try {
 			ie.readFromFileGuests(getPath());
@@ -95,6 +100,7 @@ public class GuestService implements IGuestService{
 		}
 	}
 
+	@Override
 	public void buildGuestsFromAnnot() {
 		try {
 
@@ -103,6 +109,7 @@ public class GuestService implements IGuestService{
 		}
 	}
 
+	@Override
 	public int numberOfGuests() {
 		try {
 			return dao.getAll(getConnection()).size();
@@ -112,6 +119,7 @@ public class GuestService implements IGuestService{
 		}
 	}
 
+	@Override
 	public Guest getByIdGuest(int id) {
 		try {
 			return dao.getById(getConnection(), id);

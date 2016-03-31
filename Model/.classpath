@@ -9,5 +9,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/DI"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Entity"/>
 	<classpathentry kind="lib" path="C:/Users/Kavkazec/practice/Model/lib/properties.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DAO"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

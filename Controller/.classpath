@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="C:/Users/Kavkazec/practice/Controller/lib/properties.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/ControllerAPI"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Entity"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Model"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
