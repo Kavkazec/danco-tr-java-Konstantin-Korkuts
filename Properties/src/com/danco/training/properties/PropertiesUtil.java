@@ -55,9 +55,6 @@ public class PropertiesUtil {
 	}
 
 	public void setRecordNumber(int recordNumber) {
-
 		this.recordNumber = recordNumber;
-
 	}
-
 }

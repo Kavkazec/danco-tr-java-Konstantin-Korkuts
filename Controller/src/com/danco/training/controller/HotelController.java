@@ -263,13 +263,8 @@ public class HotelController implements IHotelController {
 	}
 
 	@Override
-	public List<Room> sortRoomsBy(String string) {
-		return getRoomCon().sortRoomsBy(string);
-	}
-
-	@Override
-	public List<Room> sortFreeRoomsBy(String string) {
-		return getRoomCon().sortFreeRoomsBy(string);
+	public List<Room> sortRoomsBy(String status, String criterion) {
+		return getRoomCon().sortRoomsBy(status,criterion);
 	}
 
 	@Override

@@ -24,8 +24,7 @@ public interface IHotelController {
 	public void addRoom(Room room);
 	public void deleteRoom(Room room);
 	public void updateRoom(Room room);
-	public List<Room> sortRoomsBy(String string);
-	public List<Room> sortFreeRoomsBy(String string);
+	public List<Room> sortRoomsBy(String status, String criterion);
 	public List<Room> getRooms();
 	public int numberOfFreeRooms();
 	public void changeRoomStatus(Room room);

@@ -1,6 +1,5 @@
 package com.danco.training.api;
 
-import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
 
@@ -8,7 +7,6 @@ import com.danco.training.entity.Guest;
 import com.danco.training.entity.Room;
 import com.danco.training.entity.Service;
 import com.danco.training.entity.Settlement;
-import com.danco.training.persistexception.PersistenceException;
 
 public interface ISettlementService {
 	public Settlement getByIdSettlement(int id);

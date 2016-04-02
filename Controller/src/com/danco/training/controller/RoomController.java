@@ -26,11 +26,8 @@ public class RoomController {
 	public void updateRoom(Room room){
 		this.roomCon.updateRoom(room);
 	}
-	public List<Room> sortRoomsBy(String string){
-		return this.roomCon.sortRoomsBy(string);
-	}
-	public List<Room> sortFreeRoomsBy(String string){
-		return this.roomCon.sortFreeRoomsBy(string);
+	public List<Room> sortRoomsBy(String status, String criterion){
+		return this.roomCon.sortRoomsBy(status, criterion);
 	}
 	
 	public List<Room> getRooms(){

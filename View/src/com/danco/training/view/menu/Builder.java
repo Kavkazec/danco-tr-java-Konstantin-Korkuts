@@ -20,7 +20,6 @@ import com.danco.training.view.action.room.ImportRoomsAction;
 import com.danco.training.view.action.room.PrintRoomAction;
 import com.danco.training.view.action.room.ShowNumberOfFreeRoomsAction;
 import com.danco.training.view.action.room.ShowRoomDetailsAction;
-import com.danco.training.view.action.room.SortFreeRoomsByAction;
 import com.danco.training.view.action.room.SortRoomsByAction;
 import com.danco.training.view.action.room.UpdateRoomAction;
 import com.danco.training.view.action.service.AddServiceAction;
@@ -104,9 +103,8 @@ public class Builder {
 		roomMenuOtherShow.addMenuItem(new MenuItem(new ShowRoomDetailsAction(), "1-> Room's datails", roomMenuOtherShow));
 		roomMenuOtherShow.addMenuItem(new MenuItem(null, "2-> Back", roomMenuOther));
 		
-		roomMenuOtherSort.addMenuItem(new MenuItem(new SortRoomsByAction(), "0-> Sort rooms by ... : ", roomMenuOtherSort));
-		roomMenuOtherSort.addMenuItem(new MenuItem(new SortFreeRoomsByAction(), "1-> Sort free rooms by ... : ", roomMenuOtherSort));
-		roomMenuOtherSort.addMenuItem(new MenuItem(null, "2-> Back", roomMenuOther));
+		roomMenuOtherSort.addMenuItem(new MenuItem(new SortRoomsByAction(), "0-> Sort ... rooms by ... : ", roomMenuOtherSort));
+		roomMenuOtherSort.addMenuItem(new MenuItem(null, "1-> Back", roomMenuOther));
 		
 		serviceMenu.addMenuItem(new MenuItem(new AddServiceAction(), "0 -> Add service", serviceMenu));
 		serviceMenu.addMenuItem(new MenuItem(new DeleteServiceAction(), "1 -> Delete service", serviceMenu));

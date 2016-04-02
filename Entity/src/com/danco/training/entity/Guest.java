@@ -9,7 +9,7 @@ public class Guest extends BaseEntity{
 	private String name;
 	private String passportSeries;
 	private int passportNumber;
-	private List<Settlement> settlementList;
+	private List<Settlement> settlementList = new ArrayList<Settlement>();
 	
 	
 
@@ -18,7 +18,6 @@ public class Guest extends BaseEntity{
 		this.name = name;
 		this.passportSeries = passportSeries;
 		this.passportNumber = passportNumber;
-		this.settlementList = new ArrayList<Settlement>();
 	}
 	
 	public Guest(int id, String name, String passportSeries, int passportNumber){
@@ -26,7 +25,6 @@ public class Guest extends BaseEntity{
 		this.name = name;
 		this.passportSeries = passportSeries;
 		this.passportNumber = passportNumber;
-		this.settlementList = new ArrayList<Settlement>();
 	}
 	
 	public List<Settlement> getSettlementList() {
@@ -34,7 +32,7 @@ public class Guest extends BaseEntity{
 	}
 
 	public void setSettlementList(List<Settlement> settlementList) {
-		this.settlementList = settlementList;
+		this.settlementList.addAll(settlementList);
 	}
 
 	public String getName() {

@@ -20,6 +20,7 @@ import com.danco.training.reader.ImportAndExport;
  * The Class RoomService.
  */
 public class RoomService implements IRoomService{
+	private static final String EMPTY_STRING = " ";
 	private static final Logger LOGGER = Logger.getLogger(RoomService.class);
 	private ImportAndExport ie = ImportAndExport.getInstance();
 	private IRoomDao dao = (IRoomDao) DependencyInjection.getInstance().getClassInstance(IRoomDao.class);
@@ -151,26 +152,34 @@ public class RoomService implements IRoomService{
 
 	@Override
 	public int numberOfFreeRooms() {
-		int count = 0;
 		try {
-			for (Room room : dao.getAll(getConnection())) {
-				if (room.isFreeRoom()) {
-					count += 1;
-				}
-			}
-			return count;
+			return dao.numberOfFreeRooms(getConnection());
 		} catch (Exception e) {
 			LOGGER.error(e);
-			return count;
+			return 0;
 		}
 	}
 
 	@Override
 	public String showRoomDetails(Room room) {
-		String str = "";
+		String str = null;
 		try {
-			str = room.getId() + " " + room.getNumber() + " " + room.getCapacity() + " " + room.getNumberOfStars() + " "
-					+ room.getCoast() + " " + room.isFreeRoom() + " " + room.isOnRepair();
+			StringBuilder sb = new StringBuilder();
+			sb.append(room.getId());
+			sb.append(EMPTY_STRING);
+			sb.append(room.getNumber());
+			sb.append(EMPTY_STRING);
+			sb.append(room.getCapacity());
+			sb.append(EMPTY_STRING);
+			sb.append(room.getNumberOfStars());
+			sb.append(EMPTY_STRING);
+			sb.append(room.getCoast());
+			sb.append(EMPTY_STRING);
+			sb.append(room.isFreeRoom());
+			sb.append(EMPTY_STRING);
+			sb.append(room.isOnRepair());
+			sb.append(EMPTY_STRING);
+			str = sb.toString();
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
@@ -189,22 +198,13 @@ public class RoomService implements IRoomService{
 	}
 
 	@Override
-	public List<Room> sortRoomsBy(String string) {
+	public List<Room> sortRoomsBy(String status, String criterion) {
 		try {
-			return dao.sortRoomsBy(getConnection(), string);
+			return dao.sortRoomsBy(getConnection(), status, criterion);
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
 		}
 	}
 
-	@Override
-	public List<Room> sortFreeRoomsBy(String string) {
-		try {
-			return dao.sortFreeRoomsBy(getConnection(), string);
-		} catch (Exception e) {
-			LOGGER.error(e);
-			return null;
-		}
-	}
 }

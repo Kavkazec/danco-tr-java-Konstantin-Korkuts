@@ -12,8 +12,6 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import com.danco.training.properties.PropertiesReader;
-
 public class ProcessAnnotation {
 	private static final Logger LOGGER = Logger.getLogger(ProcessAnnotation.class);
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -24,7 +22,6 @@ public class ProcessAnnotation {
 	private List<String> listType = new ArrayList<String>();
 
 	public void procAnnotation(Object ob) {
-		PropertiesReader.getInstance().setProperties();
 		FileInputStream reader = null;
 		try {
 			Class<?> cl = ob.getClass();

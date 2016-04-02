@@ -9,7 +9,6 @@ import java.util.List;
 
 import com.danco.training.api.IGuestDao;
 import com.danco.training.entity.Guest;
-import com.danco.training.entity.Settlement;
 import com.danco.training.persistexception.PersistenceException;
 
 public class GuestDatabaseDao implements IGuestDao{

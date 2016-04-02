@@ -67,9 +67,10 @@ public class RoomDatabaseDao implements IRoomDao{
 	@Override
 	public void update(Connection connection, Room model) throws PersistenceException{
 		try{
-			String sql = "UPDATE room_model SET room_number=?, capasity=?, numberOfStars=?, coast=?,"
-					+ "isFreeRoom=?, isOnRepair=? WHERE id=?;";
-			PreparedStatement statement = connection.prepareStatement(sql);
+			StringBuilder sb = new StringBuilder();
+			sb.append("UPDATE room_model SET room_number=?, capasity=?, numberOfStars=?, coast=?, ");
+			sb.append("isFreeRoom=?, isOnRepair=? WHERE id=?;");
+			PreparedStatement statement = connection.prepareStatement(sb.toString());
 			statement.setInt(1, model.getNumber());
 			statement.setInt(2, model.getCapacity());
 			statement.setInt(3, model.getNumberOfStars());
@@ -86,9 +87,11 @@ public class RoomDatabaseDao implements IRoomDao{
 	@Override
 	public void add(Connection connection, Room model) throws PersistenceException{
 		try{
-			String sql = "INSERT INTO room_model (room_number, capasity, numberOfStars, coast, isFreeRoom, isOnRepair)"
-					+ " VALUES (?,?,?,?,?,?);";
-			PreparedStatement statement = connection.prepareStatement(sql);
+			StringBuilder sb = new StringBuilder();
+			sb.append("INSERT INTO room_model ");
+			sb.append("(room_number, capasity, numberOfStars, coast, isFreeRoom, isOnRepair) ");
+			sb.append("VALUES (?,?,?,?,?,?);");
+			PreparedStatement statement = connection.prepareStatement(sb.toString());
 			statement.setInt(1, model.getNumber());
 			statement.setInt(2, model.getCapacity());
 			statement.setInt(3, model.getNumberOfStars());
@@ -133,35 +136,21 @@ public class RoomDatabaseDao implements IRoomDao{
 		
 	}
 	@Override
-	public List<Room> sortRoomsBy(Connection connection, String string) throws PersistenceException {
+	public List<Room> sortRoomsBy(Connection connection, String status, String criterion) throws PersistenceException {
 		ResultSet result = null;
 		List<Room> roomsList = new ArrayList<Room>();
 		try(Statement statament = connection.createStatement()){
-			switch(string) {
-		    case "capacity": 
-		    	result = statament.executeQuery("SELECT * FROM room_model ORDER BY capasity;");
+			if(StatusForSortRoom.All.equals(StatusForSortRoom.valueOf(status))){
+			    result = statament.executeQuery("SELECT * FROM room_model ORDER BY "+criterion +";");
+			    while(result.next()){
+					roomsList.add(parserRS(result));
+				}
+			}
+			if(StatusForSortRoom.Free.equals(StatusForSortRoom.valueOf(status))){
+			    result = statament.executeQuery("SELECT * FROM room_model WHERE isFreeRoom=true ORDER BY "+criterion +";");
 		    	while(result.next()){
 					roomsList.add(parserRS(result));
 				}
-				break;
-			case "number of stars": 
-				result = statament.executeQuery("SELECT * FROM room_model ORDER BY numberOfStars;");
-		    	while(result.next()){
-					roomsList.add(parserRS(result));
-				}
-				break;
-			case "coast": 
-				result = statament.executeQuery("SELECT * FROM room_model ORDER BY coast;");
-		    	while(result.next()){
-					roomsList.add(parserRS(result));
-				}
-				break;
-			default:
-				result = statament.executeQuery("SELECT * FROM room_model;");
-		    	while(result.next()){
-					roomsList.add(parserRS(result));
-				}
-				break;
 			}
 		} catch(Exception ex) {
 			 throw new PersistenceException(ex);
@@ -169,40 +158,17 @@ public class RoomDatabaseDao implements IRoomDao{
 		return roomsList;
 	}
 	@Override
-	public List<Room> sortFreeRoomsBy(Connection connection, String string) throws PersistenceException {
+	public int numberOfFreeRooms(Connection connection) throws PersistenceException {
 		ResultSet result = null;
-		List<Room> roomsList = new ArrayList<Room>();
+		int count = 0;
 		try(Statement statament = connection.createStatement()){
-			switch(string) {
-		    case "capacity": 
-		    	result = statament.executeQuery("SELECT * FROM room_model WHERE isFreeRoom=true ORDER BY capasity;");
-		    	while(result.next()){
-					roomsList.add(parserRS(result));
-				}
-				break;
-			case "number of stars": 
-				result = statament.executeQuery("SELECT * FROM room_model WHERE isFreeRoom=true ORDER BY numberOfStars;");
-		    	while(result.next()){
-					roomsList.add(parserRS(result));
-				}
-				break;
-			case "coast": 
-				result = statament.executeQuery("SELECT * FROM room_model WHERE isFreeRoom=true ORDER BY coast;");
-		    	while(result.next()){
-					roomsList.add(parserRS(result));
-				}
-				break;
-			default:
-				result = statament.executeQuery("SELECT * FROM room_model;");
-		    	while(result.next()){
-					roomsList.add(parserRS(result));
-				}
-				break;
+			result = statament.executeQuery("SELECT COUNT(Id) AS count FROM room_model WHERE isFreeRoom=true;");
+			while(result.next()){
+				count = result.getInt("count");
 			}
 		} catch(Exception ex) {
 			 throw new PersistenceException(ex);
 		}
-		return roomsList;
+		return count;
 	}
-
 }

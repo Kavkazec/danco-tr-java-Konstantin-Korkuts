@@ -25,4 +25,6 @@ public interface ISettlementDao extends ItemDao<Settlement>{
 	public Settlement parserRS(Connection con, ResultSet result) throws PersistenceException;
 	
 	public void addServiceToGuest(Connection connection, Guest guest, Service service, Date date) throws PersistenceException;
+	
+	public void addSetToGuest(Connection connection, Guest guests) throws PersistenceException;
 }

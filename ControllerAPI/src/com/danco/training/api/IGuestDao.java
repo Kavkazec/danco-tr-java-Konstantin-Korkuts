@@ -1,6 +1,5 @@
 package com.danco.training.api;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 
 import com.danco.training.entity.Guest;
