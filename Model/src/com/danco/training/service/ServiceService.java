@@ -1,6 +1,7 @@
 package com.danco.training.service;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -50,6 +51,12 @@ public class ServiceService implements IServiceService{
 			dao.add(getConnection(), service);
 		} catch (Exception e) {
 			LOGGER.error(e);
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 
@@ -59,6 +66,12 @@ public class ServiceService implements IServiceService{
 			dao.delete(getConnection(), service);
 		} catch (Exception e) {
 			LOGGER.error(e);
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 
@@ -69,6 +82,12 @@ public class ServiceService implements IServiceService{
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 
 	}
@@ -92,20 +111,17 @@ public class ServiceService implements IServiceService{
 	}
 
 	@Override
-	public void buildServicesFromAnnot() {
-		try {
-
-		} catch (Exception e) {
-			LOGGER.error(e);
-		}
-	}
-
-	@Override
 	public void updateService(Service service) {
 		try {
 			dao.update(getConnection(), service);
 		} catch (Exception e) {
 			LOGGER.error(e);
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 
@@ -115,6 +131,12 @@ public class ServiceService implements IServiceService{
 			dao.update(getConnection(), service);
 		} catch (Exception e) {
 			LOGGER.error(e);
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 
@@ -125,6 +147,12 @@ public class ServiceService implements IServiceService{
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 

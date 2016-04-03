@@ -93,11 +93,6 @@ public class HotelController implements IHotelController {
 	}
 
 	@Override
-	public void buildGuestsFromAnnot() {
-		getGuestCon().buildGuestsFromAnnot();
-	}
-
-	@Override
 	public void addRoom(Room room) {
 		getRoomCon().addRoom(room);
 	}
@@ -153,11 +148,6 @@ public class HotelController implements IHotelController {
 	}
 
 	@Override
-	public void buildRoomsFromAnnot() {
-		getRoomCon().buildRoomsFromAnnot();
-	}
-
-	@Override
 	public void addService(Service service) {
 		getServiceCon().addService(service);
 	}
@@ -190,11 +180,6 @@ public class HotelController implements IHotelController {
 	@Override
 	public void importServices() {
 		getServiceCon().importServices();
-	}
-
-	@Override
-	public void buildServicesFromAnnot() {
-		getServiceCon().buildServicesFromAnnot();
 	}
 
 	@Override

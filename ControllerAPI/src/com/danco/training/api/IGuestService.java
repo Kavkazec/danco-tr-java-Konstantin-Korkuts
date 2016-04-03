@@ -13,5 +13,4 @@ public interface IGuestService {
 	public int numberOfGuests();
 	public void exportGuests();
 	public void importGuests();
-	public void buildGuestsFromAnnot();
 }

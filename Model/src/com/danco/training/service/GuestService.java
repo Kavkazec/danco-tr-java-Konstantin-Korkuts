@@ -1,6 +1,7 @@
 package com.danco.training.service;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -50,6 +51,12 @@ public class GuestService implements IGuestService{
 			dao.add(getConnection(), guest);
 		} catch (Exception e) {
 			LOGGER.error(e);
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 
@@ -59,6 +66,12 @@ public class GuestService implements IGuestService{
 			dao.delete(getConnection(), guest);
 		} catch (Exception e) {
 			LOGGER.error(e);
+		}finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 
@@ -68,6 +81,12 @@ public class GuestService implements IGuestService{
 			dao.update(getConnection(), guest);
 		} catch (Exception e) {
 			LOGGER.error(e);
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 
@@ -78,6 +97,12 @@ public class GuestService implements IGuestService{
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 
 	}
@@ -101,21 +126,18 @@ public class GuestService implements IGuestService{
 	}
 
 	@Override
-	public void buildGuestsFromAnnot() {
-		try {
-
-		} catch (Exception e) {
-			LOGGER.error(e);
-		}
-	}
-
-	@Override
 	public int numberOfGuests() {
 		try {
 			return dao.getAll(getConnection()).size();
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return 0;
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 
@@ -126,6 +148,12 @@ public class GuestService implements IGuestService{
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 

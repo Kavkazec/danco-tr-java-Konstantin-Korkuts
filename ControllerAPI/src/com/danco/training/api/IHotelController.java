@@ -20,7 +20,6 @@ public interface IHotelController {
 	public int numberOfGuests();
 	public void exportGuests();
 	public void importGuests();
-	public void buildGuestsFromAnnot();
 	public void addRoom(Room room);
 	public void deleteRoom(Room room);
 	public void updateRoom(Room room);
@@ -33,7 +32,6 @@ public interface IHotelController {
 	public String showRoomDetails(Room room);
 	public void exportRooms();
 	public void importRooms();
-	public void buildRoomsFromAnnot();
 	public void addService(Service service);
 	public void deleteService(Service service);
 	public void updateService(Service service);
@@ -41,7 +39,6 @@ public interface IHotelController {
 	public void changeServiceCoast(Service service);
 	public void exportServices();
 	public void importServices();
-	public void buildServicesFromAnnot();
 	public List<Settlement> getAll();
 	public void add(Settlement model);
 	public void addServiceToGuest(Guest guest, Service service, Date date);

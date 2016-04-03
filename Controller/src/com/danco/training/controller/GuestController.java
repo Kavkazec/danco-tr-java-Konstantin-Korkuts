@@ -38,7 +38,4 @@ public class GuestController {
 	public void importGuests(){
 		this.guestCon.importGuests();
 	}
-	public void buildGuestsFromAnnot(){
-		this.guestCon.buildGuestsFromAnnot();
-	}
 }

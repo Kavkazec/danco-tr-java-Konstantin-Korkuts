@@ -13,5 +13,4 @@ public interface IServiceService {
 	public void changeServiceCoast(Service service);
 	public void exportServices();
 	public void importServices();
-	public void buildServicesFromAnnot();
 }

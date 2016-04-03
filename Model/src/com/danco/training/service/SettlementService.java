@@ -1,6 +1,7 @@
 package com.danco.training.service;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -52,6 +53,12 @@ public class SettlementService implements ISettlementService {
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
+		}  finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 
 	}
@@ -62,6 +69,12 @@ public class SettlementService implements ISettlementService {
 			dao.add(getConnection(), model);
 		} catch (Exception e) {
 			LOGGER.error(e);
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 
@@ -71,6 +84,12 @@ public class SettlementService implements ISettlementService {
 			dao.delete(getConnection(), model);
 		} catch (Exception e) {
 			LOGGER.error(e);
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 
@@ -80,6 +99,12 @@ public class SettlementService implements ISettlementService {
 			dao.update(getConnection(), model);
 		} catch (Exception e) {
 			LOGGER.error(e);
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 
@@ -98,6 +123,12 @@ public class SettlementService implements ISettlementService {
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 		return rooms;
 	}
@@ -115,6 +146,12 @@ public class SettlementService implements ISettlementService {
 			}
 		} catch (Exception e) {
 			LOGGER.error(e);
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 		return list;
 	}
@@ -127,6 +164,12 @@ public class SettlementService implements ISettlementService {
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return 0;
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 
@@ -137,6 +180,12 @@ public class SettlementService implements ISettlementService {
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 
@@ -165,6 +214,12 @@ public class SettlementService implements ISettlementService {
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 
@@ -175,6 +230,12 @@ public class SettlementService implements ISettlementService {
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 
@@ -185,6 +246,12 @@ public class SettlementService implements ISettlementService {
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 
@@ -194,6 +261,12 @@ public class SettlementService implements ISettlementService {
 			dao.addServiceToGuest(getConnection(), guest, service, date);
 		} catch (Exception e) {
 			LOGGER.error(e);
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 }

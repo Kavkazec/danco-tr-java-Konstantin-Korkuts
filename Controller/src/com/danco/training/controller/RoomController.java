@@ -54,7 +54,4 @@ public class RoomController {
 	public void importRooms(){
 		this.roomCon.importRooms();
 	}
-	public void buildRoomsFromAnnot(){
-		this.roomCon.buildRoomsFromAnnot();
-	}
 }

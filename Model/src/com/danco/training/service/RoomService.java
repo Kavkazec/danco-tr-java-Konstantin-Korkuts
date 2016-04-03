@@ -52,6 +52,12 @@ public class RoomService implements IRoomService{
 			dao.add(getConnection(), room);
 		} catch (Exception e) {
 			LOGGER.error(e);
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 
@@ -62,6 +68,12 @@ public class RoomService implements IRoomService{
 		} catch (Exception e) {
 			LOGGER.error(e);
 
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 
@@ -72,6 +84,12 @@ public class RoomService implements IRoomService{
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 
 	}
@@ -90,6 +108,12 @@ public class RoomService implements IRoomService{
 			try {
 				conn.rollback();
 			} catch (SQLException e1) {
+				LOGGER.error(e);
+			}
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
 				LOGGER.error(e);
 			}
 		}
@@ -114,20 +138,17 @@ public class RoomService implements IRoomService{
 	}
 
 	@Override
-	public void buildRoomsFromAnnot() {
-		try {
-
-		} catch (Exception e) {
-			LOGGER.error(e);
-		}
-	}
-
-	@Override
 	public void updateRoom(Room room) {
 		try {
 			dao.update(getConnection(), room);
 		} catch (Exception e) {
 			LOGGER.error(e);
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 
 	}
@@ -138,6 +159,12 @@ public class RoomService implements IRoomService{
 			dao.update(getConnection(), room);
 		} catch (Exception e) {
 			LOGGER.error(e);
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 
@@ -147,6 +174,12 @@ public class RoomService implements IRoomService{
 			dao.update(getConnection(), room);
 		} catch (Exception e) {
 			LOGGER.error(e);
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 
@@ -157,6 +190,12 @@ public class RoomService implements IRoomService{
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return 0;
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 
@@ -183,6 +222,12 @@ public class RoomService implements IRoomService{
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 		return str;
 	}
@@ -194,6 +239,12 @@ public class RoomService implements IRoomService{
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 
@@ -204,6 +255,12 @@ public class RoomService implements IRoomService{
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
+		} finally {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 

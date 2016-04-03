@@ -18,5 +18,4 @@ public interface IRoomService {
 	public String showRoomDetails(Room room);
 	public void exportRooms();
 	public void importRooms();
-	public void buildRoomsFromAnnot();
 }

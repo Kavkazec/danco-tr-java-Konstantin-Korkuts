@@ -39,7 +39,4 @@ public class ServiceController {
 	public void importServices(){
 		this.serviceCon.importServices();
 	}
-	public void buildServicesFromAnnot(){
-		this.serviceCon.buildServicesFromAnnot();
-	}
 }
