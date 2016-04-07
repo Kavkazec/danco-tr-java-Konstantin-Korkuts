@@ -10,7 +10,20 @@ public class PrintService {
 	
 	public static void printServices(List<Service> list){
 		for (Service service : list) {
-			InReader.print(service.getId() + SEPAR + service.getName() + SEPAR + service.getCoast());
+			StringBuilder sb = new StringBuilder();
+			sb.append(service.getId());
+			sb.append(SEPAR);
+			sb.append(service.getName());
+			sb.append(SEPAR);
+			sb.append(service.getCoast());
+			sb.append(SEPAR);
+			sb.append(service.getSettlement().getId());
+			sb.append(SEPAR);
+			sb.append(service.getDate());
+			sb.append(SEPAR);
+			sb.append(service.getType());
+			sb.append(SEPAR);
+			InReader.print(sb.toString());
 		}
 	}
 }

@@ -36,6 +36,7 @@ import com.danco.training.action.settlement.ExportSettlementsAction;
 import com.danco.training.action.settlement.ImportSettlementsAction;
 import com.danco.training.action.settlement.ListGuestServicesSortedByAction;
 import com.danco.training.action.settlement.ListGuestsAndRoomSortedByAction;
+import com.danco.training.action.settlement.MoveOutFromRoomAction;
 import com.danco.training.action.settlement.PrintSettelmentAction;
 import com.danco.training.action.settlement.ReleasedInTheFutureActrion;
 import com.danco.training.action.settlement.ServicesAndRoomsPriceSortedByAction;
@@ -131,8 +132,9 @@ public class Builder {
 		
 		
 		settlementMenuOther.addMenuItem(new MenuItem(null,"0 -> List of ...",settlementMenuOtherShow));
-		settlementMenuOther.addMenuItem(new MenuItem(new ShowLastThreeGuestAction(),"0 -> Show last 1 guests",settlementMenuOtherShow));
-		settlementMenuOther.addMenuItem(new MenuItem(null,"2 -> Back",settlementMenu));
+		settlementMenuOther.addMenuItem(new MenuItem(new ShowLastThreeGuestAction(),"1 -> Show last 3 guests",settlementMenuOtherShow));
+		settlementMenuOther.addMenuItem(new MenuItem(new MoveOutFromRoomAction(),"2 -> To evict a guest",settlementMenuOtherShow));
+		settlementMenuOther.addMenuItem(new MenuItem(null,"3 -> Back",settlementMenu));
 		
 		settlementMenuOtherShow.addMenuItem(new MenuItem(new ServicesAndRoomsPriceSortedByAction(),"0 -> Prices of rooms and services, "
 																					+ "sorted by ...",settlementMenuOtherShow));

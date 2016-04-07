@@ -8,10 +8,7 @@ import org.apache.log4j.Logger;
 
 public class PropertiesReader {
 	private static Logger logger = Logger.getLogger(PropertiesReader.class);
-	private PropertiesUtil util = new PropertiesUtil();
-	private static final String ZAP = ",";
-	
-	
+	private PropertiesUtil util = new PropertiesUtil();		
 	
 	private static PropertiesReader instance;
 	
@@ -37,7 +34,7 @@ public class PropertiesReader {
 	public void setProperties(){
 		FileInputStream reader = null;
 		try {
-			reader = new FileInputStream("src\\main\\resources\\config.properties");
+			reader = new FileInputStream("src//main//resources//config.properties");
 			Properties properties = new Properties();
 			properties.load(reader);
 			Boolean swith = Boolean.parseBoolean(properties.getProperty(SWITCH_KEY));

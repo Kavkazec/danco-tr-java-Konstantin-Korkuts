@@ -1,0 +1,11 @@
+Service.name.String=agag
+Service.coast.int=100
+Room.number.int=1
+Room.capacity.int=2
+Room.numberOfStars.int=4
+Room.coast.int=200
+Room.isOnRepair.Boolean=false
+Guest.name.String=Kolya
+Guest.passportSeries.String=AM
+Guest.passportNumber.int=1020307
+Service.serviceList.List=Fight;100,StreetFight;200

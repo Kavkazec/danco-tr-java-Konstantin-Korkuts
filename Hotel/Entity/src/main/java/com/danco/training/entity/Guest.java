@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,7 +24,7 @@ public class Guest extends BaseEntity{
 	@Column(name="passport_number")
 	private int passportNumber;
 	
-	@OneToMany(targetEntity=com.danco.training.entity.Settlement.class, mappedBy="guest")
+	@OneToMany(targetEntity=com.danco.training.entity.Settlement.class, mappedBy="guest", fetch = FetchType.LAZY)
 	private List<Settlement> settlementList = new ArrayList<Settlement>();
 	
 	public Guest(){

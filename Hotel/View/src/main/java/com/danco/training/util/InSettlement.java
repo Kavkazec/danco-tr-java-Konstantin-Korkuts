@@ -29,7 +29,7 @@ public class InSettlement {
 		Date dateOfDeparture = InReader.readDate();
 		Room room = ((IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class)).getByIdRoom(roomID);
 		Guest guest = ((IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class)).getByIdGuest(guestID);
-		Settlement sm = new Settlement(room, guest, null, dateOfArrival, dateOfDeparture, null, false);
+		Settlement sm = new Settlement(room, guest, null, dateOfArrival, dateOfDeparture, false);
 		return sm;
 	}
 	
@@ -46,7 +46,7 @@ public class InSettlement {
 		Date dateOfDeparture = InReader.readDate();
 		Room room = ((IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class)).getByIdRoom(roomID);
 		Guest guest = ((IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class)).getByIdGuest(guestID);
-		Settlement sm = new Settlement(room, guest, null, dateOfArrival, dateOfDeparture, null, false);
+		Settlement sm = new Settlement(room, guest, null, dateOfArrival, dateOfDeparture, false);
 		return sm;
 	}
 	
@@ -61,12 +61,10 @@ public class InSettlement {
 		Date dateOfArrival = InReader.readDate();
 		InReader.print(DATE_OF_DEPARTURE);
 		Date dateOfDeparture = InReader.readDate();
-		InReader.print(DATE_OF_THE_ADDED_SERVICE);
-		Date serviceDate = InReader.readDate();
 		Room room = ((IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class)).getByIdRoom(roomID);
 		Guest guest = ((IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class)).getByIdGuest(guestID);
 		Service service =  ((IHotelController) DependencyInjection.getInstance().getClassInstance(IHotelController.class)).getByIdService(serviceID);
-		Settlement sm = new Settlement(room, guest, service, dateOfArrival, dateOfDeparture, serviceDate, false);
+		Settlement sm = new Settlement(room, guest, service, dateOfArrival, dateOfDeparture, false);
 		return sm;
 	}
 }

@@ -177,7 +177,7 @@ public class HotelController implements IHotelController {
 		return getSettlementCon().releasedInTheFuture(date);
 	}
 
-	public List<Guest> showLastThreeGuest(Room room) {
+	public List<String> showLastThreeGuest(Room room) {
 		return getSettlementCon().showLastThreeGuest(room);
 	}
 
@@ -227,5 +227,9 @@ public class HotelController implements IHotelController {
 
 	public void addServiceToGuest(Guest guest, Service service, Date date) {
 		getSettlementCon().addServiceToGuest(guest, service, date);
+	}
+	
+	public void moveOutFromRoom(Room room, Guest guest){
+		getSettlementCon().moveOutFromRoom(room, guest);
 	}
 }

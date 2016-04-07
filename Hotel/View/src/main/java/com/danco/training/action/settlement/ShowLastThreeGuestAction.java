@@ -13,6 +13,7 @@ import com.danco.training.entity.Guest;
 import com.danco.training.transmission.Transmission;
 import com.danco.training.util.InReader;
 import com.danco.training.util.PrintGuest;
+import com.danco.training.util.PrintString;
 
 public class ShowLastThreeGuestAction implements IAction{
 	private final Logger LOGGER = Logger.getLogger(PrintGuestsAction.class);
@@ -36,7 +37,7 @@ public class ShowLastThreeGuestAction implements IAction{
 	public void answer(Object answerFromServer) {
 		InReader.print(DETAILS_GUEST);
 		if (answerFromServer instanceof List && answerFromServer != null) {
-			PrintGuest.printGuests((List<Guest>) answerFromServer);;
+			PrintString.printString((List<String>) answerFromServer);
 		}
 	}
 }

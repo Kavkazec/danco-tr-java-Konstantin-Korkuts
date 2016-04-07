@@ -47,35 +47,17 @@ public class ImportAndExportSettlements {
 			fw.append(Settlement.class.getSimpleName());
 			fw.append(NEXT_LINE);
 			for (int i = 0; i < list.size(); i++) {
-				if(list.get(i).getService() == null){
-					fw.append(list.get(i).getRoom().getId() + "");
-					fw.append(SEPAR);
-					fw.append(list.get(i).getGuest().getId() + "");
-					fw.append(SEPAR);
-					fw.append(list.get(i).getDateOfArrival()+"");
-					fw.append(SEPAR);
-					fw.append(list.get(i).getDateOfDeparture()+"");
-					fw.append(SEPAR);
-					fw.append(list.get(i).isPaid()+"");
-					fw.append(SEPAR);
-					fw.append(NEXT_LINE);
-				} else {
-					fw.append(list.get(i).getRoom().getId() + "");
-					fw.append(SEPAR);
-					fw.append(list.get(i).getGuest().getId() + "");
-					fw.append(SEPAR);
-					fw.append(list.get(i).getService().getId() +"");
-					fw.append(SEPAR);
-					fw.append(list.get(i).getDateOfArrival()+"");
-					fw.append(SEPAR);
-					fw.append(list.get(i).getDateOfDeparture()+"");
-					fw.append(SEPAR);
-					fw.append(list.get(i).getServiceDateOfAdd()+"");
-					fw.append(SEPAR);
-					fw.append(list.get(i).isPaid()+"");
-					fw.append(SEPAR);
-					fw.append(NEXT_LINE);
-				}
+				fw.append(list.get(i).getRoom().getId() + "");
+				fw.append(SEPAR);
+				fw.append(list.get(i).getGuest().getId() + "");
+				fw.append(SEPAR);
+				fw.append(list.get(i).getDateOfArrival()+"");
+				fw.append(SEPAR);
+				fw.append(list.get(i).getDateOfDeparture()+"");
+				fw.append(SEPAR);
+				fw.append(list.get(i).isPaid()+"");
+				fw.append(SEPAR);
+				fw.append(NEXT_LINE);
 			}
 			fw.flush();
 		} catch (IOException e) {
@@ -105,13 +87,11 @@ public class ImportAndExportSettlements {
 					String[] arr = list.get(i).split(SEPAR);
 					int room_ID = Integer.parseInt(arr[0]);
 					int guest_ID = Integer.parseInt(arr[1]);
-					int service_ID = Integer.parseInt(arr[2]);
-					Date dateArr = SDF.parse(arr[3]);
-					Date dateDep = SDF.parse(arr[4]);
-					Date servDate = SDF.parse(arr[4]);
-					boolean isPaid = Boolean.parseBoolean(arr[5]);
+					Date dateArr = SDF.parse(arr[2]);
+					Date dateDep = SDF.parse(arr[3]);
+					boolean isPaid = Boolean.parseBoolean(arr[4]);
 					Settlement sm = new Settlement(rdd.getById(session, room_ID), gdd.getById(session, guest_ID),
-							sdd.getById(session, service_ID), dateArr, dateDep, servDate,  isPaid);
+							null, dateArr, dateDep, isPaid);
 					if (!equalID(sm.getRoom().getNumber(), sm.getGuest().getName(), services)) {
 						services.add(sm);
 					}

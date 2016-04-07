@@ -18,11 +18,11 @@ public class Settlement extends BaseEntity{
 	private static final long serialVersionUID = -1536940568158081361L;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="room_model_id")
+	@JoinColumn(name="room_id")
 	private Room room;
 
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="guest_model_id")
+	@JoinColumn(name="guest_id")
 	private Guest guest;
 	
 	@Column(name="date_arrive")
@@ -34,60 +34,31 @@ public class Settlement extends BaseEntity{
 	@OneToMany(targetEntity=com.danco.training.entity.Service.class, mappedBy="settlement")
 	private List<Service> serviceList;
 	
-	@Column(name="service_date")
-	private Date serviceDateOfAdd;
-	
 	@Column(name="is_paid")
 	private boolean isPaid;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="service_model_id")
-	private Service service;
 	
 	public Settlement(){
 		
 	}
 	
-	public Settlement(Room room, Guest guest, Service service, Date dateOfArrival, Date dateOfDeparture, Date serviceDateOfAdd,
+	public Settlement(Room room, Guest guest, Service service, Date dateOfArrival, Date dateOfDeparture,
 			boolean isPaid){
 		super();
 		this.room = room;
 		this.guest = guest;
-		this.service = service;
 		this.dateOfArrival = dateOfArrival;
 		this.dateOfDeparture = dateOfDeparture;
-		this.serviceDateOfAdd = serviceDateOfAdd;
 		this.isPaid = isPaid;
 	}
 	
-	public Settlement(int id, Room room, Guest guest, Service service,  Date dateOfArrival, Date dateOfDeparture, Date serviceDateOfAdd,
+	public Settlement(int id, Room room, Guest guest, Service service,  Date dateOfArrival, Date dateOfDeparture,
 			boolean isPaid){
 		super(id);
 		this.room = room;
 		this.guest = guest;
-		this.service = service;
 		this.dateOfArrival = dateOfArrival;
 		this.dateOfDeparture = dateOfDeparture;
-		this.serviceDateOfAdd = serviceDateOfAdd;
 		this.isPaid = isPaid;
-	}
-
-	
-	
-	public Service getService() {
-		return service;
-	}
-
-	public void setService(Service service) {
-		this.service = service;
-	}
-
-	public Date getServiceDateOfAdd() {
-		return serviceDateOfAdd;
-	}
-
-	public void setServiceDateOfAdd(Date serviceDateOfAdd) {
-		this.serviceDateOfAdd = serviceDateOfAdd;
 	}
 
 	public boolean isPaid() {

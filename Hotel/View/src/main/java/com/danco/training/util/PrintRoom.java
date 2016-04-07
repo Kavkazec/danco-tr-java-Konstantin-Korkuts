@@ -8,8 +8,24 @@ public class PrintRoom {
 	private static final String SEPAR = " ; ";
 	public static void printRooms(List<Room> list){
 		for (Room room : list) {
-			InReader.print(room.getId() + SEPAR  + room.getNumber() + SEPAR  + room.getCapacity() + SEPAR  + room.getNumberOfStars()
-			+ SEPAR + room.getCoast() + SEPAR  + room.isFreeRoom() + SEPAR  + room.isOnRepair());
+			StringBuilder sb = new StringBuilder();
+			sb.append(room.getId());
+			sb.append(SEPAR);
+			sb.append(room.getNumber());
+			sb.append(SEPAR);
+			sb.append(room.getCapacity());
+			sb.append(SEPAR);
+			sb.append(room.getNumberOfStars());
+			sb.append(SEPAR);
+			sb.append(room.getCoast());
+			sb.append(SEPAR);
+			sb.append(room.isFreeRoom());
+			sb.append(SEPAR);
+			sb.append(room.isOnRepair());
+			sb.append(SEPAR);
+			sb.append(room.getType());
+			sb.append(SEPAR);
+			InReader.print(sb.toString());
 		}
 	}
 }

@@ -35,7 +35,6 @@ public class DIConfig {
 		try {
 			fileInputStream = new FileInputStream(file);
 			properties.load(fileInputStream);
-
 		} catch (Exception e) {
 			LOGGER.error(e);
 		} finally {
@@ -47,7 +46,6 @@ public class DIConfig {
 				LOGGER.error(e);
 			}
 		}
-
 	}
 
 	public String getImplClassName(String iName) {

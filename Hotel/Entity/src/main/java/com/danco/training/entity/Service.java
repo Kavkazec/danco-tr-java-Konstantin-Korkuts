@@ -1,5 +1,7 @@
 package com.danco.training.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,6 +28,9 @@ public class Service extends BaseEntity{
 	@JoinColumn(name="room_guests_id")
 	private Settlement settlement;
 	
+	@Column(name="service_date")
+	private Date date;
+	
 	public Service(){
 		
 	}
@@ -42,7 +47,15 @@ public class Service extends BaseEntity{
 		this.coast = coast;
 	}
 	
-	
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
 	public Settlement getSettlement() {
 		return settlement;
 	}

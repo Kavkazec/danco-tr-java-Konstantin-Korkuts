@@ -38,7 +38,7 @@ public class SettlementController {
 	public List<Room> releasedInTheFuture(Date date){
 		return this.setCon.releasedInTheFuture(date);
 	}
-	public List<Guest> showLastThreeGuest(Room room){
+	public List<String> showLastThreeGuest(Room room){
 		return this.setCon.showLastThreeGuest(room);
 	}
 	public int paiForRoom(Guest guest){
@@ -58,5 +58,8 @@ public class SettlementController {
 	}
 	public void importSettlements(){
 		this.setCon.importSettlements();
+	}
+	public void moveOutFromRoom(Room room, Guest guest){
+		this.setCon.moveOutFromRoom(room, guest);
 	}
 }

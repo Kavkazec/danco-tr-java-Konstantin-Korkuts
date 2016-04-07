@@ -16,11 +16,12 @@ public interface ISettlementService {
 	public void delete(Settlement model);
 	public void update(Settlement model);
 	public List<Room> releasedInTheFuture(Date date);
-	public List<Guest> showLastThreeGuest(Room room);
+	public List<String> showLastThreeGuest(Room room);
 	public int paiForRoom(Guest guest);
 	public List<String> servicesAndRoomsPriceSortedBy(String string);
 	public List<String> listGuestsAndRoomsSortedBy(String string);
 	public List<String> listGuestServicesSortedBy(Guest guest , String string);
 	public void exportSettlements();
 	public void importSettlements();
+	public void moveOutFromRoom(Room room, Guest guest);
 }
