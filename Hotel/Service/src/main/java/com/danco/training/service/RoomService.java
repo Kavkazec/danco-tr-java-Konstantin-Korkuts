@@ -98,18 +98,32 @@ public class RoomService implements IRoomService{
 	}
 
 	public void exportRooms() {
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			ie.writeToFileRooms(getPath());
+			session.beginTransaction();
+			ie.writeToFileRooms(session, getPath());
+			session.getTransaction().commit();
 		} catch (Exception e) {
 			LOGGER.error(e);
+		} finally {
+			 if (session != null && session.isOpen()) {
+			      session.close();
+			 }
 		}
 	}
 
 	public void importRooms() {
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			ie.writeToFileRooms(getPath());
+			session.beginTransaction();
+			ie.writeToFileRooms(session, getPath());
+			session.getTransaction().commit();
 		} catch (Exception e) {
 			LOGGER.error(e);
+		} finally {
+			 if (session != null && session.isOpen()) {
+			      session.close();
+			 }
 		}
 	}
 

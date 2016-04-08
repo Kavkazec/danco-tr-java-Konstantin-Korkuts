@@ -2,6 +2,7 @@ package com.danco.training.api;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Session;
 
@@ -13,9 +14,7 @@ import com.danco.training.persisexception.PersistenceException;
 
 public interface ISettlementDao extends ItemDao<Settlement>{
 	public List<Room> releasedInTheFuture(Session session, Date date) throws PersistenceException;
-	
-	public List<String> servicesAndRoomsPriceSortedBy(Session session, String string) throws PersistenceException;
-	
+		
 	public List<Settlement> listGuestsAndRoomsSortedBy(Session session, String string) throws PersistenceException;
 	
 	public Settlement getSettlementByGuest(Session session, Guest guest) throws PersistenceException;

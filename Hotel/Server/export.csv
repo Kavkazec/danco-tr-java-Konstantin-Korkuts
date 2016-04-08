@@ -1,8 +1,5 @@
-Guest
-Kostya ; AB ; 1234567 ; 
-Vasya ; KH ; 2125345 ; 
-Pasha ; AB ; 1263768 ; 
-Serega ; MC ; 5555555 ; 
-Katya ; KH ; 3333333 ; 
-Andrea ; PP ; 7676777 ; 
-Jora ; MC ; 4443333 ; 
+Room
+1 ; 122 ; 2 ; 3 ; 200 ; true ; false ; room ; 
+2 ; 220 ; 3 ; 5 ; 300 ; true ; false ; room ; 
+3 ; 210 ; 2 ; 3 ; 200 ; true ; false ; room ; 
+4 ; 211 ; 4 ; 4 ; 400 ; true ; false ; room ; 

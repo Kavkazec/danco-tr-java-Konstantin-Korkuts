@@ -17,7 +17,9 @@ import org.hibernate.Session;
 import com.danco.training.api.IGuestDao;
 import com.danco.training.api.IRoomDao;
 import com.danco.training.api.IServiceDao;
+import com.danco.training.api.ISettlementDao;
 import com.danco.training.di.DependencyInjection;
+import com.danco.training.entity.Service;
 import com.danco.training.entity.Settlement;
 import com.danco.training.persisexception.PersistenceException;
 import com.danco.training.service.SettlementService;
@@ -26,31 +28,30 @@ public class ImportAndExportSettlements {
 	private static final String SEPAR = " ; ";
 	private static final String NEXT_LINE = "\n";
 	private static final Logger LOGGER = Logger.getLogger(ImportAndExportServices.class);
-	private SettlementService service;
 	private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
 	private IRoomDao rdd = (IRoomDao) DependencyInjection.getInstance().getClassInstance(IRoomDao.class);
 	private IGuestDao gdd = (IGuestDao) DependencyInjection.getInstance().getClassInstance(IGuestDao.class);
 	private IServiceDao sdd = (IServiceDao) DependencyInjection.getInstance().getClassInstance(IServiceDao.class);
+	private ISettlementDao dao = (ISettlementDao) DependencyInjection.getInstance().getClassInstance(ISettlementDao.class);
 
-	public SettlementService getService() {
-		if (service == null) {
-			service = new SettlementService();
-		}
-		return service;
-	}
-
-	public void writeToFileServices(String path) {
+	public void writeToFileServices(Session session, String path) throws PersistenceException {
 		FileWriter fw = null;
-		List<Settlement> list = getService().getAll();
+		List<Settlement> list = dao.getAll(session);
 		try {
 			fw = new FileWriter(path);
 			fw.append(Settlement.class.getSimpleName());
 			fw.append(NEXT_LINE);
 			for (int i = 0; i < list.size(); i++) {
+				fw.append(list.get(i).getId() + "");
+				fw.append(SEPAR);
 				fw.append(list.get(i).getRoom().getId() + "");
 				fw.append(SEPAR);
 				fw.append(list.get(i).getGuest().getId() + "");
 				fw.append(SEPAR);
+				for (Service service : list.get(i).getServiceList()) {
+					fw.append(service.getId() + "");
+					fw.append(SEPAR);
+				}
 				fw.append(list.get(i).getDateOfArrival()+"");
 				fw.append(SEPAR);
 				fw.append(list.get(i).getDateOfDeparture()+"");
@@ -85,14 +86,15 @@ public class ImportAndExportSettlements {
 			for (int i = 1; i < list.size(); i++) {
 				if (Settlement.class.getSimpleName().equals(list.get(0))) {
 					String[] arr = list.get(i).split(SEPAR);
-					int room_ID = Integer.parseInt(arr[0]);
-					int guest_ID = Integer.parseInt(arr[1]);
-					Date dateArr = SDF.parse(arr[2]);
-					Date dateDep = SDF.parse(arr[3]);
-					boolean isPaid = Boolean.parseBoolean(arr[4]);
-					Settlement sm = new Settlement(rdd.getById(session, room_ID), gdd.getById(session, guest_ID),
+					int id = Integer.parseInt(arr[0]);
+					int room_ID = Integer.parseInt(arr[1]);
+					int guest_ID = Integer.parseInt(arr[2]);
+					Date dateArr = SDF.parse(arr[3]);
+					Date dateDep = SDF.parse(arr[4]);
+					boolean isPaid = Boolean.parseBoolean(arr[5]);
+					Settlement sm = new Settlement(id, rdd.getById(session, room_ID), gdd.getById(session, guest_ID),
 							null, dateArr, dateDep, isPaid);
-					if (!equalID(sm.getRoom().getNumber(), sm.getGuest().getName(), services)) {
+					if (!services.contains(sm)) {
 						services.add(sm);
 					}
 				}
@@ -114,16 +116,5 @@ public class ImportAndExportSettlements {
 			}
 		}
 		return services;
-	}
-
-	public boolean equalID(int roomNumber, String name, List<Settlement> list) {
-		boolean b = false;
-		for (Settlement model : list) {
-			if (model.getRoom().getNumber() == roomNumber && model.getGuest().getName().equals(name)) {
-				b = true;
-				break;
-			}
-		}
-		return b;
 	}
 }

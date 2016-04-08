@@ -3,6 +3,9 @@ package com.danco.training.daoimpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.danco.training.api.IServiceDao;
@@ -31,9 +34,13 @@ public class ServiceDaoImpl implements IServiceDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Service> getAll(Session session) throws PersistenceException {
-		List<Service> services = new ArrayList<Service>();
+		List<Service> services = null;
 		try {
-			services = session.createCriteria(Service.class).list();
+			Criteria empQuery = session.createCriteria(Service.class);
+			services = empQuery.list();
+			for (Service emp : services) {
+			    Hibernate.initialize(emp.getSettlement());
+			}
 		} catch (Exception e) {
 			throw new PersistenceException(e);
 		} 

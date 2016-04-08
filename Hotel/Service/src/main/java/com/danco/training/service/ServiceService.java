@@ -81,18 +81,32 @@ public class ServiceService implements IServiceService{
 	}
 
 	public void exportServices() {
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			ie.writeToFileServices(getPath());
+			session.beginTransaction();
+			ie.writeToFileServices(session, getPath());
+			session.getTransaction().commit();
 		} catch (Exception e) {
 			LOGGER.error(e);
+		} finally {
+			 if (session != null && session.isOpen()) {
+			      session.close();
+			 }
 		}
 	}
 
 	public void importServices() {
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			ie.readFromFileServices(getPath());
+			session.beginTransaction();
+			ie.readFromFileServices(session, getPath());
+			session.getTransaction().commit();
 		} catch (Exception e) {
 			LOGGER.error(e);
+		} finally {
+			 if (session != null && session.isOpen()) {
+			      session.close();
+			 }
 		}
 	}
 

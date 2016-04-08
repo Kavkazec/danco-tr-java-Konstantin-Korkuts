@@ -2,11 +2,18 @@ package com.danco.training.daoimpl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
+import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 
 import com.danco.training.api.ISettlementDao;
 import com.danco.training.entity.Guest;
@@ -40,9 +47,15 @@ public class SettlementDaoImpl implements ISettlementDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Settlement> getAll(Session session) throws PersistenceException {
-		List<Settlement> settlements = new ArrayList<Settlement>();
+		List<Settlement> settlements = null;
 		try {
-			settlements = session.createCriteria(Settlement.class).list();
+			Criteria empQuery = session.createCriteria(Settlement.class);
+			settlements = empQuery.list();
+			for (Settlement emp : settlements) {
+			    Hibernate.initialize(emp.getGuest());
+			    Hibernate.initialize(emp.getRoom());
+			    Hibernate.initialize(emp.getServiceList());
+			}
 		} catch (Exception e) {
 			 throw new PersistenceException(e);
 		} 
@@ -89,12 +102,6 @@ public class SettlementDaoImpl implements ISettlementDao {
 		return rooms;
 	}
 
-	@Override
-	public List<String> servicesAndRoomsPriceSortedBy(Session session, String string) throws PersistenceException {
-		return null;
-		
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Settlement> listGuestsAndRoomsSortedBy(Session session, String string) throws PersistenceException {
@@ -103,10 +110,20 @@ public class SettlementDaoImpl implements ISettlementDao {
 			if(string.equals("name")){
 				Query q = session.createQuery("from Settlement AS s order by s.guest.name");
 				list = q.list();
+				for (Settlement emp : list) {
+				    Hibernate.initialize(emp.getGuest());
+				    Hibernate.initialize(emp.getRoom());
+				    Hibernate.initialize(emp.getServiceList());
+				}
 			}
 			if(string.equals("date")){
 				Query q = session.createQuery("from Settlement AS s order by dateOfDeparture");
 				list = q.list();
+				for (Settlement emp : list) {
+				    Hibernate.initialize(emp.getGuest());
+				    Hibernate.initialize(emp.getRoom());
+				    Hibernate.initialize(emp.getServiceList());
+				}
 			}
 		} catch (Exception e) {
 			throw new PersistenceException(e);
@@ -119,8 +136,13 @@ public class SettlementDaoImpl implements ISettlementDao {
 	public List<Settlement> showLastThreeGuest(Session session, Room room) throws PersistenceException {
 		List<Settlement> list = null;
 		try {
-			list = session.createQuery("from Settlement AS s where s.room = ?")
-					.setEntity(0, room).list();
+			Query q = session.createQuery("from Settlement AS s where s.room = ?").setEntity(0, room);
+			list = q.list();
+			for (Settlement emp : list) {
+			    Hibernate.initialize(emp.getGuest());
+			    Hibernate.initialize(emp.getRoom());
+			    Hibernate.initialize(emp.getServiceList());
+			}
 		} catch (Exception e) {
 			throw new PersistenceException(e);
 		} 
@@ -147,6 +169,9 @@ public class SettlementDaoImpl implements ISettlementDao {
 			Query q = session.createQuery("from Service where settlement = ? order by " + string);
 			q.setEntity(0, settlement);
 			list = q.list();
+			for (Service emp : list) {
+			    Hibernate.initialize(emp.getSettlement());
+			}
 		} catch (Exception e) {
 			throw new PersistenceException(e);
 		} 

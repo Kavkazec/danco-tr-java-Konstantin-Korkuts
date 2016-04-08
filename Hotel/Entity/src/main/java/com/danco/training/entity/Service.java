@@ -24,6 +24,7 @@ public class Service extends BaseEntity{
 	@Column
 	private String type;
 	
+	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="room_guests_id")
 	private Settlement settlement;

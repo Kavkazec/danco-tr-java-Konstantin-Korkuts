@@ -8,6 +8,7 @@ import com.danco.training.entity.Guest;
 import com.danco.training.entity.Room;
 import com.danco.training.entity.Service;
 import com.danco.training.entity.Settlement;
+import com.danco.training.persisexception.PersistenceException;
 
 public class ImportAndExport {
 	private ImportAndExportGuests guest;
@@ -56,32 +57,32 @@ public class ImportAndExport {
 
 	}
 
-	public void writeToFileGuests(String path) {
-		getGuest().writeToFileGuests(path);
+	public void writeToFileGuests(Session session, String path) throws PersistenceException {
+		getGuest().writeToFileGuests(session, path);
 	}
 
-	public void writeToFileRooms(String path) {
-		getRoom().writeToFileRooms(path);
+	public void writeToFileRooms(Session session, String path) throws PersistenceException {
+		getRoom().writeToFileRooms(session, path);
 	}
 
-	public void writeToFileServices(String path) {
-		getService().writeToFileServices(path);
+	public void writeToFileServices(Session session, String path) throws PersistenceException {
+		getService().writeToFileServices(session, path);
 	}
 	
-	public void writeToFileSettlements(String path) {
-		getSettlement().writeToFileServices(path);
+	public void writeToFileSettlements(Session session, String path) throws PersistenceException {
+		getSettlement().writeToFileServices(session, path);
 	}
 
-	public List<Service> readFromFileServices(String path) {
-		return getService().readFromFileServices(path);
+	public List<Service> readFromFileServices(Session session, String path) throws  PersistenceException {
+		return getService().readFromFileServices(session, path);
 	}
 
-	public List<Room> readFromFileRooms(String path) {
-		return getRoom().readFromFileRooms(path);
+	public List<Room> readFromFileRooms(Session session, String path) {
+		return getRoom().readFromFileRooms(session, path);
 	}
 
-	public List<Guest> readFromFileGuests(String path) {
-		return getGuest().readFromFileGuests(path);
+	public List<Guest> readFromFileGuests(Session session, String path) {
+		return getGuest().readFromFileGuests(session, path);
 	}
 	public List<Settlement> readFromFileSettlements(String path, Session session) {
 		return getSettlement().readFromFileServices(path, session);

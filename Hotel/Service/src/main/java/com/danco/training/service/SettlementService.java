@@ -2,11 +2,15 @@ package com.danco.training.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
+import com.danco.training.api.IRoomDao;
+import com.danco.training.api.IServiceDao;
 import com.danco.training.api.ISettlementDao;
 import com.danco.training.api.ISettlementService;
 import com.danco.training.di.DependencyInjection;
@@ -23,6 +27,9 @@ public class SettlementService implements ISettlementService {
 	private static final Logger LOGGER = Logger.getLogger(RoomService.class);
 	private ISettlementDao dao = (ISettlementDao) DependencyInjection.getInstance().getClassInstance(ISettlementDao.class);
 	private ImportAndExport ie = ImportAndExport.getInstance();
+	private IServiceDao daoSer = (IServiceDao) DependencyInjection.getInstance().getClassInstance(IServiceDao.class);
+	private IRoomDao daoRom = (IRoomDao) DependencyInjection.getInstance().getClassInstance(IRoomDao.class);
+
 
 	public String getPath() {
 		try {
@@ -189,10 +196,17 @@ public class SettlementService implements ISettlementService {
 	}
 
 	public void exportSettlements() {
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			ie.writeToFileSettlements(getPath());
+			session.beginTransaction();
+			ie.writeToFileSettlements(session, getPath());
+			session.getTransaction().commit();
 		} catch (Exception e) {
 			LOGGER.error(e);
+		} finally {
+			 if (session != null && session.isOpen()) {
+			      session.close();
+			 }
 		}
 	}
 
@@ -212,7 +226,31 @@ public class SettlementService implements ISettlementService {
 	}
 
 	public List<String> servicesAndRoomsPriceSortedBy(String string) {
-		return null;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		List<String> list = new ArrayList<String>();
+		List<Room> rooms = null;
+		List<Service> services = null;
+		try {
+			session.beginTransaction();
+			if(string.equals("type")){
+				rooms = daoRom.getAll(session);
+				for (Room room : rooms) {
+					list.add(room.getCoast() + " " + room.getType());
+				}
+				services = daoSer.getAll(session);
+				for (Service service : services) {
+					list.add(service.getCoast() + " " + service.getType());
+				}
+			}
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			LOGGER.error(e);
+		} finally {
+			 if (session != null && session.isOpen()) {
+			      session.close();
+			 }
+		}
+		return list;
 	}
 
 	public List<String> listGuestsAndRoomsSortedBy(String string) {

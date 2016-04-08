@@ -3,10 +3,13 @@ package com.danco.training.daoimpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 
 import com.danco.training.api.IGuestDao;
 import com.danco.training.entity.Guest;
+import com.danco.training.entity.Service;
 import com.danco.training.persisexception.PersistenceException;
 
 public class GuestDaoImpl implements IGuestDao{
@@ -31,9 +34,13 @@ public class GuestDaoImpl implements IGuestDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Guest> getAll(Session session) throws PersistenceException {
-		List<Guest> guests = new ArrayList<Guest>();
+		List<Guest> guests = null;
 		try {
-			guests = session.createCriteria(Guest.class).list();
+			Criteria empQuery = session.createCriteria(Guest.class);
+			guests = empQuery.list();
+			for (Guest emp : guests) {
+			    Hibernate.initialize(emp.getSettlementList());
+			};
 		} catch (Exception e) {
 			 throw new PersistenceException(e);
 		} 

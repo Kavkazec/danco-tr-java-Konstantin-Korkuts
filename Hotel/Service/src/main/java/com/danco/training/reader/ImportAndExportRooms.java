@@ -9,31 +9,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 
+import com.danco.training.api.IRoomDao;
+import com.danco.training.di.DependencyInjection;
 import com.danco.training.entity.Room;
+import com.danco.training.persisexception.PersistenceException;
 import com.danco.training.service.RoomService;
 
 public class ImportAndExportRooms {
 	private static final String SEPAR = " ; ";
 	private static final String NEXT_LINE = "\n";
 	private static final Logger LOGGER = Logger.getLogger(ImportAndExportRooms.class);
-	private RoomService room;
+	private IRoomDao dao = (IRoomDao) DependencyInjection.getInstance().getClassInstance(IRoomDao.class);
 
-	public RoomService getRoom() {
-		if (room == null) {
-			room = new RoomService();
-		}
-		return room;
-	}
-
-	public void writeToFileRooms(String path) {
+	public void writeToFileRooms(Session session, String path) throws PersistenceException {
 		FileWriter fw = null;
-		List<Room> list = getRoom().getRooms();
+		List<Room> list = dao.getAll(session);
 		try {
 			fw = new FileWriter(path);
 			fw.append(Room.class.getSimpleName());
 			fw.append(NEXT_LINE);
 			for (int i = 0; i < list.size(); i++) {
+				fw.append(list.get(i).getId() + "");
+				fw.append(SEPAR);
 				fw.append(list.get(i).getNumber() + "");
 				fw.append(SEPAR);
 				fw.append(list.get(i).getCapacity() + "");
@@ -45,6 +44,8 @@ public class ImportAndExportRooms {
 				fw.append(list.get(i).isFreeRoom() + "");
 				fw.append(SEPAR);
 				fw.append(list.get(i).isOnRepair() + "");
+				fw.append(SEPAR);
+				fw.append(list.get(i).getType());
 				fw.append(SEPAR);
 				fw.append(NEXT_LINE);
 			}
@@ -60,7 +61,7 @@ public class ImportAndExportRooms {
 		}
 	}
 
-	public List<Room> readFromFileRooms(String path) {
+	public List<Room> readFromFileRooms(Session session, String path) {
 		List<String> list = new ArrayList<String>();
 		List<Room> rooms = new ArrayList<Room>();
 		String line = "";
@@ -73,15 +74,18 @@ public class ImportAndExportRooms {
 			for (int i = 1; i < list.size(); i++) {
 				if (Room.class.getSimpleName().equals(list.get(0))) {
 					String[] arr = list.get(i).split(SEPAR);
-					int number = Integer.parseInt(arr[0]);
-					int capacity = Integer.parseInt(arr[1]);
-					int stars = Integer.parseInt(arr[2]);
-					int coast = Integer.parseInt(arr[3]);
-					boolean status = Boolean.parseBoolean(arr[4]);
+					int id = Integer.parseInt(arr[0]);
+					int number = Integer.parseInt(arr[1]);
+					int capacity = Integer.parseInt(arr[2]);
+					int stars = Integer.parseInt(arr[3]);
+					int coast = Integer.parseInt(arr[4]);
+					boolean status = Boolean.parseBoolean(arr[5]);
 					boolean onRepair = Boolean.parseBoolean(arr[6]);
-					Room rm = new Room(number, capacity, stars, coast, status);
+					String type = arr[7];
+					Room rm = new Room(id, number, capacity, stars, coast, status);
 					rm.setOnRepair(onRepair);
-					if (!equalID(number, rooms)) {
+					rm.setType(type);
+					if (!rooms.contains(rm)) {
 						rooms.add(rm);
 					}
 				}
@@ -100,20 +104,4 @@ public class ImportAndExportRooms {
 		return rooms;
 
 	}
-
-	public boolean equalID(int number, List<Room> list) {
-		Room rm = null;
-		for (Room model : list) {
-			if (model.getNumber() == number) {
-				rm = model;
-				break;
-			}
-		}
-		if (rm == null) {
-			return true;
-		}
-		return false;
-
-	}
-
 }

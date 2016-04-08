@@ -97,18 +97,32 @@ public class GuestService implements IGuestService{
 	}
 
 	public void exportGuests() {
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			ie.writeToFileGuests(getPath());
+			session.beginTransaction();
+			ie.writeToFileGuests(session, getPath());
+			session.getTransaction().commit();
 		} catch (Exception e) {
 			LOGGER.error(e);
+		} finally {
+			 if (session != null && session.isOpen()) {
+			      session.close();
+			 }
 		}
 	}
 
 	public void importGuests() {
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			ie.readFromFileGuests(getPath());
+			session.beginTransaction();
+			ie.readFromFileGuests(session, getPath());
+			session.getTransaction().commit();
 		} catch (Exception e) {
 			LOGGER.error(e);
+		} finally {
+			 if (session != null && session.isOpen()) {
+			      session.close();
+			 }
 		}
 	}
 
@@ -118,7 +132,7 @@ public class GuestService implements IGuestService{
 		try {
 			session.beginTransaction();
 			count = dao.getAll(session).size();
-			session.getTransaction();
+			session.getTransaction().commit();
 		} catch (Exception e) {
 			LOGGER.error(e);
 		} finally {
@@ -135,7 +149,7 @@ public class GuestService implements IGuestService{
 		try {
 			session.beginTransaction();
 			guest = dao.getById(session, id);
-			session.getTransaction();
+			session.getTransaction().commit();
 		} catch (Exception e) {
 			LOGGER.error(e);
 		} finally {

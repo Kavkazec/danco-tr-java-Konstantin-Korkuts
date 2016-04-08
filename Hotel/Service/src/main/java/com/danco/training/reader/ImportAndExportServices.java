@@ -9,34 +9,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 
+import com.danco.training.api.IServiceDao;
+import com.danco.training.api.ISettlementDao;
+import com.danco.training.di.DependencyInjection;
 import com.danco.training.entity.Service;
+import com.danco.training.entity.Settlement;
+import com.danco.training.persisexception.PersistenceException;
 import com.danco.training.service.ServiceService;
 
 public class ImportAndExportServices {
 	private static final String SEPAR = " ; ";
 	private static final String NEXT_LINE = "\n";
 	private static final Logger LOGGER = Logger.getLogger(ImportAndExportServices.class);
-	private ServiceService service;
+	private IServiceDao dao = (IServiceDao) DependencyInjection.getInstance().getClassInstance(IServiceDao.class);
+	private ISettlementDao daoSett = (ISettlementDao) DependencyInjection.getInstance().getClassInstance(ISettlementDao.class);
 
-	public ServiceService getService() {
-		if (service == null) {
-			service = new ServiceService();
-		}
-		return service;
-	}
-
-	public void writeToFileServices(String path) {
+	public void writeToFileServices(Session session, String path) throws PersistenceException {
 		FileWriter fw = null;
-		List<Service> list = getService().getServices();
+		List<Service> list = dao.getAll(session);
 		try {
 			fw = new FileWriter(path);
 			fw.append(Service.class.getSimpleName());
 			fw.append(NEXT_LINE);
 			for (int i = 0; i < list.size(); i++) {
+				fw.append(list.get(i).getId() + "");
+				fw.append(SEPAR);
 				fw.append(list.get(i).getName());
 				fw.append(SEPAR);
 				fw.append(list.get(i).getCoast() + "");
+				fw.append(SEPAR);
+				fw.append(list.get(i).getType());
+				fw.append(SEPAR);
+				fw.append(list.get(i).getSettlement().getId() + "");
 				fw.append(SEPAR);
 				fw.append(NEXT_LINE);
 			}
@@ -53,7 +59,7 @@ public class ImportAndExportServices {
 		}
 	}
 
-	public List<Service> readFromFileServices(String path) {
+	public List<Service> readFromFileServices(Session session, String path) throws NumberFormatException, PersistenceException {
 		List<String> list = new ArrayList<String>();
 		List<Service> services = new ArrayList<Service>();
 		String line = "";
@@ -66,10 +72,15 @@ public class ImportAndExportServices {
 			for (int i = 1; i < list.size(); i++) {
 				if (Service.class.getSimpleName().equals(list.get(0))) {
 					String[] arr = list.get(i).split(SEPAR);
-					String name = arr[0];
-					int coast = Integer.parseInt(arr[1]);
-					Service sm = new Service(name, coast);
-					if (!equalID(name, services)) {
+					int id = Integer.parseInt(arr[0]);
+					String name = arr[1];
+					int coast = Integer.parseInt(arr[2]);
+					String type = arr[3];
+					Settlement settlement = daoSett.getById(session, Integer.parseInt(arr[4]));
+					Service sm = new Service(id, name, coast);
+					sm.setType(type);
+					sm.setSettlement(settlement);
+					if(!services.contains(sm)){
 						services.add(sm);
 					}
 				}
@@ -87,16 +98,5 @@ public class ImportAndExportServices {
 			}
 		}
 		return services;
-	}
-
-	public boolean equalID(String name, List<Service> list) {
-		boolean b = false;
-		for (Service model : list) {
-			if (model.getName().equals(name)) {
-				b = true;
-				break;
-			}
-		}
-		return b;
 	}
 }

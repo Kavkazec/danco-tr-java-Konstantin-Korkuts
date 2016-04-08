@@ -31,7 +31,7 @@ public class Settlement extends BaseEntity{
 	@Column(name="date_departure")
 	private Date dateOfDeparture;
 	
-	@OneToMany(targetEntity=com.danco.training.entity.Service.class, mappedBy="settlement")
+	@OneToMany(targetEntity=com.danco.training.entity.Service.class, mappedBy="settlement", fetch = FetchType.LAZY)
 	private List<Service> serviceList;
 	
 	@Column(name="is_paid")
