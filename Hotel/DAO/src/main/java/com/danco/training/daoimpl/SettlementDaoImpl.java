@@ -10,10 +10,13 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 import com.danco.training.api.ISettlementDao;
 import com.danco.training.entity.Guest;
@@ -49,13 +52,11 @@ public class SettlementDaoImpl implements ISettlementDao {
 	public List<Settlement> getAll(Session session) throws PersistenceException {
 		List<Settlement> settlements = null;
 		try {
-			Criteria empQuery = session.createCriteria(Settlement.class);
+			Criteria empQuery = session.createCriteria(Settlement.class)
+					.setFetchMode("room", FetchMode.JOIN)
+					.setFetchMode("guest", FetchMode.JOIN)
+					.setFetchMode("serviceList", FetchMode.JOIN);
 			settlements = empQuery.list();
-			for (Settlement emp : settlements) {
-			    Hibernate.initialize(emp.getGuest());
-			    Hibernate.initialize(emp.getRoom());
-			    Hibernate.initialize(emp.getServiceList());
-			}
 		} catch (Exception e) {
 			 throw new PersistenceException(e);
 		} 
@@ -92,10 +93,12 @@ public class SettlementDaoImpl implements ISettlementDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Room> releasedInTheFuture(Session session, Date date) throws PersistenceException {
-		List<Room> rooms = new ArrayList<Room>();
+		List<Room> rooms = null;
 		try {
-			String str = "select distinct s.room from Settlement as s where s.dateOfDeparture = ?";
-			rooms = session.createQuery(str).setDate(0, date).list();
+			Criteria cr = session.createCriteria(Settlement.class);
+			cr.createCriteria("room");
+			cr.add(Restrictions.eq("dateOfDeparture", date));
+			rooms = cr.list();
 		} catch (Exception e) {
 			throw new PersistenceException(e);
 		} 
@@ -106,25 +109,16 @@ public class SettlementDaoImpl implements ISettlementDao {
 	@Override
 	public List<Settlement> listGuestsAndRoomsSortedBy(Session session, String string) throws PersistenceException {
 		List<Settlement> list = null;
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("name","g.name");
+		map.put("date","dateOfDeparture");
 		try {
-			if(string.equals("name")){
-				Query q = session.createQuery("from Settlement AS s order by s.guest.name");
-				list = q.list();
-				for (Settlement emp : list) {
-				    Hibernate.initialize(emp.getGuest());
-				    Hibernate.initialize(emp.getRoom());
-				    Hibernate.initialize(emp.getServiceList());
-				}
-			}
-			if(string.equals("date")){
-				Query q = session.createQuery("from Settlement AS s order by dateOfDeparture");
-				list = q.list();
-				for (Settlement emp : list) {
-				    Hibernate.initialize(emp.getGuest());
-				    Hibernate.initialize(emp.getRoom());
-				    Hibernate.initialize(emp.getServiceList());
-				}
-			}
+			Criteria cr = session.createCriteria(Settlement.class).createAlias("guest", "guest");
+			cr.addOrder(Order.asc(map.get(string)))	
+				.setFetchMode("room", FetchMode.JOIN)
+				.setFetchMode("guest", FetchMode.JOIN)
+				.setFetchMode("serviceList", FetchMode.JOIN);
+			list = cr.list();	
 		} catch (Exception e) {
 			throw new PersistenceException(e);
 		} 
@@ -135,14 +129,13 @@ public class SettlementDaoImpl implements ISettlementDao {
 	@Override
 	public List<Settlement> showLastThreeGuest(Session session, Room room) throws PersistenceException {
 		List<Settlement> list = null;
-		try {
-			Query q = session.createQuery("from Settlement AS s where s.room = ?").setEntity(0, room);
-			list = q.list();
-			for (Settlement emp : list) {
-			    Hibernate.initialize(emp.getGuest());
-			    Hibernate.initialize(emp.getRoom());
-			    Hibernate.initialize(emp.getServiceList());
-			}
+		try { 
+			Criteria cr = session.createCriteria(Settlement.class).createAlias("room", "room")
+					.add(Restrictions.eq("room",room));
+			cr.setFetchMode("room", FetchMode.JOIN)
+				.setFetchMode("guest", FetchMode.JOIN)
+				.setFetchMode("serviceList", FetchMode.JOIN);	
+			list = cr.list();
 		} catch (Exception e) {
 			throw new PersistenceException(e);
 		} 
@@ -153,8 +146,9 @@ public class SettlementDaoImpl implements ISettlementDao {
 	public Settlement getSettlementByGuest(Session session, Guest guest) throws PersistenceException {
 		Settlement settlement = null;
 		try {
-			settlement = (Settlement) session.createQuery("from Settlement AS s where s.guest = ? AND isPaid=false")
-					.setEntity(0, guest).uniqueResult();
+			Criteria cr = session.createCriteria(Settlement.class).createAlias("guest", "guest")
+					.add(Restrictions.eq("guest", guest)).add(Restrictions.eq("isPaid",false));
+			settlement = (Settlement) cr.uniqueResult();
 		} catch (Exception e) {
 			throw new PersistenceException(e);
 		} 
@@ -166,12 +160,9 @@ public class SettlementDaoImpl implements ISettlementDao {
 	public List<Service> listGuestServicesSortedBy(Session session, Settlement settlement, String string) throws PersistenceException {
 		List<Service> list = null;
 		try {
-			Query q = session.createQuery("from Service where settlement = ? order by " + string);
-			q.setEntity(0, settlement);
-			list = q.list();
-			for (Service emp : list) {
-			    Hibernate.initialize(emp.getSettlement());
-			}
+			Criteria cr = session.createCriteria(Service.class).add(Restrictions.eq("settlement", settlement))
+					.addOrder(Order.asc(string)).setFetchMode("settlement", FetchMode.JOIN);
+			list = cr.list();
 		} catch (Exception e) {
 			throw new PersistenceException(e);
 		} 
@@ -182,10 +173,9 @@ public class SettlementDaoImpl implements ISettlementDao {
 	public Settlement getSettlementByGuestAndRoom(Session session, Room room, Guest guest) throws PersistenceException {
 		Settlement settlement = null;
 		try {
-			Query q = session.createQuery("from Settlement where room = :room AND guest = :guest AND isPaid=false");
-			q.setEntity("room", room);
-			q.setEntity("guest", guest);
-			settlement = (Settlement) q.uniqueResult();
+			Criteria cr = session.createCriteria(Settlement.class).add(Restrictions.eq("room", room))
+					.add(Restrictions.eq("guest", guest)).add(Restrictions.eq("isPaid", false));
+			settlement = (Settlement) cr.uniqueResult();
 		} catch (Exception e) {
 			throw new PersistenceException(e);
 		} 

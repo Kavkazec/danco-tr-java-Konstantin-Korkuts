@@ -41,6 +41,7 @@ public class RoomService implements IRoomService{
 			dao.add(session, room);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -56,6 +57,7 @@ public class RoomService implements IRoomService{
 			dao.delete(session, room);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -72,6 +74,7 @@ public class RoomService implements IRoomService{
 			rooms = dao.getAll(session);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -88,8 +91,8 @@ public class RoomService implements IRoomService{
 			model.clone();
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			LOGGER.error(e);
 			session.getTransaction().rollback();
+			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
 			      session.close();
@@ -104,6 +107,7 @@ public class RoomService implements IRoomService{
 			ie.writeToFileRooms(session, getPath());
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -119,6 +123,7 @@ public class RoomService implements IRoomService{
 			ie.writeToFileRooms(session, getPath());
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -134,6 +139,7 @@ public class RoomService implements IRoomService{
 			dao.update(session, room);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -150,6 +156,7 @@ public class RoomService implements IRoomService{
 			dao.update(session, room);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -165,6 +172,7 @@ public class RoomService implements IRoomService{
 			dao.update(session, room);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -181,6 +189,7 @@ public class RoomService implements IRoomService{
 			countOfFreeRooms = dao.listOfFreeRooms(session).size();
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -211,7 +220,6 @@ public class RoomService implements IRoomService{
 			str = sb.toString();
 		} catch (Exception e) {
 			LOGGER.error(e);
-			return null;
 		} 
 		return str;
 	}
@@ -224,6 +232,7 @@ public class RoomService implements IRoomService{
 			room = dao.getById(session, id);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -241,6 +250,7 @@ public class RoomService implements IRoomService{
 			rooms = dao.sortRoomsBy(session, status, criterion);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {

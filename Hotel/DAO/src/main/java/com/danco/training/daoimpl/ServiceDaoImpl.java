@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -36,11 +37,8 @@ public class ServiceDaoImpl implements IServiceDao{
 	public List<Service> getAll(Session session) throws PersistenceException {
 		List<Service> services = null;
 		try {
-			Criteria empQuery = session.createCriteria(Service.class);
+			Criteria empQuery = session.createCriteria(Service.class).setFetchMode("settlement", FetchMode.JOIN);
 			services = empQuery.list();
-			for (Service emp : services) {
-			    Hibernate.initialize(emp.getSettlement());
-			}
 		} catch (Exception e) {
 			throw new PersistenceException(e);
 		} 

@@ -40,6 +40,7 @@ public class ServiceService implements IServiceService{
 			dao.add(session, service);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -55,6 +56,7 @@ public class ServiceService implements IServiceService{
 			dao.delete(session, service);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -71,6 +73,7 @@ public class ServiceService implements IServiceService{
 			services = dao.getAll(session);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -87,6 +90,7 @@ public class ServiceService implements IServiceService{
 			ie.writeToFileServices(session, getPath());
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -102,6 +106,7 @@ public class ServiceService implements IServiceService{
 			ie.readFromFileServices(session, getPath());
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -117,6 +122,7 @@ public class ServiceService implements IServiceService{
 			dao.update(session, service);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -132,6 +138,7 @@ public class ServiceService implements IServiceService{
 			dao.update(session, service);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -148,6 +155,7 @@ public class ServiceService implements IServiceService{
 			service = dao.getById(session, id);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {

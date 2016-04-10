@@ -1,6 +1,7 @@
 package com.danco.training.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -50,6 +51,7 @@ public class SettlementService implements ISettlementService {
 			settlements = dao.getAll(session);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -66,6 +68,7 @@ public class SettlementService implements ISettlementService {
 			dao.add(session, model);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -81,6 +84,7 @@ public class SettlementService implements ISettlementService {
 			dao.delete(session, model);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -96,6 +100,7 @@ public class SettlementService implements ISettlementService {
 			dao.update(session, model);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -112,6 +117,7 @@ public class SettlementService implements ISettlementService {
 			room = dao.releasedInTheFuture(session, date);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -147,6 +153,7 @@ public class SettlementService implements ISettlementService {
 			}
 			session.getTransaction().commit();;
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -168,6 +175,7 @@ public class SettlementService implements ISettlementService {
 			}
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -185,8 +193,8 @@ public class SettlementService implements ISettlementService {
 			settlement = dao.getById(session, id);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
-			
 		} finally {
 			 if (session != null && session.isOpen()) {
 			      session.close();
@@ -202,6 +210,7 @@ public class SettlementService implements ISettlementService {
 			ie.writeToFileSettlements(session, getPath());
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -217,6 +226,7 @@ public class SettlementService implements ISettlementService {
 			ie.readFromFileSettlements(getPath(), session);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -232,7 +242,7 @@ public class SettlementService implements ISettlementService {
 		List<Service> services = null;
 		try {
 			session.beginTransaction();
-			if(string.equals("type")){
+			if("type".equals(string)){
 				rooms = daoRom.getAll(session);
 				for (Room room : rooms) {
 					list.add(room.getCoast() + " " + room.getType());
@@ -241,9 +251,11 @@ public class SettlementService implements ISettlementService {
 				for (Service service : services) {
 					list.add(service.getCoast() + " " + service.getType());
 				}
+				Collections.sort(list);
 			}
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -272,6 +284,7 @@ public class SettlementService implements ISettlementService {
 			}
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -296,6 +309,7 @@ public class SettlementService implements ISettlementService {
 			}
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -312,6 +326,7 @@ public class SettlementService implements ISettlementService {
 			service.setSettlement(dao.getSettlementByGuest(session, guest));
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -330,6 +345,7 @@ public class SettlementService implements ISettlementService {
 			settlement.setPaid(true);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {

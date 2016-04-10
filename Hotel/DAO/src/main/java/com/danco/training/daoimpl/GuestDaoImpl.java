@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 
@@ -36,11 +37,8 @@ public class GuestDaoImpl implements IGuestDao{
 	public List<Guest> getAll(Session session) throws PersistenceException {
 		List<Guest> guests = null;
 		try {
-			Criteria empQuery = session.createCriteria(Guest.class);
+			Criteria empQuery = session.createCriteria(Guest.class).setFetchMode("settlementList", FetchMode.JOIN);
 			guests = empQuery.list();
-			for (Guest emp : guests) {
-			    Hibernate.initialize(emp.getSettlementList());
-			};
 		} catch (Exception e) {
 			 throw new PersistenceException(e);
 		} 

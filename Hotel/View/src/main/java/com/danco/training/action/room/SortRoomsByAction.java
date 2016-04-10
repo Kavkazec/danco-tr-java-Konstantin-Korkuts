@@ -18,7 +18,7 @@ public class SortRoomsByAction implements IAction{
 	public Transmission sendCommand() {
 		Transmission trans = null;
 		try {
-			InReader.print("Sort ('All' or 'Free') rooms by ('capacity' or 'coast' or 'number of stars')");
+			InReader.print("Sort ('All' or 'Free') rooms by ('capacity' or 'coast' or 'numberOfStars')");
 			Object[] args = {InReader.readStrin()};
 			String methodName = "sortRoomsBy";
 			trans = new Transmission(methodName, args);

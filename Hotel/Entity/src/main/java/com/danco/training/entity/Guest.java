@@ -24,7 +24,7 @@ public class Guest extends BaseEntity{
 	@Column(name="passport_number")
 	private int passportNumber;
 	
-	@OneToMany(targetEntity=com.danco.training.entity.Settlement.class, mappedBy="guest", fetch = FetchType.LAZY)
+	@OneToMany(targetEntity=Settlement.class, mappedBy="guest", fetch = FetchType.LAZY)
 	private List<Settlement> settlementList = new ArrayList<Settlement>();
 	
 	public Guest(){

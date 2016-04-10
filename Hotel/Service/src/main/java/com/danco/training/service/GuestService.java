@@ -41,6 +41,7 @@ public class GuestService implements IGuestService{
 			dao.add(session, guest);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -56,6 +57,7 @@ public class GuestService implements IGuestService{
 			dao.delete(session, guest);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		}finally {
 			 if (session != null && session.isOpen()) {
@@ -71,6 +73,7 @@ public class GuestService implements IGuestService{
 			dao.update(session, guest);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -87,6 +90,7 @@ public class GuestService implements IGuestService{
 			guests = dao.getAll(session);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -103,6 +107,7 @@ public class GuestService implements IGuestService{
 			ie.writeToFileGuests(session, getPath());
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -118,6 +123,7 @@ public class GuestService implements IGuestService{
 			ie.readFromFileGuests(session, getPath());
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -134,6 +140,7 @@ public class GuestService implements IGuestService{
 			count = dao.getAll(session).size();
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
@@ -151,6 +158,7 @@ public class GuestService implements IGuestService{
 			guest = dao.getById(session, id);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			session.getTransaction().rollback();
 			LOGGER.error(e);
 		} finally {
 			 if (session != null && session.isOpen()) {
