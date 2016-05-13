@@ -1,0 +1,6 @@
+com\danco\training\entity\Settlement.class
+com\danco\training\entity\Service.class
+com\danco\training\entity\User.class
+com\danco\training\entity\Guest.class
+com\danco\training\entity\Room.class
+com\danco\training\entity\BaseEntity.class

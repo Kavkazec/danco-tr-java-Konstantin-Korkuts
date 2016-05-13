@@ -1,0 +1,10 @@
+com.danco.training.api.ISettlementService=com.danco.training.service.SettlementService
+com.danco.training.api.IServiceService=com.danco.training.service.ServiceService
+com.danco.training.api.IRoomService=com.danco.training.service.RoomService
+com.danco.training.api.IGuestService=com.danco.training.service.GuestService
+com.danco.training.api.IUserervice=com.danco.training.service.UserService
+com.danco.training.api.IRoomDao=com.danco.training.daoimpl.RoomDaoImpl
+com.danco.training.api.IGuestDao=com.danco.training.daoimpl.GuestDaoImpl
+com.danco.training.api.IServiceDao=com.danco.training.daoimpl.ServiceDaoImpl
+com.danco.training.api.ISettlementDao=com.danco.training.daoimpl.SettlementDaoImpl
+com.danco.training.api.IUserDao=com.danco.training.daoimpl.UserDaoImpl
