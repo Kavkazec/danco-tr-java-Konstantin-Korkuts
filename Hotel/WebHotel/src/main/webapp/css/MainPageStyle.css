@@ -1,0 +1,128 @@
+body {
+  background: url("../img/bg.png");
+  font: 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+nav {
+  display: block;
+  position: relative;
+  background: rgb(255,212,3) linear-gradient(rgb(255,212,3), rgb(248,157,23));
+  height: 100px;
+}
+nav:after {
+  display: block;
+  width:  100px;
+  height: 5px;
+  position: relative;
+  background: linear-gradient(90deg, 
+    #CDE0EE, #CDE0EE 20%,
+    #EBF0F3 20%, #EBF0F3 40%, 
+    #9BB0C1 40%, #9BB0C1 60%, 
+    #5D8BAD 60%, #5D8BAD 80%,
+    #041E34 80%, #041E34 100%);
+ 
+}
+ul {
+  width: 660px;
+  margin: 0 auto;
+  padding-left: 0;
+  list-style: none;
+  overflow: hidden;
+}
+li {
+  float: left;
+  width: 20%;
+}
+
+.menu {
+	position: relative;
+	display: table;
+	width: 100%;
+}
+
+.menu ul {
+  position: relative;
+  z-index: 5;
+  display: none;
+}
+
+.menu li {
+  display: table-cell;
+  text-align: center;
+}
+
+.menu li:hover ul {
+  display: block;
+}
+
+.menu ul li {
+  display: block;
+  text-align: left;
+}
+
+.menu ul a {
+  text-size: 1em;	
+}
+
+.menu a {
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  color: #868686;
+  padding: 0.7em 0;
+  font-size: 3em;
+  font-weight: bold;
+  transition: 0.5s ease-in-out;
+  font-family: cursive; 
+}
+ .menu a:hover {
+  color: #f70211;
+}
+
+.hdr {
+	margin-top:20px;
+	margin-bottom:16px;
+	font-family: Verdana;
+	font-size: 5em;
+	font-weight: bold;
+	color: #FFFFFF;
+	letter-spacing: -0.11em;
+	text-shadow: -0.05em 0px 0.07em #000000;
+}
+ 
+.hdr div {
+	display: inline-block;	
+	color: #F00000;
+}
+
+.menu-input {
+	margin-right: 400px;
+	width: 200px; 	
+	 font-weight: 700;
+	  color: white;
+	  text-decoration: none;
+	  padding: .8em 1em calc(.8em + 3px);
+	  border-radius: 3px;
+	  background: rgb(64,199,129);
+	  box-shadow: 0 -3px rgb(53,167,110) inset;
+	  transition: 0.2s;
+}
+
+
+.menu-input:hover {
+	background: rgb(53, 167, 110); 
+	color: red;
+}
+	
+.menu-input:active {
+  background: rgb(33,147,90);
+  box-shadow: 0 3px rgb(33,147,90) inset;
+}
+
+.form_from_content {
+	border-right: 10px double rgba(255,0,0,.10);
+	border-bottom: 2px solid rgba(255,255,0,.15);
+	width: 950px;
+	height: 100%;
+	background: url("../img/fonblok.jpg");
+}
