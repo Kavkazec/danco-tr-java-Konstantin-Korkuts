@@ -16,7 +16,7 @@ public class UserService implements IUserService {
 	private static final Logger LOGGER = Logger.getLogger(UserService.class);
 	//private IUserDao dao = (IUserDao) DependencyInjection.getInstance().getClassInstance(IUserDao.class);
 	private UserDaoImpl dao = new UserDaoImpl();
-	public User getByIdRoom(int id) {
+	public User getByIdUser(int id) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		User user = null;
 		try {
@@ -100,7 +100,7 @@ public class UserService implements IUserService {
 		return users;
 	}
 
-	public boolean findUser(String login, String password) {
+	public User findUser(String login, String password) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		boolean userFindStatus = false;
 		User user = null;
@@ -117,7 +117,7 @@ public class UserService implements IUserService {
 			      session.close();
 			 }
 		}
-		return userFindStatus;
+		return user;
 	}
 
 }

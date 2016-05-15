@@ -7,6 +7,7 @@ import org.hibernate.Session;
 
 import com.danco.training.api.IServiceDao;
 import com.danco.training.api.IServiceService;
+import com.danco.training.daoimpl.ServiceDaoImpl;
 import com.danco.training.di.DependencyInjection;
 import com.danco.training.entity.Service;
 import com.danco.training.properties.HibernateUtil;
@@ -20,8 +21,9 @@ import com.danco.training.reader.ImportAndExport;
 public class ServiceService implements IServiceService{
 	private static final Logger LOGGER = Logger.getLogger(ServiceService.class);
 	private ImportAndExport ie = ImportAndExport.getInstance();
-	private IServiceDao dao = (IServiceDao) DependencyInjection.getInstance().getClassInstance(IServiceDao.class);
-
+	//private IServiceDao dao = (IServiceDao) DependencyInjection.getInstance().getClassInstance(IServiceDao.class);
+	private IServiceDao dao = new ServiceDaoImpl();
+	
 	public String getPath() {
 		try {
 			PropertiesReader prop = PropertiesReader.getInstance();

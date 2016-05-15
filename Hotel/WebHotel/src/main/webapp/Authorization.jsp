@@ -16,9 +16,9 @@
 				<label for="password">Password:</label>
 				<input type="password" name="password" required placeholder="Input password" /></br></br>
 				<input type="submit" name="logon" class="login-button" value="Logon" />
-			</form>
-			<form action="Registration.jsp" method="get">
 				<input type="submit" name="registration" class="login-button" value="Registration" />
+			</form>
+			<form action="Registration" method="get">
 			</form>
 		</div>
 </body>

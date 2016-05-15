@@ -1,43 +1,60 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<link rel="stylesheet" href="css/MainPageStyle.css">
+	<link rel="stylesheet" href="css/Style.css">
 <title>Main Page</title>
 </head>
 <body>
-	<div class="hdr">
+	<form class="hdr" action="Logout" method="get">
 		<span>H</span><span>O</span>
-		<div><span>T</span><span>E</span><span>L</span></div></br>
-	</div>
+		<div><span>T</span><span>E</span><span>L</span></div>
+		<input type="submit" class="logout "value="Logout" />	
+	</form>
 	<nav>
 		<ul class="menu">
-		  <li><a href="#">Main</a></li>
-		  <li><a href="#">Rooms</a>
+		  <li><a class="large" href="#">Main</a></li>
+		   <li><a class="large">Rooms</a>
 			<ul class="submenu">
-			 <form><input type="submit" class="menu-input" value="First" /></form>
-			 <form><input type="submit" class="menu-input" value="Second" /></form>
-			 <form><input type="submit" class="menu-input" value="Therd" /></form>
+			<a href="main/addRoomPage.jsp"> Add Room </a>
+			<a href="main/addRoomPage.jsp"> Show rooms </a>
+			<a href="main/addRoomPage.jsp"> Delete room </a>
+			<a href="main/addRoomPage.jsp"> Sorted rooms </a>
+			<a href="main/addRoomPage.jsp"> Free rooms count </a>
+			<a href="main/addRoomPage.jsp"> Clone room </a>
+			<a href="main/addRoomPage.jsp"> Import/export room </a>
+			<a href="main/addRoomPage.jsp"> Change room </a>
+			<a href="main/addRoomPage.jsp"> Show room's details </a>
 			</ul>
 		  </li>
-		  <li><a href="#">Services</a>
+		  <li><a class="large">Services</a>
 			<ul class="submenu">
-			 <form><input type="submit" class="menu-input" value="First" /></form>
-			 <form><input type="submit" class="menu-input" value="Second" /></form>
-			 <form><input type="submit" class="menu-input" value="Therd" /></form>
+			 <a href="main/addRoomPage.jsp"> Add service </a>
+			 <a href="main/addRoomPage.jsp"> Show services </a>
+			<a href="main/addRoomPage.jsp"> elete service </a>
+			<a href="main/addRoomPage.jsp"> Import/export services </a>
+			<a href="main/addRoomPage.jsp"> Change service </a>
 			</ul>
 		  </li>
-		  <li><a href="#">Guests</a>
+		  <li><a class="large">Guests</a>
 			<ul class="submenu">
-			 <form><input type="submit" class="menu-input" value="First" /></form>
-			 <form><input type="submit" class="menu-input" value="Second" /></form>
-			 <form><input type="submit" class="menu-input" value="Therd" /></form>
+			 <a href="main/addRoomPage.jsp"> Add guest </a>
+			<a href="main/addRoomPage.jsp"> Show guests </a>
+			 <a href="main/addRoomPage.jsp"> Delete guest </a>
+			<a href="main/addRoomPage.jsp"> Import/export guests </a>
+			 <a href="main/addRoomPage.jsp"> Count guests </a>
 			</ul>
 		  </li>
-		   <li><a href="#">Settlement</a>
+		   <li><a class="large">Settlement</a>
 			<ul class="submenu">
-			 <form><input type="submit" class="menu-input" value="First" /></form>
-			 <form><input type="submit" class="menu-input" value="Second" /></form>
-			 <form><input type="submit" class="menu-input" value="Therd" /></form>
+			<a href="main/addRoomPage.jsp"> New settlement </a>
+		<a href="main/addRoomPage.jsp"> Show settlements </a>
+			<a href="main/addRoomPage.jsp"> Delete settlement </a>
+		<a href="main/addRoomPage.jsp"> Import/export settlements </a>
+			 <a href="main/addRoomPage.jsp"> Room released in ... </a>
+			<a href="main/addRoomPage.jsp"> Room's payment </a>
+			<a href="main/addRoomPage.jsp"> Sorting </a>
+			<a href="main/addRoomPage.jsp"> Add service to guest </a>
+			<a href="main/addRoomPage.jsp"> Move out from room </a>
 			</ul>
 		  </li>
 		</ul>

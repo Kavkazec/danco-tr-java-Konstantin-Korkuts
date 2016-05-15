@@ -19,6 +19,7 @@
 		<mapping class="com.danco.training.entity.Guest" />
 		<mapping class="com.danco.training.entity.Settlement" />
 		<mapping class="com.danco.training.entity.User" />
+		<mapping class="com.danco.training.entity.Act" />
 
 	</session-factory>
 </hibernate-configuration>

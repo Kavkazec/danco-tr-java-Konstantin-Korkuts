@@ -7,6 +7,7 @@ import org.hibernate.Session;
 
 import com.danco.training.api.IGuestDao;
 import com.danco.training.api.IGuestService;
+import com.danco.training.daoimpl.GuestDaoImpl;
 import com.danco.training.di.DependencyInjection;
 import com.danco.training.entity.Guest;
 import com.danco.training.properties.HibernateUtil;
@@ -21,7 +22,8 @@ import com.danco.training.reader.ImportAndExport;
 public class GuestService implements IGuestService{
 	private static final Logger LOGGER = Logger.getLogger(GuestService.class);
 	private ImportAndExport ie = ImportAndExport.getInstance();
-	private IGuestDao dao = (IGuestDao) DependencyInjection.getInstance().getClassInstance(IGuestDao.class);
+	//private IGuestDao dao = (IGuestDao) DependencyInjection.getInstance().getClassInstance(IGuestDao.class);
+	private IGuestDao dao = new GuestDaoImpl();
 	
 	public String getPath() {
 		try {

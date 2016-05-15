@@ -7,6 +7,7 @@ import org.hibernate.Session;
 
 import com.danco.training.api.IRoomDao;
 import com.danco.training.api.IRoomService;
+import com.danco.training.daoimpl.RoomDaoImpl;
 import com.danco.training.di.DependencyInjection;
 import com.danco.training.entity.Room;
 import com.danco.training.properties.HibernateUtil;
@@ -21,8 +22,9 @@ public class RoomService implements IRoomService{
 	private static final String EMPTY_STRING = " ";
 	private static final Logger LOGGER = Logger.getLogger(RoomService.class);
 	private ImportAndExport ie = ImportAndExport.getInstance();
-	private IRoomDao dao = (IRoomDao) DependencyInjection.getInstance().getClassInstance(IRoomDao.class);
-
+	//private IRoomDao dao = (IRoomDao) DependencyInjection.getInstance().getClassInstance(IRoomDao.class);
+	private IRoomDao dao = new RoomDaoImpl();
+	
 	public String getPath() {
 		try {
 			PropertiesReader prop = PropertiesReader.getInstance();

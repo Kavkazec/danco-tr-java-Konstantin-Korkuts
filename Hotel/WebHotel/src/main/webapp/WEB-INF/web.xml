@@ -1,23 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:web="http://xmlns.jcp.org/xml/ns/javaee">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
   <display-name>Archetype Created Web Application</display-name>
   <welcome-file-list>
     <welcome-file>Authorization.jsp</welcome-file>
   </welcome-file-list>
+  
   <servlet>
     <servlet-name>Authorization</servlet-name>
     <servlet-class>com.danco.training.servlet.Authorization</servlet-class>
-  </servlet>
-   <servlet>
-    <servlet-name>Registration</servlet-name>
-    <servlet-class>com.danco.training.servlet.Registration</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Authorization</servlet-name>
     <url-pattern>/Authorization</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Registration</servlet-name>
+    <servlet-class>com.danco.training.servlet.Registration</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Registration</servlet-name>
     <url-pattern>/Registration</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>com.danco.training.servlet.Logout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/Logout</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>MainPageServlet</servlet-name>
+    <servlet-class>com.danco.training.servlet.MainPageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MainPageServlet</servlet-name>
+    <url-pattern>/MainPageServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+ <!--   Filters -->
+  
+  <filter>
+    <filter-name>AuditFilter</filter-name>
+    <filter-class>com.danco.training.filter.AuditFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AuditFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter>
+    <filter-name>LogonFilter</filter-name>
+    <filter-class>com.danco.training.filter.LogonFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LogonFilter</filter-name>
+    <url-pattern>/main/*</url-pattern>
+  </filter-mapping>
 </web-app>

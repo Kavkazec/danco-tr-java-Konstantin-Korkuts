@@ -12,6 +12,9 @@ import com.danco.training.api.IRoomDao;
 import com.danco.training.api.IServiceDao;
 import com.danco.training.api.ISettlementDao;
 import com.danco.training.api.ISettlementService;
+import com.danco.training.daoimpl.RoomDaoImpl;
+import com.danco.training.daoimpl.ServiceDaoImpl;
+import com.danco.training.daoimpl.SettlementDaoImpl;
 import com.danco.training.di.DependencyInjection;
 import com.danco.training.entity.Guest;
 import com.danco.training.entity.Room;
@@ -24,11 +27,13 @@ import com.danco.training.reader.ImportAndExport;
 public class SettlementService implements ISettlementService {
 	private static final String STRING = " ----- ";
 	private static final Logger LOGGER = Logger.getLogger(RoomService.class);
-	private ISettlementDao dao = (ISettlementDao) DependencyInjection.getInstance().getClassInstance(ISettlementDao.class);
+	//private ISettlementDao dao = (ISettlementDao) DependencyInjection.getInstance().getClassInstance(ISettlementDao.class);
 	private ImportAndExport ie = ImportAndExport.getInstance();
-	private IServiceDao daoSer = (IServiceDao) DependencyInjection.getInstance().getClassInstance(IServiceDao.class);
-	private IRoomDao daoRom = (IRoomDao) DependencyInjection.getInstance().getClassInstance(IRoomDao.class);
-
+	//private IServiceDao daoSer = (IServiceDao) DependencyInjection.getInstance().getClassInstance(IServiceDao.class);
+	//private IRoomDao daoRom = (IRoomDao) DependencyInjection.getInstance().getClassInstance(IRoomDao.class);
+	private IRoomDao daoRom = new RoomDaoImpl();
+	private IServiceDao daoSer = new ServiceDaoImpl();
+	private ISettlementDao dao = new SettlementDaoImpl();
 
 	public String getPath() {
 		try {
