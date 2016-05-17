@@ -20,7 +20,7 @@ public abstract class AbstractDaoImpl<T extends BaseEntity> implements ItemDao<T
 	
 	public T getById(Session session, int id) throws PersistenceException {
 		try {
-			return (T) session.load(getGenericClass(), id);
+			return (T) session.get(getGenericClass(), id);
 		} catch (Exception e) {
 			throw new PersistenceException(e);
 		} 
@@ -37,7 +37,7 @@ public abstract class AbstractDaoImpl<T extends BaseEntity> implements ItemDao<T
 	
 	public void delete(Session session, T model) throws PersistenceException {
 		try {
-			session.update(model);
+			session.delete(model);
 		} catch (Exception e) {
 			throw new PersistenceException(e);
 		} 

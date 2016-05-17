@@ -90,7 +90,8 @@ public class RoomService implements IRoomService{
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
-			model.clone();
+			Room room = model.clone();
+			this.addRoom(room);
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			session.getTransaction().rollback();

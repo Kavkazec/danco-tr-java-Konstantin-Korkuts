@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="room_model")
-public class Room extends BaseEntity {
+public class Room extends BaseEntity implements Cloneable {
 	
 	private static final long serialVersionUID = -5339484064824529456L;
 	
@@ -97,6 +97,6 @@ public class Room extends BaseEntity {
 		this.isOnRepair = isOnRepair;
 	}
 	public Room clone() throws CloneNotSupportedException {
-        return (Room)super.clone();
+        return (Room) super.clone();
 	}
 }
