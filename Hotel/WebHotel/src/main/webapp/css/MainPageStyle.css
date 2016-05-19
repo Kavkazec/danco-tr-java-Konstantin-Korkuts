@@ -1,37 +1,37 @@
 body {
-  background: url("../img/bg.png");
-  font: 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	background: url("../img/bg.png");
+	font: 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 nav {
-  display: block;
-  position: relative;
-  background: rgb(255,212,3) linear-gradient(rgb(255,212,3), rgb(248,157,23));
-  height: 100px;
+	display: block;
+	position: relative;
+	background: rgb(255, 212, 3) linear-gradient(rgb(255, 212, 3),
+		rgb(248, 157, 23));
+	height: 100px;
 }
+
 nav:after {
-  display: block;
-  width:  100px;
-  height: 5px;
-  position: relative;
-  background: linear-gradient(90deg, 
-    #CDE0EE, #CDE0EE 20%,
-    #EBF0F3 20%, #EBF0F3 40%, 
-    #9BB0C1 40%, #9BB0C1 60%, 
-    #5D8BAD 60%, #5D8BAD 80%,
-    #041E34 80%, #041E34 100%);
- 
+	display: block;
+	width: 100px;
+	height: 5px;
+	position: relative;
+	background: linear-gradient(90deg, #CDE0EE, #CDE0EE 20%, #EBF0F3 20%, #EBF0F3 40%,
+		#9BB0C1 40%, #9BB0C1 60%, #5D8BAD 60%, #5D8BAD 80%, #041E34 80%,
+		#041E34 100%);
 }
+
 ul {
-  width: 660px;
-  margin: 0 auto;
-  padding-left: 0;
-  list-style: none;
-  overflow: hidden;
+	width: 660px;
+	margin: 0 auto;
+	padding-left: 0;
+	list-style: none;
+	overflow: hidden;
 }
+
 li {
-  float: left;
-  width: 20%;
+	float: left;
+	width: 20%;
 }
 
 .menu {
@@ -41,47 +41,48 @@ li {
 }
 
 .menu ul {
-  position: relative;
-  z-index: 5;
-  display: none;
+	position: relative;
+	z-index: 5;
+	display: none;
 }
 
 .menu li {
-  display: table-cell;
-  text-align: center;
+	display: table-cell;
+	text-align: center;
 }
 
 .menu li:hover ul {
-  display: block;
+	display: block;
 }
 
 .menu ul li {
-  display: block;
-  text-align: left;
+	display: block;
+	text-align: left;
 }
 
 .menu ul a {
-  text-size: 1em;	
+	text-size: 1em;
 }
 
 .menu a {
-  text-decoration: none;
-  text-align: center;
-  display: block;
-  color: #868686;
-  padding: 0.7em 0;
-  font-size: 3em;
-  font-weight: bold;
-  transition: 0.5s ease-in-out;
-  font-family: cursive; 
+	text-decoration: none;
+	text-align: center;
+	display: block;
+	color: #868686;
+	padding: 0.7em 0;
+	font-size: 3em;
+	font-weight: bold;
+	transition: 0.5s ease-in-out;
+	font-family: cursive;
 }
- .menu a:hover {
-  color: #f70211;
+
+.menu a:hover {
+	color: #f70211;
 }
 
 .hdr {
-	margin-top:20px;
-	margin-bottom:16px;
+	margin-top: 20px;
+	margin-bottom: 16px;
 	font-family: Verdana;
 	font-size: 5em;
 	font-weight: bold;
@@ -90,7 +91,7 @@ li {
 	text-shadow: -0.05em 0px 0.07em #000000;
 }
 
-.hdr label{
+.hdr label {
 	right: 200px;
 	position: absolute;
 	font-family: Verdana;
@@ -104,167 +105,180 @@ li {
 .nik {
 	left: 1157px;
 }
- 
+
 .hdr div {
-	display: inline-block;	
+	display: inline-block;
 	color: #F00000;
 }
 
 .menu-input {
 	margin-right: 400px;
-	width: 200px; 	
-	 font-weight: 700;
-	  color: white;
-	  text-decoration: none;
-	  padding: .8em 1em calc(.8em + 3px);
-	  border-radius: 3px;
-	  background: rgb(64,199,129);
-	  box-shadow: 0 -3px rgb(53,167,110) inset;
-	  transition: 0.2s;
+	width: 200px;
+	font-weight: 700;
+	color: white;
+	text-decoration: none;
+	padding: .8em 1em calc(.8em + 3px);
+	border-radius: 3px;
+	background: rgb(64, 199, 129);
+	box-shadow: 0 -3px rgb(53, 167, 110) inset;
+	transition: 0.2s;
 }
-
 
 .menu-input:hover {
-	background: rgb(53, 167, 110); 
+	background: rgb(53, 167, 110);
 	color: red;
 }
-	
+
 .menu-input:active {
-  background: rgb(33,147,90);
-  box-shadow: 0 3px rgb(33,147,90) inset;
+	background: rgb(33, 147, 90);
+	box-shadow: 0 3px rgb(33, 147, 90) inset;
 }
 
 .form_from_content {
-	
-	border-right: 10px double rgba(255,0,0,.10);
-	border-bottom: 2px solid rgba(255,255,0,.15);
+	border-right: 10px double rgba(255, 0, 0, .10);
+	border-bottom: 2px solid rgba(255, 255, 0, .15);
 	width: 950px;
 	height: 100%;
 	background: url("../img/fonblok.jpg");
 }
 
 .form_from_content input, button {
-	
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 15px;
-  font-weight: 300;
-  width: 300px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 15px;
+	font-weight: 300;
+	width: 300px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .form_from_content input[type=text], input[type=password] {
-  padding: 0 10px;
-  width: 200px;
-  height: 40px;
-  color: #000000;
-  text-shadow: 1px 1px 1px black;
-  background: rgba(255, 255, 254, 0.16);
-  border: 0;
-  border-radius: 5px;
-  -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.06);
-  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.3), 0 1px rgb(255,212,3);
+	padding: 0 10px;
+	width: 200px;
+	height: 40px;
+	color: #000000;
+	text-shadow: 1px 1px 1px black;
+	background: rgba(255, 255, 254, 0.16);
+	border: 0;
+	border-radius: 5px;
+	-webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.3), 0 1px
+		rgba(255, 255, 255, 0.06);
+	box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.3), 0 1px rgb(255, 212, 3);
 }
 
 .form_from_content input[type=text]:focus, input[type=password]:focus {
-  color: red;
-  background: rgba(0, 0, 0, 0.1);
-  outline: 0;
+	color: red;
+	background: rgba(0, 0, 0, 0.1);
+	outline: 0;
 }
 
 .form_name {
 	left: 585px;
-    color: #6B5344;
-    font-weight: normal;
-    position: absolute;
-    text-shadow: 0 2px 0 rgba(255,255,255,0.5);
-    font-size: 36px;
-    line-height: 40px;
-    font-family: 'Carrois Gothic', sans-serif;
+	color: #6B5344;
+	font-weight: normal;
+	position: absolute;
+	text-shadow: 0 2px 0 rgba(255, 255, 255, 0.5);
+	font-size: 36px;
+	line-height: 40px;
+	font-family: 'Carrois Gothic', sans-serif;
 }
 
 .success {
 	left: 585px;
-    color: green;
-    font-weight: normal;
-    position: absolute;
-    text-shadow: 0 2px 0 rgba(255,255,255,0.5);
-    font-size: 36px;
-    line-height: 40px;
-    font-family: 'Carrois Gothic', sans-serif;
+	color: green;
+	font-weight: normal;
+	position: absolute;
+	text-shadow: 0 2px 0 rgba(255, 255, 255, 0.5);
+	font-size: 36px;
+	line-height: 40px;
+	font-family: 'Carrois Gothic', sans-serif;
 }
 
 .fail {
 	left: 585px;
-    color: red;
-    font-weight: normal;
-    position: absolute;
-    text-shadow: 0 2px 0 rgba(255,255,255,0.5);
-    font-size: 36px;
-    line-height: 40px;
-    font-family: 'Carrois Gothic', sans-serif;
+	color: red;
+	font-weight: normal;
+	position: absolute;
+	text-shadow: 0 2px 0 rgba(255, 255, 255, 0.5);
+	font-size: 36px;
+	line-height: 40px;
+	font-family: 'Carrois Gothic', sans-serif;
 }
 
 .login-button {
-  size: 100px;
-  display: inline-block;
-  color: black;
-  font-size: 125%;
-  font-weight: 700;
-  text-decoration: none;
-  padding: .25em .5em;
-  outline: none;
-  border: 1px solid rgb(250,172,17);
-  border-radius: 7px;
-  background: rgb(255,212,3) linear-gradient(rgb(255,212,3), rgb(248,157,23));
-  box-shadow: inset 0 -2px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,0);
-  transition: box-shadow .2s, border-color .2s;
+	size: 100px;
+	display: inline-block;
+	color: black;
+	font-size: 125%;
+	font-weight: 700;
+	text-decoration: none;
+	padding: .25em .5em;
+	outline: none;
+	border: 1px solid rgb(250, 172, 17);
+	border-radius: 7px;
+	background: rgb(255, 212, 3) linear-gradient(rgb(255, 212, 3),
+		rgb(248, 157, 23));
+	box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0), inset 0 1px 2px
+		rgba(0, 0, 0, 0), inset 0 0 0 60px rgba(255, 255, 0, 0);
+	transition: box-shadow .2s, border-color .2s;
 }
 
 .login-button:hover {
-  box-shadow: inset 0 -1px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,.5);
+	box-shadow: inset 0 -1px 1px rgba(0, 0, 0, 0), inset 0 1px 2px
+		rgba(0, 0, 0, 0), inset 0 0 0 60px rgba(255, 255, 0, .5);
 }
+
 .login-button:active {
-  padding: calc(.25em + 1px) .5em calc(.25em - 1px);
-  border-color: rgba(177,159,0,1);
-  box-shadow: inset 0 -1px 1px rgba(0,0,0,.1), inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 60px rgba(255,255,0,.45);
+	padding: calc(.25em + 1px) .5em calc(.25em - 1px);
+	border-color: rgba(177, 159, 0, 1);
+	box-shadow: inset 0 -1px 1px rgba(0, 0, 0, .1), inset 0 1px 2px
+		rgba(0, 0, 0, .3), inset 0 0 0 60px rgba(255, 255, 0, .45);
 }
 
 .form_from_content label {
-	font-size:20px;
+	font-size: 20px;
 	float: left;
 	position: fixed;
-	color:rgba(0,0,102,0.5);
+	color: rgba(0, 0, 102, 0.5);
 }
 
 .logout {
 	float: right;
-  position: relative;
-  display: inline-block;
-  color: #777674;
-  font-weight: bold;
-  text-decoration: none;
-  text-shadow: rgba(255,255,255,.5) 1px 1px, rgba(100,100,100,.3) 3px 7px 3px;
-  padding: 1em 2em;
-  outline: none;
-  border-radius: 3px / 100%;
-  background-image:
-   linear-gradient(45deg, rgba(255,255,255,.0) 30%, rgba(255,255,255,.8), rgba(255,255,255,.0) 70%),
-   linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 90%, rgba(255,255,255,.3)),
-   linear-gradient(to right, rgba(125,125,125,1), rgba(255,255,255,.9) 45%, rgba(125,125,125,.5)),
-   linear-gradient(to right, rgba(125,125,125,1), rgba(255,255,255,.9) 45%, rgba(125,125,125,.5)),
-   linear-gradient(to right, rgba(223,190,170,1), rgba(255,255,255,.9) 45%, rgba(223,190,170,.5)),
-   linear-gradient(to right, rgba(223,190,170,1), rgba(255,255,255,.9) 45%, rgba(223,190,170,.5));
-  background-repeat: no-repeat;
-  background-size: 200% 100%, auto, 100% 2px, 100% 2px, 100% 1px, 100% 1px;
-  background-position: 200% 0, 0 0, 0 0, 0 100%, 0 4px, 0 calc(100% - 4px);
-  box-shadow: rgba(0,0,0,.5) 3px 10px 10px -10px;
+	position: relative;
+	display: inline-block;
+	color: #777674;
+	font-weight: bold;
+	text-decoration: none;
+	text-shadow: rgba(255, 255, 255, .5) 1px 1px, rgba(100, 100, 100, .3)
+		3px 7px 3px;
+	padding: 1em 2em;
+	outline: none;
+	border-radius: 3px/100%;
+	background-image: linear-gradient(45deg, rgba(255, 255, 255, .0) 30%,
+		rgba(255, 255, 255, .8), rgba(255, 255, 255, .0) 70%),
+		linear-gradient(to right, rgba(255, 255, 255, 1),
+		rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 90%,
+		rgba(255, 255, 255, .3)),
+		linear-gradient(to right, rgba(125, 125, 125, 1),
+		rgba(255, 255, 255, .9) 45%, rgba(125, 125, 125, .5)),
+		linear-gradient(to right, rgba(125, 125, 125, 1),
+		rgba(255, 255, 255, .9) 45%, rgba(125, 125, 125, .5)),
+		linear-gradient(to right, rgba(223, 190, 170, 1),
+		rgba(255, 255, 255, .9) 45%, rgba(223, 190, 170, .5)),
+		linear-gradient(to right, rgba(223, 190, 170, 1),
+		rgba(255, 255, 255, .9) 45%, rgba(223, 190, 170, .5));
+	background-repeat: no-repeat;
+	background-size: 200% 100%, auto, 100% 2px, 100% 2px, 100% 1px, 100% 1px;
+	background-position: 200% 0, 0 0, 0 0, 0 100%, 0 4px, 0 calc(100% - 4px);
+	box-shadow: rgba(0, 0, 0, .5) 3px 10px 10px -10px;
 }
+
 .logout:hover {
-  transition: .5s linear;
-  background-position: -200% 0, 0 0, 0 0, 0 100%, 0 4px, 0 calc(100% - 4px);
+	transition: .5s linear;
+	background-position: -200% 0, 0 0, 0 0, 0 100%, 0 4px, 0
+		calc(100% - 4px);
 }
+
 .logout:active {
-  top: 1px;
+	top: 1px;
 }

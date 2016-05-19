@@ -28,6 +28,8 @@ public class LogonFilter implements Filter {
 			httpResponse.sendRedirect(httpRequest.getContextPath()
 					+ "/Authorization.jsp");
 		}
+		
+		chain.doFilter(request, response);
 	}
 
 	public FilterConfig getFilterConfig() {

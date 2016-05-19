@@ -24,7 +24,7 @@ public class AddGuestServlet extends HttpServlet {
 		service = new GuestService();
 	}
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		boolean isSuccess = false;
 		
 		

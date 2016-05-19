@@ -26,7 +26,7 @@ public class DeleteGuestResultServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		boolean isSuccess = false;
 		if(request.getParameter("select_guest") != null){
 			int id = Integer.parseInt(request.getParameter("select_guest"));

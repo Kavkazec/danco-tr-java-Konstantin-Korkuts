@@ -27,7 +27,7 @@ public class CountFreeRoomsServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int count = service.numberOfFreeRooms();
 		request.setAttribute("count", count);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/countFreeRoomsResultPage.jsp");

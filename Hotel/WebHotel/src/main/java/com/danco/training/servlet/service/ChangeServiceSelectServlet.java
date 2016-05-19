@@ -36,7 +36,6 @@ public class ChangeServiceSelectServlet extends HttpServlet {
 		if(request.getParameter("select_service") != null){
 			int id = Integer.parseInt(request.getParameter("select_service"));
 			Service serviceEntity = service.getByIdService(id);
-			request.setAttribute("serviceEntity", serviceEntity);
 			session.setAttribute("serviceEntity", serviceEntity);
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/changeServiceResult.jsp");

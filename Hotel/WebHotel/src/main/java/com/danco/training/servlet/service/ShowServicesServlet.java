@@ -29,7 +29,7 @@ public class ShowServicesServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Service> sevices = service.getServices();
 		request.setAttribute("sevices", sevices);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/showServicesPageResult.jsp");

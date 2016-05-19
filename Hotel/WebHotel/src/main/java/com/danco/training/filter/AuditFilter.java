@@ -1,7 +1,7 @@
 package com.danco.training.filter;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Date;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.Filter;
@@ -22,9 +22,13 @@ public class AuditFilter implements Filter {
 	private FilterConfig filterConfig;
 	private IActService service;
 	
+	public AuditFilter(){
+		super();
+		service = new ActService();
+	}
+	
 	public void init(FilterConfig filterConfig) throws ServletException {
 		this.filterConfig = filterConfig;
-		service = new ActService();
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -33,20 +37,13 @@ public class AuditFilter implements Filter {
         }
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpSession session = httpRequest.getSession(false);
+		String resourse = httpRequest.getRequestURL().toString();
 		
-		if(session != null && session.getAttribute("User") != null){
-			User user = (User) session.getAttribute("User");
-			if(user != null){
-				Date logonDate = new Date(session.getCreationTime());
-				Act act = new Act();
-				act.setUser(user);
-				act.setLogonDate(logonDate);
-				Date logoutDate = new Date(session.getLastAccessedTime());
-				act.setLogoutDate(logoutDate);
-				act.setResource(httpRequest.getRequestURL().toString());
-				service.addAct(act);
-				session.setAttribute("act",  act);
-			}
+		if(session != null && session.getAttribute("act") != null){
+			Act act = (Act) session.getAttribute("act");
+			act.setLogoutDate(new Date());
+			act.setResource(resourse);
+			service.addAct(act);
 		}
 		chain.doFilter(request, response);
 	}

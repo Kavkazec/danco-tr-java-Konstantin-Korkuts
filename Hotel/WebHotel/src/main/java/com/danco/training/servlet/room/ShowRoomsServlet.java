@@ -29,7 +29,7 @@ public class ShowRoomsServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Room> rooms = service.getRooms();
 		request.setAttribute("rooms", rooms);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/showRoomsPageResult.jsp");

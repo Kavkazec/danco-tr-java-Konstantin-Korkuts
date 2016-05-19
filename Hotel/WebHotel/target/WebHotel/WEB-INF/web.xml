@@ -1,288 +1,310 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-  <display-name>Archetype Created Web Application</display-name>
-  <welcome-file-list>
-    <welcome-file>Authorization.jsp</welcome-file>
-  </welcome-file-list>
-  
-  <servlet>
-    <servlet-name>Authorization</servlet-name>
-    <servlet-class>com.danco.training.servlet.Authorization</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Authorization</servlet-name>
-    <url-pattern>/Authorization</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>Registration</servlet-name>
-    <servlet-class>com.danco.training.servlet.Registration</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Registration</servlet-name>
-    <url-pattern>/Registration</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>Logout</servlet-name>
-    <servlet-class>com.danco.training.servlet.Logout</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Logout</servlet-name>
-    <url-pattern>/Logout</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>MainPageServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.MainPageServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MainPageServlet</servlet-name>
-    <url-pattern>/MainPageServlet</url-pattern>
-  </servlet-mapping>
-  
-  <!-- GuestServlets -->
-  
-  <servlet>
-    <servlet-name>AddGuestServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.guest.AddGuestServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddGuestServlet</servlet-name>
-    <url-pattern>/AddGuestServlet</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>ShowGuestsServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.guest.ShowGuestsServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ShowGuestsServlet</servlet-name>
-    <url-pattern>/ShowGuestsServlet</url-pattern>
-  </servlet-mapping>
-  
-   <servlet>
-    <servlet-name>DeleteGuestServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.guest.DeleteGuestServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DeleteGuestServlet</servlet-name>
-    <url-pattern>/DeleteGuestServlet</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>DeleteGuestResultServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.guest.DeleteGuestResultServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DeleteGuestResultServlet</servlet-name>
-    <url-pattern>/DeleteGuestResultServlet</url-pattern>
-  </servlet-mapping>
-  
-   <servlet>
-    <servlet-name>CountGuestsServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.guest.CountGuestsServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CountGuestsServlet</servlet-name>
-    <url-pattern>/CountGuestsServlet</url-pattern>
-  </servlet-mapping>
-  
-  <!-- ServiceServlets -->
-  
-  <servlet>
-    <servlet-name>AddServiceServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.service.AddServiceServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddServiceServlet</servlet-name>
-    <url-pattern>/AddServiceServlet</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>ShowServicesServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.service.ShowServicesServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ShowServicesServlet</servlet-name>
-    <url-pattern>/ShowServicesServlet</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>DeleteServiceServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.service.DeleteServiceServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DeleteServiceServlet</servlet-name>
-    <url-pattern>/DeleteServiceServlet</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>DeleteServiceResultServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.service.DeleteServiceResultServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DeleteServiceResultServlet</servlet-name>
-    <url-pattern>/DeleteServiceResultServlet</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>ChangeServiceServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.service.ChangeServiceServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ChangeServiceServlet</servlet-name>
-    <url-pattern>/ChangeServiceServlet</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>ChangeServiceSelectServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.service.ChangeServiceSelectServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ChangeServiceSelectServlet</servlet-name>
-    <url-pattern>/ChangeServiceSelectServlet</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>ChangeServiceResultServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.service.ChangeServiceResultServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ChangeServiceResultServlet</servlet-name>
-    <url-pattern>/ChangeServiceResultServlet</url-pattern>
-  </servlet-mapping>
-  
-  
- <!--  RoomServlets -->
- 
- 
- <servlet>
-    <servlet-name>AddRoomServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.room.AddRoomServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddRoomServlet</servlet-name>
-    <url-pattern>/AddRoomServlet</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>ShowRoomsServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.room.ShowRoomsServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ShowRoomsServlet</servlet-name>
-    <url-pattern>/ShowRoomsServlet</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>DeleteRoomServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.room.DeleteRoomServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DeleteRoomServlet</servlet-name>
-    <url-pattern>/DeleteRoomServlet</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>DeleteRoomResultServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.room.DeleteRoomResultServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DeleteRoomResultServlet</servlet-name>
-    <url-pattern>/DeleteRoomResultServlet</url-pattern>
-  </servlet-mapping>
-  
-   <servlet>
-    <servlet-name>ShowRoomDetailsServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.room.ShowRoomDetailsServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ShowRoomDetailsServlet</servlet-name>
-    <url-pattern>/ShowRoomDetailsServlet</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>ShowRoomDetailsResultServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.room.ShowRoomDetailsResultServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ShowRoomDetailsResultServlet</servlet-name>
-    <url-pattern>/ShowRoomDetailsResultServlet</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>CloneRoomServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.room.CloneRoomServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CloneRoomServlet</servlet-name>
-    <url-pattern>/CloneRoomServlet</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>CloneRoomResultServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.room.CloneRoomResultServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CloneRoomResultServlet</servlet-name>
-    <url-pattern>/CloneRoomResultServlet</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>SortedRoomServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.room.SortedRoomServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SortedRoomServlet</servlet-name>
-    <url-pattern>/SortedRoomServlet</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>CountFreeRoomsServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.room.CountFreeRoomsServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CountFreeRoomsServlet</servlet-name>
-    <url-pattern>/CountFreeRoomsServlet</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>ChangeRoomServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.room.ChangeRoomServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ChangeRoomServlet</servlet-name>
-    <url-pattern>/ChangeRoomServlet</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>ChangeRoomSelectServlet</servlet-name>
-    <servlet-class>com.danco.training.servlet.room.ChangeRoomSelectServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ChangeRoomSelectServlet</servlet-name>
-    <url-pattern>/ChangeRoomSelectServlet</url-pattern>
-  </servlet-mapping>
-  
-  
-  <!-- Filters -->
-  
-  
-  <filter>
-    <filter-name>AuditFilter</filter-name>
-    <filter-class>com.danco.training.filter.AuditFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>AuditFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
-  <filter>
-    <filter-name>LogonFilter</filter-name>
-    <filter-class>com.danco.training.filter.LogonFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>LogonFilter</filter-name>
-    <url-pattern>/main/*</url-pattern>
-  </filter-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:web="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<display-name>Archetype Created Web Application</display-name>
+	<welcome-file-list>
+		<welcome-file>Authorization.jsp</welcome-file>
+	</welcome-file-list>
+
+	<servlet>
+		<servlet-name>Authorization</servlet-name>
+		<servlet-class>com.danco.training.servlet.Authorization</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Authorization</servlet-name>
+		<url-pattern>/Authorization</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Registration</servlet-name>
+		<servlet-class>com.danco.training.servlet.Registration</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Registration</servlet-name>
+		<url-pattern>/Registration</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Logout</servlet-name>
+		<servlet-class>com.danco.training.servlet.Logout</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Logout</servlet-name>
+		<url-pattern>/Logout</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>MainPageServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.MainPageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MainPageServlet</servlet-name>
+		<url-pattern>/MainPageServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- GuestServlets -->
+
+	<servlet>
+		<servlet-name>AddGuestServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.guest.AddGuestServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddGuestServlet</servlet-name>
+		<url-pattern>/AddGuestServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ShowGuestsServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.guest.ShowGuestsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShowGuestsServlet</servlet-name>
+		<url-pattern>/ShowGuestsServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DeleteGuestServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.guest.DeleteGuestServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteGuestServlet</servlet-name>
+		<url-pattern>/DeleteGuestServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DeleteGuestResultServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.guest.DeleteGuestResultServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteGuestResultServlet</servlet-name>
+		<url-pattern>/DeleteGuestResultServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CountGuestsServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.guest.CountGuestsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CountGuestsServlet</servlet-name>
+		<url-pattern>/CountGuestsServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- ServiceServlets -->
+
+	<servlet>
+		<servlet-name>AddServiceServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.service.AddServiceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddServiceServlet</servlet-name>
+		<url-pattern>/AddServiceServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ShowServicesServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.service.ShowServicesServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShowServicesServlet</servlet-name>
+		<url-pattern>/ShowServicesServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DeleteServiceServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.service.DeleteServiceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteServiceServlet</servlet-name>
+		<url-pattern>/DeleteServiceServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DeleteServiceResultServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.service.DeleteServiceResultServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteServiceResultServlet</servlet-name>
+		<url-pattern>/DeleteServiceResultServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ChangeServiceServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.service.ChangeServiceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChangeServiceServlet</servlet-name>
+		<url-pattern>/ChangeServiceServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ChangeServiceSelectServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.service.ChangeServiceSelectServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChangeServiceSelectServlet</servlet-name>
+		<url-pattern>/ChangeServiceSelectServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ChangeServiceResultServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.service.ChangeServiceResultServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChangeServiceResultServlet</servlet-name>
+		<url-pattern>/ChangeServiceResultServlet</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- RoomServlets -->
+
+
+	<servlet>
+		<servlet-name>AddRoomServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.room.AddRoomServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddRoomServlet</servlet-name>
+		<url-pattern>/AddRoomServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ShowRoomsServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.room.ShowRoomsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShowRoomsServlet</servlet-name>
+		<url-pattern>/ShowRoomsServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DeleteRoomServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.room.DeleteRoomServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteRoomServlet</servlet-name>
+		<url-pattern>/DeleteRoomServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DeleteRoomResultServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.room.DeleteRoomResultServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteRoomResultServlet</servlet-name>
+		<url-pattern>/DeleteRoomResultServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ShowRoomDetailsServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.room.ShowRoomDetailsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShowRoomDetailsServlet</servlet-name>
+		<url-pattern>/ShowRoomDetailsServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ShowRoomDetailsResultServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.room.ShowRoomDetailsResultServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShowRoomDetailsResultServlet</servlet-name>
+		<url-pattern>/ShowRoomDetailsResultServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CloneRoomServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.room.CloneRoomServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CloneRoomServlet</servlet-name>
+		<url-pattern>/CloneRoomServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CloneRoomResultServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.room.CloneRoomResultServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CloneRoomResultServlet</servlet-name>
+		<url-pattern>/CloneRoomResultServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SortedRoomServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.room.SortedRoomServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SortedRoomServlet</servlet-name>
+		<url-pattern>/SortedRoomServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CountFreeRoomsServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.room.CountFreeRoomsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CountFreeRoomsServlet</servlet-name>
+		<url-pattern>/CountFreeRoomsServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ChangeRoomServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.room.ChangeRoomServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChangeRoomServlet</servlet-name>
+		<url-pattern>/ChangeRoomServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ChangeRoomSelectServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.room.ChangeRoomSelectServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChangeRoomSelectServlet</servlet-name>
+		<url-pattern>/ChangeRoomSelectServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ChangeRoomResultServlet</servlet-name>
+		<servlet-class>com.danco.training.servlet.room.ChangeRoomResultServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChangeRoomResultServlet</servlet-name>
+		<url-pattern>/ChangeRoomResultServlet</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- Filters -->
+
+	<filter>
+		<filter-name>LogonFilter</filter-name>
+		<filter-class>com.danco.training.filter.LogonFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LogonFilter</filter-name>
+		<url-pattern>/rooms/*</url-pattern>
+		<url-pattern>/guests/*</url-pattern>
+		<url-pattern>/main/*</url-pattern>
+		<url-pattern>/pages/*</url-pattern>
+		<url-pattern>/services/*</url-pattern>
+		<url-pattern>/settlements/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>AuditFilter</filter-name>
+		<filter-class>com.danco.training.filter.AuditFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AuditFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<url-pattern>/rooms/*</url-pattern>
+		<url-pattern>/guests/*</url-pattern>
+		<url-pattern>/main/*</url-pattern>
+		<url-pattern>/pages/*</url-pattern>
+		<url-pattern>/services/*</url-pattern>
+		<url-pattern>/settlements/*</url-pattern>
+	</filter-mapping>
+	
 </web-app>

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.PageContext;
 
 import com.danco.training.api.IActService;
 import com.danco.training.entity.Act;
@@ -23,19 +24,10 @@ public class Logout extends HttpServlet {
         service = new ActService();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		
-		if(session != null && session.getAttribute("act") != null){
-			Act act = (Act) session.getAttribute("act");
-			System.out.println("something to output");
-			System.out.println(act.getId());
-			Date date = new Date();
-			act.setLogoutDate(date);
-			service.addAct(act);
-		}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		HttpSession session = httpRequest.getSession(false);
 		session.invalidate();
-		
 		getServletContext().getRequestDispatcher("/Authorization.jsp").forward(request, response);
 	}
 }

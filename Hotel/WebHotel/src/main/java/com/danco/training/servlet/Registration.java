@@ -24,7 +24,7 @@ public class Registration extends HttpServlet {
 		service = new UserService();
 	}
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
 		
 		String login = request.getParameter("login");

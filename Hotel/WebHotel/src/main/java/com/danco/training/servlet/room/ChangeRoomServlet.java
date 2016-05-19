@@ -29,10 +29,10 @@ public class ChangeRoomServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Room> rooms = service.getRooms();
 		request.setAttribute("rooms", rooms);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/showRoomsPageResult.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/changeRoomSelectPage.jsp");
 		dispatcher.forward(request, response);
 	}
 
