@@ -9,11 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 @Entity
 @Table(name="verification")
-public class Verification extends AbstractPersistable<Integer> {
+public class Verification extends BaseEntity {
 
 	/**
 	 * 

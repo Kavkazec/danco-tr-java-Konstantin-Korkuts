@@ -13,11 +13,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 @Entity
 @Table(name="lecturer")
-public class Lecturer extends AbstractPersistable<Integer> {
+public class Lecturer extends BaseEntity {
 
 	/**
 	 * 

@@ -8,11 +8,9 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 @Entity
 @Table(name="pulpit")
-public class Pulpit extends AbstractPersistable<Integer> {
+public class Pulpit extends BaseEntity {
 
 	/**
 	 * 

@@ -8,5 +8,6 @@
   	<module>Entity</module>
   	<module>API</module>
   	<module>Properties</module>
+  	<module>Service</module>
   </modules>
 </project>

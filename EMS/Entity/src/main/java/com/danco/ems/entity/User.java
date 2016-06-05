@@ -4,11 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 @Entity
 @Table(name="user")
-public class User extends AbstractPersistable<Integer> {
+public class User extends BaseEntity {
 
 	/**
 	 * 

@@ -10,11 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 @Entity
 @Table(name="subject")
-public class Subject extends AbstractPersistable<Integer> {
+public class Subject extends BaseEntity {
 
 	/**
 	 * 
