@@ -1,7 +1,11 @@
 package com.danco.ems.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,16 +24,26 @@ public class User extends BaseEntity {
 	private String password;
 	
 	@Column
-	private UserRole role;
+	private String login;
+	
+	@Column
+	private String role;
+	
+	@OneToOne(targetEntity=Lecturer.class, mappedBy = "user", fetch = FetchType.LAZY)
+	private Lecturer lecturer;
+	
+	@OneToOne(targetEntity=Student.class, mappedBy = "user", fetch = FetchType.LAZY)
+	private Student student;
 
 	public User(){
 		
 	}
 	
-	public User(String fullName, String password, UserRole role){
+	public User(String fullName, String password, String login,  String role){
 		this.fullName = fullName;
 		this.password = password;
 		this.role = role;
+		this.login = login;
 	}
 
 	public String getFullName() {
@@ -48,12 +62,36 @@ public class User extends BaseEntity {
 		this.password = password;
 	}
 
-	public UserRole getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(UserRole role) {
+	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public Lecturer getLecturer() {
+		return lecturer;
+	}
+
+	public void setLecturer(Lecturer lecturer) {
+		this.lecturer = lecturer;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 	
 	

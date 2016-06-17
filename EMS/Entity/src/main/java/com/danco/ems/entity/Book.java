@@ -31,6 +31,13 @@ public class Book extends BaseEntity {
 		this.author = author;
 		this.countPage = countPage;
 	}
+	
+	public Book(int id, String title, String author, int countPage){
+		super(id);
+		this.title = title;
+		this.author = author;
+		this.countPage = countPage;
+	}
 
 	public String getTitle() {
 		return title;

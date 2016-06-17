@@ -25,12 +25,13 @@ public class Lecturer extends BaseEntity {
 	@Column
 	private String education;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn
+	
+	@OneToOne(cascade = CascadeType.MERGE )
+	@JoinColumn(name="user_id")
 	private User user;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="subject_id")
+	@JoinColumn(name="pulpit_id")
 	private Pulpit pulpit;
 	
 	@OneToMany(targetEntity=Subject.class, mappedBy="lecturer", fetch = FetchType.LAZY)

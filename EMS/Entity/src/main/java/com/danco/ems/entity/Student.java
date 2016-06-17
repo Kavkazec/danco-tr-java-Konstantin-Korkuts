@@ -33,8 +33,8 @@ public class Student extends BaseEntity {
 	@JoinColumn(name="groupe_id")
 	private Groupe groupe;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn
+	@OneToOne(cascade = CascadeType.MERGE )
+	@JoinColumn(name="user_id")
 	private User user;
 	
 	@Column
