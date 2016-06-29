@@ -35,4 +35,8 @@ public class GroupeServiceImpl implements IGroupeService {
 		return groupeRepository.findAll();
 	}
 
+	public Groupe findGroupeByTitle(String title) {
+		return groupeRepository.findByTitle(title);
+	}
+
 }

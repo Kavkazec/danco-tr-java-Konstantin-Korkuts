@@ -8,6 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="pulpit")
 public class Pulpit extends BaseEntity {
@@ -20,9 +22,11 @@ public class Pulpit extends BaseEntity {
 	@Column
 	private String title;
 	
+	@JsonManagedReference
 	@OneToMany(targetEntity=Groupe.class, mappedBy="pulpit", fetch = FetchType.LAZY)
 	private List<Groupe> groupes;
 	
+	@JsonManagedReference
 	@OneToMany(targetEntity=Lecturer.class, mappedBy="pulpit", fetch = FetchType.LAZY)
 	private List<Lecturer> lecturers;
 	

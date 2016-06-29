@@ -7,8 +7,17 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="groupe")
@@ -22,13 +31,17 @@ public class Groupe extends BaseEntity {
 	@Column
 	private String title;
 	
+	@JsonBackReference
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="pulpit_id")
+	@Fetch(FetchMode.JOIN)
 	private Pulpit pulpit;
 	
+	@JsonIgnore
 	@OneToMany(targetEntity=Student.class, mappedBy="groupe", fetch = FetchType.LAZY)
 	private List<Student> students;
 	
+	@JsonIgnore
 	@OneToMany(targetEntity=Schedule.class, mappedBy="groupe", fetch = FetchType.LAZY)
 	private List<Schedule> schedules;
 	

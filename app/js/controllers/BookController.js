@@ -1,6 +1,10 @@
 app.controller('BookController', ['$scope','books', function($scope, books) { 
-  forecast.success(function(data) {
-  	$scope.title = 'asgasga';
+	$scope.title = 'E-library';
+ 	$scope.myDate = new Date();
+	$scope.orderBy = function(x) {
+    	$scope.myOrderBy = x;
+  	}
+  books.success(function(data) {
     $scope.all = data;
   });
 }]);

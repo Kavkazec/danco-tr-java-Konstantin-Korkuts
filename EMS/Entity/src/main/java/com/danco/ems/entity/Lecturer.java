@@ -13,6 +13,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="lecturer")
 public class Lecturer extends BaseEntity {
@@ -25,15 +32,21 @@ public class Lecturer extends BaseEntity {
 	@Column
 	private String education;
 	
-	
+	@JsonManagedReference
 	@OneToOne(cascade = CascadeType.MERGE )
 	@JoinColumn(name="user_id")
 	private User user;
 	
+	@JsonBackReference
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="pulpit_id")
+	@Fetch(FetchMode.JOIN)
 	private Pulpit pulpit;
 	
+	@Column
+	private String status;
+	
+	@JsonIgnore
 	@OneToMany(targetEntity=Subject.class, mappedBy="lecturer", fetch = FetchType.LAZY)
 	private List<Subject> subjects;
 	
@@ -79,6 +92,14 @@ public class Lecturer extends BaseEntity {
 
 	public void setSubjects(List<Subject> subjects) {
 		this.subjects = subjects;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	

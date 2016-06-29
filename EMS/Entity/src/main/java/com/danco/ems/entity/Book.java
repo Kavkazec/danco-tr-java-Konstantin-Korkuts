@@ -1,8 +1,14 @@
 package com.danco.ems.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="book")
@@ -21,6 +27,10 @@ public class Book extends BaseEntity {
 	
 	@Column(name="pages")
 	private int countPage;
+	
+	@JsonIgnore
+	@OneToMany(targetEntity=Subject.class, mappedBy="book", fetch = FetchType.LAZY)
+	private List<Subject> subject;
 	
 	public Book(){
 		
@@ -61,6 +71,14 @@ public class Book extends BaseEntity {
 
 	public void setCountPage(int countPage) {
 		this.countPage = countPage;
+	}
+
+	public List<Subject> getSubject() {
+		return subject;
+	}
+
+	public void setSubject(List<Subject> subject) {
+		this.subject = subject;
 	}
 	
 	

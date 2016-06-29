@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Schedule</title>
+	<script src="../lib/angular.min.js"></script>
+  <script src="../lib/angular-resource.js"></script>
+  	<link href="../css/bootstrap.min.css" rel="stylesheet">
+ 	 <link href="../css/style.css" rel="stylesheet">
+  	<link href="../css/schedule.css" rel="stylesheet">
+</head>
+<body ng-app="myApp">
+	<div class="controller" ng-controller="ScheduleController">
+    <header>
+      <ng-include src="'cascade/mainPageHeader.html'" /> 
+    </header>
+    <div class="row">
+       <ng-include src="'cascade/mainPageNavBar.html'"> </ng-include>
+       <div class="span8" ng-view>
+       	  <div class="tabbable"> <!-- Only required for left/right tabs -->
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#tab1" data-toggle="tab">For studnet</a></li>
+              <li><a href="#tab2" data-toggle="tab">For lecturer</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab1">
+              
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <form>
+                        <th><select class="form-control" ng-model="selectedGroupe">
+                          <option ng-repeat="x in allGroupes" value="{{x.title}}">{{x.title}}</option>
+                        </select>
+                      </th>
+                      <th><input class="form-control" type="date" value="{{date}}"
+                          max="2017-06-04" min="2012-05-29" ng-model="date"></th>
+                     <th> 
+                        <button type="submit" class="btn btn-small" value="findByGroupe" ng-click="findByGroupe()">
+                            Show
+                        </button>
+                      </th>
+                    </form>
+                    </tr>
+                  </thead>
+                </table>
+            <form class="main-table">
+              <table class="table table-bordered">  
+               <thead>
+                    <tr>
+                      <th>date</th>
+                      <th>subject</th>
+                      <th>lecturer</th>
+                      <th>groupe</th>
+                      <th>type</th>
+                    </tr>
+                  </thead>
+                  <tbody ng-repeat="groupe in groupeList">
+                    <tr>
+                      <td class="td-bound">{{groupe.date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                      <td class="td-bound">{{groupe.subject}}</td>
+                      <td class="td-bound">{{groupe.lecturer}}</td>
+                      <td class="td-bound">{{groupe.groupe}}</td>
+                      <td class="td-bound">{{groupe.type}}</td>
+                    </tr>
+                  </tbody>
+              </table>
+            </form>
+              </div>
+              <div class="tab-pane" id="tab2">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <form>
+                       <th><select class="form-control" ng-model="selectedLecturer">
+                          <option ng-repeat="x in allLecturers" value="{{x.user.fullName}}">{{x.user.fullName}}</option>
+                        </select>
+                      </th>
+                       <th><input class="form-control" type="date" value="{{date}}"
+                          max="2017-06-04" min="2012-05-29" ng-model="date"></th>
+                     <th> 
+                        <button type="submit" class="btn btn-small" value="findByLecturer" ng-click="findByLecturer()">
+                            Show
+                        </button>
+                      </th>
+                    </form>
+                    </tr>
+                  </thead>
+                </table>
+              <form class="main-table">
+              <table class="table table-bordered">  
+               <thead>
+                    <tr>
+                      <th>date</th>
+                      <th>subject</th>
+                      <th>lecturer</th>
+                      <th>groupe</th>
+                      <th>type</th>
+                    </tr>
+                  </thead>
+                  <tbody ng-repeat="lecturer in lecturerList">
+                    <tr>
+                      <td class="td-bound">{{lecturer.date | date :'yyyy-MM-dd HH:mm:ss'}}</td>
+                      <td class="td-bound">{{lecturer.subject}}</td>
+                      <td class="td-bound">{{lecturer.lecturer}}</td>
+                      <td class="td-bound">{{lecturer.groupe}}</td>
+                      <td class="td-bound">{{lecturer.type}}</td>
+                    </tr>
+                  </tbody>
+              </table>
+            </form>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  	</div>
+
+<script src="../js/app.js"></script>
+
+  <!-- Controllers -->
+  <script src="../js/controllers/ScheduleController.js"></script>
+
+  <!-- Services -->
+  <script src="../js/services/groupes.js"></script>
+  <script src="../js/services/lecturers.js"></script>
+
+  <!-- Directives -->
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="../js/bootstrap/bootstrap.min.js"></script>
+</body>
+</html>

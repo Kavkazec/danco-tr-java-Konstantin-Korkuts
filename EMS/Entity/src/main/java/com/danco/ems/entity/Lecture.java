@@ -10,6 +10,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="lecture")
 public class Lecture extends BaseEntity {
@@ -24,8 +29,10 @@ public class Lecture extends BaseEntity {
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="subject_id")
+	@Fetch(FetchMode.JOIN)
 	private Subject subject;
 	
+	@JsonManagedReference
 	@OneToMany(targetEntity=Schedule.class, mappedBy="lecture", fetch = FetchType.LAZY)
 	private List<Schedule> schedules;
 	

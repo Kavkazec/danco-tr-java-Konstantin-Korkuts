@@ -9,6 +9,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="verification")
 public class Verification extends BaseEntity {
@@ -18,6 +23,7 @@ public class Verification extends BaseEntity {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@JsonBackReference
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="student_id")
 	private Student student;

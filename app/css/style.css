@@ -1,4 +1,66 @@
-.but {
-	width: 100px;
-	height: 20px;
+.title {
+    color: #378DC3;
+    font-weight: normal;
+    font-family: 'Ultra', sans-serif;  
+    font-size: 38px;
+    line-height: 42px;
+    text-transform: uppercase;
+    text-shadow: 0 2px white, 0 3px #777;
+
+}
+
+.form-search td {
+	padding: 20px 0;
+	padding-left: 20px;
+}
+
+.form-search {
+	border-bottom: 10px double #DCDCDC;
+	border-top: 10px double #DCDCDC;
+	border-bottom-right-radius: 10%;
+	border-top-right-radius: 10%;
+	border-top-left-radius: 10%;
+}
+
+.input-append {
+	padding-left: 400px;
+}
+
+.row {
+	
+}
+
+.span4 {
+	padding-top: 70px;
+	width: 250px;
+	margin-right: 10px;
+	float:left;
+	margin-left: 3%;
+}
+
+.span4 input{
+	width: 200px;
+}
+
+.span4 a {
+	width: 200px;
+	height: 45px;
+	size: 15px;
+	margin-bottom: 35px;
+	vertical-align: middle;
+}
+
+.span8 {
+	padding-top: 40px;
+	width: 900px;
+	float: right;
+	padding-right: 20%;
+}
+
+.form-search a {
+	text-decoration: none;
+}
+
+.form-search a:hover {
+	text-decoration: none;
 }

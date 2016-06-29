@@ -14,6 +14,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="student")
 public class Student extends BaseEntity {
@@ -29,16 +35,18 @@ public class Student extends BaseEntity {
 	@Column
 	private String interests;
 	
+	@JsonBackReference
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="groupe_id")
 	private Groupe groupe;
 	
+	@JsonManagedReference
 	@OneToOne(cascade = CascadeType.MERGE )
 	@JoinColumn(name="user_id")
 	private User user;
 	
 	@Column
-	private StudentStatus status;
+	private String status;
 	
 	@Column(name="study_start")
 	private Date studyStart;
@@ -46,6 +54,7 @@ public class Student extends BaseEntity {
 	@Column(name="count_year")
 	private int countYear;
 	
+	@JsonManagedReference
 	@OneToMany(targetEntity=Verification.class, mappedBy="student", fetch = FetchType.LAZY)
 	private List<Verification> verifications;
 	
@@ -54,7 +63,7 @@ public class Student extends BaseEntity {
 		
 	}
 	
-	public Student(boolean steward, String interests, Groupe groupe, User user, StudentStatus status, Date studyStart, int countYear){
+	public Student(boolean steward, String interests, Groupe groupe, User user, String status, Date studyStart, int countYear){
 		this.steward = steward;
 		this.interests = interests;
 		this.groupe = groupe;
@@ -96,11 +105,11 @@ public class Student extends BaseEntity {
 		this.user = user;
 	}
 
-	public StudentStatus getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(StudentStatus status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

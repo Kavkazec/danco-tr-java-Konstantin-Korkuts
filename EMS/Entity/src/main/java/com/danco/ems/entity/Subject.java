@@ -10,6 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name="subject")
 public class Subject extends BaseEntity {
@@ -22,12 +25,14 @@ public class Subject extends BaseEntity {
 	@Column
 	private String title;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="lecturer_id")
+	@Fetch(FetchMode.JOIN)
 	private Lecturer lecturer;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="book_id")
+	@Fetch(FetchMode.JOIN)
 	private Book book;
 	
 	@OneToMany(targetEntity=Verification.class, mappedBy="subject", fetch = FetchType.LAZY)

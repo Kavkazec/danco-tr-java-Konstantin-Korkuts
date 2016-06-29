@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Authorizatoin</title>
+	<script src="../lib/angular.min.js"></script>
+	<script src="../lib/angular-resource.js"></script>
+  	<link href="../css/bootstrap.min.css" rel="stylesheet">
+  	<link href="../css/authorization.css" rel="stylesheet"
+</head>
+<body ng-app="myApp">
+	<div class="controller" align="center" >
+		<h1>AUHORIZATION</h1></br>
+		<form class="form-horizontal" ng-controller="AuthorizationController">
+		  <div class="control-group">
+		    <label class="control-label first" for="inputEmail">Login</label>
+		    <div class="controls">
+		      <input type="text" ng-model="login" placeholder="Login">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <label class="control-label" for="inputPassword">Password</label>
+		    <div class="controls">
+		      <input type="password" ng-model="password" placeholder="Password">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <div class="controls">
+		      <label class="checkbox">
+		        <input type="checkbox" ng-model="checkboxModel"> Remember me
+		      </label>
+		      <button type="submit" class="btn" ng-click="result()">Sign in</button>
+		    </div>
+		  </div>
+		</form>
+	</div>
+	
+	<!-- Modules -->
+  <script src="../js/app.js"></script>
+
+  <!-- Controllers -->
+  <script src="../js/controllers/AuthorizationController.js"></script>
+
+
+  <!-- Directives -->
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="../js/bootstrap/bootstrap.min.js"></script>
+</body>
+</html>
