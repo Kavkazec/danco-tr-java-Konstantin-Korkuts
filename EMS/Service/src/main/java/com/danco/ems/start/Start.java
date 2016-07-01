@@ -21,6 +21,7 @@ import com.danco.ems.entity.Lecture;
 import com.danco.ems.entity.Lecturer;
 import com.danco.ems.entity.Pulpit;
 import com.danco.ems.entity.Schedule;
+import com.danco.ems.entity.Student;
 import com.danco.ems.entity.Subject;
 import com.danco.ems.entity.User;
 import com.danco.ems.entity.UserRole;
@@ -28,6 +29,7 @@ import com.danco.ems.service.IGroupeService;
 import com.danco.ems.service.ILecturerService;
 import com.danco.ems.service.IPulpitService;
 import com.danco.ems.service.IScheduleService;
+import com.danco.ems.service.IStudentService;
 import com.danco.ems.service.ISubjectService;
 import com.danco.ems.service.IUserService;
 import com.danco.ems.service.impl.BookServiceImpl;
@@ -35,16 +37,19 @@ import com.danco.ems.service.impl.GroupeServiceImpl;
 import com.danco.ems.service.impl.LecturerServiceImpl;
 import com.danco.ems.service.impl.PulpitServiceImpl;
 import com.danco.ems.service.impl.ScheduleServiceImpl;
+import com.danco.ems.service.impl.StudentServiceImpl;
 import com.danco.ems.service.impl.SubjectServiceImpl;
 import com.danco.ems.service.impl.UserServiceImpl;
 
 public class Start {
 
 	public static void main(String[] args) throws ParseException {
-		//ApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = sdf.parse("2016-5-27");
-		System.out.println(date.toString());
+		ApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);
+		ISubjectService service1 = ctx.getBean(SubjectServiceImpl.class);
+		ILecturerService service2 = ctx.getBean(LecturerServiceImpl.class);
+		Lecturer lecturer = service2.getById(1);
+		for(Subject subject : service1.findSubjectByLecturer(lecturer)){
+			System.out.println(subject.getTitle());
+		}
 	}
-
 }

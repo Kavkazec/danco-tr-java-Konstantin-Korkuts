@@ -1,4 +1,4 @@
-app.controller('ScheduleController', ['$scope','$http','groupes','lecturers',function($scope,$http,groupes,lecturers) { 
+app.controller('ScheduleController', ['$scope','$http','groupes','lecturers','scheduleByGroupe','scheduleByLecturer',function($scope,$http,groupes,lecturers,scheduleByGroupe,scheduleByLecturer) { 
  	$scope.myDate = new Date().toLocaleString();
  	$scope.date = new Date();
  	$scope.selectedGroupe = '';
@@ -7,37 +7,20 @@ app.controller('ScheduleController', ['$scope','$http','groupes','lecturers',fun
  		var months = $scope.date.getMonth()+1;
  		var days = $scope.date.getDate();
  		var result = years+"-"+months+"-"+days;
- 		var byGroupe = 'title=' + $scope.selectedGroupe + '&date=' + result;
-		
-		
-		var user = $http({
-	        url: 'http://localhost:8080/webrest/schedules/find/by/groupe',
-	        method: "POST",
-	        data: byGroupe
-	    }).success(function(data) { 
-              $scope.groupeList = data;
-            }) 
-            .error(function(err) { 
-              return err; 
-            }); 
+
+        scheduleByGroupe.async($scope.selectedGroupe, result).success(function(data){
+			$scope.groupeList = data;
+        });
 	}
 	$scope.findByLecturer = function(){
 		var years = $scope.date.getFullYear();
  		var months = $scope.date.getMonth()+1;
  		var days = $scope.date.getDate();
  		var result = years+"-"+months+"-"+days;
- 		var byLecturer = 'fullName=' + $scope.selectedLecturer + '&date=' + result;
-		
-		var user = $http({
-	        url: 'http://localhost:8080/webrest/schedules/find/by/lecturer',
-	        method: "POST",
-	        data: byLecturer
-	    }).success(function(data) { 
-              $scope.lecturerList = data;
-            }) 
-            .error(function(err) { 
-              return err; 
-        }); 
+
+ 		scheduleByLecturer.async($scope.selectedLecturer, result).success(function(data){
+			$scope.lecturerList = data;
+        });
 	}
  	groupes.success(function(data) {
    	 $scope.allGroupes = data;

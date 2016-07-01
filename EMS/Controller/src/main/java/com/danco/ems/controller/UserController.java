@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.danco.ems.entity.Book;
+import com.danco.ems.entity.Student;
 import com.danco.ems.entity.User;
 import com.danco.ems.service.IUserService;
 
@@ -20,7 +21,7 @@ public class UserController {
 	@Autowired
 	private IUserService userService;
 	
-	@RequestMapping(value = "/users/find", method = RequestMethod.POST, produces="application/json")
+	@RequestMapping(value = "/users/find", method = RequestMethod.GET, produces="application/json")
 	public @ResponseBody User findUser(@RequestParam("login") String login, @RequestParam("password") String password) {
 		User user = userService.findUserByLoginAndPassword(login, password);
 		System.out.println(user.getId());
@@ -37,6 +38,14 @@ public class UserController {
 		User user = userService.getById(id);
 		return user;
 
+	}
+	
+	@RequestMapping(value = "/user/{id}", method = RequestMethod.PUT, produces="application/json")
+	public @ResponseBody User updatePassword(@PathVariable int id, @RequestParam("password") String password) {
+		System.out.println(password);
+		User user = getUserById(id);
+		user.setPassword(password);
+		return user;
 	}
 	
 }

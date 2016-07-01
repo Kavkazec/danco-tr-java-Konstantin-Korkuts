@@ -1,0 +1,23 @@
+.container li {
+	float: left;
+}
+
+.last {
+	margin-left: 774px;
+}
+
+#profile {
+	padding-top: 100px;
+}
+
+#edit {
+	padding-top: 60px;
+}
+
+#marks {
+	padding-top: 100px;
+}
+
+.form-inline textarea{
+	height: 30px;
+}

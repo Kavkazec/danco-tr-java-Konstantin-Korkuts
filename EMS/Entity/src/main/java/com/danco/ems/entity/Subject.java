@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="subject")
 public class Subject extends BaseEntity {
@@ -35,9 +37,11 @@ public class Subject extends BaseEntity {
 	@Fetch(FetchMode.JOIN)
 	private Book book;
 	
+	@JsonIgnore
 	@OneToMany(targetEntity=Verification.class, mappedBy="subject", fetch = FetchType.LAZY)
 	private List<Verification> verifications;
 	
+	@JsonIgnore
 	@OneToMany(targetEntity=Lecture.class, mappedBy="subject", fetch = FetchType.LAZY)
 	private List<Lecture> lectures;
 	

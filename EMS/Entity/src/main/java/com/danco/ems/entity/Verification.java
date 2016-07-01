@@ -23,13 +23,14 @@ public class Verification extends BaseEntity {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@JsonBackReference
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="student_id")
+	@Fetch(FetchMode.JOIN)
 	private Student student;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="subject_id")
+	@Fetch(FetchMode.JOIN)
 	private Subject subject;
 	
 	@Column

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.danco.ems.entity.Lecturer;
 import com.danco.ems.entity.Subject;
 import com.danco.ems.repository.SubjectRepository;
 import com.danco.ems.service.ISubjectService;
@@ -34,6 +35,10 @@ public class SubjectServiceImpl implements ISubjectService {
 
 	public List<Subject> getAll() {
 		return subjectRepository.findAll();
+	}
+
+	public List<Subject> findSubjectByLecturer(Lecturer lecturer) {
+		return subjectRepository.findByLecturer(lecturer);
 	}
 
 }

@@ -26,8 +26,7 @@ public class BookController{
 	
 	@RequestMapping(value = "/books/{id}", method = RequestMethod.GET, produces="application/json")
 	public @ResponseBody Book getBookById(@PathVariable("id") int id) {
-		Book book = bookService.getById(id);
-		return book;
+		return bookService.getById(id);
 
 	}
 }

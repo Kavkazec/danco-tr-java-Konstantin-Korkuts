@@ -1,12 +1,12 @@
-app.factory('authorization', ['$http', function($http) { 
-var authorization = {
-    async: function(name, pass) {
+app.factory('scheduleByGroupe', ['$http', function($http) { 
+var scheduleByGroupe = {
+    async: function(groupe, result) {
       var promise = $http({
-	        url: 'http://localhost:8080/webrest/users/find',
+	        url: 'http://localhost:8080/webrest/schedules/find/by/groupe',
 	        method: "GET",
 	        params: {
-	        	login: name,
-	        	password: pass
+	        	title: groupe,
+	        	date: result
 	        }
 	    }).success(function(data) { 
               return data;
@@ -17,5 +17,5 @@ var authorization = {
       return promise;
     }
   };
-  return authorization;
+  return scheduleByGroupe;
 }]);

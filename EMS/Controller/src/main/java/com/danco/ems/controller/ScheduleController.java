@@ -63,7 +63,7 @@ public class ScheduleController {
 		return list;
 	}
 	
-	@RequestMapping(value = "/schedules/find/by/groupe", method = RequestMethod.POST, produces="application/json")
+	@RequestMapping(value = "/schedules/find/by/groupe", method = RequestMethod.GET, produces="application/json")
 	public @ResponseBody List<Map<String,Object>> findSchedulesByGroupe(@RequestParam("title") String title, @RequestParam("date") String date) throws ParseException {
 		System.out.println(title + " " + date.toString());
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
@@ -88,7 +88,7 @@ public class ScheduleController {
 		return list;
 	}
 	
-	@RequestMapping(value = "/schedules/find/by/lecturer", method = RequestMethod.POST, produces="application/json")
+	@RequestMapping(value = "/schedules/find/by/lecturer", method = RequestMethod.GET, produces="application/json")
 	public @ResponseBody List<Map<String,Object>> findSchedulesByLecturer(@RequestParam("fullName") String fullName, @RequestParam("date") String date) throws ParseException {
 		System.out.println(fullName + " " + date.toString());
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();

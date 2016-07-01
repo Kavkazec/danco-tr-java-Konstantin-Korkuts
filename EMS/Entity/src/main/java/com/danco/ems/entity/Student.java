@@ -18,6 +18,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -35,9 +36,9 @@ public class Student extends BaseEntity {
 	@Column
 	private String interests;
 	
-	@JsonBackReference
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="groupe_id")
+	@Fetch(FetchMode.JOIN)
 	private Groupe groupe;
 	
 	@JsonManagedReference
@@ -54,8 +55,9 @@ public class Student extends BaseEntity {
 	@Column(name="count_year")
 	private int countYear;
 	
-	@JsonManagedReference
+	@JsonIgnore
 	@OneToMany(targetEntity=Verification.class, mappedBy="student", fetch = FetchType.LAZY)
+	@Fetch(FetchMode.JOIN)
 	private List<Verification> verifications;
 	
 	
