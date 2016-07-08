@@ -1,0 +1,56 @@
+<table class="table">
+					  <tbody>
+					    <tr>
+					      <td>
+					      	<form ng-show="!showCreateBook">
+					      		<legend>New book</legend>
+								<label>Title:</label>
+								<input type="text" ng-model="bookTitle" placeholder="Input it here..."></br>
+								<label>Author:</label>
+								<input type="text" ng-model="bookAuthor" placeholder="Input it here..."></br>
+								<label>Count page:</label>
+								<input type="text" ng-model="bookCountPage" placeholder="Input it here..."></br>
+								<button type="submit" class="btn" ng-click="addBook(bookTitle,bookAuthor,bookCountPage)">Add</button>
+					      	</form>
+					      	<form ng-hide="!showUpdateBook">
+					      		<legend>Edit book</legend>
+					      		<label>Id:</label>
+								<input type="text" ng-value="book.id" disabled></br>
+								<label>Title:</label>
+								<input type="text" ng-value="book.title" ng-model="newBookTitle"></br>
+								<label>Author:</label>
+								<input type="text" ng-value="book.author" ng-model="newBookAuthor" placeholder="Input it here..."></br>
+								<label>Count page:</label>
+								<input type="text" ng-value="book.countPage" ng-model="newBookCountPage" placeholder="Input it here..."></br>
+								<button type="submit" class="btn" ng-click="updateBook(book,newBookTitle,newBookAuthor,newBookCountPage)">Edit</button>
+								<button type="submit" class="btn" ng-click="backBook()">Back</button>
+					      	</form>
+					      </td>
+					      <td>
+					      	<table class="table table-bordered">
+							  <thead>
+							    <tr>
+							      <th class="th-bound" ng-click="orderBy('id') ; reverseSort = !reverseSort">Id</th>
+							      <th class="th-bound" ng-click="orderBy('title') ; reverseSort = !reverseSort">Title</th>
+							      <th class="th-bound" ng-click="orderBy('author') ; reverseSort = !reverseSort">Author</th>
+							      <th class="th-bound" ng-click="orderBy('countPage') ; reverseSort = !reverseSort">Count page</th>
+							      <th>Actions</th>
+							    </tr>
+							  </thead>
+							  <tbody ng-repeat="book in books | filter: searchKeyword | orderBy:myOrderBy:reverseSort">
+							    <tr>
+							      <td class="td-bound">{{book.id}}</td>
+							      <td class="td-bound">{{book.title}}</td>
+							      <td class="td-bound">{{book.author}}</td>
+							      <td class="td-bound">{{book.countPage}}</td>
+							      <td>
+							      		<button type="submit" class="btn btn-info" ng-click="switchBookForm(book)">Edit</button> |
+							      		<button type="submit" class="btn btn-info" ng-click="deleteBook(book)">Delete</button>
+							      </td>
+							    </tr>
+							  </tbody>
+							</table>
+					      </td>
+					    </tr>
+					  </tbody>
+					</table>

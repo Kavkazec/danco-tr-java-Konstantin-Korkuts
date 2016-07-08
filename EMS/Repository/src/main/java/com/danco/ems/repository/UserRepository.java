@@ -5,7 +5,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.danco.ems.entity.User;
 
-@Transactional
 public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	User findByLoginAndPassword(String login, String password);

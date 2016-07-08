@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.danco.ems.entity.Lecturer;
+import com.danco.ems.entity.User;
 import com.danco.ems.repository.LecturerRepository;
 import com.danco.ems.service.ILecturerService;
 
@@ -19,8 +20,8 @@ public class LecturerServiceImpl implements ILecturerService {
 		return lecturerRepository.findOne(id);
 	}
 
-	public void save(Lecturer model) {
-		lecturerRepository.save(model);
+	public Lecturer save(Lecturer model) {
+		return lecturerRepository.saveAndFlush(model);
 	}
 
 	public void delete(Lecturer model) {
@@ -33,6 +34,10 @@ public class LecturerServiceImpl implements ILecturerService {
 
 	public List<Lecturer> getAll() {
 		return lecturerRepository.findAll();
+	}
+
+	public Lecturer findLecturerByUser(User user) {
+		return lecturerRepository.findByUser(user);
 	}
 
 }

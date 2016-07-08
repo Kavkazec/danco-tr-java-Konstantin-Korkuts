@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.danco.ems.entity.User;
 import com.danco.ems.repository.UserRepository;
 import com.danco.ems.service.IUserService;
 
 @Service
+@Transactional
 public class UserServiceImpl implements IUserService {
 	
 	@Autowired
@@ -19,8 +21,8 @@ public class UserServiceImpl implements IUserService {
 		return userRepository.findOne(id);
 	}
 
-	public void save(User model) {
-		userRepository.save(model);
+	public User  save(User model) {
+		return userRepository.saveAndFlush(model);
 	}
 
 	public void delete(User model) {

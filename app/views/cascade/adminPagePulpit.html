@@ -1,0 +1,44 @@
+<table class="table">
+					  <tbody>
+					    <tr>
+					      <td>
+					      	<form ng-show="!showCreatePulpit">
+					      		<legend>New pulpit</legend>
+								<label>Title:</label>
+								<input type="text" ng-model="pulpitTitle" placeholder="Input it here..."></br>
+								<button type="submit" class="btn" ng-click="addPulpit(pulpitTitle)">Add</button>
+					      	</form>
+					      	<form ng-hide="!showUpdatePulpit">
+					      		<legend>Edit pulpit</legend>
+					      		<label>Id:</label>
+								<input type="text" ng-value="pulpit.id" disabled></br>
+								<label>Title:</label>
+								<input type="text" ng-value="pulpit.title" ng-model="newPulpitTitle"></br>
+								<button type="submit" class="btn" ng-click="updatePulpit(pulpit,newPulpitTitle)">Edit</button>
+								<button type="submit" class="btn" ng-click="backPulpit()">Back</button>
+					      	</form>
+					      </td>
+					      <td>
+					      	<table class="table table-bordered">
+							  <thead>
+							    <tr>
+							      <th class="th-bound" ng-click="orderBy('id') ; reverseSort = !reverseSort">Id</th>
+							      <th class="th-bound" ng-click="orderBy('title') ; reverseSort = !reverseSort">Title</th>
+							      <th>Actions</th>
+							    </tr>
+							  </thead>
+							  <tbody ng-repeat="pulpit in pulpits | filter: searchKeyword | orderBy:myOrderBy:reverseSort">
+							    <tr>
+							      <td class="td-bound">{{pulpit.id}}</td>
+							      <td class="td-bound">{{pulpit.title}}</td>
+							      <td>
+							      		<button type="submit" class="btn btn-info" ng-click="switchPulpitForm(pulpit)">Edit</button> |
+							      		<button type="submit" class="btn btn-info" ng-click="deletePulpit(pulpit)">Delete</button>
+							      </td>
+							    </tr>
+							  </tbody>
+							</table>
+					      </td>
+					    </tr>
+					  </tbody>
+					</table>

@@ -41,7 +41,7 @@ public class Student extends BaseEntity {
 	@Fetch(FetchMode.JOIN)
 	private Groupe groupe;
 	
-	@JsonManagedReference
+	@JsonManagedReference("user-student")
 	@OneToOne(cascade = CascadeType.MERGE )
 	@JoinColumn(name="user_id")
 	private User user;
@@ -55,9 +55,8 @@ public class Student extends BaseEntity {
 	@Column(name="count_year")
 	private int countYear;
 	
-	@JsonIgnore
+	@JsonBackReference("student-verification")
 	@OneToMany(targetEntity=Verification.class, mappedBy="student", fetch = FetchType.LAZY)
-	@Fetch(FetchMode.JOIN)
 	private List<Verification> verifications;
 	
 	

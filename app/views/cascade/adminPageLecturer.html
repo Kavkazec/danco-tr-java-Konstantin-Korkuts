@@ -1,0 +1,79 @@
+<table class="table">
+					  <tbody>
+					    <tr>
+					      <td>
+					      	<form ng-show="!showCreateLecturer">
+					      		<legend>New lecturer</legend>
+								<label>Full name:</label>
+								<input type="text" ng-model="lecturerFullName" placeholder="Input it here..."></br>
+								<label>Login:</label>
+								<input type="text" ng-model="lecturerLogin" placeholder="Input it here..."></br>
+								<label>Password:</label>
+								<input type="text" ng-model="lecturerPassword" placeholder="Input it here..."></br>
+								<label>Education:</label>
+								<input type="text" ng-model="lecturerEducation" placeholder="Input it here..."></br>
+								<label>Status:</label>
+								<select class="form-control" ng-model="lecturerStatus">
+		                          <option ng-repeat="status in lecturerStatuses" value="{{status}}">{{status}}</option>
+		                        </select></br>
+								<label>Pulpit:</label>
+								<select class="form-control" ng-model="lecturerPulpit">
+		                          <option ng-repeat="pulpit in lecturerPulpits" value="{{pulpit}}">{{pulpit.title}}</option>
+		                        </select></br>
+								<button type="submit" class="btn" ng-click="addLecturer(lecturerFullName,lecturerLogin,lecturerPassword,lecturerEducation,lecturerStatus,lecturerPulpit)">Add</button>
+					      	</form>
+					      	<form ng-show="lecturerNextStep">
+
+					      	</form>
+					      	<form ng-hide="!showUpdateLecturer">
+					      		<legend>Edit pulpit</legend>
+					      		<label>Id:</label>
+								<input type="text" ng-value="lecturer.id" disabled></br>
+								<label>Full name:</label>
+								<input type="text" ng-value="lecturer.user.fullName" ng-model="lecturerFullName" placeholder="Input it here..."></br>
+								<label>Login:</label>
+								<input type="text" ng-value="lecturer.user.login" ng-model="lecturerLogin" placeholder="Input it here..."></br>
+								<label>Password:</label>
+								<input type="text" ng-value="lecturer.user.password" ng-model="lecturerPassword" placeholder="Input it here..."></br>
+								<label>Education:</label>
+								<input type="text" ng-value="lecturer.education" ng-model="lecturerEducation" placeholder="Input it here..."></br>
+								<label>Status:</label>
+								<select class="form-control" ng-model="lecturerStatus">
+		                          <option ng-repeat="status in lecturerStatuses" value="{{status}}">{{status}}</option>
+		                        </select></br>
+								<label>Pulpit:</label>
+								<select class="form-control" ng-model="lecturerPulpit">
+		                          <option ng-repeat="pulpit in lecturerPulpits" value="{{pulpit}}">{{pulpit.title}}</option>
+		                        </select></br>
+								<button type="submit" class="btn" ng-click="updateLecturer(lecturer,lecturerFullName,lecturerLogin,lecturerPassword,lecturerEducation,lecturerStatus,lecturerPulpit)">Edit</button>
+								<button type="submit" class="btn" ng-click="backLecturer()">Back</button>
+					      	</form>
+					      </td>
+					      <td>
+					      	<table class="table table-bordered">
+							  <thead>
+							    <tr>
+							      <th class="th-bound" ng-click="orderBy('id') ; reverseSort = !reverseSort">Id</th>
+							      <th class="th-bound" ng-click="orderBy('user.fullName') ; reverseSort = !reverseSort">Full name</th>
+							      <th class="th-bound" ng-click="orderBy('pulpit.title') ; reverseSort = !reverseSort">Pulpit</th>
+							      <th class="th-bound" ng-click="orderBy('status') ; reverseSort = !reverseSort">Status</th>
+							      <th>Actions</th>
+							    </tr>
+							  </thead>
+							  <tbody ng-repeat="lecturer in lecturers | filter: searchKeyword | orderBy:myOrderBy:reverseSort">
+							    <tr>
+							      <td class="td-bound">{{lecturer.id}}</td>
+							      <td class="td-bound">{{lecturer.user.fullName}}</td>
+							      <td class="td-bound">{{lecturer.pulpit.title}}</td>
+							      <td class="td-bound">{{lecturer.status}}</td>
+							      <td>
+							      		<button type="submit" class="btn btn-info" ng-click="switchLecturerForm(lecturer)">Edit</button> |
+							      		<button type="submit" class="btn btn-info" ng-click="deleteLecturer(lecturer)">Delete</button>
+							      </td>
+							    </tr>
+							  </tbody>
+							</table>
+					      </td>
+					    </tr>
+					  </tbody>
+					</table>

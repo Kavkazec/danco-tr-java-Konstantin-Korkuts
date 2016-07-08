@@ -19,8 +19,8 @@ public class LectureServiceImpl implements ILectureService {
 		return lectureRepository.findOne(id);
 	}
 
-	public void save(Lecture model) {
-		lectureRepository.save(model);
+	public Lecture save(Lecture model) {
+		return lectureRepository.saveAndFlush(model);
 	}
 
 	public void delete(Lecture model) {

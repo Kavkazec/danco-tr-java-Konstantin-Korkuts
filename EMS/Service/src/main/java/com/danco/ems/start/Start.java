@@ -42,14 +42,13 @@ import com.danco.ems.service.impl.SubjectServiceImpl;
 import com.danco.ems.service.impl.UserServiceImpl;
 
 public class Start {
-
 	public static void main(String[] args) throws ParseException {
 		ApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);
-		ISubjectService service1 = ctx.getBean(SubjectServiceImpl.class);
-		ILecturerService service2 = ctx.getBean(LecturerServiceImpl.class);
-		Lecturer lecturer = service2.getById(1);
-		for(Subject subject : service1.findSubjectByLecturer(lecturer)){
-			System.out.println(subject.getTitle());
-		}
+		IGroupeService service = ctx.getBean(GroupeServiceImpl.class);
+		IPulpitService pp = ctx.getBean(PulpitServiceImpl.class);
+		Pulpit pulpit = pp.getById(2);
+		Groupe groupe = new Groupe("KB-2", pulpit);
+		service.save(groupe);
+		System.out.println(groupe.getId());
 	}
 }

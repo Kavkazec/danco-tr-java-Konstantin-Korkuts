@@ -21,8 +21,8 @@ public class SubjectServiceImpl implements ISubjectService {
 		return subjectRepository.findOne(id);
 	}
 
-	public void save(Subject model) {
-		subjectRepository.save(model);
+	public Subject save(Subject model) {
+		return subjectRepository.saveAndFlush(model);
 	}
 
 	public void delete(Subject model) {

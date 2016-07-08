@@ -1,0 +1,75 @@
+<table class="table">
+					  <tbody>
+					    <tr>
+					      <td>
+					      	<form ng-show="!showCreateStudent">
+					      		<legend>New lecturer</legend>
+								<label>Full name:</label>
+								<input type="text" ng-model="studentFullName" placeholder="Input it here..."></br>
+								<label>Login:</label>
+								<input type="text" ng-model="studentLogin" placeholder="Input it here..."></br>
+								<label>Password:</label>
+								<input type="text" ng-model="studentPassword" placeholder="Input it here..."></br>
+								<label>Groupe:</label>
+								<select class="form-control" ng-model="studentGroupe">
+		                          <option ng-repeat="groupe in studentGroupes" value="{{groupe}}">{{groupe.title}}</option>
+		                        </select></br>
+								<label>Status:</label>
+								<select class="form-control" ng-model="studentStatus">
+		                          <option ng-repeat="status in studentStatuses" value="{{status}}">{{status}}</option>
+		                        </select></br>
+		                        <label>Date:</label>
+								<input class="form-control" type="date" value="{{date}}"
+                          max="2017-06-04" min="2012-05-29" ng-model="studentStartStudy"></br>
+								<label>Course:</label>
+								<input type="text" ng-model="studentSteward" placeholder="Input it here..."></br>
+								<input type="text" ng-model="studentCourse" placeholder="Input it here..."></br>
+								<label>Interests:</label>
+								<input type="text" ng-model="studentInterests" placeholder="Input it here..."></br>
+								<button type="submit" class="btn" ng-click="addStudent(studentFullName,studentLogin,studentPassword,studentGroupe,studentStartStudy,studentCourse,studentInterests)">Add</button>
+					      	</form>					      	
+					      	</form>
+					      	<form ng-hide="!showUpdateStudent">
+					      		<legend>Edit student</legend>
+					      		<label>Id:</label>
+								<input type="text" ng-value="pulpit.id" disabled></br>
+								<label>Title:</label>
+								<input type="text" ng-value="pulpit.title" ng-model="newPulpitTitle"></br>
+								<button type="submit" class="btn" ng-click="updateStudent(pulpit)">Edit</button>
+								<button type="submit" class="btn" ng-click="backStudent()">Back</button>
+					      	</form>
+					      </td>
+					      <td>
+					      	<table class="table table-bordered">
+							  <thead>
+							    <tr>
+							      <th class="th-bound" ng-click="orderBy('id') ; reverseSort = !reverseSort">Id</th>
+							      <th class="th-bound" ng-click="orderBy('user.fullName') ; reverseSort = !reverseSort">Full name</th>
+							      <th class="th-bound" ng-click="orderBy('groupe.title') ; reverseSort = !reverseSort">Groupe</th>
+							      <th class="th-bound" ng-click="orderBy('status') ; reverseSort = !reverseSort">Status</th>
+							       <th class="th-bound" ng-click="orderBy('studyStart') ; reverseSort = !reverseSort">Study start</th>
+							      <th class="th-bound" ng-click="orderBy('countYear') ; reverseSort = !reverseSort">Course</th>
+							       <th class="th-bound" ng-click="orderBy('steward') ; reverseSort = !reverseSort">Steward</th>
+							      <th>Actions</th>
+							    </tr>
+							  </thead>
+							  <tbody ng-repeat="student in students | filter: searchKeyword | orderBy:myOrderBy:reverseSort">
+							    <tr>
+							      <td class="td-bound">{{student.id}}</td>
+							      <td class="td-bound">{{student.user.fullName}}</td>
+							      <td class="td-bound">{{student.groupe.title}}</td>
+							      <td class="td-bound">{{student.status}}</td>
+							      <td class="td-bound">{{student.studyStart | date:'yyyy-MM-dd'}}</td>
+							      <td class="td-bound">{{student.countYear}}</td>
+							      <td class="td-bound">{{student.steward}}</td>
+							      <td>
+							      		<button type="submit" class="btn btn-info" ng-click="switchStudentForm(student)">Edit</button> |
+							      		<button type="submit" class="btn btn-info" ng-click="deleteStudent(student)">Delete</button>
+							      </td>
+							    </tr>
+							  </tbody>
+							</table>
+					      </td>
+					    </tr>
+					  </tbody>
+					</table>

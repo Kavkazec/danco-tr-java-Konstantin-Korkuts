@@ -20,8 +20,8 @@ public class StudentServiceImpl implements IStudentService {
 		return studentRepository.findOne(id);
 	}
 
-	public void save(Student model) {
-		studentRepository.save(model);
+	public Student save(Student model) {
+		return studentRepository.saveAndFlush(model);
 	}
 
 	public void delete(Student model) {

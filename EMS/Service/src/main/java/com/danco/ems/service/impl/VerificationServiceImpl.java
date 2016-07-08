@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.danco.ems.entity.Student;
 import com.danco.ems.entity.Verification;
 import com.danco.ems.repository.VerificationRepository;
 import com.danco.ems.service.IVerificationService;
@@ -19,8 +20,8 @@ public class VerificationServiceImpl implements IVerificationService {
 		return verificationRepository.findOne(id);
 	}
 
-	public void save(Verification model) {
-		verificationRepository.save(model);
+	public Verification save(Verification model) {
+		return  verificationRepository.saveAndFlush(model);
 	}
 
 	public void delete(Verification model) {
@@ -33,6 +34,10 @@ public class VerificationServiceImpl implements IVerificationService {
 
 	public List<Verification> getAll() {
 		return verificationRepository.findAll();
+	}
+
+	public List<Verification> findVerifiactionsByStudent(Student student) {
+		return verificationRepository.findByStudent(student);
 	}
 
 }

@@ -58,10 +58,10 @@
                   <tbody ng-repeat="groupe in groupeList">
                     <tr>
                       <td class="td-bound">{{groupe.date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-                      <td class="td-bound">{{groupe.subject}}</td>
-                      <td class="td-bound">{{groupe.lecturer}}</td>
-                      <td class="td-bound">{{groupe.groupe}}</td>
-                      <td class="td-bound">{{groupe.type}}</td>
+                      <td class="td-bound">{{groupe.lecture.subject.title}}</td>
+                      <td class="td-bound">{{groupe.lecturer.user.fullName}}</td>
+                      <td class="td-bound">{{groupe.groupe.title}}</td>
+                      <td class="td-bound">{{groupe.lecture.type}}</td>
                     </tr>
                   </tbody>
               </table>
@@ -100,11 +100,11 @@
                   </thead>
                   <tbody ng-repeat="lecturer in lecturerList">
                     <tr>
-                      <td class="td-bound">{{lecturer.date | date :'yyyy-MM-dd HH:mm:ss'}}</td>
-                      <td class="td-bound">{{lecturer.subject}}</td>
-                      <td class="td-bound">{{lecturer.lecturer}}</td>
-                      <td class="td-bound">{{lecturer.groupe}}</td>
-                      <td class="td-bound">{{lecturer.type}}</td>
+                      <td class="td-bound">{{lecturer.date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                      <td class="td-bound">{{lecturer.lecture.subject.title}}</td>
+                      <td class="td-bound">{{lecturer.lecturer.user.fullName}}</td>
+                      <td class="td-bound">{{lecturer.groupe.title}}</td>
+                      <td class="td-bound">{{lecturer.lecture.type}}</td>
                     </tr>
                   </tbody>
               </table>

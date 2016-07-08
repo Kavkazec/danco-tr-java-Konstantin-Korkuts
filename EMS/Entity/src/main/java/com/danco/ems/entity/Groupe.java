@@ -31,17 +31,16 @@ public class Groupe extends BaseEntity {
 	@Column
 	private String title;
 	
-	@JsonBackReference
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="pulpit_id")
 	@Fetch(FetchMode.JOIN)
 	private Pulpit pulpit;
 	
-	@JsonIgnore
+	@JsonBackReference("groupe-student")
 	@OneToMany(targetEntity=Student.class, mappedBy="groupe", fetch = FetchType.LAZY)
 	private List<Student> students;
 	
-	@JsonIgnore
+	@JsonBackReference("groupe-schedule")
 	@OneToMany(targetEntity=Schedule.class, mappedBy="groupe", fetch = FetchType.LAZY)
 	private List<Schedule> schedules;
 	

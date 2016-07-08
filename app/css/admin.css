@@ -1,0 +1,27 @@
+.container li {
+	float: left;
+}
+
+.last {
+	margin-left: 174px;
+}
+
+#student {
+	padding-top: 100px;
+}
+
+#lecturer {
+	padding-top: 60px;
+}
+
+#pulpit {
+	padding-top: 100px;
+}
+
+.form-inline textarea{
+	height: 30px;
+}
+
+.form-control {
+	width: 200px;
+}

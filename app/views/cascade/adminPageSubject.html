@@ -1,0 +1,62 @@
+<table class="table">
+					  <tbody>
+					    <tr>
+					      <td>
+					      	<form ng-show="!showCreateSubject">
+					      		<legend>New subject</legend>
+								<label>Title:</label>
+								<input type="text" ng-model="subjectTitle" placeholder="Input it here..."></br>
+								<label>Lecturer:</label>
+								<select class="form-control" ng-model="subjectLecturer">
+		                          <option ng-repeat="lecturer in subjectLecturers" value="{{lecturer}}">{{lecturer.user.fullName}}</option>
+		                        </select></br>
+		                        <label>Book:</label>
+		                        <select class="form-control" ng-model="subjectBook">
+		                          <option ng-repeat="book in subjectBooks" value="{{book}}">{{book.title}}</option>
+		                        </select></br>
+								<button type="submit" class="btn" ng-click="addSubject(subjectTitle,subjectLecturer,subjectBook)">Add</button>
+					      	</form>
+					      	<form ng-hide="!showUpdateSubject">
+					      		<legend>Edit subject</legend>
+								<label>Title:</label>
+								<input type="text" ng-model="newSubjectTitle" placeholder="Input it here..."></br>
+								<label>Lecturer:</label>
+								<select class="form-control" ng-model="newSubjectLecturer">
+		                          <option ng-repeat="lecturer in subjectLecturers" value="{{lecturer}}">{{lecturer.user.fullName}}</option>
+		                        </select></br>
+		                        <label>Book:</label>
+		                        <select class="form-control" ng-model="newSubjectBook">
+		                          <option ng-repeat="book in subjectBooks" value="{{book}}">{{book.title}}</option>
+		                        </select></br>
+								<button type="submit" class="btn" ng-click="updateSubject(subject,newSubjectTitle,newSubjectLecturer,newSubjectBook)">Edit</button>
+								<button type="submit" class="btn" ng-click="backSubject()">Back</button>
+					      	</form>
+					      </td>
+					      <td>
+					      	<table class="table table-bordered">
+							  <thead>
+							    <tr>
+							      <th class="th-bound" ng-click="orderBy('id') ; reverseSort = !reverseSort">Id</th>
+							      <th class="th-bound" ng-click="orderBy('title') ; reverseSort = !reverseSort">Title</th>
+							      <th class="th-bound" ng-click="orderBy('lecturer.user.fullName') ; reverseSort = !reverseSort">Lecturer</th>
+							      <th class="th-bound" ng-click="orderBy('book.title') ; reverseSort = !reverseSort">Book</th>
+							      <th>Actions</th>
+							    </tr>
+							  </thead>
+							  <tbody ng-repeat="subject in subjects | filter: searchKeyword | orderBy:myOrderBy:reverseSort">
+							    <tr>
+							      <td class="td-bound">{{subject.id}}</td>
+							      <td class="td-bound">{{subject.title}}</td>
+							      <td class="td-bound">{{subject.lecturer.user.fullName}}</td>
+							      <td class="td-bound">{{subject.book.title}}</td>
+							      <td>
+							      		<button type="submit" class="btn btn-info" ng-click="switchSubjectForm(subject)">Edit</button> |
+							      		<button type="submit" class="btn btn-info" ng-click="deleteSubject(subject)">Delete</button>
+							      </td>
+							    </tr>
+							  </tbody>
+							</table>
+					      </td>
+					    </tr>
+					  </tbody>
+					</table>

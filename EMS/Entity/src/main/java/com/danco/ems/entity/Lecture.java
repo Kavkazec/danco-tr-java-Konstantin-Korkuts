@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -32,7 +34,7 @@ public class Lecture extends BaseEntity {
 	@Fetch(FetchMode.JOIN)
 	private Subject subject;
 	
-	@JsonManagedReference
+	@JsonBackReference("lecture-schedule")
 	@OneToMany(targetEntity=Schedule.class, mappedBy="lecture", fetch = FetchType.LAZY)
 	private List<Schedule> schedules;
 	

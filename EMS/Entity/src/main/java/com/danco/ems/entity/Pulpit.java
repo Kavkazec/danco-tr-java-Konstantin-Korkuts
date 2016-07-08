@@ -8,6 +8,11 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -22,11 +27,12 @@ public class Pulpit extends BaseEntity {
 	@Column
 	private String title;
 	
-	@JsonManagedReference
+	@JsonBackReference("pulpit-groupe")
 	@OneToMany(targetEntity=Groupe.class, mappedBy="pulpit", fetch = FetchType.LAZY)
+	@Fetch(FetchMode.JOIN)
 	private List<Groupe> groupes;
 	
-	@JsonManagedReference
+	@JsonBackReference("pulpit-lecturer")
 	@OneToMany(targetEntity=Lecturer.class, mappedBy="pulpit", fetch = FetchType.LAZY)
 	private List<Lecturer> lecturers;
 	

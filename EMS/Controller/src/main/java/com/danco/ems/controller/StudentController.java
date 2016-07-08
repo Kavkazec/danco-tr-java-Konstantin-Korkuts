@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.danco.ems.entity.Book;
 import com.danco.ems.entity.Lecturer;
@@ -41,6 +43,31 @@ public class StudentController {
 		Student student = studentService.getById(id);
 		student.setInterests(interests);
 		return student;
+	}
+	
+	@RequestMapping(value = "/student/add", method = RequestMethod.POST, produces="application/json")
+	public @ResponseBody Student addBook(@RequestBody Student student) {
+		Student model = studentService.save(student);
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/student/delete", method = RequestMethod.DELETE, produces="application/json")
+	public @ResponseBody ModelAndView  deleteBook(@RequestParam("id") int id) {
+		System.out.println(id);
+		ModelAndView map = new ModelAndView();
+		Student student = studentService.getById(id);
+		studentService.delete(student);
+		return map;
+
+	}
+	
+	@RequestMapping(value = "/student/edit", method = RequestMethod.PUT, produces="application/json")
+	public @ResponseBody ModelAndView  updateBook(@RequestBody Student student) {
+		ModelAndView map = new ModelAndView();
+		studentService.update(student);
+		return map;
+
 	}
 	
 }

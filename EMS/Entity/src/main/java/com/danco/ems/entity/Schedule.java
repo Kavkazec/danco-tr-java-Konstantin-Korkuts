@@ -16,6 +16,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="schedule")
@@ -26,17 +27,20 @@ public class Schedule extends BaseEntity {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@JsonBackReference
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="lecture_id")
 	@Fetch(FetchMode.JOIN)
 	private Lecture lecture;
 	
-	@JsonBackReference
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="groupe_id")
 	@Fetch(FetchMode.JOIN)
 	private Groupe groupe;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="lecturer_id")
+	@Fetch(FetchMode.JOIN)
+	private Lecturer lecturer;
 	
 	@Column
 	private Date date;
@@ -73,6 +77,14 @@ public class Schedule extends BaseEntity {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public Lecturer getLecturer() {
+		return lecturer;
+	}
+
+	public void setLecturer(Lecturer lecturer) {
+		this.lecturer = lecturer;
 	}
 	
 	

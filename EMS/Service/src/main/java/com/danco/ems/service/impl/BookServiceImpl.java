@@ -19,8 +19,8 @@ public class BookServiceImpl implements IBookService{
 		return bookRepository.findOne(id);
 	}
 
-	public void save(Book model) {
-		bookRepository.save(model);
+	public Book save(Book model) {
+		return bookRepository.saveAndFlush(model);
 	}
 
 	public void delete(Book model) {

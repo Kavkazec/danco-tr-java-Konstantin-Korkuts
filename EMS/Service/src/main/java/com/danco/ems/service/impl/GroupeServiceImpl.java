@@ -19,8 +19,8 @@ public class GroupeServiceImpl implements IGroupeService {
 		return groupeRepository.findOne(id);
 	}
 
-	public void save(Groupe model) {
-		groupeRepository.save(model);
+	public Groupe save(Groupe model) {
+		return groupeRepository.saveAndFlush(model);
 	}
 
 	public void delete(Groupe model) {

@@ -8,6 +8,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -33,11 +36,11 @@ public class User extends BaseEntity {
 	@Column
 	private String role;
 	
-	@JsonBackReference
+	@JsonBackReference("user-lecturer")
 	@OneToOne(targetEntity=Lecturer.class, mappedBy = "user", fetch = FetchType.LAZY)
 	private Lecturer lecturer;
 	
-	@JsonBackReference
+	@JsonBackReference("user-student")
 	@OneToOne(targetEntity=Student.class, mappedBy = "user", fetch = FetchType.LAZY)
 	private Student student;
 

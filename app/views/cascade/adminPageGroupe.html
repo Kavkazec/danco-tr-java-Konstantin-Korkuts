@@ -1,0 +1,54 @@
+<table class="table">
+					  <tbody>
+					    <tr>
+					      <td>
+					      	<form ng-show="!showCreateGroupe">
+					      		<legend>New groupe</legend>
+								<label>Title:</label>
+								<input type="text" ng-model="groupeTitle" placeholder="Input it here..."></br>
+								<label>Pulpit:</label>
+								<select class="form-control" ng-model="groupePulpit">
+		                          <option ng-repeat="pulpit in groupePulpits" value="{{pulpit}}">{{pulpit.title}}</option>
+		                        </select></br>
+								<button type="submit" class="btn" ng-click="addGroupe(groupeTitle,groupePulpit)">Add</button>
+					      	</form>
+					      	<form ng-hide="!showUpdateGroupe">
+					      		<legend>Edit groupe</legend>
+					      		<label>Id:</label>
+								<input type="text" ng-value="groupe.id" disabled></br>
+								<label>Title:</label>
+								<input type="text" ng-value="groupe.title" ng-model="newGroupeTitle"></br>
+								<label>Pulpit:</label>
+								<select class="form-control" ng-model="newGroupeGroupe">
+		                          <option ng-repeat="pulpit in groupePulpits" value="{{pulpit}}">{{pulpit.title}}</option>
+		                        </select></br>
+								<button type="submit" class="btn" ng-click="updateGroupe(groupe,newGroupeTitle,newGroupeGroupe)">Edit</button>
+								<button type="submit" class="btn" ng-click="backGroupe()">Back</button>
+					      	</form>
+					      </td>
+					      <td>
+					      	<table class="table table-bordered">
+							  <thead>
+							    <tr>
+							      <th class="th-bound" ng-click="orderBy('id') ; reverseSort = !reverseSort">Id</th>
+							      <th class="th-bound" ng-click="orderBy('title') ; reverseSort = !reverseSort">Title</th>
+							      <th class="th-bound" ng-click="orderBy('author') ; reverseSort = !reverseSort">Pulpit</th>
+							      <th>Actions</th>
+							    </tr>
+							  </thead>
+							  <tbody ng-repeat="groupe in groupes | filter: searchKeyword | orderBy:myOrderBy:reverseSort">
+							    <tr>
+							      <td class="td-bound">{{groupe.id}}</td>
+							      <td class="td-bound">{{groupe.title}}</td>
+							      <td class="td-bound">{{groupe.pulpit.title}}</td>
+							      <td>
+							      		<button type="submit" class="btn btn-info" ng-click="switchGroupeForm(groupe)">Edit</button> |
+							      		<button type="submit" class="btn btn-info" ng-click="deleteGroupe(groupe)">Delete</button>
+							      </td>
+							    </tr>
+							  </tbody>
+							</table>
+					      </td>
+					    </tr>
+					  </tbody>
+					</table>

@@ -25,8 +25,10 @@ import com.danco.ems.entity.Schedule;
 import com.danco.ems.entity.Subject;
 import com.danco.ems.entity.User;
 import com.danco.ems.service.IGroupeService;
+import com.danco.ems.service.ILecturerService;
 import com.danco.ems.service.IScheduleService;
 import com.danco.ems.service.IUserService;
+import com.danco.ems.util.DateUtil;
 
 @RestController
 public class ScheduleController {
@@ -42,100 +44,28 @@ public class ScheduleController {
 	@Autowired
 	private IUserService userService;
 	
+	@Autowired
+	private ILecturerService lecturerService;
+	
 	@RequestMapping(value = "/schedules", method = RequestMethod.GET, produces="application/json; charset=utf-8")
-	public @ResponseBody List<Map<String,Object>> getAllSchedules() {
-		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
-		List<Schedule> all = scheduleService.getAll();
-		for (Schedule schedule : all) {
-			Map<String,Object> map = new HashMap<String, Object>();
-			Groupe groupe = schedule.getGroupe();
-			Lecture lecture = schedule.getLecture();
-			Subject subject = lecture.getSubject();
-			Lecturer lecturer = subject.getLecturer();
-			User user = lecturer.getUser();
-			map.put("date",schedule.getDate());
-			map.put("groupe",groupe.getTitle());
-			map.put("subject",subject.getTitle());
-			map.put("type",lecture.getType());
-			map.put("lecturer",user.getFullName());
-			list.add(map);
-		}
-		return list;
+	public @ResponseBody List<Schedule> getAllSchedules() {
+		return scheduleService.getAll();
 	}
 	
-	@RequestMapping(value = "/schedules/find/by/groupe", method = RequestMethod.GET, produces="application/json")
-	public @ResponseBody List<Map<String,Object>> findSchedulesByGroupe(@RequestParam("title") String title, @RequestParam("date") String date) throws ParseException {
+	@RequestMapping(value = "/schedules/find/by/groupe", method = RequestMethod.GET, produces="application/json; charset=utf-8")
+	public @ResponseBody List<Schedule> findSchedulesByGroupe(@RequestParam("title") String title, @RequestParam("date") String date) throws ParseException {
 		System.out.println(title + " " + date.toString());
-		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
-		List<Schedule> all = findSchedulesByDate(SDF.parse(date));
-		for (Schedule schedule : all) {
-			Map<String,Object> map = new HashMap<String, Object>();
-			Groupe groupe = groupeService.findGroupeByTitle(title);
-			if(schedule.getGroupe().equals(groupe)){
-				Lecture lecture = schedule.getLecture();
-				Subject subject = lecture.getSubject();
-				Lecturer lecturer = subject.getLecturer();
-				User user = lecturer.getUser();
-				map.put("date",schedule.getDate());
-				map.put("groupe",groupe.getTitle());
-				map.put("subject",subject.getTitle());
-				map.put("type",lecture.getType());
-				map.put("lecturer",user.getFullName());
-				list.add(map);
-			}
-		}
-	
-		return list;
-	}
-	
-	@RequestMapping(value = "/schedules/find/by/lecturer", method = RequestMethod.GET, produces="application/json")
-	public @ResponseBody List<Map<String,Object>> findSchedulesByLecturer(@RequestParam("fullName") String fullName, @RequestParam("date") String date) throws ParseException {
-		System.out.println(fullName + " " + date.toString());
-		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
-		List<Schedule> all = findSchedulesByDate(SDF.parse(date));
-		for (Schedule schedule : all) {
-			Map<String,Object> map = new HashMap<String, Object>();
-			Groupe groupe = schedule.getGroupe();
-			Lecture lecture = schedule.getLecture();
-			Subject subject = lecture.getSubject();
-			Lecturer lecturer = subject.getLecturer();
-			User user = userService.findUserByFullName(fullName);
-			if(lecturer.getUser().equals(user)){
-				map.put("date",schedule.getDate());
-				map.put("groupe",groupe.getTitle());
-				map.put("subject",subject.getTitle());
-				map.put("type",lecture.getType());
-				map.put("lecturer",user.getFullName());
-				list.add(map);
-			}
-		}
-	
-		return list;
-	}
-	
-	public List<Schedule> findSchedulesByDate(Date date){
-		List<Schedule> schedules = new ArrayList<Schedule>();
-		List<Date> dates = new ArrayList<Date>();
-		Date dateNow = new Date();
-		Date dateNext = new Date();
-		dateNow.setTime(date.getTime());
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(dateNow);
-		calendar.add(Calendar.DAY_OF_YEAR, 1);
-		dateNext.setTime(calendar.getTimeInMillis());
-		for(Schedule schedule : scheduleService.getAll()){
-			if(dateNow.before(schedule.getDate()) && dateNext.after(schedule.getDate())){
-				dates.add(schedule.getDate());
-			}
-		}
-		for (Schedule schedule : scheduleService.getAll()) {
-			for (Date dateResult : dates) {
-				if(schedule.getDate().equals(dateResult)){
-					schedules.add(schedule);
-				}
-			}
-		}
+		Groupe groupe = groupeService.findGroupeByTitle(title);
+		List<Schedule> schedules = DateUtil.findSchedulesByDate(scheduleService.findScheduleByGroupe(groupe),SDF.parse(date));
 		return schedules;
 	}
 	
+	@RequestMapping(value = "/schedules/find/by/lecturer", method = RequestMethod.GET, produces="application/json; charset=utf-8")
+	public @ResponseBody List<Schedule> findSchedulesByLecturer(@RequestParam("fullName") String fullName, @RequestParam("date") String date) throws ParseException {
+		System.out.println(fullName + " " + date.toString());
+		User user = userService.findUserByFullName(fullName);
+		Lecturer lecturer = lecturerService.findLecturerByUser(user);
+		List<Schedule> schedules = DateUtil.findSchedulesByDate(scheduleService.findScheduleByLecturer(lecturer),SDF.parse(date));
+		return schedules;
+	}
 }

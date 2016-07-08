@@ -5,9 +5,20 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -28,7 +39,7 @@ public class Book extends BaseEntity {
 	@Column(name="pages")
 	private int countPage;
 	
-	@JsonIgnore
+	@JsonBackReference("book-subject")
 	@OneToMany(targetEntity=Subject.class, mappedBy="book", fetch = FetchType.LAZY)
 	private List<Subject> subject;
 	

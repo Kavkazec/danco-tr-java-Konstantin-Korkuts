@@ -1,0 +1,58 @@
+<table class="table">
+					  <tbody>
+					    <tr>
+					      <td>
+					      	<form ng-show="!showCreateLecture">
+					      		<legend>New lecture</legend>
+								<label>Type:</label>
+								<select class="form-control" ng-model="lectureType">
+		                          <option ng-repeat="type in lectureTypes" value="{{type}}">{{type}}</option>
+		                        </select></br>
+								<label>Subject:</label>
+								<select class="form-control" ng-model="lectureSubject">
+		                          <option ng-repeat="subject in lectureSubjects" value="{{subject}}">{{subject.title}}</option>
+		                        </select></br>
+								<button type="submit" class="btn" ng-click="addLecture(lectureType,lectureSubject)">Add</button>
+					      	</form>
+					      	<form ng-hide="!showUpdateLecture">
+					      		<legend>Edit lecture</legend>
+					      		<label>Id:</label>
+								<input type="text" ng-value="lecture.id" disabled></br>
+								<label>Type:</label>
+								<select class="form-control" ng-model="newLectureType">
+		                          <option ng-repeat="type in lectureTypes" value="{{type}}">{{type}}</option>
+		                        </select></br>
+								<label>Subject:</label>
+								<select class="form-control" ng-model="newLectureSubject">
+		                          <option ng-repeat="subject in lectureSubjects" value="{{subject}}">{{subject.title}}</option>
+		                        </select></br>
+								<button type="submit" class="btn" ng-click="updateLecture(lecture,newLectureType,newLectureSubject)">Edit</button>
+								<button type="submit" class="btn" ng-click="backLecture()">Back</button>
+					      	</form>
+					      </td>
+					      <td>
+					      	<table class="table table-bordered">
+							  <thead>
+							    <tr>
+							      <th class="th-bound" ng-click="orderBy('id') ; reverseSort = !reverseSort">Id</th>
+							      <th class="th-bound" ng-click="orderBy('type') ; reverseSort = !reverseSort">Type</th>
+							      <th class="th-bound" ng-click="orderBy('subject.title') ; reverseSort = !reverseSort">Subject</th>
+							      <th>Actions</th>
+							    </tr>
+							  </thead>
+							  <tbody ng-repeat="lecture in lectures | filter: searchKeyword | orderBy:myOrderBy:reverseSort">
+							    <tr>
+							      <td class="td-bound">{{lecture.id}}</td>
+							      <td class="td-bound">{{lecture.type}}</td>
+							      <td class="td-bound">{{lecture.subject.title}}</td>
+							      <td>
+							      		<button type="submit" class="btn btn-info" ng-click="switchLectureForm(lecture)">Edit</button> |
+							      		<button type="submit" class="btn btn-info" ng-click="deleteLecture(lecture)">Delete</button>
+							      </td>
+							    </tr>
+							  </tbody>
+							</table>
+					      </td>
+					    </tr>
+					  </tbody>
+					</table>

@@ -8,7 +8,7 @@ public interface ICrudService <T extends BaseEntity> {
 
 	public T getById(int id);
 	
-	public void save(T model);
+	public T save(T model);
 	
 	public void delete(T model);
 	

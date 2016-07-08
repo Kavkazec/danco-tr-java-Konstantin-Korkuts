@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.danco.ems.entity.Groupe;
+import com.danco.ems.entity.Lecturer;
 import com.danco.ems.entity.Schedule;
 import com.danco.ems.repository.ScheduleRepository;
 import com.danco.ems.service.IScheduleService;
@@ -22,8 +23,8 @@ public class ScheduleServiceImpl implements IScheduleService {
 		return scheduleRepository.findOne(id);
 	}
 
-	public void save(Schedule model) {
-		scheduleRepository.save(model);
+	public Schedule save(Schedule model) {
+		return scheduleRepository.saveAndFlush(model);
 	}
 
 	public void delete(Schedule model) {
@@ -40,6 +41,18 @@ public class ScheduleServiceImpl implements IScheduleService {
 
 	public List<Schedule> findScheduleByGroupeAndDate(Groupe groupe, Date date) {
 		return scheduleRepository.findByGroupeAndDate(groupe, date);
+	}
+
+	public List<Schedule> findScheduleByGroupe(Groupe groupe) {
+		return scheduleRepository.findByGroupe(groupe);
+	}
+
+	public List<Schedule> findScheduleByLecturerAndDate(Lecturer lecturer, Date date) {
+		return scheduleRepository.findByLecturerAndDate(lecturer, date);
+	}
+
+	public List<Schedule> findScheduleByLecturer(Lecturer lecturer) {
+		return scheduleRepository.findByLecturer(lecturer);
 	}
 
 }

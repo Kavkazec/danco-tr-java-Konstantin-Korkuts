@@ -24,14 +24,15 @@ public class VerificationController {
 	@Autowired
 	private IStudentService studentService;
 	
-	@RequestMapping(value = "/verification", method = RequestMethod.GET, produces="application/json")
+	@RequestMapping(value = "/verification", method = RequestMethod.GET, produces="application/json; charset=UTF-8")
 	public @ResponseBody List<Verification> getAllVerifications() {
 		return verificationService.getAll();
 	}
 	
-	@RequestMapping(value = "/verification/{id}", method = RequestMethod.GET, produces="application/json")
+	@RequestMapping(value = "/verification/{id}", method = RequestMethod.GET, produces="application/json; charset=UTF-8")
 	public @ResponseBody List<Verification> getAllVerificationsByStudent(@PathVariable int id) {
 		Student student = studentService.getById(id);
-		return student.getVerifications();
+		List<Verification> verifications = verificationService.findVerifiactionsByStudent(student);
+		return verifications;
 	}
 }

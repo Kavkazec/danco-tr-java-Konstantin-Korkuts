@@ -32,12 +32,11 @@ public class Lecturer extends BaseEntity {
 	@Column
 	private String education;
 	
-	@JsonManagedReference
+	@JsonManagedReference("user-lecturer")
 	@OneToOne(cascade = CascadeType.MERGE )
 	@JoinColumn(name="user_id")
 	private User user;
-	
-	@JsonBackReference
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="pulpit_id")
 	@Fetch(FetchMode.JOIN)
@@ -46,9 +45,13 @@ public class Lecturer extends BaseEntity {
 	@Column
 	private String status;
 	
-	@JsonIgnore
+	@JsonBackReference("lecturer-subject")
 	@OneToMany(targetEntity=Subject.class, mappedBy="lecturer", fetch = FetchType.LAZY)
 	private List<Subject> subjects;
+	
+	@JsonBackReference("lecturer-schedule")
+	@OneToMany(targetEntity=Schedule.class, mappedBy="lecturer", fetch = FetchType.LAZY)
+	private List<Schedule> schedules;
 	
 	
 	
@@ -56,10 +59,11 @@ public class Lecturer extends BaseEntity {
 		
 	}
 	
-	public Lecturer(String education, User user, Pulpit pulpit){
+	public Lecturer(String education, User user, Pulpit pulpit, String status){
 		this.education = education;
 		this.user = user;
 		this.pulpit = pulpit;
+		this.status = status;
 	}
 
 	public String getEducation() {

@@ -19,8 +19,8 @@ public class PulpitServiceImpl implements IPulpitService {
 		return pulpitRepository.findOne(id);
 	}
 
-	public void save(Pulpit model) {
-		pulpitRepository.save(model);
+	public Pulpit save(Pulpit model) {
+		return pulpitRepository.saveAndFlush(model);
 	}
 
 	public void delete(Pulpit model) {
